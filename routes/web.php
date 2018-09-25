@@ -14,5 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/welcome', function () {
+    return view('welcome1');
+});
+
 Route::get('/send', 'SendMessageController@index')->name('send');
+
 Route::post('/postMessage', 'SendMessageController@sendMessage')->name('postMessage');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
