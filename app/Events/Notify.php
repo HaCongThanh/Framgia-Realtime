@@ -26,6 +26,7 @@ class Notify
     public function __construct($data)
     {
         $this->title = $data['title'];
+        
         $this->message  = $data['content'];
     }
 
