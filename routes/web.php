@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/send', 'SendMessageController@index')->name('send');
+Route::post('/postMessage', 'SendMessageController@sendMessage')->name('postMessage');
