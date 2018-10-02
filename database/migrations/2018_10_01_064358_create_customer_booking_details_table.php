@@ -21,9 +21,9 @@ class CreateCustomerBookingDetailsTable extends Migration
                 $table->integer('room_type_id')->unsigned()->comment('ID loại phòng');
                 $table->tinyInteger('number_room')->comment('Số lượng phòng thuê của loại phòng này');
                 $table->string('total_price')->comment('Thành tiền');
-                $table->softDeletes();
 
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
     }

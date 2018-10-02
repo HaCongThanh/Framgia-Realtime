@@ -21,9 +21,9 @@ class CreateRoomRentalListsTable extends Migration
                 $table->integer('room_id')->unsigned()->comment('ID phòng');
                 $table->date('start_date')->comment('Ngày nhận phòng');
                 $table->date('end_date')->comment('Ngày trả phòng');
-                $table->softDeletes();
 
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
     }

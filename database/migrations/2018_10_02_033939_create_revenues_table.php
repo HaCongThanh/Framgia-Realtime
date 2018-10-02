@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBenefitsTable extends Migration
+class CreateRevenuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateBenefitsTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('benefits')){
-            Schema::create('benefits', function (Blueprint $table) {
+        if(!Schema::hasTable('revenues')){
+            Schema::create('revenues', function (Blueprint $table) {
                 $table->increments('id');
 
-                $table->string('name')->unique()->comment('Tên quyền lợi');
+                $table->string('total_amount')->comment('Tổng tiền thu trong ngày');
 
                 $table->timestamps();
-
+                
                 $table->softDeletes();
             });
         }
@@ -33,6 +33,6 @@ class CreateBenefitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('benefits');
+        Schema::dropIfExists('revenues');
     }
 }

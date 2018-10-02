@@ -24,9 +24,9 @@ class CreatePostsTable extends Migration
                 $table->string('image')->nullable()->comment('Ảnh bài viết');
                 $table->text('description')->nullable()->comment('Tóm tắt nội dung bài viết');
                 $table->text('content')->nullable()->comment('Nội dung bài viết');
-                $table->softDeletes();
 
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
     }

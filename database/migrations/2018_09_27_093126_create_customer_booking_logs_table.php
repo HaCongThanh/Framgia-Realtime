@@ -23,9 +23,9 @@ class CreateCustomerBookingLogsTable extends Migration
                 $table->tinyInteger('total_number_people')->comment('Tổng số người trong lần thuê đó');
                 $table->tinyInteger('total_number_room')->comment('Tổng số phòng thuê trong lần thuê đó');
                 $table->string('total_money')->comment('Tổng tiền');
-                $table->softDeletes();
 
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
     }

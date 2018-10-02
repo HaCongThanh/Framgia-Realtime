@@ -18,9 +18,10 @@ class CreateRoomsTable extends Migration
                 $table->increments('id');
 
                 $table->integer('room_type_id')->unsigned()->comment('ID loại phòng');
-                $table->softDeletes();
-
+                
                 $table->timestamps();
+                
+                $table->softDeletes();
             });
         }
     }
