@@ -18,9 +18,10 @@ class CreateFacilitiesTable extends Migration
                 $table->increments('id');
 
                 $table->string('name')->unique()->comment('Tên tiện ích có trong phòng');
-                $table->softDeletes();
 
                 $table->timestamps();
+                
+                $table->softDeletes();
             });
         }
     }

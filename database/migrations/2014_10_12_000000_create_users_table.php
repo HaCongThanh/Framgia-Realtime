@@ -31,10 +31,10 @@ class CreateUsersTable extends Migration
                 $table->tinyInteger('arrivals_number')->nullable()->comment('Số lần đến với khách sạn (Làm chi ân)');
                 $table->string('total_money_spent')->nullable()->comment('Tổng số tiền khách hàng chi tiêu cho khách sạn (Làm chi ân)');
                 $table->tinyInteger('type')->default(0)->comment('0: Khách hàng, 1: Nhân viên, 2: Quản lý');
-                $table->softDeletes();
 
                 $table->rememberToken();
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
     }
