@@ -12,11 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/welcome', function () {
-    return view('welcome1');
+    return view('coming-soon');
 });
 
 Route::get('/send', 'SendMessageController@index')->name('send');
