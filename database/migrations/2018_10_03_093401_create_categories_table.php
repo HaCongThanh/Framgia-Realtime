@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBenefitsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateBenefitsTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('benefits')){
-            Schema::create('benefits', function (Blueprint $table) {
+        if(!Schema::hasTable('categories')){
+            Schema::create('categories', function (Blueprint $table) {
                 $table->increments('id');
 
-                $table->string('name')->unique()->comment('Tên quyền lợi');
+                $table->string('name')->comment('Tên danh mục');
 
                 $table->timestamps();
 
@@ -33,6 +33,6 @@ class CreateBenefitsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('benefits');
+        Schema::dropIfExists('categories');
     }
 }

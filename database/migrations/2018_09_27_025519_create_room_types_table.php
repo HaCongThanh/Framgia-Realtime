@@ -25,7 +25,6 @@ class CreateRoomTypesTable extends Migration
                 $table->string('image')->comment('Ảnh của phòng');
                 $table->text('description')->comment('Miêu tả về loại phòng');
                 $table->text('facilities')->comment('Các tiện nghi của loại phòng này');
-                $table->string('benefit')->comment('Quyền lợi của loại phòng này');
 
                 $table->timestamps();
                 $table->softDeletes();
