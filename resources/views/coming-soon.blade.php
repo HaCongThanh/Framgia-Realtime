@@ -2,17 +2,17 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Garden-Plants &amp; Care Service HTML5 Template | Coming Soon</title>
+    <title>Framgia - Hotels | Coming Soon</title>
     <!-- Stylesheets -->
-    <link href="{{ asset('css/comingsoon/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/comingsoon/revolution-slider.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/comingsoon/flipclock.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/comingsoon/style.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/comingsoon/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/comingsoon/revolution-slider.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/comingsoon/flipclock.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/comingsoon/style.css') }}" rel="stylesheet">
     <!-- Responsive -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link href="{{ asset('css/comingsoon/bootstrap-margin-padding.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/comingsoon/responsive.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/comingsoon/bootstrap-margin-padding.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/comingsoon/responsive.css') }}" rel="stylesheet">
 
 </head>
 
@@ -21,7 +21,7 @@
 
         <div class="preloader"></div>
 
-        <section class="parallax-section theme-overlay overlay-deep-white pt-200" style="background-image: url({{ asset('/images/comingsoon.jpg')}});">
+        <section class="parallax-section theme-overlay overlay-deep-white pt-200" style="background-image: url({{ asset('/img/comingsoon.jpg')}});">
             <div class="container">
                 <div class="row clearfix">
                     <div class="col-md-8 col-md-offset-2 text-center pt-180 pb-180">
@@ -38,12 +38,12 @@
 
     <div class="scroll-to-top"><span class="fa fa-arrow-up"></span></div>
 
-    <script src="{{ asset('js/comingsoon/jquery.js') }}"></script>
-    <script src="{{ asset('js/comingsoon/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/comingsoon/revolution.min.js') }}"></script>
-    <script src="{{ asset('js/comingsoon/flipclock.js') }}"></script>
-    <script src="{{ asset('js/comingsoon/jquery-ui.min.js') }}"></script>
-    <script src="{{ asset('js/comingsoon/script.js') }}"></script>
+    <script src="{{ mix('js/comingsoon/jquery.js') }}"></script>
+    <script src="{{ mix('js/comingsoon/bootstrap.min.js') }}"></script>
+    <script src="{{ mix('js/comingsoon/revolution.min.js') }}"></script>
+    <script src="{{ mix('js/comingsoon/flipclock.js') }}"></script>
+    <script src="{{ mix('js/comingsoon/jquery-ui.min.js') }}"></script>
+    <script src="{{ mix('js/comingsoon/script.js') }}"></script>
 
     <script type="text/javascript">
         var clock;

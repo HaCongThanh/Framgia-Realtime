@@ -7,6 +7,11 @@ use Pusher\Pusher;
 
 class SendMessageController extends Controller
 {
+    public function realTime()
+    {
+        return view('welcome');
+    }
+    
 	public function index()
     {
         return view('send_message');
