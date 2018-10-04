@@ -7,7 +7,7 @@
         }
 
         .search-area-box-6 {
-            padding: 42px 0 43px !important;
+            padding: 53px 0 53px !important;
         }
     </style>
 @endsection
@@ -84,19 +84,19 @@
                                 <h2 class="hidden-lg hidden-md">Search Your <span>Rooms</span></h2>
                             </div>
                         </div>
-                        <div class="col-lg-9 col-md-9">
+                        <div class="col-lg-9 col-md-9" style="margin-top: 3%;">
                             <div class="row">
-                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" class="btn-default datepicker" placeholder="Check In">
+                                        <input type="text" class="btn-default datepicker" placeholder="Ngày nhận phòng">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" class="btn-default datepicker" placeholder="Check Out">
+                                        <input type="text" class="btn-default datepicker" placeholder="Ngày trả phòng">
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                {{-- <div class="col-md-4 col-sm-4 col-xs-6">
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="room">
                                             <option>Room</option>
@@ -105,23 +105,38 @@
                                             <option>Deluxe Room</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                </div> --}}
+                                <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="adults">
-                                            <option>Adult</option>
+                                            <option>Người lớn</option>
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
                                             <option>4</option>
                                             <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                            <option>8</option>
+                                            <option>9</option>
+                                            <option>10</option>
+                                            <option>11</option>
+                                            <option>12</option>
+                                            <option>13</option>
+                                            <option>14</option>
+                                            <option>15</option>
+                                            <option>16</option>
+                                            <option>17</option>
+                                            <option>18</option>
+                                            <option>19</option>
+                                            <option>20</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="children">
-                                            <option>Child</option>
+                                            <option>Trẻ em</option>
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
@@ -130,7 +145,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-4 col-sm-4 col-xs-6">
+                                <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
                                         <button class="search-button btn-theme">Search</button>
                                     </div>
