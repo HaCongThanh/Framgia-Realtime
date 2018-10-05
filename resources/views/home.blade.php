@@ -17,7 +17,7 @@
     <!-- Banner start -->
     <section class="banner banner_video_bg">
         <div class="pattern-overlay">
-            <a id="bgndVideo" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=5e0LxrLSzok',containment:'.banner_video_bg', quality:'large', autoPlay:true, mute:true, opacity:1}">bg</a>
+            {{-- <a id="bgndVideo" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=5e0LxrLSzok',containment:'.banner_video_bg', quality:'large', autoPlay:true, mute:true, opacity:1}">bg</a> --}}
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
@@ -75,41 +75,32 @@
     <div class="search-area-box-2 search-area-box-6">
         <div class="container">
             <div class="search-contents">
-                <form method="GET">
+                <form method="GET" action="{{ route('home.find_rooms') }}">
                     <div class="row search-your-details">
                         <div class="col-lg-3 col-md-3">
                             <div class="search-your-rooms mt-20">
-                                <h3 class="hidden-xs hidden-sm">Search</h3>
-                                <h2 class="hidden-xs hidden-sm">Your <span>Rooms</span></h2>
-                                <h2 class="hidden-lg hidden-md">Search Your <span>Rooms</span></h2>
+                                <h2 class="hidden-xs hidden-sm">Tìm <span>Phòng </span></h2>
+                                <h2 class="hidden-xs hidden-sm">Của Bạn</h2>
+                                <h2 class="hidden-lg hidden-md">Tìm <span>Phòng </span>Của Bạn</h2>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9" style="margin-top: 3%;">
                             <div class="row">
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" class="btn-default datepicker" placeholder="Ngày nhận phòng">
+                                        <input type="text" name="start_date" class="btn-default datepicker" placeholder="Ngày nhận phòng">
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" class="btn-default datepicker" placeholder="Ngày trả phòng">
+                                        <input type="text" name="end_date" class="btn-default datepicker" placeholder="Ngày trả phòng">
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-4 col-sm-4 col-xs-6">
-                                    <div class="form-group">
-                                        <select class="selectpicker search-fields form-control-2" name="room">
-                                            <option>Room</option>
-                                            <option>Single Room</option>
-                                            <option>Double Room</option>
-                                            <option>Deluxe Room</option>
-                                        </select>
-                                    </div>
-                                </div> --}}
                                 <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="adults">
                                             <option>Người lớn</option>
+                                            <option>0</option>
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
@@ -137,6 +128,7 @@
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="children">
                                             <option>Trẻ em</option>
+                                            <option>0</option>
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
@@ -147,7 +139,7 @@
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
-                                        <button class="search-button btn-theme">Search</button>
+                                        <button type="submit" name="submit" class="search-button btn-theme">Tìm</button>
                                     </div>
                                 </div>
                             </div>
@@ -911,5 +903,9 @@
         </div>
     </div>
     <!-- intro section end -->
+
+@endsection
+
+@section('script')
 
 @endsection

@@ -47,10 +47,18 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get roles
+     * Get roles many to many
      * @return [type] [description]
      */
     public function roles() {
         return $this->belongsToMany('App\Models\Role', 'role_user', 'user_id', 'role_id');
+    }
+
+    /**
+     * Get room_rental_lists: One to many
+     * @return [type] [description]
+     */
+    public function room_rental_lists() {
+        return $this->hasMany('App\Models\RoomRentalList', 'user_id');
     }
 }
