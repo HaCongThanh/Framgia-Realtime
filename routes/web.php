@@ -17,6 +17,8 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'dev'], function() {
 	Route::get('/', 'HomeController@index')->name('home');
+
+	Route::get('/find-rooms', 'HomeController@findRooms')->name('home.find_rooms');
 });
 
 Route::get('/realtime', 'SendMessageController@realTime')->name('realTime');

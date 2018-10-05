@@ -396,6 +396,7 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="{{ mix('js/hotel-alpha/ie10-viewport-bug-workaround.js') }}"></script>
 <!-- Custom javascript -->
+@yield('script')
 
 </body>
 
