@@ -37,6 +37,13 @@ class Room extends Model
         return $this->hasMany('App\Models\RoomRentalList', 'room_id');
     }
 
-
+    /**
+     * Get room_types: One to many
+     * @return [type] [description]
+     */
+    public function room_types()
+    {
+        return $this->belongsTo('App\Models\RoomType', 'room_type_id');
+    }
 
 }

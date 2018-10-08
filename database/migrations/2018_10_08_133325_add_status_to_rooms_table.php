@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddFloorToRoomsTable extends Migration
+class AddStatusToRoomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,8 @@ class AddFloorToRoomsTable extends Migration
     public function up()
     {
         Schema::table('rooms', function (Blueprint $table) {
-            if (!Schema::hasColumn('rooms', 'floor')) {
-                $table->tinyInteger('floor')->comment('Tầng');
+            if (!Schema::hasColumn('rooms', 'status')) {
+                $table->tinyInteger('status')->default(0)->comment('0: Chưa được thuê, 1: Đã được thuê');
             }
         });
     }
@@ -28,9 +28,7 @@ class AddFloorToRoomsTable extends Migration
     public function down()
     {
         Schema::table('rooms', function (Blueprint $table) {
-            if (Schema::hasColumn('rooms', 'floor')) {
-                $table->dropColumn('floor');
-            }
+            //
         });
     }
 }
