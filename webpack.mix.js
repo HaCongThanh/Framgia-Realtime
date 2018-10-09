@@ -57,4 +57,8 @@ mix.copy('resources/js/hotel-alpha/app.js', 'public/js/hotel-alpha/app.js');
 mix.copy('resources/js/hotel-alpha/ie10-viewport-bug-workaround.js', 'public/js/hotel-alpha/ie10-viewport-bug-workaround.js');
 // End -------
 
+// Applicator
+mix.styles('resources/css/applicator/app.css', 'public/css/applicator/app.css');
+// End ------
+
 mix.version();

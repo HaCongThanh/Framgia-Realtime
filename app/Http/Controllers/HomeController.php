@@ -62,7 +62,17 @@ class HomeController extends Controller
 
         if ($end_date <= $min_date || $start_date >= $max_date) {
             // Nếu (ngày nhận phòng của khách) nhỏ hơn (ngày nhận phòng nhỏ nhất) HOẶC (ngày trả phòng của khách) lớn hơn (ngày trả phòng lớn nhất): thì tất cả các phòng đều CÒN TRỐNG vào khoảng thời gian thuê đó.
-            dd('Tất cả các phòng đều còn trống vào khoảng thời gian bạn chọn.');
+            // dd('Tất cả các phòng đều còn trống vào khoảng thời gian bạn chọn.');
+
+            $array_room_type_data = RoomType::all();
+
+            $rooms = Room::all();
+
+            foreach ($rooms as $room) {
+                array_push($array_room_type, $room->room_type_id);
+            }
+
+            $array_count_room_type = array_count_values($array_room_type);
         } else {
             foreach ($room_rental_lists as $room_rental_list) {
                 /*Đẩy thông tin từng phòng vào mảng*/
@@ -78,9 +88,6 @@ class HomeController extends Controller
 
             /*Đếm những ID phòng trùng lặp trong mảng đếm*/
             $array_count = array_count_values($array_count);
-
-            // dd($array_count);
-            // dd($array_time);
 
             for ($i=0; $i < count($array_time); $i++) {
                 $room_id = $array_time[$i]['room_id'];
@@ -126,48 +133,23 @@ class HomeController extends Controller
             
             $array_room_type_data = array();
 
-            for ($i=0; $i < count($array_unique_room_type); $i++) { 
-                $room_type = RoomType::find($array_unique_room_type[$i]);
+            for ($i=0; $i < count($array_room_type); $i++) { 
+                if (array_key_exists($i, $array_unique_room_type)) {
+                    $room_type = RoomType::find($array_unique_room_type[$i]);
 
-                array_push($array_room_type_data, $room_type);  //  Truyền ra view
+                    array_push($array_room_type_data, $room_type);  //  Truyền ra view
+                }
             }
-
-            // foreach ($array_room_type_data as $room_type) {
-            //     dd($array_count_room_type[$room_type->id]);
-            // }
-
-            dd($array_room_type_data);
-
         }
 
-        
-
-
-
-        // dd(RoomRentalList::orderBy('room_id', 'desc')->first());
-
-        // dd($start_date1);
-
-        // $data = $request->all();
-
-        // if ($data['adults'] == 'Người lớn') {
-        //     $data['adults'] = 0;
-        // }
-
-        // if ($data['children'] == 'Trẻ em') {
-        //     $data['children'] = 0;
-        // }
-
-        
-
-        // $keyWord =  $request->Input('q');
-        // $posts = Post::SearchByKeyword($keyWord)->orderBy('created_at', 'desc')->paginate(6);
-        // $courses = Course::search($keyWord);
-
-        // $posts->setPath('?q='.$keyWord);
-        // $courses->setPath('?q='.$keyWord);
-
-        return true;
+        return view('booking', [
+            'array_room_type_data'      =>  $array_room_type_data,
+            'array_count_room_type'     =>  $array_count_room_type,
+            'start_date'                =>  $request->input('start_date'),
+            'end_date'                  =>  $request->input('end_date')
+        ]);
     }
+
+
 
 }
