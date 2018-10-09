@@ -57,4 +57,32 @@ mix.copy('resources/js/hotel-alpha/app.js', 'public/js/hotel-alpha/app.js');
 mix.copy('resources/js/hotel-alpha/ie10-viewport-bug-workaround.js', 'public/js/hotel-alpha/ie10-viewport-bug-workaround.js');
 // End -------
 
+// Admin
+mix.styles('resources/css/admin/animate.min.css', 'public/css/admin/animate.min.css');
+mix.styles('resources/css/admin/app.css', 'public/css/admin/app.css');
+mix.styles('resources/css/admin/bootstrap.css', 'public/css/admin/bootstrap.css');
+mix.styles('resources/css/admin/font-awesome.min.css', 'public/css/admin/font-awesome.min.css');
+mix.styles('resources/css/admin/materialdesignicons.min.css', 'public/css/admin/materialdesignicons.min.css');
+mix.styles('resources/css/admin/pace-theme-minimal.css', 'public/css/admin/pace-theme-minimal.css');
+mix.styles('resources/css/admin/perfect-scrollbar.min.css', 'public/css/admin/perfect-scrollbar.min.css');
+mix.styles('resources/css/admin/themify-icons.css', 'public/css/admin/themify-icons.css');
+mix.styles('resources/css/admin/jasny-bootstrap.min.css', 'public/css/admin/jasny-bootstrap.min.css');
+mix.styles('resources/css/admin/summernote-bs4.css', 'public/css/admin/summernote-bs4.css');
+mix.styles('resources/css/admin/selectize.default.css', 'public/css/admin/selectize.default.css');
+mix.styles('resources/css/admin/dataTables.bootstrap4.min.css', 'public/css/admin/dataTables.bootstrap4.min.css');
+
+mix.copy('resources/js/admin/app.min.js', 'public/js/admin/app.min.js');
+mix.copy('resources/js/admin/default.js', 'public/js/admin/default.js');
+mix.copy('resources/js/admin/vendor.js', 'public/js/admin/vendor.js');
+mix.copy('resources/js/admin/Chart.min.js', 'public/js/admin/Chart.min.js');
+mix.copy('resources/js/admin/jquery.sparkline.min.js', 'public/js/admin/jquery.sparkline.min.js');
+mix.copy('resources/js/admin/data-table.js', 'public/js/admin/data-table.js');
+mix.copy('resources/js/admin/form-elements.js', 'public/js/admin/form-elements.js');
+mix.copy('resources/js/admin/jasny-bootstrap.min.js', 'public/js/admin/jasny-bootstrap.min.js');
+mix.copy('resources/js/admin/summernote-bs4.min.js', 'public/js/admin/summernote-bs4.min.js');
+mix.copy('resources/js/admin/selectize.min.js', 'public/js/admin/selectize.min.js');
+mix.copy('resources/js/admin/jquery.dataTables.js', 'public/js/admin/jquery.dataTables.js');
+mix.copy('resources/js/admin/dataTables.bootstrap4.min.js', 'public/js/admin/dataTables.bootstrap4.min.js');
+// End -------
+
 mix.version();
