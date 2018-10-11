@@ -7,7 +7,7 @@
         }
     </style>
 
-    <link rel="stylesheet" type="text/css" href="{{ mix('css/applicator/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ mix('css/admin/app.css') }}">
 @endsection
 
 @section('content')

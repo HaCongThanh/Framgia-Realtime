@@ -7,24 +7,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Permission extends EntrustPermission
 {
-	use SoftDeletes;
+    use SoftDeletes;
 
-	/**
-	 * [$table description]
-	 * @var string
-	 */
-	protected $table="permissions";
+    /**
+     * [$table description]
+     * @var string
+     */
+    protected $table="permissions";
 
-	/**
-	 * [$dates description]
-	 * @var array
-	 */
-	protected $dates = ['deleted_at'];
+    /**
+     * [$dates description]
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
-	/**
-	 * [$fillable description]
-	 * @var [type]
-	 */
+    /**
+     * [$fillable description]
+     * @var [type]
+     */
     protected $fillable = [
         'name', 'display_name', 'description',
     ];
@@ -34,6 +34,6 @@ class Permission extends EntrustPermission
      * @return [type] [description]
      */
     public function roles() {
-		return $this->belongsToMany('App\Models\Role', 'permission_role', 'permission_id', 'role_id');
-	}
+        return $this->belongsToMany('App\Models\Role', 'permission_role', 'permission_id', 'role_id');
+    }
 }

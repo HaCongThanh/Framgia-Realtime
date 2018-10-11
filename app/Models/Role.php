@@ -7,24 +7,24 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends EntrustRole
 {
-	use SoftDeletes;
+    use SoftDeletes;
 
-	/**
-	 * [$table description]
-	 * @var string
-	 */
-	protected $table="roles";
+    /**
+     * [$table description]
+     * @var string
+     */
+    protected $table="roles";
 
-	/**
-	 * [$dates description]
-	 * @var array
-	 */
-	protected $dates = ['deleted_at'];
+    /**
+     * [$dates description]
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
-	/**
-	 * [$fillable description]
-	 * @var [type]
-	 */
+    /**
+     * [$fillable description]
+     * @var [type]
+     */
     protected $fillable = [
         'name', 'display_name', 'description',
     ];
