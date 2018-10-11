@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'dev'], function() {
-    Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('/', 'User\HomeController@index')->name('user.home.index');
 
-    Route::get('/find-rooms', 'HomeController@findRooms')->name('home.find_rooms');
+    Route::get('/find-rooms', 'User\HomeController@findRooms')->name('user.home.find_rooms');
 });
 
 Route::group(['prefix' => 'admin'], function() {

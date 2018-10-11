@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('admin.layouts.master')
 
 @section('style')
     <link rel="stylesheet" href={{mix('css/admin/jasny-bootstrap.min.css')}} />
