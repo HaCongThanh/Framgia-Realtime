@@ -16,9 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'dev'], function() {
-	Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/', 'HomeController@index')->name('home.index');
 
-	Route::get('/find-rooms', 'HomeController@findRooms')->name('home.find_rooms');
+    Route::get('/find-rooms', 'HomeController@findRooms')->name('home.find_rooms');
 });
 
 Route::group(['prefix' => 'admin'], function() {
@@ -66,5 +66,3 @@ Route::post('/postMessage', 'SendMessageController@sendMessage')->name('postMess
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
