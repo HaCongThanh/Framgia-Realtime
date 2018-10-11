@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- Mirrored from storage.googleapis.com/themevessel-items/hotel-alpha/index-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 07 Jul 2018 11:21:13 GMT -->
 <head>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

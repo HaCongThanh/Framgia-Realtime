@@ -1,7 +1,7 @@
 @extends('admin.layouts.master')
 
 @section('style')
-    <link rel="stylesheet" href={{mix('css/admin/dataTables.bootstrap4.min.css')}} />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/dataTables.bootstrap4.min.css') }}" />
 @endsection
 
 @section('content')
@@ -99,7 +99,7 @@
 @endsection
 
 @section('script')
-    <script src={{mix('js/admin/jquery.dataTables.js')}}></script>
-    <script src={{mix('js/admin/dataTables.bootstrap4.min.js')}}></script>
-    <script src={{mix('js/admin/data-table.js')}}></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/data-table.js') }}"></script>
 @endsection

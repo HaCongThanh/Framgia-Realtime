@@ -146,8 +146,8 @@ class HomeController extends Controller
         return view('user.booking', [
             'array_room_type_data'      =>  $array_room_type_data,
             'array_count_room_type'     =>  $array_count_room_type,
-            'start_date'                =>  $request->input('start_date'),
-            'end_date'                  =>  $request->input('end_date')
+            'start_date'                =>  $_GET['start_date'],
+            'end_date'                  =>  $_GET['end_date']
         ]);
     }
 }

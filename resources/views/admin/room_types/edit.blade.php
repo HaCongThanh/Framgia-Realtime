@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
 
 @section('style')
-    <link rel="stylesheet" href={{mix('css/admin/jasny-bootstrap.min.css')}} />
-    <link rel="stylesheet" href={{mix('css/admin/selectize.default.css')}} />
-    <link rel="stylesheet" href={{mix('css/admin/summernote-bs4.css')}} />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/jasny-bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/selectize.default.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/summernote-bs4.css') }}" />
 @endsection
 
 @section('content')
@@ -101,9 +101,9 @@
 @endsection
 
 @section('script')
-    <script src={{mix('js/admin/jasny-bootstrap.min.js')}}></script>
-    <script src={{mix('js/admin/selectize.min.js')}}></script>
-    <script src={{mix('js/admin/summernote-bs4.min.js')}}></script>
-    <script src={{mix('js/admin/form-elements.js')}}></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/selectize.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/summernote-bs4.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/form-elements.js') }}"></script>
 @endsection
 

@@ -44,12 +44,12 @@
                             <div class="row">
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="start_date" class="btn-default datepicker" placeholder="Ngày nhận phòng">
+                                        <input type="text" name="start_date" class="btn-default datepicker" placeholder="Ngày nhận phòng" value="{{ $start_date }}">
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="end_date" class="btn-default datepicker" placeholder="Ngày trả phòng">
+                                        <input type="text" name="end_date" class="btn-default datepicker" placeholder="Ngày trả phòng" value="{{ $end_date }}">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-6">
@@ -95,7 +95,7 @@
     </div>
     <!-- Search area box 2 end -->
 
-    <div class="main-content" style="width: 80%; margin: 0 auto;">
+    <div class="main-content" style="width: 65%; margin: 0 auto;">
         <div class="container-fluid">
             <div class="page-header">
             </div>
@@ -110,8 +110,8 @@
                                     <th style="text-align: center;">Phù hợp cho</th>
                                     <th style="text-align: center;">Giá 1 đêm</th>
                                     <th style="text-align: center;">Chọn phòng</th>
-                                    <th style="text-align: center;">Hành động</th>
-                                    <th style="text-align: center;"></th>
+                                    {{-- <th style="text-align: center;">Hành động</th> --}}
+                                    {{-- <th style="text-align: center;"></th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -141,11 +141,11 @@
                                                     @endphp
                                                 </select>
                                             </td>
-                                            <td style="text-align: center;"> $168.00</td>
-                                            <td class="text-center font-size-18" style="text-align: center;">
+                                            {{-- <td style="text-align: center;"> $168.00</td> --}}
+                                            {{-- <td class="text-center font-size-18" style="text-align: center;">
                                                 <a href="#" class="text-gray m-r-15"><i class="ti-pencil"></i></a>
                                                 <a href="#" class="text-gray"><i class="ti-trash"></i></a>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 @endif

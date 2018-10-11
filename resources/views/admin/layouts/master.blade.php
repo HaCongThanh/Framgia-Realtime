@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-
-<!-- Mirrored from themenate.com/applicator/dist/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 07 Jul 2018 11:17:23 GMT -->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,18 +11,18 @@
     <link rel="shortcut icon" href="../img/icon.png">
 
     <!-- core dependcies css -->
-    <link rel="stylesheet" href={{mix('css/admin/bootstrap.css')}} />
-    <link rel="stylesheet" href={{mix('css/admin/pace-theme-minimal.css')}} />
-    <link rel="stylesheet" href={{mix('css/admin/perfect-scrollbar.min.css')}} />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/bootstrap.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/pace-theme-minimal.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/perfect-scrollbar.min.css') }}" />
 
     <!-- page css -->
     @yield('style')
     <!-- core css -->
-    <link href={{asset('css/admin/font-awesome.min.css')}} rel="stylesheet">
-    <link href={{asset('css/admin/themify-icons.css')}} rel="stylesheet">
-    <link href={{asset('css/admin/materialdesignicons.min.css')}} rel="stylesheet">
-    <link href={{asset('css/admin/animate.min.css')}} rel="stylesheet">
-    <link href={{asset('css/admin/app.css')}} rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/admin/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/admin/css/themify-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/admin/css/materialdesignicons.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/admin/css/animate.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/admin/css/app.css') }}" rel="stylesheet">
 
     <style type="text/css">
         .side-nav-folded .header .header-container .nav-logo > a .logo-dark{
@@ -932,19 +930,16 @@
     </div>
 </div>
 
-<script src={{mix('js/admin/vendor.js')}}></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/vendor.js') }}"></script>
 
-<script src={{mix('js/admin/app.min.js')}}></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/app.min.js') }}"></script>
 
 <!-- page js -->
-<script src={{mix('js/admin/Chart.min.js')}}></script>
-<script src={{mix('js/admin/jquery.sparkline.min.js')}}></script>
-<script src={{mix('js/admin/default.js')}}></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/Chart.min.js') }}"></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/jquery.sparkline.min.js') }}"></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/default.js') }}"></script>
 
 @yield('script')
 
 </body>
-
-
-<!-- Mirrored from themenate.com/applicator/dist/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 07 Jul 2018 11:18:15 GMT -->
 </html>
