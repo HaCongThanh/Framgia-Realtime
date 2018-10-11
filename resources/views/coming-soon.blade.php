@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <title>Framgia - Hotels | Coming Soon</title>
     <!-- Stylesheets -->
-    <link href="{{ mix('css/comingsoon/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ mix('css/comingsoon/revolution-slider.css') }}" rel="stylesheet">
-    <link href="{{ mix('css/comingsoon/flipclock.css') }}" rel="stylesheet">
-    <link href="{{ mix('css/comingsoon/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/comingsoon/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/comingsoon/css/revolution-slider.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/comingsoon/css/flipclock.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/comingsoon/css/style.css') }}" rel="stylesheet">
     <!-- Responsive -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link href="{{ mix('css/comingsoon/bootstrap-margin-padding.css') }}" rel="stylesheet">
-    <link href="{{ mix('css/comingsoon/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/comingsoon/css/bootstrap-margin-padding.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/lib_booking/lib/comingsoon/css/responsive.css') }}" rel="stylesheet">
 
 </head>
 
@@ -38,12 +38,12 @@
 
     <div class="scroll-to-top"><span class="fa fa-arrow-up"></span></div>
 
-    <script src="{{ mix('js/comingsoon/jquery.js') }}"></script>
-    <script src="{{ mix('js/comingsoon/bootstrap.min.js') }}"></script>
-    <script src="{{ mix('js/comingsoon/revolution.min.js') }}"></script>
-    <script src="{{ mix('js/comingsoon/flipclock.js') }}"></script>
-    <script src="{{ mix('js/comingsoon/jquery-ui.min.js') }}"></script>
-    <script src="{{ mix('js/comingsoon/script.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/comingsoon/js/jquery.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/comingsoon/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/comingsoon/js/revolution.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/comingsoon/js/flipclock.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/comingsoon/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/comingsoon/js/script.js') }}"></script>
 
     <script type="text/javascript">
         var clock;

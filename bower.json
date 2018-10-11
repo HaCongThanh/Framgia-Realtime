@@ -1,0 +1,20 @@
+{
+    "name": "Framgia_Realtime",
+    "description": "",
+    "main": "",
+    "authors": [
+        "HaCongThanh <hacongthanh.it.hubt@gmail.com>"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/HaCongThanh/Framgia-Realtime",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "lib_booking": "https://github.com/HaCongThanh/lib_booking.git"
+    }
+}
