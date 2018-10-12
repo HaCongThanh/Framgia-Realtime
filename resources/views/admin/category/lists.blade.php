@@ -5,37 +5,40 @@
     <div class="main-content">
         <div class="container-fluid">
             <div class="page-header">
-                <h2 class="header-title">Danh mục bài viết</h2>
+                <h2 class="header-title">{{ __('messages.category') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="#" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Home</a>
-                        <a class="breadcrumb-item" href="#">Tables</a>
-                        <span class="breadcrumb-item active">Basic Table</span>
+                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
+                        <a class="breadcrumb-item" href="">{{ __('messages.categories') }}</a>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header border bottom">
-                    <a href="/admin/category/create" class="btn btn-success"><i class="fa fa-plus"></i> Thêm</a>
+                    <a href="{{ route('category_create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-hover">
                         <thead class="thead-light">
                         <tr>
-                            <th scope="col">STT</th>
-                            <th scope="col">Danh mục</th>
-                            <th scope="col" style="text-align: center">Action</th>
+                            <th scope="col">{{ __('messages.id') }}</th>
+                            <th scope="col">{{ __('messages.categories') }}</th>
+                            <th scope="col" style="text-align: center">{{ __('messages.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($categories as $category)
                         <tr>
-                            <td scope="row">1</td>
-                            <td>Mark</td>
+                            <td scope="row">{!! $category -> id !!}</td>
+                            <td>{!! $category -> name !!}</td>
                             <td class="text-center font-size-18">
-                                <a href="/admin/category/edit" class="text-gray m-r-15" title="Sửa"><i class="ti-pencil"></i></a>
-                                <a href="#" class="text-gray" title="Xóa"><i class="ti-trash"></i></a>
+                                <a href="{{ route('category_edit', $category -> id) }}" class="text-gray m-r-15" title="{{ __('messages.edit') }}"><i class="ti-pencil"></i></a>
+                                {!! Form::open(['route' => ['category_delete',$category->id], 'method' => 'POST']) !!}
+                                    {!! Form::button('<i class="ti-trash"></i>', ['class' => 'text-gray', 'type' => 'submit', 'title' => __('messages.delete')]) !!}
+                                {!! Form::close() !!}
                             </td>
                         </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

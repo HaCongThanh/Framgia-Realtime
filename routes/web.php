@@ -33,41 +33,34 @@ Route::group(['prefix' => 'dev'], function() {
     Route::post('/register', 'Auth\RegisterController@register')->name('user.register');
 });
 
+/*---------------------- Admin Route --------------------*/
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
 
-    //Quản lý room_types
-    Route::get('/room_types','Admin\RoomTypesController@index');
-    Route::get('/room_types/create','Admin\RoomTypesController@create');
-    Route::get('/room_types/edit','Admin\RoomTypesController@edit');
-    Route::post('/room_types/edit','Admin\RoomTypesController@update');
+    /* Categories */
+    Route::get('/category','Admin\CategoriesController@index')->name('category');
+    Route::get('/category/create','Admin\CategoriesController@create')->name('category_create');
+    Route::post('/category/create','Admin\CategoriesController@store');
+    Route::get('/category/{id?}edit','Admin\CategoriesController@edit')->name('category_edit');
+    Route::post('/category/{id?}edit','Admin\CategoriesController@update');
+    Route::post('/category/{id?}delete','Admin\CategoriesController@destroy')->name('category_delete');
 
-    //Quản lý rooms
-    Route::get('/rooms','Admin\RoomsController@index');
-    Route::get('/rooms/create','Admin\RoomsController@create');
-    Route::get('/rooms/edit','Admin\RoomsController@edit');
-    Route::post('/rooms/edit','Admin\RoomsController@edit');
-
-    //Quản lý rooms list book
-    Route::get('/book_lists','Admin\RoomListBookController@index');
-
-    //Quản lý post
-    Route::get('/category','Admin\CategoriesController@index');
-    Route::get('/category/create','Admin\CategoriesController@create');
-    Route::get('/category/edit','Admin\CategoriesController@edit');
-    Route::post('/category/edit','Admin\CategoriesController@update');
-
-    Route::get('/post','Admin\PostsController@index');
-    Route::get('/post/create','Admin\PostsController@create');
-    Route::get('/post/edit','Admin\PostsController@edit');
-    Route::post('/post/edit','Admin\PostsController@update');
-
-    //Quan ly nhan vien
-    Route::get('/user','Admin\UsersController@index');
-
-    //Quan ly customer
-    Route::get('/customer','Admin\CustomersController@index');
+    /* Posts */
+    Route::get('/post','Admin\PostsController@index')->name('post');
+    Route::get('/post/create','Admin\PostsController@create')->name('post_create');
+    Route::post('/post/create','Admin\PostsController@store');
+    Route::get('/post/{id?}edit','Admin\PostsController@edit')->name('post_edit');
+    Route::post('/post/{id?}edit','Admin\PostsController@update');
+    Route::post('/post/{id?}delete','Admin\PostsController@destroy')->name('post_delete');
 });
+/*-------------------------------------------------------*/
+
+/*---------------------- Language -----------------------*/
+Route::get('/{locale}', function($locale) {
+    Session::put('locale', $locale);
+    return redirect()->back();
+})->name('locale');
+/*-------------------------------------------------------*/
 
 Route::get('/realtime', 'SendMessageController@realTime')->name('realTime');
 
