@@ -27,6 +27,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // 
+        return redirect()->route('user.home.index');
     }
 }

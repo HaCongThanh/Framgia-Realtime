@@ -12,6 +12,7 @@
     <title>Framgia Hotel - System Booking 5 Star</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- External CSS libraries -->
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/bootstrap.min.css') }}">
@@ -86,9 +87,31 @@
                             <i class="fa fa-rss"></i>
                         </a>
                     </li>
-                    <li>
-                        <a href="login.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
-                    </li>
+
+                    @if (Auth::check())
+                        <li>
+                            <a class="sign-in" href="{{ route('user.logout') }}"
+                               onclick="event.preventDefault();
+                                             document.getElementById('logout-form').submit();"><i class="fa fa-user"></i>
+                                {{ __('Đăng xuất') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    @else
+                        <li>
+                            <a href="{{ route('user.login_form') }}" class="sign-in"><i class="fa fa-user"></i>
+                                {{ __('Đăng nhập / Đăng ký') }}
+                            </a>
+                        </li>
+                    @endif
+                        
+                    
+                        
+                    
+
                 </ul>
             </div>
         </div>

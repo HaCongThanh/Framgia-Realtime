@@ -18,7 +18,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
+        $this->middleware('auth')->only('checkOut');
     }
 
     /**
@@ -147,7 +147,22 @@ class HomeController extends Controller
             'array_room_type_data'      =>  $array_room_type_data,
             'array_count_room_type'     =>  $array_count_room_type,
             'start_date'                =>  $_GET['start_date'],
-            'end_date'                  =>  $_GET['end_date']
+            'end_date'                  =>  $_GET['end_date'],
+            'adults'                    =>  $_GET['adults'],
+            'children'                  =>  $_GET['children']
         ]);
     }
+
+    /**
+     * Thực hiện Checkout
+     * 
+     * @return [type] [description]
+     */
+    public function checkOut()
+    {
+
+
+        return view('user.checkout');
+    }
+
 }
