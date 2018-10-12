@@ -8,7 +8,6 @@
     </style>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/admin/css/app.css') }}">
-
 @endsection
 
 @section('content')
@@ -101,6 +100,10 @@
             </div>
 
             <div class="card">
+                <div class="card-header">
+                    <a href="{{ route('user.home.check_out') }}" class="btn btn-success" style="float: right;"><i class="fa fa-plus"></i> Đặt phòng</a>
+                    <label class="btn btn-success" style="float: right;"><span id="number-room">Tổng giá: Chưa chọn phòng nào</span> <b id="price-total"></b></label>   
+                </div>
                 <div class="card-body">
                     <div class="table-overflow">
                         <table id="dt-opt" class="table table-hover table-xl">
@@ -110,13 +113,19 @@
                                     <th style="text-align: center;">Phù hợp cho</th>
                                     <th style="text-align: center;">Giá 1 đêm</th>
                                     <th style="text-align: center;">Chọn phòng</th>
-                                    {{-- <th style="text-align: center;">Hành động</th> --}}
-                                    {{-- <th style="text-align: center;"></th> --}}
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    $array_select_room = array();
+                                @endphp
+
                                 @if (isset($array_room_type_data))
                                     @foreach ($array_room_type_data as $data_room_type)
+                                        @php
+                                            $text = 'select-room-' . $data_room_type->id;
+                                            array_push($array_select_room, $text);
+                                        @endphp
                                         <tr>
                                             <td style="text-align: center;">
                                                 <div class="list-media">
@@ -128,12 +137,12 @@
                                             </td>
                                             <td style="text-align: center;">{{ $data_room_type->price }} VNĐ</td>
                                             <td style="text-align: center;">
-                                                <select class="selectpicker form-control-2" name="select-room">
-                                                    <option>0</option>
+                                                <select class="selectpicker form-control-2" name="select-room" id="select-room-{{ $data_room_type->id }}" data-price="{{ $data_room_type->price }}" onchange="selectRooms();">
+                                                    <option value="0" id="number-room-0">0</option>
                                                     @php
                                                         for ($i=1; $i <= $array_count_room_type[$data_room_type->id]; $i++) {
                                                     @endphp
-                                                        <option>@php
+                                                        <option value="@php echo $i; @endphp" id="number-room-@php echo $i; @endphp">@php
                                                             echo $i;
                                                         @endphp</option>
                                                     @php
@@ -141,24 +150,19 @@
                                                     @endphp
                                                 </select>
                                             </td>
-                                            {{-- <td style="text-align: center;"> $168.00</td> --}}
-                                            {{-- <td class="text-center font-size-18" style="text-align: center;">
-                                                <a href="#" class="text-gray m-r-15"><i class="ti-pencil"></i></a>
-                                                <a href="#" class="text-gray"><i class="ti-trash"></i></a>
-                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 @endif
                             </tbody>
                         </table>
-                    </div> 
-                </div>       
-            </div>   
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
 @endsection
 
 @section('script')
-
+    <script src="{{ mix('js/user/booking.js') }}"></script>
 @endsection

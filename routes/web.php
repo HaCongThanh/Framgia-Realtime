@@ -19,6 +19,18 @@ Route::group(['prefix' => 'dev'], function() {
     Route::get('/', 'User\HomeController@index')->name('user.home.index');
 
     Route::get('/find-rooms', 'User\HomeController@findRooms')->name('user.home.find_rooms');
+
+    Route::get('/checkout', 'User\HomeController@checkOut')->name('user.home.check_out');
+
+    Route::get('/login', 'Auth\LoginController@loginForm')->name('user.login_form');
+
+    Route::post('/login', 'Auth\LoginController@login')->name('user.login');
+
+    Route::post('/logout', 'Auth\LoginController@logout')->name('user.logout');
+
+    Route::get('/register', 'Auth\RegisterController@registerForm')->name('user.register_form');
+
+    Route::post('/register', 'Auth\RegisterController@register')->name('user.register');
 });
 
 Route::group(['prefix' => 'admin'], function() {
