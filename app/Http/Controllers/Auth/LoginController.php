@@ -60,7 +60,7 @@ class LoginController extends Controller
             $password = $request->input('password');
 
             if(Auth::attempt(['email' => $email, 'password' => $password])) {
-                return redirect()->route('user.home.index');
+                return redirect()->route(session()->get('route'));
             } else {
                 $errors = new MessageBag(['password' => 'Email hoặc mật khẩu không đúng']);
                 return redirect()->back()->withInput()->withErrors($errors);
@@ -72,7 +72,7 @@ class LoginController extends Controller
      * [logout description]
      * @return [type] [description]
      */
-    public function logout() {
+    public function logout(Request $request) {
         Auth::logout();
 
         return redirect()->route('user.login_form');

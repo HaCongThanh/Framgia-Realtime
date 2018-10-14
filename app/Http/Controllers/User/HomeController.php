@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\RoomRentalList;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\RoomType;
+use Validator;
+use DB;
 
 class HomeController extends Controller
 {
@@ -28,6 +31,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        session()->forget('route');
+        
+        session()->put('route', 'user.home.index');
+        
         return view('user.home');
     }
 
@@ -43,7 +50,7 @@ class HomeController extends Controller
         $children   = $request->input('children');
 
         if ($adults == 'Người lớn') {
-            $adults = 0;
+            $adults = 1;
         }
 
         if ($children == 'Trẻ em') {
@@ -148,8 +155,89 @@ class HomeController extends Controller
             'array_count_room_type'     =>  $array_count_room_type,
             'start_date'                =>  $_GET['start_date'],
             'end_date'                  =>  $_GET['end_date'],
-            'adults'                    =>  $_GET['adults'],
-            'children'                  =>  $_GET['children']
+            'adults'                    =>  $adults,
+            'children'                  =>  $children
+        ]);
+    }
+
+    /**
+     * Lưu session
+     * 
+     * @return [type] [description]
+     */
+    public function sessionBookings(Request $request)
+    {
+        session()->forget('start_date');
+        session()->put('start_date', $request->start_date);
+
+        session()->forget('end_date');
+        session()->put('end_date', $request->end_date);
+
+        session()->forget('adults');
+        session()->put('adults', $request->adults);
+
+        session()->forget('children');
+        session()->put('children', $request->children);
+
+        session()->forget('total_number_room');
+        session()->put('total_number_room', $request->total_number_room);
+
+        session()->forget('total_money');
+        session()->put('total_money', $request->total_money);
+
+        if ($request->rt1 != 0) {
+            session()->forget('rt1');
+            session()->put('rt1', $request->rt1);
+        }
+
+        if ($request->rt2 != 0) {
+            session()->forget('rt2');
+            session()->put('rt2', $request->rt2);
+        }
+
+        if ($request->rt3 != 0) {
+            session()->forget('rt3');
+            session()->put('rt3', $request->rt3);
+        }
+        
+        if ($request->rt4 != 0) {
+            session()->forget('rt4');
+            session()->put('rt4', $request->rt4);
+        }
+
+        if ($request->rt5 != 0) {
+            session()->forget('rt5');
+            session()->put('rt5', $request->rt5);
+        }
+
+        if ($request->rt6 != 0) {
+            session()->forget('rt6');
+            session()->put('rt6', $request->rt6);
+        }
+
+        if ($request->rt7 != 0) {
+            session()->forget('rt7');
+            session()->put('rt7', $request->rt7);
+        }
+
+        if ($request->rt8 != 0) {
+            session()->forget('rt8');
+            session()->put('rt8', $request->rt8);
+        }
+
+        if ($request->rt9 != 0) {
+            session()->forget('rt9');
+            session()->put('rt9', $request->rt9);
+        }
+
+        if ($request->rt10 != 0) {
+            session()->forget('rt10');
+            session()->put('rt10', $request->rt10);
+        }
+
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Thêm session thành công!'
         ]);
     }
 
@@ -160,9 +248,26 @@ class HomeController extends Controller
      */
     public function checkOut()
     {
+        $user = Auth::user();
 
-
-        return view('user.checkout');
+        return view('user.checkout', [
+            'start_date'        =>  session()->get('start_date'),
+            'end_date'          =>  session()->get('end_date'),
+            'adults'            =>  session()->get('adults'),
+            'children'          =>  session()->get('children'),
+            'total_number_room' =>  session()->get('total_number_room'),
+            'total_money'       =>  session()->get('total_money'),
+            'user_id'           =>  $user->id,
+            'name'              =>  $user->name,
+            'email'             =>  $user->email,
+            'gender'            =>  $user->gender,
+            'mobile'            =>  $user->mobile,
+            'address'           =>  $user->address,
+            'card_type'         =>  $user->card_type,
+            'card_number'       =>  $user->card_number,
+            'expire'            =>  $user->expire,
+            'year'              =>  $user->year
+        ]);
     }
 
 }

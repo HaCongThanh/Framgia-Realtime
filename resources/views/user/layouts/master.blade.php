@@ -56,8 +56,8 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
                 <div class="list-inline">
-                    <a href="tel:1-8X0-666-8X88"><i class="fa fa-phone"></i>Need Support? 1-8X0-666-8X88</a>
-                    <a href="tel:info@themevessel.com"><i class="fa fa-envelope"></i>info@themevessel.com</a>
+                    <a href="tel:0997654398"><i class="fa fa-phone"></i>Bạn cần hỗ trợ? 0997654398</a>
+                    <a href="mailto:hacongthanh.it.hubt@gmail.com"><i class="fa fa-envelope"></i>hacongthanh.it.hubt@gmail.com</a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
@@ -107,11 +107,6 @@
                             </a>
                         </li>
                     @endif
-                        
-                    
-                        
-                    
-
                 </ul>
             </div>
         </div>
@@ -130,7 +125,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="index.html" class="logo">
+                <a href="{{ route('user.home.index') }}" class="logo">
                     <img src="{{ url('/img/logo.png') }}" alt="logo">
                 </a>
             </div>
@@ -230,7 +225,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
                     <li>
-                        <a class="btn-navbar btn btn-sm btn-theme-sm-outline btn-round" href="login.html">Create Account</a>
+                        <a class="btn-navbar btn btn-sm btn-theme-sm-outline btn-round" href="#">Thông tin tài khoản</a>
                     </li>
                     <li>
                         <a id="header-search-btn" class="btn-navbar search-icon"><i class="fa fa-search"></i></a>
@@ -277,20 +272,20 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-item">
                         <div class="main-title-2">
-                            <h1>Contact Us</h1>
+                            <h1>Liên hệ</h1>
                         </div>
                         <ul class="personal-info">
                             <li>
                                 <i class="fa fa-map-marker"></i>
-                                Address: 44 New Design Street,
+                                44 New Design Street,
                             </li>
                             <li>
                                 <i class="fa fa-envelope"></i>
-                                Email:<a href="mailto:sales@hotelempire.com">info@themevessel.com</a>
+                                <a href="mailto:hacongthanh.it.hubt@gmail.com">hacongthanh.it.hubt@gmail.com</a>
                             </li>
                             <li>
                                 <i class="fa fa-phone"></i>
-                                Phone: <a href="tel:+55-417-634-7071">+0477 85X6 552</a>
+                                <a href="tel:+55-417-634-7071">0997654398</a>
                             </li>
                             <li>
                                 <i class="fa fa-fax"></i>
@@ -352,14 +347,14 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-item newsletter">
                         <div class="main-title-2">
-                            <h1>Newsletter</h1>
+                            <h1>Ưu đãi mới</h1>
                         </div>
                         <div class="newsletter-inner">
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p>Đăng ký để nhận những ưu đãi mới của khách sạn chúng tôi.</p>
                             <form action="#" method="GET">
-                                <p><input type="text" class="form-contact" name="email" placeholder="Enter your email"></p>
+                                <p><input type="text" class="form-contact" name="email" placeholder="Nhập Email của bạn"></p>
                                 <p><button type="submit" name="submitNewsletter" class="btn btn-small">
-                                    Signup
+                                    Đăng ký
                                 </button></p>
                             </form>
                         </div>
@@ -374,7 +369,7 @@
 <!-- Copy right start -->
 <div class="copy-right">
     <div class="container">
-        &copy;  2017 <a href="http://themevessel.com/" target="_blank">Theme Vessel</a>. Trademarks and brands are the property of their respective owners.
+        &copy;  2018 <a href="http://themevessel.com/" target="_blank">Framgia</a>. Nhãn hiệu và thương hiệu là tài sản của chủ sở hữu tương ứng.
     </div>
 </div>
 <!-- Copy end right-->
