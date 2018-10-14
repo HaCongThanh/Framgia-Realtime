@@ -8,6 +8,7 @@
     </style>
 
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/admin/css/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/sweet-alert.css') }}">
 @endsection
 
 @section('content')
@@ -56,7 +57,7 @@
                                         <select class="selectpicker search-fields form-control-2" name="adults">
                                             <option>Người lớn</option>
                                             @php
-                                                for ($i=0; $i <= 10 ; $i++) {
+                                                for ($i=1; $i <= 10 ; $i++) {
                                             @endphp
                                                 <option>@php
                                                     echo $i;
@@ -101,8 +102,27 @@
 
             <div class="card">
                 <div class="card-header">
-                    <a href="{{ route('user.home.check_out') }}" class="btn btn-success" style="float: right;"><i class="fa fa-plus"></i> Đặt phòng</a>
-                    <label class="btn btn-success" style="float: right;"><span id="number-room">Tổng giá: Chưa chọn phòng nào</span> <b id="price-total"></b></label>   
+                    <button type="button" class="btn btn-success" id="btn-booking" style="float: right;"><i class="fa fa-plus"></i> Đặt phòng</button>
+
+                    @php
+                        session()->forget('route');
+                        session()->put('route', 'user.home.check_out');
+                    @endphp
+
+                    <label class="btn btn-success" style="float: right;"><span id="number-room">Tổng giá: Chưa chọn phòng nào</span> <b id="price-total"></b></label>
+                    <input type="hidden" name="number-room-hidden" id="number-room-hidden" class="btn btn-success" value="" disabled>
+                    <input type="hidden" name="total-money-hidden" id="total-money-hidden" class="btn btn-success" value="" disabled>
+                    <input type="hidden" name="start-date-hidden" id="start-date-hidden" class="btn btn-success" value="{{ $start_date }}" disabled>
+                    <input type="hidden" name="end-date-hidden" id="end-date-hidden" class="btn btn-success" value="{{ $end_date }}" disabled>
+                    <input type="hidden" name="adults-hidden" id="adults-hidden" class="btn btn-success" value="{{ $adults }}" disabled>
+                    <input type="hidden" name="children-hidden" id="children-hidden" class="btn btn-success" value="{{ $children }}" disabled>
+                    @php
+                        for ($i=1; $i <= 10; $i++) {
+                    @endphp
+                        <input type="hidden" name="rt@php echo $i; @endphp" id="rt@php echo $i; @endphp" class="btn btn-success" value="" disabled>
+                    @php
+                        }
+                    @endphp
                 </div>
                 <div class="card-body">
                     <div class="table-overflow">
@@ -135,7 +155,7 @@
                                             <td style="text-align: center;">
                                                 <span class="badge badge-pill badge-gradient-success">{{ $data_room_type->max_people }} người</span>
                                             </td>
-                                            <td style="text-align: center;">{{ $data_room_type->price }} VNĐ</td>
+                                            <td style="text-align: center;">{{ number_format($data_room_type->price) }} VNĐ</td>
                                             <td style="text-align: center;">
                                                 <select class="selectpicker form-control-2" name="select-room" id="select-room-{{ $data_room_type->id }}" data-price="{{ $data_room_type->price }}" onchange="selectRooms();">
                                                     <option value="0" id="number-room-0">0</option>
@@ -164,5 +184,57 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('bower_components/lib_booking/lib/user/js/sweet-alert.min.js') }}"></script>
     <script src="{{ mix('js/user/booking.js') }}"></script>
+
+    <script>
+        $('#btn-booking').on('click', function(event) {
+            event.preventDefault();
+
+            swal({
+                title: "Bạn có chắc muốn đặt loại phòng này?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#24d5d8",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            },
+            function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('user.session_bookings') }}",
+                    data: {
+                        total_number_room   :   $('#number-room-hidden').val(),
+                        total_money         :   $('#total-money-hidden').val(),
+                        start_date          :   $('#start-date-hidden').val(),
+                        end_date            :   $('#end-date-hidden').val(),
+                        adults              :   $('#adults-hidden').val(),
+                        children            :   $('#children-hidden').val(),
+                        rt1                 :   $('#rt1').val(),
+                        rt2                 :   $('#rt2').val(),
+                        rt3                 :   $('#rt3').val(),
+                        rt4                 :   $('#rt4').val(),
+                        rt5                 :   $('#rt5').val(),
+                        rt6                 :   $('#rt6').val(),
+                        rt7                 :   $('#rt7').val(),
+                        rt8                 :   $('#rt8').val(),
+                        rt9                 :   $('#rt9').val(),
+                        rt10                :   $('#rt10').val()
+                    },
+                    success:function(res){
+                        window.location.href = "{{ route('user.home.check_out') }}";
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        // 
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

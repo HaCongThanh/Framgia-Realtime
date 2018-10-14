@@ -101,7 +101,7 @@
                                         <select class="selectpicker search-fields form-control-2" name="adults">
                                             <option>Người lớn</option>
                                             @php
-                                                for ($i=0; $i <= 10 ; $i++) {
+                                                for ($i=1; $i <= 10 ; $i++) {
                                             @endphp
                                                 <option>@php
                                                     echo $i;

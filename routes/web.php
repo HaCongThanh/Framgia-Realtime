@@ -31,6 +31,12 @@ Route::group(['prefix' => 'dev'], function() {
     Route::get('/register', 'Auth\RegisterController@registerForm')->name('user.register_form');
 
     Route::post('/register', 'Auth\RegisterController@register')->name('user.register');
+
+    Route::post('/session-bookings', 'User\HomeController@sessionBookings')->name('user.session_bookings');
+
+    Route::post('/users/update-info', 'User\UserController@updateInfo')->name('user.users.update_info');
+
+    Route::post('/users/update-payment', 'User\UserController@updatePayment')->name('user.users.update_payment');
 });
 
 Route::group(['prefix' => 'admin'], function() {

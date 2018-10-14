@@ -28,7 +28,9 @@ class AddStatusToRoomsTable extends Migration
     public function down()
     {
         Schema::table('rooms', function (Blueprint $table) {
-            //
+            if (Schema::hasColumn('rooms', 'status')) {
+                $table->dropColumn('status');
+            }
         });
     }
 }
