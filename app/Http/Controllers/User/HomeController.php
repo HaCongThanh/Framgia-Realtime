@@ -226,8 +226,7 @@ class HomeController extends Controller
 
         return response()->json([
             'error'     =>  false,
-            'message'   =>  'Thêm session thành công!',
-            'data'   =>  session()->get('rt5')
+            'message'   =>  'Thêm session thành công!'
         ]);
     }
 
