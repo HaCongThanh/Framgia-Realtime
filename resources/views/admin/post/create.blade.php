@@ -37,15 +37,15 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('name', __('messages.categories'), ['class' => 'control-label']) !!}
-                            {!! Form::select('category', $categories, 'S', ['class' => 'form-control']) !!}
+                            {!! Form::select('category', $categories, '',['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('description', __('messages.description'), ['class' => 'control-label']) !!}
-                            {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => __('messages.description_text'), 'rows'=>"3"]) !!}
+                            {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => __('messages.description_text'), 'rows' => "3"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('content', __('messages.content'), ['class'=>'control-label']) !!}
-                            {!! Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => __('messages.content_text'), 'rows'=>"3", 'id'=>'editor1']) !!}
+                            {!! Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => __('messages.content_text'), 'rows' => "3", 'id' => 'editor1']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('image', __('messages.image'), ['class' => 'control-label']) !!}
@@ -57,6 +57,14 @@
                                     </span>
                                 <span class="fileinput-filename"></span>
                                 <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('status', __('messages.status'), ['class'=>'control-label']) !!}
+                            <div class="m-t-15">
+                                <div class="select-box">
+                                    {{ Form::select('status', [1 => trans('messages.checked'), 0 => trans('messages.uncheck')], null, ['class' => 'form-control']) }}
+                                </div>
                             </div>
                         </div>
                         {!! Form::submit(__('messages.add'), ['class'=>'btn btn-info btn-float btn-outline']) !!}

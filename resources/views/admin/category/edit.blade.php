@@ -24,7 +24,7 @@
                     {!! Form::open(['method' => 'POST']) !!}
                         <div class="form-group">
                             {!! Form::label('name', __('messages.categories'), ['class' => 'control-label']) !!}
-                            {!! Form::text('name', $category -> name, ['class' => 'form-control form-control-sm']) !!}
+                            {!! Form::text('name', $category->name, ['class' => 'form-control form-control-sm']) !!}
                         </div>
                         {!! Form::submit(__('messages.update'), ['class' => 'btn btn-info btn-float btn-outline']) !!}
                     {!! Form::close() !!}

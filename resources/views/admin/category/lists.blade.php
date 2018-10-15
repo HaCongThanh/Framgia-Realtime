@@ -27,9 +27,10 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @php ($stt=1)
                         @foreach($categories as $category)
                         <tr>
-                            <td scope="row">{!! $category -> id !!}</td>
+                            <td scope="row">{!! $stt++ !!}</td>
                             <td>{!! $category -> name !!}</td>
                             <td class="text-center font-size-18">
                                 <a href="{{ route('category_edit', $category -> id) }}" class="text-gray m-r-15" title="{{ __('messages.edit') }}"><i class="ti-pencil"></i></a>

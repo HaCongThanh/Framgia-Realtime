@@ -350,7 +350,7 @@
                         <span>Framgia Hotel</span>
                     </li>
                     <li class="nav-item dropdown open">
-                        <a class="dropdown-toggle" href="">
+                        <a class="dropdown-toggle" href="{{ route('dashboard') }}">
                                 <span class="icon-holder">
                                     <i class="mdi mdi-gauge"></i>
                                 </span>
@@ -370,10 +370,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="">{{ __('messages.room_types_list') }}</a>
+                                <a href="{{ route('room_type') }}">{{ __('messages.room_types_list') }}</a>
                             </li>
                             <li>
-                                <a href="">{{ __('messages.facility') }}</a>
+                                <a href="{{ route('facility') }}">{{ __('messages.facility') }}</a>
                             </li>
                         </ul>
                     </li>

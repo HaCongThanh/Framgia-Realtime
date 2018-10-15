@@ -13,6 +13,7 @@
                     </nav>
                 </div>
             </div>
+
             <div class="card">
                 <div class="card-header border bottom">
                     <a href="{{ route('post_create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
@@ -31,19 +32,36 @@
                         <tbody>
                         @foreach($posts as $post)
                         <tr>
-                            <td scope="row">{{ $post->image }}</td>
-                            <td>{{ $post->name }}</td>
-                            <td>Mark</td>
+                            <td><img src="{{ asset('/public/images/post/'.$post->image) }}" width="100"></td>
+                            <td>{{ $post->title }}</td>
+
                             <td>
-                                <div class="switch d-inline m-r-10">
-                                    {{ Form::checkbox('status', 'value', true) }}
-                                    {{--<input type="checkbox" id="switch-1" checked="">--}}
-                                    <label for="switch-1"></label>
-                                </div>
+                                {{--{{ $post->categories[0]->name }}--}}
                             </td>
+                            @if($post->status == 0)
+                                <td>
+                                    <div class="switch d-inline m-r-10">
+                                        <input type="checkbox" id="switch-3" disabled="">
+                                        <label for="switch-3"></label>
+                                    </div>
+                                    <label>{{ __('messages.uncheck') }}</label>
+                                </td>
+                            @else
+                                <td>
+                                    <div class="switch d-inline m-r-10">
+                                        <input type="checkbox" id="switch-4" disabled="" checked="">
+                                        <label for="switch-4"></label>
+                                    </div>
+                                    <label>{{ __('messages.checked') }}</label>
+                                </td>
+                            @endif
                             <td class="text-center font-size-18">
-                                <a href="{{ route('post_edit', $post->id) }}" class="text-gray m-r-15" title="{{ __('messages.edit') }}"><i class="ti-pencil"></i></a>
-                                <a href="" class="text-gray" title="{{ __('messages.delete') }}"><i class="ti-trash"></i></a>
+                                {!! Form::open(['route' => ['post_edit',$post->id], 'method' => 'GET']) !!}
+                                    {!! Form::button('<i class="ti-pencil"></i>', ['class' => 'text-gray', 'type' => 'submit', 'title' => __('messages.edit')]) !!}
+                                {!! Form::close() !!}
+                                {!! Form::open(['route' => ['post_edit',$post->id], 'method' => 'POST']) !!}
+                                    {!! Form::button('<i class="ti-trash"></i>', ['class' => 'text-gray', 'type' => 'submit', 'title' => __('messages.delete')]) !!}
+                                {!! Form::close() !!}
                             </td>
                         </tr>
                         @endforeach

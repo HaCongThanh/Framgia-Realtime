@@ -29,7 +29,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        $categories = Category::all()->pluck('name', 'id');
+        $categories = Category::all();
         return view('admin.post.create', compact('categories'));
     }
 
@@ -41,16 +41,26 @@ class PostsController extends Controller
      */
     public function store(PostFormRequest $request)
     {
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $new_name = str_random(3).'_'.$image->getClientOriginalName();
+            while (file_exists('public/images/post/'.$new_name)) {
+                $new_name = str_random(4).'_'.$new_name;
+            }
+            $image->move('public/images/post', $new_name);
+        }
         $post = new Post(array(
-            'title' => $request -> get('title'),
-            'slug' => $request -> get('slug'),
-            'description' => $request -> get('description'),
-            'content' => $request -> get('content'),
-            'image' => $request ->file('image'),
+            'title' => $request->get('title'),
+            'slug' => $request->get('slug'),
+            'description' => $request->get('description'),
+            'content' => $request->get('content'),
+            'status' => $request->get('status'),
+            'user_id' => 4,
+            'image' => $new_name
         ));
-        $post->categories()->sync($request->get('categories'));
-        $post -> save();
-        dd($post);
+        $post->save();
+        $post->categories()->sync($request->get('category'));
+
         return redirect() -> route('post');
     }
 
@@ -73,8 +83,10 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::whereid($id)->firstOrFail();
-        return view('admin.post.edit', compact('post'));
+        $post = Post::findOrFail($id);
+        $categories = Category::all();
+        $selectedCategories = $post->categories->pluck('id');
+        return view('admin.post.edit', compact('post', 'categories', 'selectedCategories'));
     }
 
     /**
@@ -86,10 +98,28 @@ class PostsController extends Controller
      */
     public function update($id, PostFormRequest $request)
     {
-        $post = Post::whereid($id)->firstOrFail();
-        $post->name = $request->get('name');
+        $post = Post::findOrFail($id);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $new_name = str_random(3).'_'.$image->getClientOriginalName();
+            while (file_exists('public/images/post/'.$new_name)) {
+                $new_name = str_random(3).'_'.$new_name;
+            }
+            if (file_exists('public/images/post/'.$new_name)) {
+                unlink('public/images/post/'.$post->image);
+            }
+            $image->move('public/images/post'.$new_name);
+        }
+        $post->title = $request->get('title');
+        $post->slug = $request->get('slug');
+        $post->content = $request->get('content');
+        $post->description = $request->get('description');
+        $post->status = $request->get('status');
+        $post->image = $new_name;
 
+        //dd($post);
         $post->save();
+        $post->categories()->sync($request->get('categories'));
         return redirect()->route('post',$post->id);
     }
 
