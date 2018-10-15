@@ -350,11 +350,7 @@
                         <span>Framgia Hotel</span>
                     </li>
                     <li class="nav-item dropdown open">
-<<<<<<< HEAD
                         <a class="dropdown-toggle" href="{{ route('dashboard') }}">
-=======
-                        <a class="dropdown-toggle" href="">
->>>>>>> 18a3b4284f7adbe629ff3a4b7a5c2f4269265789
                                 <span class="icon-holder">
                                     <i class="mdi mdi-gauge"></i>
                                 </span>
