@@ -26,7 +26,7 @@ class RoomRentalList extends Model
      * @var [type]
      */
     protected $fillable = [
-        'user_id', 'room_id', 'start_date', 'end_date'
+        'user_id', 'room_id', 'start_date', 'end_date', 'created_at', 'updated_at', 'deleted_at'
     ];
 
     /**
