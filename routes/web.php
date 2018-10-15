@@ -65,7 +65,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/room_type','Admin\RoomTypesController@index')->name('room_type');
     Route::get('/room_type/create','Admin\RoomTypesController@create')->name('room_type_create');
     Route::post('/room_type/create','Admin\RoomTypesController@store');
-
 });
 /*-------------------------------------------------------*/
 

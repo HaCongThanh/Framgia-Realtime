@@ -20,7 +20,6 @@
                 </div>
             </div>
             <div class="card">
-
                 @foreach ($errors->all() as $error)
                     <p class="alert alert-danger">{{ $error }}</p>
                 @endforeach
@@ -71,6 +70,8 @@
                     {!! Form::submit(__('messages.update'), ['class' => 'btn btn-info btn-float btn-outline']) !!}
                     {!! Form::close() !!}
                 </div>
+                {!! Form::submit(__('messages.update'), ['class'=>'btn btn-info btn-float btn-outline']) !!}
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
