@@ -67,7 +67,7 @@ class RoomTypesController extends Controller
 //            'facilities' => $request -> get('facilities'),
 //            'image' => $name
 //        ));
-        dd($room_type);
+        //dd($room_type);
         $room_type->save();
         if ($request->has('facilities')) {
             foreach ($request->facilites as $facility) {
