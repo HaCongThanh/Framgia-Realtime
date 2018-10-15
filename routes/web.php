@@ -34,6 +34,8 @@ Route::group(['prefix' => 'dev'], function() {
 
     Route::post('/session-bookings', 'User\HomeController@sessionBookings')->name('user.session_bookings');
 
+    Route::get('/bookings', 'User\HomeController@bookings')->name('user.bookings');
+
     Route::post('/users/update-info', 'User\UserController@updateInfo')->name('user.users.update_info');
 
     Route::post('/users/update-payment', 'User\UserController@updatePayment')->name('user.users.update_payment');

@@ -24,7 +24,6 @@ class CreateRoomTypesTable extends Migration
                 $table->string('price')->comment('Giá (1 đêm x 1 người) của phòng');
                 $table->string('image')->comment('Ảnh của phòng');
                 $table->text('description')->comment('Miêu tả về loại phòng');
-                $table->text('facilities')->comment('Các tiện nghi của loại phòng này');
 
                 $table->timestamps();
                 $table->softDeletes();

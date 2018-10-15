@@ -34,7 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'gender', 'birthday', 'mobile', 'address', 'avatar', 'rate', 'review', 'arrivals_number', 'total_money_spent', 'type',
+        'name', 'email', 'password', 'gender', 'birthday', 'mobile', 'address', 'avatar', 'rate', 'review', 'arrivals_number', 'total_money_spent', 'type', 'created_at', 'updated_at', 'deleted_at'
     ];
 
     /**
@@ -60,5 +60,13 @@ class User extends Authenticatable
      */
     public function room_rental_lists() {
         return $this->hasMany('App\Models\RoomRentalList', 'user_id');
+    }
+
+    /**
+     * Get customer_booking_logs: one to many
+     * @return [type] [description]
+     */
+    public function customer_booking_logs() {
+        return $this->hasMany('App\Models\CustomerBookingLog', 'user_id');
     }
 }
