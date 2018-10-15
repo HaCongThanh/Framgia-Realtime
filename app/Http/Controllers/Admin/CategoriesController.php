@@ -94,6 +94,6 @@ class CategoriesController extends Controller
     {
         $category = Category::whereid($id) -> firstOrFail();
         $category -> delete();
-        return redirect() -> route('category_delete');
+        return redirect() -> route('category');
     }
 }

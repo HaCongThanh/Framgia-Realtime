@@ -1,9 +1,9 @@
 @extends('admin.layouts.master')
 
 @section('style')
-    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/jasny-bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/selectize.default.css') }}" />
-    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/summernote-bs4.css') }}" />
+    <link rel="stylesheet" href={{asset('bower_components/lib_booking/lib/admin/css/jasny-bootstrap.min.css')}} />
+    <link rel="stylesheet" href={{asset('bower_components/lib_booking/lib/admin/css/selectize.default.css')}} />
+    <link rel="stylesheet" href={{asset('bower_components/lib_booking/lib/admin/css/summernote-bs4.css')}} />
 @endsection
 
 @section('content')
@@ -23,87 +23,72 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
+                        {!! Form::open(['route'=>'', 'method'=>'POST', 'files'=>true]) !!}
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label">Loại phòng: </label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Tên loại phòng">
+                                {!! Form::label('name', "Tên loại phòng:", ['class'=>'control-label']) !!}
+                                {!! Form::text('name', null, ['class'=>'form-control form-control-sm', 'placeholder'=>"Tên loại phòng"]) !!}
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Diện tích: </label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Số diện tích">
+                                {!! Form::label('room_size', "Diện tích:", ['class'=>'control-label']) !!}
+                                {!! Form::text('room_size', null, ['class'=>'form-control form-control-sm', 'placeholder'=>"Số diện tích"]) !!}
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Số giường ngủ: </label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Số lượng giường ngủ">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Số người/phòng: </label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Số người trên một phòng">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Giá phòng: </label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Nhập giá phòng">
+                                {!! Form::label('bed', "Số giường ngủ:", ['class'=>'control-label']) !!}
+                                {!! Form::text('bed', null, ['class'=>'form-control form-control-sm', 'placeholder'=>"Số lượng giường ngủ"]) !!}
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
+                                {!! Form::label('max_people', "Số người/phòng:", ['class'=>'control-label']) !!}
+                                {!! Form::text('max_people', null, ['class'=>'form-control form-control-sm', 'placeholder'=>"Số người trên một phòng"]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('price', "Giá phòng:", ['class'=>'control-label']) !!}
+                                {!! Form::text('price', null, ['class'=>'form-control form-control-sm', 'placeholder'=>"Nhập giá phòng"]) !!}
+                            </div>
+                            <div class="form-group">
+                                {!! Form::label('name', "Tên loại phòng:", ['class'=>'control-label']) !!}
                                 <label class="control-label">Chọn ảnh</label><br>
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
-                                    <span class="btn btn-default btn-file"><span class="fileinput-new">Select file</span>
-                                    <span class="fileinput-exists">Change</span><input type="file" name="..."/></span>
+                                    <span class="btn btn-default btn-file">
+                                        <span class="fileinput-new">Select file</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        {!! Form::file('image') !!}
+                                    </span>
                                     <span class="fileinput-filename"></span>
                                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h4 class="card-title m-b-25">Albums</h4>
-                                    <div class="row m-t-10">
-                                        <div class="col-4 p-h-5">
-                                            <a href="#">
-                                                <img class="img-fluid w-100" src="../img/logo.png" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="col-4 p-h-5">
-                                            <a href="#">
-                                                <img class="img-fluid w-100" src="assets/images/others/img-12.jpg" alt="">
-                                            </a>
-                                        </div>
-                                        <div class="col-4 p-h-5">
-                                            <a href="#">
-                                                <img class="img-fluid w-100" src="assets/images/others/img-13.jpg" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="form-group">
+                                {!! Form::label('depscription', "Mô tả:", ['class'=>'control-label']) !!}
                                 <label class="control-label">Mô tả: </label>
                                 <div class="m-t-15">
+                                    {!! Form::textarea('depscription', null, ['class'=>'form-control form-control-sm', 'placeholder'=>"Nhập mô tả", 'rows'=>"3"]) !!}
                                     <div id="summernote-standard"></div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Tiện ích: </label>
-                                <div id="summernote-custom"></div>
+                                {!! Form::label('name', "Tên loại phòng:", ['class'=>'control-label']) !!}
+                                {!! Form::checkbox('name', 'value') !!}
                             </div>
                         </div>
+                        <div class="clearfix"></div>
+                        {!! Form::submit("Lưu", ['class'=>'btn btn-info btn-float btn-outline']) !!}
+                        {!! Form::close() !!}
                     </div>
-                    <button type="submit" class="btn btn-info btn-float btn-outline">Lưu</button>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Content Wrapper END -->
-@endsection
+        <!-- Content Wrapper END -->
+        @endsection
 
-@section('script')
-    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js') }}"></script>
-    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/selectize.min.js') }}"></script>
-    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/summernote-bs4.min.js') }}"></script>
-    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/form-elements.js') }}"></script>
+        @section('script')
+            <script src={{asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js')}}></script>
+            <script src={{asset('bower_components/lib_booking/lib/admin/js/selectize.min.js')}}></script>
+            <script src={{asset('bower_components/lib_booking/lib/admin/js/summernote-bs4.min.js')}}></script>
+            <script src={{asset('bower_components/lib_booking/lib/admin/js/form-elements.js')}}></script>
 @endsection
-

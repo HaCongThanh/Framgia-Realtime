@@ -58,6 +58,20 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/post/{id?}edit','Admin\PostsController@edit')->name('post_edit');
     Route::post('/post/{id?}edit','Admin\PostsController@update');
     Route::post('/post/{id?}delete','Admin\PostsController@destroy')->name('post_delete');
+
+    /* Facilities */
+    Route::get('/facility','Admin\FacilitiesController@index')->name('facility');
+    Route::get('/facility/create','Admin\FacilitiesController@create')->name('facility_create');
+    Route::post('/facility/create','Admin\FacilitiesController@store');
+    Route::get('/facility/{id?}edit','Admin\FacilitiesController@edit')->name('facility_edit');
+    Route::post('/facility/{id?}edit','Admin\FacilitiesController@update');
+    Route::post('/facility/{id?}delete','Admin\FacilitiesController@destroy')->name('facility_delete');
+
+    /* Room Type */
+    Route::get('/room_type','Admin\RoomTypesController@index')->name('room_type');
+    Route::get('/room_type/create','Admin\RoomTypesController@create')->name('room_type_create');
+    Route::post('/room_type/create','Admin\RoomTypesController@store');
+
 });
 /*-------------------------------------------------------*/
 

@@ -40,7 +40,9 @@
                             <td class="text-center font-size-18">
                                 <a href="" data-toggle="modal" data-target="#modal-lg" class="text-gray m-r-15" title="Xem chi tiết"><i class="ti-eye"></i></a>
                                 <a href="/admin/rooms/edit" class="text-gray m-r-15" title="Sửa"><i class="ti-pencil"></i></a>
-                                <a href="#" class="text-gray" title="Xóa"><i class="ti-trash"></i></a>
+                                {!! Form::open(['route'=>['category_delete',$category->id], 'method'=>'POST']) !!}
+                                {!! Form::submit('<i class="ti-trash"></i>', ['class'=>'text-gray', 'title'=>"Xóa"]) !!}
+                                {!! Form::close() !!}
                             </td>
                         </tr>
                         </tbody>

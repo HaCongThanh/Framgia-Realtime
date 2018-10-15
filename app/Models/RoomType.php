@@ -37,4 +37,12 @@ class RoomType extends Model
         return $this->hasMany('App\Models\Room', 'room_type_id');
     }
 
+    /**
+     * Get rooms: Many to many
+     * @return [type] [description]
+     */
+    public function facilities(){
+        return $this->belongsToMany('App\Models\Facility', 'facility_room_type', 'room_type_id', 'facility_id');
+
+    }
 }

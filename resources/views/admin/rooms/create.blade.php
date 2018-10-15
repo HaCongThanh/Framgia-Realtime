@@ -17,38 +17,31 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
+                        {!! Form::open(['route'=>'', 'method'=>'POST']) !!}
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label">Số phòng: </label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Nhập số phòng">
+                                {!! Form::label('floor', "Tầng:", ['class'=>'control-label']) !!}
+                                {!! Form::text('floor', null, ['class'=>'form-control form-control-sm', 'placeholder'=>"Số tầng"]) !!}
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Tầng: </label>
-                                <input type="text" class="form-control form-control-sm" placeholder="Số tầng">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Loại phòng: </label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                                {!! Form::label('room_type', "Loại phòng:", ['class'=>'control-label']) !!}
+                                {!! Form::select('room_type',['L' => 'Large', 'S' => 'Small'], ['class'=>'form-control']) !!}
                             </div>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
-                                <label class="control-label">Số người/phòng: </label>
+                                {!! Form::label('max_people', "Số người/phòng:", ['class'=>'control-label']) !!}
+                                {!! Form::text('floor', 'value', ['class'=>'form-control form-control-sm']) !!}
                                 <input type="text" class="form-control form-control-sm" placeholder="">
                             </div>
                             <div class="form-group">
-                                <label class="control-label">Giá phòng: </label>
-                                <input type="text" class="form-control form-control-sm" placeholder="">
+                                {!! Form::label('price', "Giá phòng:", ['class'=>'control-label']) !!}
+                                {!! Form::text('floor', 'value', ['class'=>'form-control form-control-sm']) !!}
                             </div>
                         </div>
+                        {!! Form::submit("Thêm", ['class'=>'btn btn-info btn-float btn-outline']) !!}
+                        {!! Form::close() !!}
                     </div>
-                    <button type="submit" class="btn btn-info btn-float btn-outline">Thêm</button>
                 </div>
             </div>
         </div>
