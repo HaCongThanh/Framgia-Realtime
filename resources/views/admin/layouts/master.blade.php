@@ -7,8 +7,7 @@
     <title>Framgia - Quản lý khách sạn</title>
 
     <!-- Favicon -->
-    <link rel="apple-touch-icon" href="assets/images/logo/apple-touch-icon.html">
-    <link rel="shortcut icon" href="../img/icon.png">
+    <link rel="shortcut icon" href="{{ url('img/icon.png') }}">
 
     <!-- core dependcies css -->
     <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/bootstrap.css') }}" />
@@ -17,6 +16,7 @@
 
     <!-- page css -->
     @yield('style')
+
     <!-- core css -->
     <link href="{{ asset('bower_components/lib_booking/lib/admin/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/lib_booking/lib/admin/css/themify-icons.css') }}" rel="stylesheet">
@@ -39,7 +39,7 @@
         <div class="header navbar">
             <div class="header-container">
                 <div class="nav-logo">
-                    <a href="index.html">
+                    <a href="">
                         <div class="logo logo-dark" style="background-image: url('../img/logo.png')"></div>
                         <div class="logo logo-white" style="background-image: url('../img/logo.png')"></div>
                     </a>
@@ -117,7 +117,7 @@
                                         <li class="list-item">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-3.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                 </div>
                                                 <div class="info">
                                                     <span class="title p-t-10">Debra Stewart</span>
@@ -127,7 +127,7 @@
                                         <li class="list-item">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-5.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                 </div>
                                                 <div class="info">
                                                     <span class="title p-t-10">Jane Hunt</span>
@@ -284,14 +284,14 @@
                     </li>
                     <li class="user-profile dropdown dropdown-animated scale-left">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img class="profile-img img-fluid" src="assets/images/avatars/thumb-13.jpg" alt="">
+                            <img class="profile-img img-fluid" src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-md p-v-0">
                             <li>
                                 <ul class="list-media">
                                     <li class="list-item p-15">
                                         <div class="media-img">
-                                            <img src="assets/images/avatars/thumb-13.jpg" alt="">
+                                            <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                         </div>
                                         <div class="info">
                                             <span class="title text-semibold">Marshall Nichols</span>
@@ -328,11 +328,15 @@
                             </li>
                         </ul>
                     </li>
-                    {{--<li class="m-r-10">--}}
-                        {{--<a class="quick-view-toggler" href="javascript:void(0);">--}}
-                            {{--<i class="mdi mdi-format-indent-decrease"></i>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
+                    <li class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            {{ __('messages.language') }}
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{!! route('locale', ['en']) !!}">{{ __('messages.english') }}</a>
+                            <a class="dropdown-item" href="{!! route('locale', ['vi']) !!}">{{ __('messages.vietnamese') }}</a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -346,7 +350,7 @@
                         <span>Framgia Hotel</span>
                     </li>
                     <li class="nav-item dropdown open">
-                        <a class="dropdown-toggle" href="/admin">
+                        <a class="dropdown-toggle" href="{{ route('dashboard') }}">
                                 <span class="icon-holder">
                                     <i class="mdi mdi-gauge"></i>
                                 </span>
@@ -355,29 +359,40 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="/admin/room_types">
+                        <a class="dropdown-toggle" href="javascript:void(0);">
                             <span class="icon-holder">
                                 <i class="fa fa-home"></i>
                             </span>
-                            <span class="title">Quản Lý Loại Phòng</span>
+                            <span class="title">{{ __('messages.room_types') }}</span>
+                            <span class="arrow">
+                                <i class="mdi mdi-chevron-right"></i>
+                            </span>
                         </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ route('room_type') }}">{{ __('messages.room_types_list') }}</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('facility') }}">{{ __('messages.facility') }}</a>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="/admin/rooms">
+                        <a class="dropdown-toggle" href="">
                             <span class="icon-holder">
                                 <i class="fa fa-hotel"></i>
                             </span>
-                            <span class="title">Quản Lý Phòng</span>
+                            <span class="title">{{ __('messages.room') }}</span>
                         </a>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="/admin/book_lists">
+                        <a class="dropdown-toggle" href="">
                             <span class="icon-holder">
                                 <i class="fa fa-list-alt"></i>
                             </span>
-                            <span class="title">Danh sách đặt phòng</span>
+                            <span class="title">{{ __('messages.room_lists') }}</span>
                         </a>
                     </li>
 
@@ -386,17 +401,17 @@
                             <span class="icon-holder">
                                 <i class="fa fa-list-ol"></i>
                             </span>
-                            <span class="title">Quản Lý Bài viết</span>
+                            <span class="title">{{ __('messages.post') }}</span>
                             <span class="arrow">
                                 <i class="mdi mdi-chevron-right"></i>
                             </span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="/admin/category">Danh mục bài viết</a>
+                                <a href="{{ route('category') }}">{{ __('messages.category') }}</a>
                             </li>
                             <li>
-                                <a href="/admin/post">Danh sách bài viết</a>
+                                <a href="{{ route('post') }}">{{ __('messages.posts') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -406,17 +421,17 @@
                             <span class="icon-holder">
                                 <i class="fa fa-vcard"></i>
                             </span>
-                            <span class="title">Quản Lý Người Dùng</span>
+                            <span class="title">{{ __('messages.user') }}</span>
                             <span class="arrow">
                                 <i class="mdi mdi-chevron-right"></i>
                             </span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="/admin/user">Danh Sách Nhân Viên</a>
+                                <a href="">{{ __('messages.users') }}</a>
                             </li>
                             <li>
-                                <a href="/admin/customer">Danh sách Khách Hàng</a>
+                                <a href="">{{ __('messages.customer') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -548,7 +563,7 @@
                                         <li class="list-item unread-msg">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-1.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                     <span class="status success"></span>
                                                 </div>
                                                 <div class="info">
@@ -563,7 +578,7 @@
                                         <li class="list-item unread-msg">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-2.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                     <span class="status success"></span>
                                                 </div>
                                                 <div class="info">
@@ -578,7 +593,7 @@
                                         <li class="list-item">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-3.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                     <span class="status success"></span>
                                                 </div>
                                                 <div class="info">
@@ -595,7 +610,7 @@
                                         <li class="list-item">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-4.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                     <span class="status away"></span>
                                                 </div>
                                                 <div class="info">
@@ -606,7 +621,7 @@
                                         <li class="list-item">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-5.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                     <span class="status away"></span>
                                                 </div>
                                                 <div class="info">
@@ -617,7 +632,7 @@
                                         <li class="list-item">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-6.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                     <span class="status away"></span>
                                                 </div>
                                                 <div class="info">
@@ -628,7 +643,7 @@
                                         <li class="list-item">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-7.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                     <span class="status away"></span>
                                                 </div>
                                                 <div class="info">
@@ -644,7 +659,7 @@
                                         <li class="list-item">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-8.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                     <span class="status busy"></span>
                                                 </div>
                                                 <div class="info">
@@ -655,7 +670,7 @@
                                         <li class="list-item">
                                             <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
                                                 <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-9.jpg" alt="">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                                     <span class="status busy"></span>
                                                 </div>
                                                 <div class="info">
@@ -689,7 +704,7 @@
                                         </div>
                                         <div class="msg msg-recipient">
                                             <div class="user-img">
-                                                <img src="assets/images/avatars/thumb-2.jpg" alt="">
+                                                <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                             </div>
                                             <div class="bubble">
                                                 <div class="bubble-wrapper">
@@ -706,7 +721,7 @@
                                         </div>
                                         <div class="msg msg-recipient">
                                             <div class="user-img">
-                                                <img src="assets/images/avatars/thumb-2.jpg" alt="">
+                                                <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                             </div>
                                             <div class="bubble">
                                                 <div class="bubble-wrapper">
@@ -723,7 +738,7 @@
                                         </div>
                                         <div class="msg msg-recipient">
                                             <div class="user-img">
-                                                <img src="assets/images/avatars/thumb-2.jpg" alt="">
+                                                <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                             </div>
                                             <div class="bubble">
                                                 <div class="bubble-wrapper">
@@ -736,7 +751,7 @@
                                         </div>
                                         <div class="msg msg-recipient">
                                             <div class="user-img">
-                                                <img src="assets/images/avatars/thumb-2.jpg" alt="">
+                                                <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                             </div>
                                             <div class="bubble">
                                                 <div class="bubble-wrapper">
@@ -787,7 +802,7 @@
                                 <li class="list-item border bottom">
                                     <a href="javascript:void(0);" class="media-hover p-20">
                                         <div class="media-img">
-                                            <img src="assets/images/avatars/thumb-1.jpg" alt="">
+                                            <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                         </div>
                                         <div class="info">
                                             <span class="title">Marshall Nichols</span>
@@ -799,7 +814,7 @@
                                 <li class="list-item border bottom">
                                     <a href="javascript:void(0);" class="media-hover p-20">
                                         <div class="media-img">
-                                            <img src="assets/images/avatars/thumb-2.jpg" alt="">
+                                            <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                         </div>
                                         <div class="info">
                                             <span class="title">Susie Willis</span>
@@ -825,7 +840,7 @@
                                 <li class="list-item border bottom">
                                     <a href="javascript:void(0);" class="media-hover p-20">
                                         <div class="media-img">
-                                            <img src="assets/images/avatars/thumb-8.jpg" alt="">
+                                            <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                         </div>
                                         <div class="info">
                                             <span class="title">Erin Gonzales</span>
@@ -865,7 +880,7 @@
                                 <li class="list-item border bottom">
                                     <a href="javascript:void(0);" class="media-hover p-20">
                                         <div class="media-img">
-                                            <img src="assets/images/avatars/thumb-12.jpg" alt="">
+                                            <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                         </div>
                                         <div class="info">
                                             <span class="title">Riley Newman</span>
@@ -891,7 +906,7 @@
                                 <li class="list-item border bottom">
                                     <a href="javascript:void(0);" class="media-hover p-20">
                                         <div class="media-img">
-                                            <img src="assets/images/avatars/thumb-11.jpg" alt="">
+                                            <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
                                         </div>
                                         <div class="info">
                                             <span class="title">Darryl Day</span>
@@ -908,9 +923,9 @@
             </div>
             <!-- Side Panel END -->
 
-            @yield('content')
+        @yield('content')
 
-            <!-- Footer START -->
+        <!-- Footer START -->
             <footer class="content-footer">
                 <div class="footer">
                     <div class="copyright">
@@ -923,21 +938,21 @@
                 </div>
             </footer>
             <!-- Footer END -->
-
         </div>
         <!-- Page Container END -->
-
     </div>
 </div>
 
-<script src="{{ asset('bower_components/lib_booking/lib/admin/js/vendor.js') }}"></script>
-
-<script src="{{ asset('bower_components/lib_booking/lib/admin/js/app.min.js') }}"></script>
+<script src={{ asset('bower_components/lib_booking/lib/admin/js/vendor.js') }}></script>
+<script src={{ asset('bower_components/lib_booking/lib/admin/js/app.min.js') }}></script>
 
 <!-- page js -->
-<script src="{{ asset('bower_components/lib_booking/lib/admin/js/Chart.min.js') }}"></script>
-<script src="{{ asset('bower_components/lib_booking/lib/admin/js/jquery.sparkline.min.js') }}"></script>
-<script src="{{ asset('bower_components/lib_booking/lib/admin/js/default.js') }}"></script>
+<script src={{ asset('bower_components/lib_booking/lib/admin/js/Chart.min.js') }}></script>
+<script src={{ asset('bower_components/lib_booking/lib/admin/js/jquery.sparkline.min.js') }}></script>
+<script src={{ asset('bower_components/lib_booking/lib/admin/js/default.js') }}></script>
+
+<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script> CKEDITOR.replace('editor1'); </script>
 
 @yield('script')
 

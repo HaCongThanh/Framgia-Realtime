@@ -1,0 +1,63 @@
+<?php
+return [
+    'language' => 'Language',
+    'english' => 'English',
+    'vietnamese' => 'Vietnamese',
+    'room_types' => 'Room Type Manager',
+    'room_types_list' => 'Room Type List',
+    'room_type' => 'Room Type',
+    'room_type_name' => 'Room Type Name',
+    'room_type_add' => 'Room Type Add',
+    'room_type_edit' => 'Room Type Edit',
+    'room_size' => 'Room size',
+    'room_size_text' => 'Room size',
+    'bed' => 'Number of beds',
+    'people' => 'Max people',
+    'facility' => 'Facility',
+    'facilities' => 'Facility List',
+    'facility_add' => 'Facility Add',
+    'facility_edit' => 'Facility Edit',
+    'room' => 'Room Manager',
+    'room_lists' => 'Booking List',
+    'post' => 'Posts Manager',
+    'category' => 'Article Categories',
+    'categories' => 'Categories',
+    'categories_edit' => 'Categories Edit',
+    'categories_add' => 'Categories Add',
+    'posts' => 'Posts List',
+    'posts_name' => 'Posts Name',
+    'posts_add' => 'Posts Add',
+    'posts_edit' => 'Posts Edit',
+    'user' => 'Users Manager',
+    'users' => 'Users List',
+    'customer' => 'Customers List',
+    'description' => 'Description',
+    'description_text' => 'Write description',
+    'content' => 'Content',
+    'content_text' => 'Write content',
+
+    /*
+     * buttons
+     */
+    'add' => 'Add',
+    'edit' => 'Edit',
+    'update' => 'Update',
+    'delete' => 'Delete',
+    'view' => 'View',
+    'information' => 'Information',
+    'image' => 'Image',
+    'slug' => 'Slug',
+    'file' => 'Select file',
+    'change' => 'Change',
+    'status' => 'Status',
+    'checked' => 'Checked',
+    'uncheck' => 'Uncheck',
+    'list' => 'List',
+    'price' => 'Price Room',
+
+    /*
+     * table
+     */
+    'id' => 'Order Numerical',
+    'action' => 'Action',
+];
