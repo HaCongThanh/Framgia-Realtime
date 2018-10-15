@@ -223,7 +223,7 @@
                                                             <option @if ($card_type == 'Master Card') selected @endif>Master Card</option>
                                                             <option @if ($card_type == 'Visa') selected @endif>Visa</option>
                                                             <option @if ($card_type == 'American Express') selected @endif>American Express</option>
-                                                            <option @if ($card_type == 'Diners Club') selected @endif>Diners Club</option>
+                                                            <option @if ($card_type == 'Paypal') selected @endif>Paypal</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -454,7 +454,7 @@
                                 <br/>
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-grey prev-step" id="prev_complete">Quay lại</button></li>
-                                    <li><button type="button" class="btn search-button btn-theme next-step" id="btn_complete"><i class="fa fa-lock"></i> Hoàn tất đặt phòng</button></li>
+                                    <li><a href="{{ route('user.bookings') }}" type="button" class="btn search-button btn-theme next-step" id="btn_complete"><i class="fa fa-lock"></i> Hoàn tất đặt phòng</a></li>
                                 </ul>
                             </div>
                         </div>

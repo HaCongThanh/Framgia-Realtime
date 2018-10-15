@@ -19,7 +19,9 @@ class CreateRevenuesTable extends Migration
 
                 $table->string('total_amount')->comment('Tổng tiền thu trong ngày');
 
-                $table->timestamps();
+                $table->date('created_at')->nullable();
+                
+                $table->date('updated_at')->nullable();
                 
                 $table->softDeletes();
             });

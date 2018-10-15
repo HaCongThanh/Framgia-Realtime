@@ -9,6 +9,9 @@ use App\Models\RoomRentalList;
 use App\Models\User;
 use App\Models\Room;
 use App\Models\RoomType;
+use App\Models\Revenue;
+use App\Models\CustomerBookingLog;
+use App\Models\CustomerBookingDetail;
 use Validator;
 use DB;
 
@@ -130,8 +133,14 @@ class HomeController extends Controller
 
             foreach ($rooms as $room) {
                 array_push($array_room_type, $room->room_type_id);
+
+                array_push($array_room, $room->id);
             }
             /*---------------------------------------------------------*/
+
+            /*Đẩy mảng ID phòng còn trống vào Session*/
+            session()->forget('array_room');
+            session()->put('array_room', $array_room);
 
             $array_count_room_type = array_count_values($array_room_type);  //  Truyền ra view
             $array_unique_room_type = array_unique($array_room_type);
@@ -185,59 +194,40 @@ class HomeController extends Controller
         session()->forget('total_money');
         session()->put('total_money', $request->total_money);
 
-        if ($request->rt1 != 0) {
-            session()->forget('rt1');
-            session()->put('rt1', $request->rt1);
-        }
+        session()->forget('rt1');
+        session()->put('rt1', $request->rt1);
 
-        if ($request->rt2 != 0) {
-            session()->forget('rt2');
-            session()->put('rt2', $request->rt2);
-        }
+        session()->forget('rt2');
+        session()->put('rt2', $request->rt2);
 
-        if ($request->rt3 != 0) {
-            session()->forget('rt3');
-            session()->put('rt3', $request->rt3);
-        }
-        
-        if ($request->rt4 != 0) {
-            session()->forget('rt4');
-            session()->put('rt4', $request->rt4);
-        }
+        session()->forget('rt3');
+        session()->put('rt3', $request->rt3);
 
-        if ($request->rt5 != 0) {
-            session()->forget('rt5');
-            session()->put('rt5', $request->rt5);
-        }
+        session()->forget('rt4');
+        session()->put('rt4', $request->rt4);
 
-        if ($request->rt6 != 0) {
-            session()->forget('rt6');
-            session()->put('rt6', $request->rt6);
-        }
+        session()->forget('rt5');
+        session()->put('rt5', $request->rt5);
 
-        if ($request->rt7 != 0) {
-            session()->forget('rt7');
-            session()->put('rt7', $request->rt7);
-        }
+        session()->forget('rt6');
+        session()->put('rt6', $request->rt6);
 
-        if ($request->rt8 != 0) {
-            session()->forget('rt8');
-            session()->put('rt8', $request->rt8);
-        }
+        session()->forget('rt7');
+        session()->put('rt7', $request->rt7);
 
-        if ($request->rt9 != 0) {
-            session()->forget('rt9');
-            session()->put('rt9', $request->rt9);
-        }
+        session()->forget('rt8');
+        session()->put('rt8', $request->rt8);
 
-        if ($request->rt10 != 0) {
-            session()->forget('rt10');
-            session()->put('rt10', $request->rt10);
-        }
+        session()->forget('rt9');
+        session()->put('rt9', $request->rt9);
+
+        session()->forget('rt10');
+        session()->put('rt10', $request->rt10);
 
         return response()->json([
             'error'     =>  false,
-            'message'   =>  'Thêm session thành công!'
+            'message'   =>  'Thêm session thành công!',
+            'data'   =>  session()->get('rt5')
         ]);
     }
 
@@ -268,6 +258,102 @@ class HomeController extends Controller
             'expire'            =>  $user->expire,
             'year'              =>  $user->year
         ]);
+    }
+
+    /**
+     * [bookings description]
+     * @return [type] [description]
+     */
+    public function bookings()
+    {
+        /*Thêm bản ghi vào bảng room_rental_lists*/
+        $user = Auth::user();
+
+        $array_room = session()->get('array_room');
+
+        for ($i=1; $i <= 10; $i++) { 
+            if (session()->get('rt' . $i) > 0) {
+                $room_type_id = $i;
+
+                $count_room = session()->get('rt' . $i);    //  Số lượng phòng cần đặt của LOẠI PHÒNG đó
+
+                $count = 0;
+
+                $rooms = Room::where('room_type_id', $room_type_id)->select('id')->get();
+
+                for ($j=0; $j < count($array_room); $j++) { 
+                    foreach ($rooms as $room) {
+                        if ($room->id == $array_room[$j]) {     // Nếu phòng lấy ra trong bảng rooms có trong mảng chứa phòng còn trống
+                            if ($count < $count_room) {         // Kiểm tra số lượng phòng cần đặt của loại phòng đó đã đủ chưa
+                                RoomRentalList::create([
+                                    'user_id'       =>  $user->id,
+                                    'room_id'       =>  $room->id,
+                                    'start_date'    =>  date_format(date_create(session()->get('start_date')), 'Y-m-d'),
+                                    'end_date'      =>  date_format(date_create(session()->get('end_date')), 'Y-m-d')
+                                ]);
+
+                                $count++;                       // Mỗi lần insert thì tăng biến đếm bản ghi lên 1
+
+                                Room::where('id', $room->id)->update(['status' => 1]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /*-------------------------------------------*/
+
+        /*Thêm doanh thu*/
+        $revenue = Revenue::where('created_at', date('Y-m-d', time()))->first();
+
+        if ($revenue == null) {
+            Revenue::create([
+                'total_amount'  =>  session()->get('total_money'),
+                'created_at'    =>  date('Y-m-d', time())
+            ]);
+        } else {
+            Revenue::where('id', $revenue->id)->update([
+                'total_amount'  =>  session()->get('total_money') + $revenue->total_amount,
+                'updated_at'    =>  date('Y-m-d', time())
+            ]);
+        }
+        /*--------------*/
+
+        /*Thêm vào bảng: Nhật ký đặt phòng của khách hàng*/
+        CustomerBookingLog::create([
+            'user_id'               =>  $user->id,
+            'start_date'            =>  date_format(date_create(session()->get('start_date')), 'Y-m-d'),
+            'end_date'              =>  date_format(date_create(session()->get('end_date')), 'Y-m-d'),
+            'total_number_people'   =>  session()->get('adults') + session()->get('children'),
+            'total_number_room'     =>  session()->get('total_number_room'),
+            'total_money'           =>  session()->get('total_money')
+        ]);
+        /*----------------------------------------------*/
+
+        /*Thêm vào bảng: Chi tiết nhật ký đặt phòng của khách hàng*/
+        $customer_booking_log = CustomerBookingLog::where('user_id', $user->id)->orderBy('id', 'desc')->first();
+
+        for ($i=1; $i <= 10; $i++) { 
+            if (session()->get('rt' . $i) > 0) {
+                $room_type_id = $i;
+
+                $count_room = session()->get('rt' . $i);
+
+                $price = RoomType::find($room_type_id)->price;
+
+                $total_price = $price * $count_room;
+
+                CustomerBookingDetail::create([
+                    'customer_booking_log_id'   =>  $customer_booking_log->id,
+                    'room_type_id'              =>  $room_type_id,
+                    'number_room'               =>  $count_room,
+                    'total_price'               =>  $total_price
+                ]);
+            }
+        }
+        /*--------------------------------------------------------*/
+
+        return view('user.test');
     }
 
 }

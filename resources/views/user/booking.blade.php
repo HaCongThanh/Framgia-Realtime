@@ -228,6 +228,7 @@
                         rt10                :   $('#rt10').val()
                     },
                     success:function(res){
+                        // console.log(res);
                         window.location.href = "{{ route('user.home.check_out') }}";
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
