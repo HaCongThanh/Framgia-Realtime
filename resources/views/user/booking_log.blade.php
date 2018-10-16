@@ -60,10 +60,10 @@
                                             <td style="text-align: center;">{{ $customer_booking_log->total_number_room }}</td>
                                             <td style="text-align: center;">{{ number_format($customer_booking_log->total_money) }} VNĐ</td>
                                             <td class="text-center font-size-18" style="text-align: center;">
-                                                <a data-toggle="modal" data-target="#details" class="text-gray m-r-15">
+                                                {{-- <a data-toggle="modal" data-target="#details" class="text-gray m-r-15">
                                                     <i class="fa fa-twitter"></i>
-                                                </a>
-                                                <a data-toggle="modal" data-target="#bills" class="text-gray" onclick="bills({{ $customer_booking_log->id }})">
+                                                </a> --}}
+                                                <a data-toggle="modal" data-target="#bills" class="text-gray clear-bills" onclick="bills({{ $customer_booking_log->id }});" title="Xem chi tiết">
                                                     <i class="fa fa-credit-card"></i>
                                                 </a>
                                             </td>
@@ -103,7 +103,7 @@
                     <div class="modal-content">
                         <div class="modal-body">
 
-                            <div class="row">
+                            <div class="row" id="print_bill">
                                 <div class="col-md-12">
                                     <div class="x_panel">
                                         <div class="x_content">
@@ -180,25 +180,25 @@
                                                     </div>
 
                                                     <div class="col-xs-6">
-                                                        <p class="lead">Amount Due 2/22/2014</p>
+                                                        <p class="lead">Tổng thanh toán</p>
                                                         <div class="table-responsive">
                                                             <table class="table">
                                                                 <tbody>
-                                                                    <tr>
+                                                                    {{-- <tr>
                                                                         <th style="width:50%">Subtotal:</th>
                                                                         <td>$250.30</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Tax (9.3%)</th>
                                                                         <td>$10.34</td>
+                                                                    </tr> --}}
+                                                                    <tr>
+                                                                        <th>Tổng số phòng:</th>
+                                                                        <td id="total_number_room"></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Shipping:</th>
-                                                                        <td>$5.80</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th>Total:</th>
-                                                                        <td>$265.24</td>
+                                                                        <th>Tổng tiền:</th>
+                                                                        <td id="total_money"></td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -208,7 +208,7 @@
 
                                                 <div class="row no-print">
                                                     <div class="col-xs-12">
-                                                        <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> In hóa đơn</button>
+                                                        <button class="btn btn-default" onclick="btnPrintBill();"><i class="fa fa-print"></i> In hóa đơn</button>
                                                         <button class="btn btn-success pull-right" data-dismiss="modal">OK</button>
                                                         <button class="btn btn-primary pull-right" data-dismiss="modal" style="margin-right: 5px;">Cancel</button>
                                                     </div>
@@ -230,7 +230,15 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('bower_components/lib_booking/lib/user/js/jQuery.print.js') }}"></script>
+
     <script>
+        $(document).ready(function(){
+            $(".clear-bills").click(function(){
+                $(".clear_tr").remove();
+            })
+        })
+
         function bills(customer_booking_log_id){
             $.ajaxSetup({
                 headers: {
@@ -239,25 +247,30 @@
             });
 
             $.ajax({
-                url: "{{ route('user.bookings.bills') }}",
+                url: "{{ route('user.bookings.bill_detail') }}",
                 type: "POST",
                 data: {
                     customer_booking_log_id :   customer_booking_log_id
                 },
                 success: function(res){
+                    $count = 1;
+
                     for (var i = 0; i < res.data.length; i++) {
                         $room_type_name = res.data[i]['name'];
                         $price = res.data[i]['price'];
                         $number_room = res.data[i]['number_room'];
                         $total_price = res.data[i]['total_price'];
                         $created_at = res.data[i]['created_at'];
+                        $total_money = res.data[i]['total_money'];
+                        $total_number_room = res.data[i]['total_number_room'];
 
-                        // moment.locale('vi');
-                        // $created_at = moment(res.data[i]['created_at']).format('LL');
-
-                        $("#record_details").append("<tr><td style='width: 5%; text-align: center;'>1</td><td style='width: 25%; text-align: center;'>" + $room_type_name + "</td><td style='width: 25%; text-align: center;'>" + $price + " VNĐ</td><td style='width: 20%; text-align: center;'>" + $number_room + "</td><td style='width: 25%; text-align: center;'>" + $total_price + " VNĐ</td></tr>");
+                        $("#record_details").append("<tr class='clear_tr'><td style='width: 5%; text-align: center;'>" + $count + "</td><td style='width: 25%; text-align: center;'>" + $room_type_name + "</td><td style='width: 25%; text-align: center;'>" + $price + " VNĐ</td><td style='width: 20%; text-align: center;'>" + $number_room + "</td><td style='width: 25%; text-align: center;'>" + $total_price + " VNĐ</td></tr>");
 
                         $("#created_at").html("Ngày lập: " + $created_at);
+                        $("#total_money").html($total_money + " VNĐ");
+                        $("#total_number_room").html($total_number_room + " phòng");
+
+                        $count++;
                     }
 
                     $user_name = res.info['name'];
@@ -277,6 +290,10 @@
                     // $("#user_card_type").html($user_card_type);
                 }
             });
+        }
+
+        function btnPrintBill(){
+            jQuery('#print_bill').print();
         }
     </script>
 @endsection

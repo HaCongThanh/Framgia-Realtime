@@ -38,9 +38,15 @@ Route::group(['prefix' => 'dev'], function() {
 
     Route::post('/users/update-payment', 'User\UserController@updatePayment')->name('user.users.update_payment');
 
-    Route::post('/bookings/bills', 'User\HomeController@bookingBills')->name('user.bookings.bills');
+    Route::get('/bookings', 'User\HomeController@bookings')->name('user.bookings');
 
-    Route::get('/bookings/{type}', 'User\HomeController@bookings')->name('user.bookings');
+    Route::get('/bookings/bill', 'User\HomeController@bill')->name('user.bookings.bill');
+
+    Route::post('/bookings/bill-detail', 'User\HomeController@billDetail')->name('user.bookings.bill_detail');
+
+    Route::get('/rooms', 'User\RoomController@index')->name('user.rooms.index');
+
+    Route::get('/rooms/{id}', 'User\RoomController@show')->name('user.rooms.show');
 });
 
 /*---------------------- Admin Route --------------------*/
