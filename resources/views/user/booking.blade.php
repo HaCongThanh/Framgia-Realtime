@@ -97,8 +97,7 @@
 
     <div class="main-content" style="width: 65%; margin: 0 auto;">
         <div class="container-fluid">
-            <div class="page-header">
-            </div>
+            <div class="page-header"></div>
 
             <div class="card">
                 <div class="card-header">
@@ -136,16 +135,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php
-                                    $array_select_room = array();
-                                @endphp
-
                                 @if (isset($array_room_type_data))
                                     @foreach ($array_room_type_data as $data_room_type)
-                                        @php
-                                            $text = 'select-room-' . $data_room_type->id;
-                                            array_push($array_select_room, $text);
-                                        @endphp
                                         <tr>
                                             <td style="text-align: center;">
                                                 <div class="list-media">

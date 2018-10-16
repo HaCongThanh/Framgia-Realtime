@@ -9,6 +9,15 @@
         .search-area-box-6 {
             padding: 53px 0 53px !important;
         }
+
+        .testimonials-2 {
+            padding: 100px 0 130px;
+            background: url({{ asset('/img/big-img-7.jpg') }});
+            z-index: 0;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
 @endsection
 
@@ -17,7 +26,7 @@
     <!-- Banner start -->
     <section class="banner banner_video_bg">
         <div class="pattern-overlay">
-            {{-- <a id="bgndVideo" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=5e0LxrLSzok',containment:'.banner_video_bg', quality:'large', autoPlay:true, mute:true, opacity:1}">bg</a> --}}
+            <a id="bgndVideo" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=5e0LxrLSzok',containment:'.banner_video_bg', quality:'large', autoPlay:true, mute:true, opacity:1}">bg</a>
             <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
@@ -72,7 +81,7 @@
     <!-- Banner end -->
 
     <!-- Search area box 2 start -->
-    <div class="search-area-box-2 search-area-box-6">
+    <div class="search-area-box-2 search-area-box-6" id="jump_booking">
         <div class="container">
             <div class="search-contents">
                 <form method="GET" action="{{ route('user.home.find_rooms') }}">
@@ -101,7 +110,7 @@
                                         <select class="selectpicker search-fields form-control-2" name="adults">
                                             <option>Người lớn</option>
                                             @php
-                                                for ($i=1; $i <= 10 ; $i++) {
+                                                for ($i=1; $i <= 5 ; $i++) {
                                             @endphp
                                                 <option>@php
                                                     echo $i;
@@ -116,12 +125,15 @@
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="children">
                                             <option>Trẻ em</option>
-                                            <option>0</option>
-                                            <option>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
+                                            @php
+                                                for ($i=0; $i <= 5 ; $i++) {
+                                            @endphp
+                                                <option>@php
+                                                    echo $i;
+                                                @endphp</option>
+                                            @php
+                                                }
+                                            @endphp
                                         </select>
                                     </div>
                                 </div>
@@ -144,8 +156,8 @@
         <div class="container">
             <!-- Main title -->
             <div class="main-title">
-                <h1>Our Best Rooms</h1>
-                <p>These best rooms chosen by our customers</p>
+                <h1>Những phòng tốt nhất</h1>
+                <p> </p>
             </div>
             <ul class="list-inline-listing filters filters-listing-navigation">
                 <li class="active btn filtr-button filtr" data-filter="all">All</li>
@@ -156,186 +168,43 @@
             </ul>
             <div class="row">
                 <div class="filtr-container">
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="3, 2, 4">
-                        <div class="hotel-box">
-                            <!--header -->
-                            <div class="header clearfix">
-                                <img src="img/room/img-1.jpg" alt="img-1" class="img-responsive">
-                            </div>
-                            <!-- Detail -->
-                            <div class="detail clearfix">
-                                <div class="pr">
-                                    $567<sub>.99/Night</sub>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-full"></i>
+
+                    @if (!empty($room_types))
+                        @foreach ($room_types as $room_type)
+                            
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 filtr-item" data-category="3, 2, 4">
+                                <div class="hotel-box">
+                                    <div class="header clearfix">
+                                        <img src="{{ url('/images/rooms/' . $room_type->images->first->filename['filename']) }}" alt="img-1" class="img-responsive" style="width: 360px; height: 240px;">
+                                    </div>
+
+                                    <div class="detail clearfix">
+                                        <div class="pr">
+                                            VNĐ {{ number_format($room_type->price) }}<sub>/Đêm</sub>
+                                            {{-- <div class="rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-half-full"></i>
+                                            </div> --}}
+                                        </div>
+                                        <h3>
+                                            <a href="{{ route('user.rooms.show', $room_type->id) }}">{{ $room_type->name }}</a>
+                                        </h3>
+                                        <h5 class="location">
+                                            <a href="{{ route('user.rooms.show', $room_type->id) }}">
+                                                <i class="fa fa-map-marker"></i>Framgia Hotel,
+                                            </a>
+                                        </h5>
+                                        {!! $room_type->description !!}
                                     </div>
                                 </div>
-                                <h3>
-                                    <a href="rooms-details.html">Luxury Room</a>
-                                </h3>
-                                <h5 class="location">
-                                    <a href="rooms-details.html">
-                                        <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipi elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="3, 4, 1">
-                        <div class="hotel-box">
-                            <!--header -->
-                            <div class="header clearfix">
-                                <img src="img/room/img-2.jpg" alt="img-2" class="img-responsive">
-                            </div>
-                            <!-- Detail -->
-                            <div class="detail clearfix">
-                                <div class="pr">
-                                    $567<sub>.99/Night</sub>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-full"></i>
-                                    </div>
-                                </div>
-                                <h3>
-                                    <a href="rooms-details.html">Double Room</a>
-                                </h3>
-                                <h5 class="location">
-                                    <a href="rooms-details.html">
-                                        <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipi elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="1, 4, 2">
-                        <div class="hotel-box">
-                            <!--header -->
-                            <div class="header clearfix">
-                                <img src="img/room/img-4.jpg" alt="img-4" class="img-responsive">
-                            </div>
-                            <!-- Detail -->
-                            <div class="detail clearfix">
-                                <div class="pr">
-                                    $567<sub>.99/Night</sub>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-full"></i>
-                                    </div>
-                                </div>
-                                <h3>
-                                    <a href="rooms-details.html">Single Room</a>
-                                </h3>
-                                <h5 class="location">
-                                    <a href="rooms-details.html">
-                                        <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipi elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="2, 3, 1">
-                        <div class="hotel-box">
-                            <!--header -->
-                            <div class="header clearfix">
-                                <img src="img/room/img-3.jpg" alt="img-3" class="img-responsive">
-                            </div>
-                            <!-- Detail -->
-                            <div class="detail clearfix">
-                                <div class="pr">
-                                    $567<sub>.99/Night</sub>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-full"></i>
-                                    </div>
-                                </div>
-                                <h3>
-                                    <a href="rooms-details.html">Single Room</a>
-                                </h3>
-                                <h5 class="location">
-                                    <a href="rooms-details.html">
-                                        <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipi elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="1, 2, 3">
-                        <div class="hotel-box">
-                            <!--header -->
-                            <div class="header clearfix">
-                                <img src="img/room/img-5.jpg" alt="img-5" class="img-responsive">
-                            </div>
-                            <!-- Detail -->
-                            <div class="detail clearfix">
-                                <div class="pr">
-                                    $567<sub>.99/Night</sub>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-full"></i>
-                                    </div>
-                                </div>
-                                <h3>
-                                    <a href="rooms-details.html">Luxury Room</a>
-                                </h3>
-                                <h5 class="location">
-                                    <a href="rooms-details.html">
-                                        <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipi elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12  filtr-item" data-category="4, 2, 1">
-                        <div class="hotel-box">
-                            <!--header -->
-                            <div class="header clearfix">
-                                <img src="img/room/img-8.jpg" alt="img-8" class="img-responsive">
-                            </div>
-                            <!-- Detail -->
-                            <div class="detail clearfix">
-                                <div class="pr">
-                                    $567<sub>.99/Night</sub>
-                                    <div class="rating">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-full"></i>
-                                    </div>
-                                </div>
-                                <h3>
-                                    <a href="rooms-details.html">Double Room</a>
-                                </h3>
-                                <h5 class="location">
-                                    <a href="rooms-details.html">
-                                        <i class="fa fa-map-marker"></i>123 Kathal St. Tampa City,
-                                    </a>
-                                </h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipi elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                    </div>
+
+                        @endforeach
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -349,11 +218,11 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="service-text">
-                        <h1>Property Services</h1>
+                        <h1>Dịch vụ hoàn hảo</h1>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text everLorem</p>
                         <p>industry's standard dummy text everLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
                         <br>
-                        <a href="blog-details.html" class="btn btn-outline2 btn-md">View Details</a>
+                        <a href="{{ route('user.rooms.index') }}" class="btn btn-outline2 btn-md">Đặt phòng ngay</a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8">
@@ -361,21 +230,21 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-school-call-phone-reception"></i>
-                                <h3>24-hour Reception</h3>
+                                <h3>Lễ tân 24 giờ</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-room-service"></i>
-                                <h3>Room Service</h3>
+                                <h3>Dịch vụ phòng</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-graph-line-screen"></i>
-                                <h3>Flat Screen TV</h3>
+                                <h3>Truyền hình quốc tế</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
@@ -389,14 +258,14 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-parking"></i>
-                                <h3>Free Parking</h3>
+                                <h3>Bãi đỗ xe miễn phí</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                <h3>Free Wi-Fi</h3>
+                                <h3>Wi-Fi miễn phí</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
@@ -413,8 +282,8 @@
             <div class="container">
                 <!-- Main title -->
                 <div class="main-title">
-                    <h1>Our Staff</h1>
-                    <p>Meet out small team that make those great products.</p>
+                    <h1>Nhân viên của chúng tôi</h1>
+                    <p>Nhóm người nhỏ tạo ra sản phẩm.</p>
                 </div>
                 <div class="row">
                     <div class="carousel our-partners slide" id="ourPartners3">
@@ -426,42 +295,40 @@
                             <div class="item active">
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="staff-box-1">
-                                        <!-- Staff img -->
-                                        <a href="staff.html" class="teachers-img">
-                                            <img src="img/staff/staff-1.jpg" alt="staff-1" class="img-responsive">
+                                        <a class="teachers-img">
+                                            <img src="{{ url('/img/hct.png') }}" alt="staff-1" class="img-responsive">
                                         </a>
-                                        <!-- Staff content -->
+
                                         <div class="content">
-                                            <!-- title -->
                                             <h1 class="title">
-                                                <a href="staff.html">John Doe</a>
+                                                <a>Hà Công Thành</a>
                                             </h1>
-                                            <!-- Subject -->
-                                            <h3 class="subject">Hotel Developer</h3>
-                                            <!-- Social list -->
+
+                                            <h3 class="subject">PHP - Leader mini team</h3>
+
                                             <ul class="social-list clearfix">
                                                 <li>
-                                                    <a href="#" class="facebook">
+                                                    <a href="https://www.facebook.com/hacongthanh.t" target="blank" class="facebook" style="color: #3b589e !important;">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="twitter">
+                                                    <a class="twitter">
                                                         <i class="fa fa-twitter"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="linkedin">
+                                                    <a class="linkedin">
                                                         <i class="fa fa-linkedin"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="google">
+                                                    <a class="google">
                                                         <i class="fa fa-google-plus"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="rss">
+                                                    <a class="rss">
                                                         <i class="fa fa-rss"></i>
                                                     </a>
                                                 </li>
@@ -473,42 +340,40 @@
                             <div class="item">
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="staff-box-1">
-                                        <!-- Staff img -->
-                                        <a href="staff.html" class="teachers-img">
-                                            <img src="img/staff/staff-2.jpg" alt="staff-2" class="img-responsive">
+                                        <a class="teachers-img">
+                                            <img src="{{ url('/img/viet.png') }}" alt="staff-2" class="img-responsive">
                                         </a>
-                                        <!-- Staff content -->
+
                                         <div class="content">
-                                            <!-- title -->
                                             <h1 class="title">
-                                                <a href="staff.html">Karen Paran</a>
+                                                <a>Nguyễn Công Việt</a>
                                             </h1>
-                                            <!-- Subject -->
-                                            <h3 class="subject">Hotel Director</h3>
-                                            <!-- Social list -->
+
+                                            <h3 class="subject">PHP Developer</h3>
+
                                             <ul class="social-list clearfix">
                                                 <li>
-                                                    <a href="#" class="facebook">
+                                                    <a href="https://www.facebook.com/congviet.ruby" target="blank" class="facebook" style="color: #3b589e !important;">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="twitter">
+                                                    <a class="twitter">
                                                         <i class="fa fa-twitter"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="linkedin">
+                                                    <a class="linkedin">
                                                         <i class="fa fa-linkedin"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="google">
+                                                    <a class="google">
                                                         <i class="fa fa-google-plus"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="rss">
+                                                    <a class="rss">
                                                         <i class="fa fa-rss"></i>
                                                     </a>
                                                 </li>
@@ -520,42 +385,40 @@
                             <div class="item">
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="staff-box-1">
-                                        <!-- Staff img -->
-                                        <a href="staff.html" class="teachers-img">
-                                            <img src="img/staff/staff-3.jpg" alt="staff-3" class="img-responsive">
+                                        <a class="teachers-img">
+                                            <img src="{{ url('/img/hct.png') }}" alt="staff-3" class="img-responsive">
                                         </a>
-                                        <!-- Staff content -->
+
                                         <div class="content">
-                                            <!-- title -->
                                             <h1 class="title">
-                                                <a href="staff.html">John maikel</a>
+                                                <a>Hà Công Thành</a>
                                             </h1>
-                                            <!-- Subject -->
-                                            <h3 class="subject">Hotel Manager</h3>
-                                            <!-- Social list -->
+
+                                            <h3 class="subject">PHP - Leader mini team</h3>
+
                                             <ul class="social-list clearfix">
                                                 <li>
-                                                    <a href="#" class="facebook">
+                                                    <a href="https://www.facebook.com/hacongthanh.t" target="blank" class="facebook" style="color: #3b589e !important;">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="twitter">
+                                                    <a class="twitter">
                                                         <i class="fa fa-twitter"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="linkedin">
+                                                    <a class="linkedin">
                                                         <i class="fa fa-linkedin"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="google">
+                                                    <a class="google">
                                                         <i class="fa fa-google-plus"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="rss">
+                                                    <a class="rss">
                                                         <i class="fa fa-rss"></i>
                                                     </a>
                                                 </li>
@@ -567,42 +430,40 @@
                             <div class="item">
                                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                                     <div class="staff-box-1">
-                                        <!-- Staff img -->
-                                        <a href="staff.html" class="teachers-img">
-                                            <img src="img/staff/staff-4.jpg" alt="staff-4" class="img-responsive">
+                                        <a class="teachers-img">
+                                            <img src="{{ url('/img/viet.png') }}" alt="staff-4" class="img-responsive">
                                         </a>
-                                        <!-- Staff content -->
+
                                         <div class="content">
-                                            <!-- title -->
                                             <h1 class="title">
-                                                <a href="staff.html">John Doe</a>
+                                                <a>Nguyễn Công Việt</a>
                                             </h1>
-                                            <!-- Subject -->
-                                            <h3 class="subject">Support Manager</h3>
-                                            <!-- Social list -->
+
+                                            <h3 class="subject">PHP - Developer</h3>
+
                                             <ul class="social-list clearfix">
                                                 <li>
-                                                    <a href="#" class="facebook">
+                                                    <a href="https://www.facebook.com/congviet.ruby" target="blank" class="facebook" style="color: #3b589e !important;">
                                                         <i class="fa fa-facebook"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="twitter">
+                                                    <a class="twitter">
                                                         <i class="fa fa-twitter"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="linkedin">
+                                                    <a class="linkedin">
                                                         <i class="fa fa-linkedin"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="google">
+                                                    <a class="google">
                                                         <i class="fa fa-google-plus"></i>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#" class="rss">
+                                                    <a class="rss">
                                                         <i class="fa fa-rss"></i>
                                                     </a>
                                                 </li>
@@ -632,7 +493,7 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                         <div class="avatar">
-                                            <img src="img/avatar/avatar-2.jpg" alt="avatar-2" class="img-responsive">
+                                            <img src="{{ url('/img/avatar-2.jpg') }}" alt="avatar-2" class="img-responsive">
                                         </div>
                                     </div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
@@ -674,7 +535,7 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                         <div class="avatar">
-                                            <img src="img/avatar/avatar-1.jpg" alt="avatar-1" class="img-responsive">
+                                            <img src="{{ url('/img/avatar-1.jpg') }}" alt="avatar-1" class="img-responsive">
                                         </div>
                                     </div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
@@ -716,7 +577,7 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                         <div class="avatar">
-                                            <img src="img/avatar/avatar-3.jpg" alt="avatar-3" class="img-responsive">
+                                            <img src="{{ url('/img/avatar-3.jpg') }}" alt="avatar-3" class="img-responsive">
                                         </div>
                                     </div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
@@ -776,20 +637,20 @@
     <!-- Testimonial-2 end -->
 
     <!-- Blog section start -->
-    <div class="blog-section content-area">
+    {{-- <div class="blog-section content-area">
         <div class="container">
-            <!-- Main title -->
             <div class="main-title">
                 <h1>Our Blog</h1>
                 <p>Check out some recent news posts.</p>
             </div>
+
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog-1">
                         <div class="blog-photo">
-                            <img src="img/room/img-2.jpg" alt="img-2" class="img-responsive">
+                            <img src="{{ url('/img/img-2.jpg') }}" alt="img-2" class="img-responsive">
                             <div class="profile-user">
-                                <img src="img/avatar/avatar-1.jpg" alt="user">
+                                <img src="{{ url('/img/avatar-1.jpg') }}" alt="user">
                             </div>
                         </div>
                         <div class="detail">
@@ -804,19 +665,19 @@
                                 </ul>
                             </div>
                             <h3>
-                                <a href="blog-details.html">Standard Post Format Title</a>
+                                <a href="#">Standard Post Format Title</a>
                             </h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                            <a href="blog-details.html" class="read-more-btn">Read more...</a>
+                            <a href="#" class="read-more-btn">Read more...</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6 hidden-sm">
                     <div class="blog-1">
                         <div class="blog-photo">
-                            <img src="img/room/img-6.jpg" alt="img-6" class="img-responsive">
+                            <img src="{{ url('/img/img-6.jpg') }}" alt="img-6" class="img-responsive">
                             <div class="profile-user">
-                                <img src="img/avatar/avatar-2.jpg" alt="user">
+                                <img src="{{ url('/img/avatar-2.jpg') }}" alt="user">
                             </div>
                         </div>
                         <div class="detail">
@@ -831,19 +692,19 @@
                                 </ul>
                             </div>
                             <h3>
-                                <a href="blog-details.html">Alpha Hotel pars studiorum</a>
+                                <a href="#">Alpha Hotel pars studiorum</a>
                             </h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                            <a href="blog-details.html" class="read-more-btn">Read more...</a>
+                            <a href="#" class="read-more-btn">Read more...</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog-1">
                         <div class="blog-photo">
-                            <img src="img/room/img-3.jpg" alt="img-3" class="img-responsive">
+                            <img src="{{ url('/img/img-3.jpg') }}" alt="img-3" class="img-responsive">
                             <div class="profile-user">
-                                <img src="img/avatar/avatar-3.jpg" alt="user">
+                                <img src="{{ url('/img/avatar-3.jpg') }}" alt="user">
                             </div>
                         </div>
                         <div class="detail">
@@ -858,16 +719,16 @@
                                 </ul>
                             </div>
                             <h3>
-                                <a href="blog-details.html">Best night photo at Alpha hotel in</a>
+                                <a href="#">Best night photo at Alpha hotel in</a>
                             </h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                            <a href="blog-details.html" class="read-more-btn">Read more...</a>
+                            <a href="#" class="read-more-btn">Read more...</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Blog section end -->
 
     <!-- Intro section start -->
@@ -875,7 +736,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                    <img src="img/logos/white-logo.png" alt="white-logo">
+                    <img src="{{ url('/img/framgia3.png') }}" alt="white-logo">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                     <div class="intro-text">
@@ -884,8 +745,8 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                    <a href="contact.html" class="btn btn-md btn-theme hidden-xs hidden-sm">Contact now</a>
-                    <a href="contact.html" class="btn btn-sm btn-theme hidden-md hidden-lg">Contact now</a>
+                    <a href="#jump_booking" class="btn btn-md btn-theme hidden-xs hidden-sm">Đặt phòng ngay</a>
+                    <a href="#jump_booking" class="btn btn-sm btn-theme hidden-md hidden-lg">Đặt phòng ngay</a>
                 </div>
             </div>
         </div>

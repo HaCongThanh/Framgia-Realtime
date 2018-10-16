@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->only('checkOut');
+        $this->middleware('auth')->only(['checkOut', 'bill']);
     }
 
     /**
@@ -37,8 +37,12 @@ class HomeController extends Controller
         session()->forget('route');
         
         session()->put('route', 'user.home.index');
+
+        $room_types = RoomType::all();
         
-        return view('user.home');
+        return view('user.home', [
+            'room_types'    =>  $room_types
+        ]);
     }
 
     /**
@@ -263,11 +267,11 @@ class HomeController extends Controller
      * [bookings description]
      * @return [type] [description]
      */
-    public function bookings()
+    public function bookings($type)
     {
-        /*Thêm bản ghi vào bảng room_rental_lists*/
         $user = Auth::user();
 
+        /*Thêm bản ghi vào bảng room_rental_lists*/
         $array_room = session()->get('array_room');
 
         for ($i=1; $i <= 10; $i++) { 
@@ -352,7 +356,60 @@ class HomeController extends Controller
         }
         /*--------------------------------------------------------*/
 
-        return view('user.test');
+        return redirect()->route('user.bookings.bill');
+    }
+
+    /**
+     * [bill description]
+     * @return [type] [description]
+     */
+    public function bill()
+    {
+        $user = Auth::user();
+
+        $customer_booking_logs = CustomerBookingLog::where('user_id', $user->id)->orderBy('id', 'desc')->get();
+
+        return view('user.booking_log', [
+            'customer_booking_logs'     =>  $customer_booking_logs,
+            'user_name'                 =>  $user->name
+        ]);
+    }
+
+    /**
+     * [bookingBills description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+
+    public function billDetail(Request $request)
+    {
+        $user = Auth::user();
+
+        $customer_booking_log_id = $request->customer_booking_log_id;
+
+        // $customer_booking_details = CustomerBookingDetail::where('customer_booking_log_id', $customer_booking_log_id)->get();
+
+        $customer_booking_details = DB::table('customer_booking_details')
+            ->join('customer_booking_logs', 'customer_booking_details.customer_booking_log_id', '=', 'customer_booking_logs.id')
+            ->join('room_types', 'customer_booking_details.room_type_id', '=', 'room_types.id')
+            ->where('customer_booking_details.customer_booking_log_id', $customer_booking_log_id)
+            ->select([
+                'room_types.name',
+                'room_types.price',
+                'customer_booking_details.number_room',
+                'customer_booking_details.total_price',
+                'customer_booking_logs.created_at',
+                'customer_booking_logs.total_money',
+                'customer_booking_logs.total_number_room'
+                    ])
+            ->get();
+
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Lấy thông tin thành công!',
+            'data'      =>  $customer_booking_details,
+            'info'      =>  $user
+        ]);
     }
 
 }

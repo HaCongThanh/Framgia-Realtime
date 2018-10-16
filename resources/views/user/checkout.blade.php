@@ -454,7 +454,7 @@
                                 <br/>
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-grey prev-step" id="prev_complete">Quay lại</button></li>
-                                    <li><a href="{{ route('user.bookings') }}" type="button" class="btn search-button btn-theme next-step" id="btn_complete"><i class="fa fa-lock"></i> Hoàn tất đặt phòng</a></li>
+                                    <li><a href="{{ route('user.bookings', 1) }}" type="button" class="btn search-button btn-theme next-step" id="btn_complete"><i class="fa fa-lock"></i> Hoàn tất đặt phòng</a></li>
                                 </ul>
                             </div>
                         </div>
