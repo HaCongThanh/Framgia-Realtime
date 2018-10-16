@@ -43,7 +43,7 @@ Route::group(['prefix' => 'dev'], function() {
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
 
-    /* Categories */
+    /* Category */
     Route::get('/category','Admin\CategoriesController@index')->name('category');
     Route::get('/category/create','Admin\CategoriesController@create')->name('category_create');
     Route::post('/category/create','Admin\CategoriesController@store');
@@ -71,7 +71,20 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/room_type','Admin\RoomTypesController@index')->name('room_type');
     Route::get('/room_type/create','Admin\RoomTypesController@create')->name('room_type_create');
     Route::post('/room_type/create','Admin\RoomTypesController@store');
+    Route::get('/room_type/{id?}edit','Admin\RoomTypesController@edit')->name('room_type_edit');
+    Route::post('/room_type/{id?}edit','Admin\RoomTypesController@update');
+    Route::post('/room_type/{id?}delete','Admin\RoomTypesController@destroy')->name('room_type_delete');
 
+    /* Room */
+    Route::get('/room','Admin\RoomsController@index')->name('room');
+    Route::get('/room/create','Admin\RoomsController@create')->name('room_create');
+    Route::post('/room/create','Admin\RoomsController@store');
+    Route::get('/room/{id?}edit','Admin\RoomsController@edit')->name('room_edit');
+    Route::post('/room/{id?}edit','Admin\RoomsController@update');
+    Route::post('/room/{id?}delete','Admin\RoomsController@destroy')->name('room_delete');
+
+    /* Booking List */
+    Route::get('/booking','Admin\RoomListBookController@index')->name('rooms');
 });
 /*-------------------------------------------------------*/
 

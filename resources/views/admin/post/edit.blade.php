@@ -20,10 +20,6 @@
                 </div>
             </div>
             <div class="card">
-<<<<<<< HEAD
-
-=======
->>>>>>> 64bd99fc2179db34d5987702a5896a69cd38bea3
                 @foreach ($errors->all() as $error)
                     <p class="alert alert-danger">{{ $error }}</p>
                 @endforeach
@@ -40,7 +36,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('name', __('messages.categories'), ['class' => 'control-label']) !!}
-                        {!! Form::select('category', $categories, $post->categories, ['class' => 'form-control']) !!}
+                        {!! Form::select('category', $categories, $selectedCategories, ['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
                         {!! Form::label('description', __('messages.description'), ['class' => 'control-label']) !!}
@@ -74,8 +70,6 @@
                     {!! Form::submit(__('messages.update'), ['class' => 'btn btn-info btn-float btn-outline']) !!}
                     {!! Form::close() !!}
                 </div>
-                {!! Form::submit(__('messages.update'), ['class'=>'btn btn-info btn-float btn-outline']) !!}
-                {!! Form::close() !!}
             </div>
         </div>
     </div>

@@ -26,7 +26,7 @@ class RoomType extends Model
      * @var [type]
      */
     protected $fillable = [
-        'name', 'room_size', 'bed', 'max_people', 'price', 'image', 'description', 'facilities'
+        'name', 'room_size', 'bed', 'max_people', 'price', 'description'
     ];
 
     /**
@@ -44,5 +44,13 @@ class RoomType extends Model
     public function facilities(){
         return $this->belongsToMany('App\Models\Facility', 'facility_room_type', 'room_type_id', 'facility_id');
 
+    }
+
+    /**
+     * Get rooms: One to many
+     * @return [type] [description]
+     */
+    public function images() {
+        return $this->hasMany('App\ImageUpload', 'room_type_id');
     }
 }

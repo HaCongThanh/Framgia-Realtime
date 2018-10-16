@@ -25,7 +25,7 @@ class Category extends Model
      * [$fillable description]
      * @var [type]
      */
-    protected $guarded = ['id'];
+    protected $fillable = ['id'];
 
     /**
      * Get categories: Many to many

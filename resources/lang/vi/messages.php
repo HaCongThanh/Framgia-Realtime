@@ -1,5 +1,6 @@
 <?php
 return [
+    'dashboard' => 'Trang quản trị',
     'language' => 'Ngôn ngữ',
     'english' => 'Tiếng Anh',
     'vietnamese' => 'Tiếng Việt',
@@ -18,6 +19,11 @@ return [
     'facility_add' => 'Thêm tiện nghi',
     'facility_edit' => 'Sửa tiện nghi',
     'room' => 'Quản lý phòng',
+    'rooms' => 'Danh sách phòng',
+    'rooms_add' => 'Thêm phòng',
+    'rooms_stt' => 'Số phòng',
+    'floor' => 'Tầng',
+    'floor_stt' => 'Số tầng',
     'room_lists' => 'Danh sách đặt phòng',
     'post' => 'Quản lý bài viết',
     'category' => 'Danh mục bài viết',

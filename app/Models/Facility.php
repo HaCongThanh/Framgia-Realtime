@@ -25,7 +25,7 @@ class Facility extends Model
      * [$fillable description]
      * @var [type]
      */
-    protected $guarded = ['id'];
+    protected $fillable = ['id', 'name'];
 
     /**
      * Get categories: Many to many

@@ -47,13 +47,13 @@
                                 {!! Form::text('price', null, [ 'class' => 'form-control form-control-sm', 'placeholder' => __('messages.price') ]) !!}
                             </div>
                             <div class="form-group">
-                                {!! Form::label('name', __('messages.image'), [ 'class' => 'control-label' ]) !!}
+                                {!! Form::label('image', __('messages.image'), [ 'class' => 'control-label' ]) !!}
                                 <br>
                                 <div class="fileinput fileinput-new" data-provides="fileinput">
                                     <span class="btn btn-default btn-file">
                                         <span class="fileinput-new">{{ __('messages.file') }}</span>
                                         <span class="fileinput-exists">{{ __('messages.change') }}</span>
-                                        {!! Form::file('image') !!}
+                                        {{Form::file('image[]', ['multiple' => true,  'id' => 'exampleInputFile'])}}
                                     </span>
                                     <span class="fileinput-filename"></span>
                                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
@@ -65,27 +65,28 @@
                             <div class="form-group">
                                 {!! Form::label('description', __('messages.description'), [ 'class' => 'control-label' ]) !!}
                                 <div class="m-t-15">
-                                    {!! Form::text('description', '', ['class' => 'form-control form-control-sm', 'id' => 'editor1']) !!}
+                                    {!! Form::textarea('description', '', ['class' => 'form-control form-control-sm', 'id' => 'editor1']) !!}
                                 </div>
                             </div>
                             <div class="form-group">
                                 {!! Form::label('name', __('messages.facility'), [ 'class' => 'control-label' ]) !!}
                                 <div class="row">
+                                    @php($check = 1)
                                     @foreach($facilities as $facility)
                                     <div class="col-md-6">
                                         <div class="checkbox">
-                                            {!! Form::checkbox('facilities', $facility->name, null, [ 'id' => "myCheck", 'onclick' => "myfunction()" ]) !!}
-                                            <label for="myCheck"></label>
-                                            <label>{{ $facility->name }}</label>
+                                            {{--{!! Form::checkbox('facilities', $facility->name, '', [ 'id' => "check" ]) !!}--}}
+                                            <input id="check{{ $check+=1 }}" name="facilities[]" type="checkbox" value="{{ $facility->id }}">
+                                            <label for="check{{ $check }}"></label>
+                                            {{ Form::label($facility->name) }}
                                         </div>
                                     </div>
                                     @endforeach
-                                        <input type="button" id="btn" value="Xem kết quả"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {!! Form::submit(__('messages.add'), ['class'=>'btn btn-info btn-float btn-outline']) !!}
+                    {!! Form::submit(__('messages.add'), ['class'=>'btn btn-info btn-float btn-outline', 'id' => 'submit']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -97,5 +98,4 @@
 @section('script')
     <script src={{asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js')}}></script>
     <script src={{asset('bower_components/lib_booking/lib/admin/js/selectize.min.js')}}></script>
-    <script src={{asset('bower_components/lib_booking/lib/admin/js/form-elements.js')}}></script>
 @endsection
