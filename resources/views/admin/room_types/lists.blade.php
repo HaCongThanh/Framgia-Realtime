@@ -30,23 +30,26 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @php($stt = 0)
+                        @foreach($room_type as $room)
                         <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
+                            <td>{{ $room->name }}</td>
+                            <td>{{ $room->room_size }}</td>
+                            <td>{{ $room->bed }}</td>
+                            <td>{{ $room->max_people }}</td>
+                            <td>{{ $room->price }}</td>
                             <td class="text-center font-size-18">
-                                <a href="" data-toggle="modal" data-target="#modal-lg" class="text-gray m-r-15" title="{{ __('messages.view') }}"><i class="ti-eye"></i></a>
-                                <a href="/admin/room_types/edit" class="text-gray m-r-15" title="{{ __('messages.edit') }}"><i class="ti-pencil"></i></a>
-                                <a href="/admin/room_types/edit" class="text-gray m-r-15" title="{{ __('messages.delete') }}"><i class="ti-trash"></i></a>
-                                {{--{!! Form::open(['route'=>['category_delete',$category->id], 'method'=>'POST']) !!}--}}
-                                    {{--{!! Form::submit('<i class="ti-trash"></i>', ['class'=>'text-gray', 'title'=>"{{ __('messages.delete') }}"]) !!}--}}
-                                {{--{!! Form::close() !!}--}}
+                                <button href="" data-toggle="modal" data-target="#modal-lg{{ $stt+=1 }}" class="text-gray" title="{{ __('messages.view') }}"><i class="ti-eye"></i></button>
+                                {!! Form::open(['route'=>['room_type_edit', $room->id], 'method'=>'GET']) !!}
+                                    {!! Form::button('<i class="ti-pencil"></i>', ['class'=>'text-gray', 'title'=> __('messages.edit'), 'type' => 'submit']) !!}
+                                {!! Form::close() !!}
+                                {!! Form::open(['route'=>['room_type_delete', $room->id], 'method'=>'POST']) !!}
+                                    {!! Form::button('<i class="ti-trash"></i>', ['class'=>'text-gray', 'title'=> __('messages.delete'), 'type' => 'submit']) !!}
+                                {!! Form::close() !!}
                             </td>
                         </tr>
                         <!-- Modal START-->
-                        <div class="modal fade" id="modal-lg">
+                        <div class="modal fade" id="modal-lg{{ $stt }}">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -70,16 +73,23 @@
                                                                             <li data-target="#carouselExampleCaption" data-slide-to="2"></li>
                                                                         </ol>
                                                                         <div class="carousel-inner">
+                                                                            @foreach ($room->images as $image)
                                                                             <div class="carousel-item active">
                                                                                 <div class="bg-overlay">
-                                                                                    <img class="d-block w-100" src="assets/images/others/img-17.jpg" alt="First slide">
+                                                                                    <img class="d-block w-100" src="{{ asset('public/images/rooms/'.$image->filename) }}" alt="First slide">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="carousel-item">
-                                                                                <div class="bg-overlay">
-                                                                                    <img class="d-block w-100" src="assets/images/others/img-18.jpg" alt="Second slide">
-                                                                                </div>
-                                                                            </div>
+                                                                            @endforeach
+                                                                            {{--<div class="carousel-item active">--}}
+                                                                                {{--<div class="bg-overlay">--}}
+                                                                                    {{--<img class="d-block w-100" src="assets/images/others/img-18.jpg" alt="First slide">--}}
+                                                                                {{--</div>--}}
+                                                                            {{--</div>--}}
+                                                                            {{--<div class="carousel-item">--}}
+                                                                                {{--<div class="bg-overlay">--}}
+                                                                                    {{--<img class="d-block w-100" src="assets/images/others/img-18.jpg" alt="Second slide">--}}
+                                                                                {{--</div>--}}
+                                                                            {{--</div>--}}
                                                                         </div>
                                                                         <a class="carousel-control-prev" href="#carouselExampleCaption" role="button" data-slide="prev">
                                                                             <span class="mdi mdi-chevron-left font-size-35" aria-hidden="true"></span>
@@ -95,16 +105,20 @@
                                                 </div>
                                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                                     <div class="">
-                                                        <p>{{ __('messages.room_type') }}: </p>
-                                                        <p>{{ __('messages.room_size') }}: </p>
-                                                        <p>{{ __('messages.bed') }}: </p>
-                                                        <p>{{ __('messages.people') }}: </p>
-                                                        <p>{{ __('messages.price') }}: </p>
+                                                        <p>{{ __('messages.room_type') }}: {{ $room->name }}</p>
+                                                        <p>{{ __('messages.room_size') }}: {{ $room->room_size }}</p>
+                                                        <p>{{ __('messages.bed') }}: {{ $room->bed }}</p>
+                                                        <p>{{ __('messages.people') }}: {{ $room->max_people }}</p>
+                                                        <p>{{ __('messages.price') }}: {{ $room->price }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
-                                                    <p>{{ __('messages.description') }}: </p>
-                                                    <p>{{ __('messages.facility') }}: </p>
+                                                    <p>{{ __('messages.description') }}: {!! $room->description !!}</p>
+                                                    <p>{{ __('messages.facility') }}:<br>
+                                                        @foreach($room->facilities as $facility)
+                                                            {{ $facility->name }} <br>
+                                                        @endforeach
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -118,6 +132,7 @@
                             </div>
                         </div>
                         <!-- Modal END-->
+                        @endforeach
                         </tbody>
                     </table>
                 </div>

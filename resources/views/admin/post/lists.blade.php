@@ -36,7 +36,9 @@
                             <td>{{ $post->title }}</td>
 
                             <td>
-                                {{--{{ $post->categories[0]->name }}--}}
+                                @foreach($post->categories as $category)
+                                    {{ $category->name }}
+                                @endforeach
                             </td>
                             @if($post->status == 0)
                                 <td>
@@ -59,7 +61,7 @@
                                 {!! Form::open(['route' => ['post_edit',$post->id], 'method' => 'GET']) !!}
                                     {!! Form::button('<i class="ti-pencil"></i>', ['class' => 'text-gray', 'type' => 'submit', 'title' => __('messages.edit')]) !!}
                                 {!! Form::close() !!}
-                                {!! Form::open(['route' => ['post_edit',$post->id], 'method' => 'POST']) !!}
+                                {!! Form::open(['route' => ['post_delete',$post->id], 'method' => 'POST']) !!}
                                     {!! Form::button('<i class="ti-trash"></i>', ['class' => 'text-gray', 'type' => 'submit', 'title' => __('messages.delete')]) !!}
                                 {!! Form::close() !!}
                             </td>

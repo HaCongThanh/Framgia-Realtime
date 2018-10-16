@@ -160,7 +160,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
-
+        //Intervention\Image\ImageServiceProvider::class,
         /*
          * Debugbar
          */
@@ -215,7 +215,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Debugbar' => 'Barryvdh\Debugbar\Facade',
-
+        //'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

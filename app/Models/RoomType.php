@@ -26,7 +26,8 @@ class RoomType extends Model
      * @var [type]
      */
     protected $fillable = [
-        'name', 'room_size', 'bed', 'max_people', 'price', 'image', 'description', 'facilities', 'created_at', 'updated_at', 'deleted_at'
+        'name', 'room_size', 'bed', 'max_people', 'price', 'description', 'facilities', 'created_at', 'updated_at', 'deleted_at'
+
     ];
 
     /**
@@ -47,10 +48,17 @@ class RoomType extends Model
     }
 
     /**
-     * Get customer_booking_details: One to many
      * @return [type] [description]
      */
-    public function customer_booking_details() {
+    public function customer_booking_details()
+    {
         return $this->hasMany('App\Models\CustomerBookingDetail', 'room_type_id');
+    }
+     /* Get rooms: One to many
+
+     * @return [type] [description]
+     */
+    public function images() {
+        return $this->hasMany('App\ImageUpload', 'room_type_id');
     }
 }

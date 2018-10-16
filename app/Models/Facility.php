@@ -25,6 +25,7 @@ class Facility extends Model
      * [$fillable description]
      * @var [type]
      */
+
     protected $fillable = [
         'name', 'created_at', 'updated_at', 'deleted_at'
     ];
