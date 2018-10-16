@@ -267,12 +267,11 @@ class HomeController extends Controller
      * [bookings description]
      * @return [type] [description]
      */
-    public function bookings()
+    public function bookings($type)
     {
         $user = Auth::user();
 
         /*Thêm bản ghi vào bảng room_rental_lists*/
-
         $array_room = session()->get('array_room');
 
         for ($i=1; $i <= 10; $i++) { 
@@ -381,6 +380,7 @@ class HomeController extends Controller
      * @param  Request $request [description]
      * @return [type]           [description]
      */
+
     public function billDetail(Request $request)
     {
         $user = Auth::user();

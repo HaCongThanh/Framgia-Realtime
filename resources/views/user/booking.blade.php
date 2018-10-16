@@ -97,8 +97,7 @@
 
     <div class="main-content" style="width: 65%; margin: 0 auto;">
         <div class="container-fluid">
-            <div class="page-header">
-            </div>
+            <div class="page-header"></div>
 
             <div class="card">
                 <div class="card-header">
