@@ -16,6 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
 
 // User --------
 mix.styles('resources/css/user/style.css', 'public/css/user/style.css');
+mix.styles('resources/css/user/custom.css', 'public/css/user/custom.css');
 
 mix.copy('resources/js/user/app.js', 'public/js/user/app.js');
 mix.copy('resources/js/user/booking.js', 'public/js/user/booking.js');

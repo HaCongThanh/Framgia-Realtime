@@ -40,6 +40,17 @@
 
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/ie-emulation-modes-warning.js') }}"></script>
 
+    <style type="text/css">
+        .sub-banner {
+            background: rgba(0, 0, 0, 0.04) url({{ asset('/img/sub-banner.jpg') }}) top left repeat;
+            background-size: cover;
+            height: 270px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+    </style>
+
     @yield('style')
 
 </head>
@@ -262,7 +273,7 @@
                     <div class="footer-item">
                         <div class="footer-logo">
                             <a href="index.html">
-                                <img src="img/logos/white-logo.png" alt="white-logo">
+                                <img src="{{ url('/img/framgia3.png') }}" alt="white-logo">
                             </a>
                         </div>
                         <p>Lorem ipsum dolor sit amet, conser adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a conser nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam.</p>
@@ -310,33 +321,33 @@
                         </div>
                         <ul>
                             <li>
-                                <a href="gallery-3column.html">
-                                    <img src="img/room/small-img-2.jpg" alt="small-img-2">
+                                <a href="#">
+                                    <img src="{{ url('/img/small-img-2.jpg') }}" alt="small-img-2">
                                 </a>
                             </li>
                             <li>
-                                <a href="gallery-3column.html">
-                                    <img src="img/room/small-img-4.jpg" alt="small-img-4">
+                                <a href="#">
+                                    <img src="{{ url('/img/small-img-4.jpg') }}" alt="small-img-4">
                                 </a>
                             </li>
                             <li>
-                                <a href="gallery-3column.html">
-                                    <img src="img/room/small-img-5.jpg" alt="small-img-5">
+                                <a href="#">
+                                    <img src="{{ url('/img/small-img-5.jpg') }}" alt="small-img-5">
                                 </a>
                             </li>
                             <li>
-                                <a href="gallery-3column.html">
-                                    <img src="img/room/small-img-3.jpg" alt="small-img-3">
+                                <a href="#">
+                                    <img src="{{ url('/img/small-img-3.jpg') }}" alt="small-img-3">
                                 </a>
                             </li>
                             <li>
-                                <a href="gallery-3column.html">
-                                    <img src="img/room/small-img-6.jpg" alt="small-img-6">
+                                <a href="#">
+                                    <img src="{{ url('/img/small-img-6.jpg') }}" alt="small-img-6">
                                 </a>
                             </li>
                             <li>
-                                <a href="gallery-3column.html">
-                                    <img src="img/room/small-img.jpg" alt="small-img">
+                                <a href="#">
+                                    <img src="{{ url('/img/small-img.jpg') }}" alt="small-img">
                                 </a>
                             </li>
 
