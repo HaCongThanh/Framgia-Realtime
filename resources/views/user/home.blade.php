@@ -9,6 +9,15 @@
         .search-area-box-6 {
             padding: 53px 0 53px !important;
         }
+
+        .testimonials-2 {
+            padding: 100px 0 130px;
+            background: url({{ asset('/img/big-img-7.jpg') }});
+            z-index: 0;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
 @endsection
 
@@ -160,7 +169,7 @@
                         <div class="hotel-box">
                             <!--header -->
                             <div class="header clearfix">
-                                <img src="img/room/img-1.jpg" alt="img-1" class="img-responsive">
+                                <img src="{{ url('/img/img-1.jpg') }}" alt="img-1" class="img-responsive">
                             </div>
                             <!-- Detail -->
                             <div class="detail clearfix">
@@ -190,7 +199,7 @@
                         <div class="hotel-box">
                             <!--header -->
                             <div class="header clearfix">
-                                <img src="img/room/img-2.jpg" alt="img-2" class="img-responsive">
+                                <img src="{{ url('/img/img-2.jpg') }}" alt="img-2" class="img-responsive">
                             </div>
                             <!-- Detail -->
                             <div class="detail clearfix">
@@ -220,7 +229,7 @@
                         <div class="hotel-box">
                             <!--header -->
                             <div class="header clearfix">
-                                <img src="img/room/img-4.jpg" alt="img-4" class="img-responsive">
+                                <img src="{{ url('/img/img-4.jpg') }}" alt="img-4" class="img-responsive">
                             </div>
                             <!-- Detail -->
                             <div class="detail clearfix">
@@ -250,7 +259,7 @@
                         <div class="hotel-box">
                             <!--header -->
                             <div class="header clearfix">
-                                <img src="img/room/img-3.jpg" alt="img-3" class="img-responsive">
+                                <img src="{{ url('/img/img-3.jpg') }}" alt="img-3" class="img-responsive">
                             </div>
                             <!-- Detail -->
                             <div class="detail clearfix">
@@ -280,7 +289,7 @@
                         <div class="hotel-box">
                             <!--header -->
                             <div class="header clearfix">
-                                <img src="img/room/img-5.jpg" alt="img-5" class="img-responsive">
+                                <img src="{{ url('/img/img-5.jpg') }}" alt="img-5" class="img-responsive">
                             </div>
                             <!-- Detail -->
                             <div class="detail clearfix">
@@ -310,7 +319,7 @@
                         <div class="hotel-box">
                             <!--header -->
                             <div class="header clearfix">
-                                <img src="img/room/img-8.jpg" alt="img-8" class="img-responsive">
+                                <img src="{{ url('/img/img-8.jpg') }}" alt="img-8" class="img-responsive">
                             </div>
                             <!-- Detail -->
                             <div class="detail clearfix">
@@ -428,7 +437,7 @@
                                     <div class="staff-box-1">
                                         <!-- Staff img -->
                                         <a href="staff.html" class="teachers-img">
-                                            <img src="img/staff/staff-1.jpg" alt="staff-1" class="img-responsive">
+                                            <img src="{{ url('/img/staff-1.jpg') }}" alt="staff-1" class="img-responsive">
                                         </a>
                                         <!-- Staff content -->
                                         <div class="content">
@@ -475,7 +484,7 @@
                                     <div class="staff-box-1">
                                         <!-- Staff img -->
                                         <a href="staff.html" class="teachers-img">
-                                            <img src="img/staff/staff-2.jpg" alt="staff-2" class="img-responsive">
+                                            <img src="{{ url('/img/staff-2.jpg') }}" alt="staff-2" class="img-responsive">
                                         </a>
                                         <!-- Staff content -->
                                         <div class="content">
@@ -522,7 +531,7 @@
                                     <div class="staff-box-1">
                                         <!-- Staff img -->
                                         <a href="staff.html" class="teachers-img">
-                                            <img src="img/staff/staff-3.jpg" alt="staff-3" class="img-responsive">
+                                            <img src="{{ url('/img/staff-3.jpg') }}" alt="staff-3" class="img-responsive">
                                         </a>
                                         <!-- Staff content -->
                                         <div class="content">
@@ -569,7 +578,7 @@
                                     <div class="staff-box-1">
                                         <!-- Staff img -->
                                         <a href="staff.html" class="teachers-img">
-                                            <img src="img/staff/staff-4.jpg" alt="staff-4" class="img-responsive">
+                                            <img src="{{ url('/img/staff-4.jpg') }}" alt="staff-4" class="img-responsive">
                                         </a>
                                         <!-- Staff content -->
                                         <div class="content">
@@ -632,7 +641,7 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                         <div class="avatar">
-                                            <img src="img/avatar/avatar-2.jpg" alt="avatar-2" class="img-responsive">
+                                            <img src="{{ url('/img/avatar-2.jpg') }}" alt="avatar-2" class="img-responsive">
                                         </div>
                                     </div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
@@ -674,7 +683,7 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                         <div class="avatar">
-                                            <img src="img/avatar/avatar-1.jpg" alt="avatar-1" class="img-responsive">
+                                            <img src="{{ url('/img/avatar-1.jpg') }}" alt="avatar-1" class="img-responsive">
                                         </div>
                                     </div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
@@ -716,7 +725,7 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                                         <div class="avatar">
-                                            <img src="img/avatar/avatar-3.jpg" alt="avatar-3" class="img-responsive">
+                                            <img src="{{ url('/img/avatar-3.jpg') }}" alt="avatar-3" class="img-responsive">
                                         </div>
                                     </div>
                                     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
@@ -787,9 +796,9 @@
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog-1">
                         <div class="blog-photo">
-                            <img src="img/room/img-2.jpg" alt="img-2" class="img-responsive">
+                            <img src="{{ url('/img/img-2.jpg') }}" alt="img-2" class="img-responsive">
                             <div class="profile-user">
-                                <img src="img/avatar/avatar-1.jpg" alt="user">
+                                <img src="{{ url('/img/avatar-1.jpg') }}" alt="user">
                             </div>
                         </div>
                         <div class="detail">
@@ -804,19 +813,19 @@
                                 </ul>
                             </div>
                             <h3>
-                                <a href="blog-details.html">Standard Post Format Title</a>
+                                <a href="#">Standard Post Format Title</a>
                             </h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                            <a href="blog-details.html" class="read-more-btn">Read more...</a>
+                            <a href="#" class="read-more-btn">Read more...</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6 hidden-sm">
                     <div class="blog-1">
                         <div class="blog-photo">
-                            <img src="img/room/img-6.jpg" alt="img-6" class="img-responsive">
+                            <img src="{{ url('/img/img-6.jpg') }}" alt="img-6" class="img-responsive">
                             <div class="profile-user">
-                                <img src="img/avatar/avatar-2.jpg" alt="user">
+                                <img src="{{ url('/img/avatar-2.jpg') }}" alt="user">
                             </div>
                         </div>
                         <div class="detail">
@@ -831,19 +840,19 @@
                                 </ul>
                             </div>
                             <h3>
-                                <a href="blog-details.html">Alpha Hotel pars studiorum</a>
+                                <a href="#">Alpha Hotel pars studiorum</a>
                             </h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                            <a href="blog-details.html" class="read-more-btn">Read more...</a>
+                            <a href="#" class="read-more-btn">Read more...</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-6">
                     <div class="blog-1">
                         <div class="blog-photo">
-                            <img src="img/room/img-3.jpg" alt="img-3" class="img-responsive">
+                            <img src="{{ url('/img/img-3.jpg') }}" alt="img-3" class="img-responsive">
                             <div class="profile-user">
-                                <img src="img/avatar/avatar-3.jpg" alt="user">
+                                <img src="{{ url('/img/avatar-3.jpg') }}" alt="user">
                             </div>
                         </div>
                         <div class="detail">
@@ -858,10 +867,10 @@
                                 </ul>
                             </div>
                             <h3>
-                                <a href="blog-details.html">Best night photo at Alpha hotel in</a>
+                                <a href="#">Best night photo at Alpha hotel in</a>
                             </h3>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                            <a href="blog-details.html" class="read-more-btn">Read more...</a>
+                            <a href="#" class="read-more-btn">Read more...</a>
                         </div>
                     </div>
                 </div>
@@ -875,7 +884,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
-                    <img src="img/logos/white-logo.png" alt="white-logo">
+                    <img src="{{ url('/img/framgia3.png') }}" alt="white-logo">
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-6 col-xs-12">
                     <div class="intro-text">
@@ -884,8 +893,8 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
-                    <a href="contact.html" class="btn btn-md btn-theme hidden-xs hidden-sm">Contact now</a>
-                    <a href="contact.html" class="btn btn-sm btn-theme hidden-md hidden-lg">Contact now</a>
+                    <a href="#" class="btn btn-md btn-theme hidden-xs hidden-sm">Contact now</a>
+                    <a href="#" class="btn btn-sm btn-theme hidden-md hidden-lg">Contact now</a>
                 </div>
             </div>
         </div>
