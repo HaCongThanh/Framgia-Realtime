@@ -11,5 +11,6 @@ class RoomListBookController extends Controller
     public function index(){
         $lists = RoomRentalList::all();
         return view('admin.room_lists.lists', compact('lists'));
+//        test
     }
 }
