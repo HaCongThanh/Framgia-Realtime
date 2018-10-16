@@ -19,7 +19,8 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('admin.post.lists', compact('posts'));
+        $categories = Category::all();
+        return view('admin.post.lists', compact('posts', 'categories'));
     }
 
     /**
@@ -29,7 +30,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::all()->pluck('name', 'id');
+
         return view('admin.post.create', compact('categories'));
     }
 
@@ -49,6 +51,7 @@ class PostsController extends Controller
             }
             $image->move('public/images/post', $new_name);
         }
+
         $post = new Post(array(
             'title' => $request->get('title'),
             'slug' => $request->get('slug'),
@@ -84,7 +87,7 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        $categories = Category::all();
+        $categories = Category::all()->pluck('name', 'id');
         $selectedCategories = $post->categories->pluck('id');
         return view('admin.post.edit', compact('post', 'categories', 'selectedCategories'));
     }
@@ -131,8 +134,12 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::whereid($id)->firstOrFail();
+        $post = Post::findOrFail($id);
+        if (file_exists('public/images/post/' . $post->image)) {
+            unlink('public/images/post/' . $post->image);
+        }
         $post->delete();
-        return redirect()->route('post_delete');
+
+        return redirect()->route('post');
     }
 }

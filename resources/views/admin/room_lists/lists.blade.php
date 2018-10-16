@@ -28,6 +28,8 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @php ($stt = 0)
+                        @foreach ($lists as $list)
                         <tr>
                             <td>Mark</td>
                             <td>Otto</td>
@@ -35,45 +37,46 @@
                             <td>Mark</td>
                             <td>Otto</td>
                             <td class="text-center font-size-18">
-                                <a href="" data-toggle="modal" data-target="#modal-lg" class="text-gray m-r-15" title="Xem chi tiết"><i class="ti-eye"></i></a>
+                                <a href="" data-toggle="modal" data-target="#modal-lg{{ $stt+=1 }}" class="text-gray m-r-15" title="Xem chi tiết"><i class="ti-eye"></i></a>
                             </td>
                         </tr>
-                        </tbody>
-                    </table>
-                    <!-- Modal START-->
-                    <div class="modal fade" id="modal-lg">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4>Thông tin chi tiết</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="p-15 m-v-40">
-                                        <div class="row ">
-                                            <div class="col-md-6">
-                                                <p>Tên khách hàng: </p>
-                                                <p>Ngày nhận phòng: </p>
-                                                <p>Ngày trả phòng: </p>
-                                                <p>Tổng số người: </p>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>Số phòng: </p>
-                                                <p>Loại phòng: </p>
-                                                <p>Tầng: </p>
-                                                <p>Tổng tiền: </p>
+                        <!-- Modal START-->
+                        <div class="modal fade" id="modal-lg{{ $stt+=1 }}">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4>Thông tin chi tiết</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="p-15 m-v-40">
+                                            <div class="row ">
+                                                <div class="col-md-6">
+                                                    <p>Tên khách hàng: </p>
+                                                    <p>Ngày nhận phòng: </p>
+                                                    <p>Ngày trả phòng: </p>
+                                                    <p>Tổng số người: </p>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>Số phòng: </p>
+                                                    <p>Loại phòng: </p>
+                                                    <p>Tầng: </p>
+                                                    <p>Tổng tiền: </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer no-border">
-                                    <div class="text-right">
-                                        <button class="btn btn-success" data-dismiss="modal">OK</button>
+                                    <div class="modal-footer no-border">
+                                        <div class="text-right">
+                                            <button class="btn btn-success" data-dismiss="modal">OK</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- Modal END-->
+                        <!-- Modal END-->
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

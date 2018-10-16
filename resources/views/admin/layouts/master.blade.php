@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Framgia - Quản lý khách sạn</title>
 
     <!-- Favicon -->
@@ -379,7 +380,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="">
+                        <a class="dropdown-toggle" href="{{ route('room') }}">
                             <span class="icon-holder">
                                 <i class="fa fa-hotel"></i>
                             </span>
@@ -388,7 +389,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="">
+                        <a class="dropdown-toggle" href="{{ route('rooms') }}">
                             <span class="icon-holder">
                                 <i class="fa fa-list-alt"></i>
                             </span>
@@ -943,6 +944,7 @@
     </div>
 </div>
 
+{{--<script src={{ asset('bower_components/lib_booking/lib/user/js/jquery-2.2.0.min.js') }}></script>--}}
 <script src={{ asset('bower_components/lib_booking/lib/admin/js/vendor.js') }}></script>
 <script src={{ asset('bower_components/lib_booking/lib/admin/js/app.min.js') }}></script>
 

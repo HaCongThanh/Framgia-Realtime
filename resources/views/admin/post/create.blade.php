@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('name', __('messages.categories'), ['class' => 'control-label']) !!}
-                            {!! Form::select('category', $categories, '',['class' => 'form-control']) !!}
+                            {!! Form::select('category', $categories, '', ['class' => 'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('description', __('messages.description'), ['class' => 'control-label']) !!}
