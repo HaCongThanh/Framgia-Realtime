@@ -76,7 +76,7 @@
                                                                             @foreach ($room->images as $image)
                                                                             <div class="carousel-item active">
                                                                                 <div class="bg-overlay">
-                                                                                    <img class="d-block w-100" src="{{ asset('public/images/rooms/'.$image->filename) }}" alt="First slide">
+                                                                                    <img class="d-block w-100" src="{{ asset('images/rooms/'.$image->filename) }}" alt="First slide">
                                                                                 </div>
                                                                             </div>
                                                                             @endforeach

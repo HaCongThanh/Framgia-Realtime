@@ -39,7 +39,7 @@ class RoomType extends Model
     }
 
     /**
-     * Get rooms: Many to many
+     * Get facilities: Many to many
      * @return [type] [description]
      */
     public function facilities(){
@@ -48,17 +48,19 @@ class RoomType extends Model
     }
 
     /**
+     * Get customer_booking_details: One to many
      * @return [type] [description]
      */
     public function customer_booking_details()
     {
         return $this->hasMany('App\Models\CustomerBookingDetail', 'room_type_id');
     }
-     /* Get rooms: One to many
 
+    /**
+     * Get images: One to many
      * @return [type] [description]
      */
     public function images() {
-        return $this->hasMany('App\ImageUpload', 'room_type_id');
+        return $this->hasMany('App\Models\Image', 'room_type_id');
     }
 }

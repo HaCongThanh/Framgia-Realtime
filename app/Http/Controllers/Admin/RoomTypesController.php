@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\RoomTypesRequest;
-use App\ImageUpload;
+use App\Models\Image;
 use App\Models\Facility;
 use App\Models\Room;
 use App\Models\RoomType;
@@ -66,11 +66,11 @@ class RoomTypesController extends Controller
                 $new_name = $fileNameToStore = $filename.'_'.time().'.'.$extension;
                 $path = $image->storeAs('public/images/rooms', $new_name);
 
-                $image = new Imageupload([
+                $image = new Image([
                     'room_type_id' => $room_type->id,
                     'filename' => $new_name,
                 ]);
-                //dd($image, $room_type);
+
                 $image->save();
             }
         }
@@ -136,9 +136,9 @@ class RoomTypesController extends Controller
                 $extension = $image->getClientOriginalExtension();
 
                 $new_name = $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('public/images/rooms', $new_name);
+                $path = $image->storeAs('images/rooms', $new_name);
 
-                $image = new Imageupload([
+                $image = new Image([
                     'room_type_id' => $room_type->id,
                     'filename' => $new_name,
                 ]);

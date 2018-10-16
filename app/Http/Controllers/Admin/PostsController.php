@@ -58,7 +58,7 @@ class PostsController extends Controller
             'description' => $request->get('description'),
             'content' => $request->get('content'),
             'status' => $request->get('status'),
-            'user_id' => 4,
+            'user_id' => 7,
             'image' => $new_name
         ));
         $post->save();
