@@ -74,9 +74,10 @@ class RoomTypesController extends Controller
                 $image->save();
             }
         }
-            foreach ($request->facilities as $facility) {
-                $room_type->facilities()->attach($facility);
-            }
+
+        foreach ($request->facilities as $facility) {
+            $room_type->facilities()->attach($facility);
+        }
 
         return redirect()->route('room_type');
     }

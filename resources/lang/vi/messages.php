@@ -21,6 +21,7 @@ return [
     'room' => 'Quản lý phòng',
     'rooms' => 'Danh sách phòng',
     'rooms_add' => 'Thêm phòng',
+    'rooms_edit' => 'Sửa phòng',
     'rooms_stt' => 'Số phòng',
     'floor' => 'Tầng',
     'floor_stt' => 'Số tầng',
@@ -41,6 +42,22 @@ return [
     'description_text' => 'Nhập mô tả',
     'content' => 'Nội dung',
     'content_text' => 'Nhập nội dung',
+    'customer_name' => 'Tên khách hàng',
+    'date' => 'Ngày nhận / trả',
+    'date_start' => 'Ngày nhận phòng',
+    'date_finish' => 'Ngày trả phòng',
+    'total_people' => 'Tổng người',
+    'total_room' => 'Tổng số phòng',
+    'total_price' => 'Tổng tiền',
+    'user_list' => 'Danh sách nhân viên',
+    'user_name' => 'Tên nhân viên',
+    'gender' => 'Giới tính',
+    'date_of_birth' => 'Ngày Sinh',
+    'phone' => 'Số điện thoại',
+    'email' => 'Email',
+    'address' => 'Địa chỉ',
+    'role' => 'Quyền',
+
 
     /*
      * buttons

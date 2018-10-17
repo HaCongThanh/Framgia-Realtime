@@ -30,22 +30,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td class="text-center font-size-18">
-                                {{--<a href="" data-toggle="modal" data-target="#modal-lg" class="text-gray m-r-15" title="{{ __('messages.view') }}"><i class="ti-eye"></i></a>--}}
-                                {!! Form::open(['route'=>['room_edit'], 'method'=>'GET']) !!}
-                                    {!! Form::button('<i class="ti-pencil"></i>', ['class' => 'text-gray', 'title' => __('messages.edit')]) !!}
-                                {!! Form::close() !!}
-                                {!! Form::open(['route'=>['room_delete'], 'method'=>'POST']) !!}
-                                    {!! Form::button('<i class="ti-trash"></i>', ['class' => 'text-gray', 'title' => __('messages.delete')]) !!}
-                                {!! Form::close() !!}
-                            </td>
-                        </tr>
+                        @foreach ($rooms as $room)
+                            <tr>
+                                <td>{{ $room->id }}</td>
+                                <td>{{ $room->room_types->name }}</td>
+                                <td>{{ $room->floor }}</td>
+                                <td>{{ $room->room_types->max_people }}</td>
+                                <td>{{ $room->room_types->price }}</td>
+                                <td class="text-center font-size-18">
+                                    {{--<a href="" data-toggle="modal" data-target="#modal-lg" class="text-gray m-r-15" title="{{ __('messages.view') }}"><i class="ti-eye"></i></a>--}}
+                                    {!! Form::open(['route'=>['room_edit', $room->id], 'method'=>'GET']) !!}
+                                        {!! Form::button('<i class="ti-pencil"></i>', ['class' => 'text-gray', 'title' => __('messages.edit'), 'type' => 'submit']) !!}
+                                    {!! Form::close() !!}
+                                    {!! Form::open(['route'=>['room_delete',$room->id], 'method'=>'POST']) !!}
+                                        {!! Form::button('<i class="ti-trash"></i>', ['class' => 'text-gray', 'title' => __('messages.delete'), 'type' => 'submit']) !!}
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                     <!-- Modal START-->
