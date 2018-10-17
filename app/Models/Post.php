@@ -30,10 +30,18 @@ class Post extends Model
     ];
 
     /**
-     * Get posts: Many to many
+     * Get categories: Many to many
      * @return [type] [description]
      */
     public function categories() {
         return $this->belongsToMany('App\Models\Category', 'category_post', 'post_id', 'category_id');
+    }
+
+    /**
+     * Get users: One to many
+     * @return [type] [description]
+     */
+    public function users() {
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 }

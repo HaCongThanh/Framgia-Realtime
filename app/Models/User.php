@@ -69,4 +69,12 @@ class User extends Authenticatable
     public function customer_booking_logs() {
         return $this->hasMany('App\Models\CustomerBookingLog', 'user_id');
     }
+
+    /**
+     * Get posts: One to many
+     * @return [type] [description]
+     */
+    public function posts() {
+        return $this->hasMany('App\Models\Post', 'user_id');
+    }
 }
