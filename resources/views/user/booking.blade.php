@@ -140,7 +140,7 @@
                                         <tr>
                                             <td style="text-align: center;">
                                                 <div class="list-media">
-                                                    <a href="#" class="title">{{ $data_room_type->name }}</a>
+                                                    <a href="{{ route('user.rooms.show', $data_room_type->id) }}" target="blank" class="title">{{ $data_room_type->name }}</a>
                                                 </div>
                                             </td>
                                             <td style="text-align: center;">
