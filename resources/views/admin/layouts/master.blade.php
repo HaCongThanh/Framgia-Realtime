@@ -42,7 +42,7 @@
                 <div class="nav-logo">
                     <a href="">
                         <div class="logo logo-dark" style="background-image: url('../img/logo.png')"></div>
-                        <div class="logo logo-white" style="background-image: url('../img/logo.png')"></div>
+                        <div class="logo logo-white" style="background-image: url('../img/framgia3.png')"></div>
                     </a>
                 </div>
                 <ul class="nav-left">
@@ -945,15 +945,15 @@
 </div>
 
 {{--<script src={{ asset('bower_components/lib_booking/lib/user/js/jquery-2.2.0.min.js') }}></script>--}}
-<script src={{ asset('bower_components/lib_booking/lib/admin/js/vendor.js') }}></script>
-<script src={{ asset('bower_components/lib_booking/lib/admin/js/app.min.js') }}></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/vendor.js') }}"></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/app.min.js') }}"></script>
 
 <!-- page js -->
-<script src={{ asset('bower_components/lib_booking/lib/admin/js/Chart.min.js') }}></script>
-<script src={{ asset('bower_components/lib_booking/lib/admin/js/jquery.sparkline.min.js') }}></script>
-<script src={{ asset('bower_components/lib_booking/lib/admin/js/default.js') }}></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/Chart.min.js') }}"></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/jquery.sparkline.min.js') }}"></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/default.js') }}"></script>
 
-<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/ckeditor/ckeditor.js') }}"></script>
 <script> CKEDITOR.replace('editor1'); </script>
 
 @yield('script')

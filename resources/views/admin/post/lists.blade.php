@@ -32,7 +32,7 @@
                         <tbody>
                         @foreach($posts as $post)
                         <tr>
-                            <td><img src="{{ asset('/public/images/post/'.$post->image) }}" width="100"></td>
+                            <td><img src="{{ asset('/images/posts/'.$post->image) }}" width="100"></td>
                             <td>{{ $post->title }}</td>
 
                             <td>

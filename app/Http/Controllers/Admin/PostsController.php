@@ -46,10 +46,10 @@ class PostsController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $new_name = str_random(3).'_'.$image->getClientOriginalName();
-            while (file_exists('public/images/post/'.$new_name)) {
+            while (file_exists('images/posts/'.$new_name)) {
                 $new_name = str_random(4).'_'.$new_name;
             }
-            $image->move('public/images/post', $new_name);
+            $image->move('images/posts', $new_name);
         }
 
         $post = new Post(array(
@@ -108,10 +108,10 @@ class PostsController extends Controller
             while (file_exists('public/images/post/'.$new_name)) {
                 $new_name = str_random(3).'_'.$new_name;
             }
-            if (file_exists('public/images/post/'.$new_name)) {
-                unlink('public/images/post/'.$post->image);
+            if (file_exists('images/posts/'.$new_name)) {
+                unlink('images/posts/'.$post->image);
             }
-            $image->move('public/images/post'.$new_name);
+            $image->move('images/posts'.$new_name);
         }
         $post->title = $request->get('title');
         $post->slug = $request->get('slug');
@@ -135,8 +135,8 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        if (file_exists('public/images/post/' . $post->image)) {
-            unlink('public/images/post/' . $post->image);
+        if (file_exists('images/posts/' . $post->image)) {
+            unlink('images/posts/' . $post->image);
         }
         $post->delete();
 
