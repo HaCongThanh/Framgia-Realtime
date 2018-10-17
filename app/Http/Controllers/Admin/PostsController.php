@@ -105,7 +105,7 @@ class PostsController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $new_name = str_random(3).'_'.$image->getClientOriginalName();
-            while (file_exists('public/images/post/'.$new_name)) {
+            while (file_exists('images/post/'.$new_name)) {
                 $new_name = str_random(3).'_'.$new_name;
             }
             if (file_exists('images/posts/'.$new_name)) {

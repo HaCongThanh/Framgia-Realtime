@@ -5,13 +5,13 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use App\Models\RoomType;
+use App\Models\Post;
 use Validator;
 use DB;
 
-class RoomController extends Controller
+class PostController extends Controller
 {
-    /**
+	/**
      * Create a new controller instance.
      *
      * @return void
@@ -27,10 +27,10 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $room_types = RoomType::all();
+        $posts = Post::all();
 
-        return view('user.room_list', [
-            'room_types'    =>  $room_types
+        return view('user.post_list', [
+            'posts'    =>  $posts
         ]);
     }
 
@@ -41,13 +41,13 @@ class RoomController extends Controller
      */
     public function show($id)
     {
-        $room_type = RoomType::find($id);
+        $post = Post::find($id);
 
-        $diff_rooms = RoomType::where('id', '!=', $id)->orderBy('id', 'desc')->limit(3)->get();
+        $diff_posts = Post::where('id', '!=', $id)->orderBy('id', 'desc')->limit(3)->get();
 
-        return view('user.room_detail', [
-            'room_type'     =>  $room_type,
-            'diff_rooms'    =>  $diff_rooms
+        return view('user.post_detail', [
+            'post'    		=>  $post,
+            'diff_posts'    =>  $diff_posts
         ]);
     }
 

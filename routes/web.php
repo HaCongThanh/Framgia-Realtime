@@ -46,7 +46,11 @@ Route::group(['prefix' => 'dev'], function() {
 
     Route::get('/rooms', 'User\RoomController@index')->name('user.rooms.index');
 
+    Route::get('/posts', 'User\PostController@index')->name('user.posts.index');
+
     Route::get('/rooms/{id}', 'User\RoomController@show')->name('user.rooms.show');
+    
+    Route::get('/posts/{id}', 'User\PostController@show')->name('user.posts.show');
 });
 
 /*---------------------- Admin Route --------------------*/

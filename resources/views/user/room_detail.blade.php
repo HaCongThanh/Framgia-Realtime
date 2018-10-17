@@ -510,44 +510,28 @@
                         <!-- Recent News start -->
                         <div class="sidebar-widget recent-news">
                             <div class="main-title-2">
-                                <h1>Recent Posts</h1>
+                                <h1>Loại phòng mới nhất</h1>
                             </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <img class="media-object" src="img/room/small-img.jpg" alt="small-img">
-                                </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Host a Family Party</a>
-                                    </h3>
-                                    <p>From 80 $ per night</p>
-                                    <h5><i class="fa fa-calendar"></i>18/10/2017</h5>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <img class="media-object" src="img/room/small-img-2.jpg" alt="small-img-2">
-                                </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Room with View</a>
-                                    </h3>
-                                    <p>From 80 $ per night</p>
-                                    <h5><i class="fa fa-calendar"></i>18/10/2017</h5>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="media-left">
-                                    <img class="media-object" src="img/room/small-img-3.jpg" alt="small-img-3">
-                                </div>
-                                <div class="media-body">
-                                    <h3 class="media-heading">
-                                        <a href="rooms-details.html">Double Room</a>
-                                    </h3>
-                                    <p>From 80 $ per night</p>
-                                    <h5><i class="fa fa-calendar"></i>18/10/2017</h5>
-                                </div>
-                            </div>
+
+                            @if (!empty($diff_rooms))
+                                @foreach ($diff_rooms as $diff_room)
+                                    
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img class="media-object" src="{{ url('/images/rooms/' . $diff_room->images->first->filename['filename']) }}" style="width: 80px; height: 80px;" alt="small-img">
+                                        </div>
+                                        <div class="media-body">
+                                            <h3 class="media-heading">
+                                                <a href="{{ route('user.rooms.show', $diff_room->id) }}">{{ $diff_room->name }}</a>
+                                            </h3>
+                                            <p>{{ number_format($diff_room->price) }} VNĐ / Đêm</p>
+                                            <h5>Tối đa: {{ $diff_room->max_people }} người</h5>
+                                        </div>
+                                    </div>
+
+                                @endforeach
+                            @endif
+
                         </div>
                         <!-- Recent News end -->
 

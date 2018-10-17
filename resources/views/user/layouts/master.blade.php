@@ -152,6 +152,9 @@
                     <li class="dropdown">
                         <a href="{{ route('user.bookings.bill') }}">Nhật ký đặt phòng</a>
                     </li>
+                    <li class="dropdown">
+                        <a href="{{ route('user.posts.index') }}">Bài viết</a>
+                    </li>
                     {{-- <li class="dropdown">
                         <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
                             Contact<span class="caret"></span>
