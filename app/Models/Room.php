@@ -26,7 +26,7 @@ class Room extends Model
      * @var [type]
      */
     protected $fillable = [
-        'room_type_id', 'floor', 'created_at', 'updated_at', 'deleted_at'
+        'floor', 'room_type_id', 'created_at', 'updated_at', 'deleted_at'
     ];
 
     /**

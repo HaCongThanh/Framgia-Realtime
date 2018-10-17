@@ -40,6 +40,21 @@ return [
     'description_text' => 'Write description',
     'content' => 'Content',
     'content_text' => 'Write content',
+    'customer_name' => 'Customer name',
+    'date' => 'Date start / finish',
+    'date_start' => 'Date create at',
+    'date_finish' => 'Date update at',
+    'total_people' => 'Total people',
+    'total_room' => 'Total room',
+    'total_price' => 'Total Price',
+    'user_list' => 'User list',
+    'user_name' => 'User name',
+    'gender' => 'Gender',
+    'date_of_birth' => 'Date of birth',
+    'phone' => 'Phone',
+    'email' => 'Email',
+    'address' => 'Address',
+    'role' => 'Roles',
 
     /*
      * buttons

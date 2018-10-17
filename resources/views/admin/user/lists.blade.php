@@ -9,32 +9,31 @@
     <div class="main-content">
         <div class="container-fluid">
             <div class="page-header">
-                <h2 class="header-title">Danh sách nhân viên</h2>
+                <h2 class="header-title">{{ __('messages.user_list') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="#" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Home</a>
-                        <a class="breadcrumb-item" href="#">Tables</a>
-                        <span class="breadcrumb-item active">Data Table</span>
+                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
+                        <span class="breadcrumb-item active">{{ __('messages.list') }}</span>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header border bottom">
-                    <a href="#" class="btn btn-success" title="Thêm mới"><i class="ti-plus"></i>Thêm</a>
+                    <a href="#" class="btn btn-success"><i class="ti-plus"></i>{{ __('messages.add') }}</a>
                 </div>
                 <div class="card-body">
                     <div class="table-overflow">
                         <table id="dt-opt" class="table table-hover table-xl">
                             <thead>
                             <tr>
-                                <th>Tên nhân viên</th>
-                                <th>Giới tính</th>
-                                <th>Ngày sinh</th>
-                                <th>Số điện thoại</th>
-                                <th>Email</th>
-                                <th>Địa chỉ</th>
-                                <th>Quyền</th>
-                                <th>Action</th>
+                                <th>{{ __('messages.user_name') }}</th>
+                                <th>{{ __('messages.gender') }}</th>
+                                <th>{{ __('messages.date_of_birth') }}</th>
+                                <th>{{ __('messages.phone') }}</th>
+                                <th>{{ __('messages.email') }}</th>
+                                <th>{{ __('messages.address') }}</th>
+                                <th>{{ __('messages.role') }}</th>
+                                <th>{{ __('messages.action') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -57,35 +56,13 @@
                                     <td>0123456789</td>
                                     <td>Example@gmail.com</td>
                                     <td>Hà Nội</td>
-                                    <td><span class="badge badge-pill badge-gradient-success">Admin</span></td>
-                                    <td class="text-center font-size-18">
-                                        <a href="#" class="text-gray"title="Sửa"><i class="ti-pencil"></i></a>
-                                        <a href="#" class="text-gray" title="Xóa"><i class="ti-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
                                     <td>
-                                        <div class="list-media">
-                                            <div class="list-item">
-                                                <div class="media-img">
-                                                    <img src="assets/images/avatars/thumb-1.jpg" alt="">
-                                                </div>
-                                                <div class="info">
-                                                    <span class="title">Marshall Nichols</span>
-                                                    <span class="sub-title">ID 870</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <span class="badge badge-pill badge-gradient-success">Admin</span>
+                                        <span class="badge badge-pill badge-warning">Nhân viên</span>
                                     </td>
-                                    <td>Nam</td>
-                                    <td>08 May 2018</td>
-                                    <td>0123456789</td>
-                                    <td>Example@gmail.com</td>
-                                    <td>Hà Nội</td>
-                                    <td><span class="badge badge-pill badge-warning">Nhân viên</span></td>
                                     <td class="text-center font-size-18">
-                                        <a href="#" class="text-gray m-r-15"title="Sửa"><i class="ti-pencil"></i></a>
-                                        <a href="#" class="text-gray" title="Xóa"><i class="ti-trash"></i></a>
+                                        <a href="#" class="text-gray"title="{{ __('messages.edit') }}"><i class="ti-pencil"></i></a>
+                                        <a href="#" class="text-gray" title="{{ __('messages.delete') }}"><i class="ti-trash"></i></a>
                                     </td>
                                 </tr>
                             </tbody>

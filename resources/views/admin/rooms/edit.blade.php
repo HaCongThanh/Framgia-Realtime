@@ -5,43 +5,27 @@
     <div class="main-content">
         <div class="container-fluid">
             <div class="page-header">
-                <h2 class="header-title">Sửa phòng</h2>
+                <h2 class="header-title">{{ __('messages.rooms_edit') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="#" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Home</a>
-                        <a class="breadcrumb-item" href="/admin/rooms">Danh sách phòng</a>
-                        <span class="breadcrumb-item active">Sửa phòng</span>
+                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
+                        <a class="breadcrumb-item" href="{{ route('room') }}">{{ __('messages.rooms') }}</a>
+                        <span class="breadcrumb-item active">{{ __('messages.edit') }}</span>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    <div class="row">
-                        {!! Form::open(['route'=>'', 'method'=>'POST']) !!}
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                {!! Form::label('floor', "Tầng:", ['class'=>'control-label']) !!}
-                                {!! Form::text('floor', null, ['class'=>'form-control form-control-sm', 'placeholder'=>"Số tầng"]) !!}
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('room_type', "Loại phòng:", ['class'=>'control-label']) !!}
-                                {!! Form::select('room_type',['L' => 'Large', 'S' => 'Small'], ['class'=>'form-control']) !!}
-                            </div>
+                    {!! Form::open(['route' => 'room_edit', 'method' => 'POST']) !!}
+                        <div class="form-group">
+                            {!! Form::label('rooms_stt', __('messages.rooms_stt'), ['class' => 'control-label']) !!} : {{ $rooms->id }}
                         </div>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="form-group">
-                                {!! Form::label('max_people', "Số người/phòng:", ['class'=>'control-label']) !!}
-                                {!! Form::text('floor', 'value', ['class'=>'form-control form-control-sm']) !!}
-                                <input type="text" class="form-control form-control-sm" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                {!! Form::label('price', "Giá phòng:", ['class'=>'control-label']) !!}
-                                {!! Form::text('floor', 'value', ['class'=>'form-control form-control-sm']) !!}
-                            </div>
+                        <div class="form-group">
+                            {!! Form::label('room_type', __('messages.room_type'), ['class' => 'control-label']) !!}
+                            {!! Form::select('room_type', $room_types, $selectedTypes, ['class' => 'form-control', 'id' => 'type', 'data-depenment' => 'state']) !!}
                         </div>
-                        {!! Form::submit("Lưu", ['class'=>'btn btn-info btn-float btn-outline']) !!}
-                        {!! Form::close() !!}
-                    </div>
+                    {!! Form::submit(__('messages.edit'), ['class' => 'btn btn-info btn-float btn-outline']) !!}
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

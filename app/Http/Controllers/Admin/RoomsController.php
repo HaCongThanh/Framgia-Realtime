@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\RoomRequest;
+use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -15,8 +17,8 @@ class RoomsController extends Controller
      */
     public function index()
     {
-        //$room_type = RoomType::all();
-        return view('admin.rooms.lists');
+        $rooms = Room::all();
+        return view('admin.rooms.lists', compact('rooms'));
     }
 
     /**
@@ -26,7 +28,7 @@ class RoomsController extends Controller
      */
     public function create()
     {
-        $room_types = RoomType::all();
+        $room_types = RoomType::all()->pluck('name', 'id');
         //dd($room_types);
         return view('admin.rooms.create', compact('room_types'));
     }
@@ -37,43 +39,16 @@ class RoomsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RoomTypesRequest $request)
+    public function store(RoomRequest $request)
     {
-        $room_type = new RoomType;
-        //dd($new_name);
-        $room_type->name = $request->name;
-        $room_type->room_size = $request->room_size;
-        $room_type->bed = $request->bed;
-        $room_type->max_people = $request->max_people;
-        $room_type->price = $request->price;
-        $room_type->description = $request->description;
-        //dd($image, $room_type);
-        //$image->save();
-        $room_type->save();
+        $rooms = new Room;
 
-        if($request->hasFile('image')) {
-            $images = $request->file('image');
-            foreach($images as $image) {
-                $filenameWithExt = $image->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
+        $rooms->floor = $request->floor;
+        $rooms->room_type_id = $request->room_type;
+        //dd($room);
+        $rooms->save();
 
-                $new_name = $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('public/images/rooms', $new_name);
-
-                $image = new Imageupload([
-                    'room_type_id' => $room_type->id,
-                    'filename' => $new_name,
-                ]);
-                //dd($image, $room_type);
-                $image->save();
-            }
-        }
-        foreach ($request->facilities as $facility) {
-            $room_type->facilities()->attach($facility);
-        }
-
-        return redirect()->route('room_type');
+        return redirect()->route('room');
     }
 
     /**
@@ -95,11 +70,13 @@ class RoomsController extends Controller
      */
     public function edit($id)
     {
-        $room_type = RoomType::findOrFail($id);
-        $facilities = Facility::all();
-        $checkedFacility = $room_type->facilities->pluck('id')->toArray();
-//        dd($facilities, $checkedFacility);
-        return view('admin.room_types.edit', compact('room_type', 'facilities', 'checkedFacility'));
+        $rooms = Room::findOrFail($id);
+
+        $room_types = RoomType::all()->pluck('name', 'id');
+
+        $selectedTypes = $rooms->room_types->id;
+        //dd($rooms->room_types->id);
+        return view('admin.rooms.edit', compact('rooms', 'room_types', 'selectedTypes'));
     }
 
     /**
@@ -109,51 +86,13 @@ class RoomsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoomTypesRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        $room_type = RoomType::findOrFail($id);
+        $rooms = Room::findOrFail($id);
+        $rooms->save();
+        $rooms->room_types()->associate($request->get('room_type'));
 
-        $room_type->name = $request->name;
-        $room_type->room_size = $request->room_size;
-        $room_type->bed = $request->bed;
-        $room_type->max_people = $request->max_people;
-        $room_type->price = $request->price;
-        $room_type->description = $request->description;
-        //dd($room_type);
-        //$image->save();
-        $room_type->save();
-
-        if ($request->hasFile('image')) {
-            $images = $request->file('image');
-            foreach ($images as $image) {
-                $filenameWithExt = $image->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
-
-                $new_name = $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('public/images/rooms', $new_name);
-
-                $image = new Imageupload([
-                    'room_type_id' => $room_type->id,
-                    'filename' => $new_name,
-                ]);
-                //dd($image, $room_type);
-                $image->save();
-            }
-        }
-
-        if ($request->has('facilities')) {
-            $room_type->facilities()->detach();
-            //dd($request->facilities);
-            foreach ($request->facilities as $facility) {
-                $room_type->facilities()->attach($facility);
-            }
-        } else {
-            $room_type->facilities()->detach();
-        }
-
-
-        return redirect()->route('room_type', $room_type->id);
+        return redirect()->route('room', $rooms->id);
     }
 
     /**
@@ -164,9 +103,9 @@ class RoomsController extends Controller
      */
     public function destroy($id)
     {
-        $room_type = RoomType::findOrFail($id);
-        $room_type->delete();
+        $rooms = Room::findOrFail($id);
+        $rooms->delete();
 
-        return redirect()->route('room_type');
+        return redirect()->route('room');
     }
 }

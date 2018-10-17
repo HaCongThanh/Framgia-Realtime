@@ -15,6 +15,11 @@
                 </div>
             </div>
             <div class="card">
+
+                @foreach ($errors->all() as $error)
+                    <p class="alert alert-danger">{{ $error }}</p>
+                @endforeach
+
                 <div class="card-body">
                     {!! Form::open(['route' => 'room_create', 'method' => 'POST']) !!}
                     <div class="row">
@@ -23,20 +28,27 @@
                                 {!! Form::label('floor', __('messages.floor'), ['class' => 'control-label']) !!}
                                 {!! Form::text('floor', null, ['class' => 'form-control form-control-sm', 'placeholder' => __('messages.floor_stt')]) !!}
                             </div>
-                            <div class="form-group">
-                                {!! Form::label('room_type', __('messages.room_type'), ['class'=>'control-label']) !!}
-                                {!! Form::select('room_type select', $room_types, '', ['class' => 'form-control', 'id' => 'type', 'data-depenment' => 'state']) !!}
-                            </div>
                         </div>
                         <div class="col-md-6 room">
                             <div class="form-group">
-                                {!! Form::label('max_people', __('messages.people'), ['class' => 'control-label']) !!}
-                                {!! Form::select('max_people', ['L' => 'Large', 'S' => 'Small'], '',['class' => 'form-control', 'id' => 'people', 'data-depenment' => 'state']) !!}
+                                {!! Form::label('room_type', __('messages.room_type'), ['class'=>'control-label']) !!}
+                                {!! Form::select('room_type', $room_types, '', ['class' => 'form-control', 'id' => 'type', 'data-depenment' => 'state']) !!}
                             </div>
-                            <div class="form-group">
-                                {!! Form::label('price', __('messages.price'), ['class'=>'control-label']) !!}
-                                {!! Form::select('price', ['L' => 'Large', 'S' => 'Small'], '',['class'=>'form-control', 'id' => 'price', 'data-depenment' => 'state']) !!}
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('max_people', __('messages.people'), ['class' => 'control-label']) !!}--}}
+                                {{--{!! Form::text('max_people', '', ['class' => 'form-control form-control-sm', 'id' => 'people', 'data-depenment' => 'state']) !!}--}}
+{{----}}
+                                {{--{!! Form::select('max_people', ['L' => 'Large', 'S' => 'Small'], '',['class' => 'form-control', 'id' => 'people', 'data-depenment' => 'state']) !!}--}}
+{{----}}
+                            {{--</div>--}}
+                            {{--<div class="form-group">--}}
+                                {{--{!! Form::label('price', __('messages.price'), ['class'=>'control-label']) !!}--}}
+                                {{--{!! Form::text('price', '', ['class' => 'form-control form-control-sm', 'id' => 'price', 'data-depenment' => 'state']) !!}--}}
+
+                                {{----}}
+                                                                {{--{!! Form::select('price', ['L' => 'Large', 'S' => 'Small'], '',['class'=>'form-control', 'id' => 'price', 'data-depenment' => 'state']) !!}--}}
+                                {{----}}
+                            {{--</div>--}}
                         </div>
                         <div class="col-md-12">
                             {!! Form::submit(__('messages.add'), ['class'=>'btn btn-info btn-float btn-outline']) !!}
@@ -51,7 +63,7 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript">
+{{--    <script type="text/javascript">
         $(document).ready(function () {
             $('.select').change(function () {
                 if ($(this).val() != '') {
@@ -59,10 +71,9 @@
                     var value = $(this).val();
                     var depenment = $(this).data('depenment');
                     var _token = $('input[name = "_token"]').val();
-
                     $.ajax({
                         url: "{{ route('room_create') }}",
-                        method: "POST",
+                        method: "GET",
                         data: {select: select, value: value, _token: _token, depenment: depenment},
                         success:function (result) {
                             $('#'+depenment).html(result);
@@ -78,29 +89,5 @@
                 $('#price').val('');
             });
         });
-        // $(document).ready(function() {
-        //     $('select[id="type"]').on('change', function() {
-        //         var stateID = $(this).val();
-        //         if(stateID) {
-        //             $.ajax({
-        //                 url: '/room/create/'+stateID,
-        //                 type: "GET",
-        //                 dataType: "json",
-        //                 success:function(data) {
-        //
-        //
-        //                     $('select[id="people"]').empty();
-        //                     $.each(data, function(key, value) {
-        //                         $('select[id="people"]').append('<option value="'+ key +'">'+ value +'</option>');
-        //                     });
-        //
-        //
-        //                 }
-        //             });
-        //         }else{
-        //             $('select[name="city"]').empty();
-        //         }
-        //     });
-        // });
-    </script>
+    </script>--}}
 @endsection
