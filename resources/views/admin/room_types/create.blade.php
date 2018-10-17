@@ -1,8 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('style')
-    <link rel="stylesheet" href={{asset('bower_components/lib_booking/lib/admin/css/jasny-bootstrap.min.css')}} />
-    <link rel="stylesheet" href={{asset('bower_components/lib_booking/lib/admin/css/selectize.default.css')}} />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/jasny-bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/selectize.default.css') }}" />
 @endsection
 
 @section('content')
@@ -96,6 +96,6 @@
 @endsection
 
 @section('script')
-    <script src={{asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js')}}></script>
-    <script src={{asset('bower_components/lib_booking/lib/admin/js/selectize.min.js')}}></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/selectize.min.js') }}"></script>
 @endsection

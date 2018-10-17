@@ -57,7 +57,7 @@
                             <span class="fileinput-filename"></span>
                             <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
                             </div>
-                        <img src="{{ asset('/public/images/post/'.$post->image) }}" width="100">
+                        <img src="{{ asset('/images/posts/'.$post->image) }}" width="100">
                     </div>
                     <div class="form-group">
                         {!! Form::label('status', __('messages.status'), ['class'=>'control-label']) !!}

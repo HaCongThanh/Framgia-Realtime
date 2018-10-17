@@ -1,8 +1,8 @@
 @extends('admin.layouts.master')
 
 @section('style')
-    <link rel="stylesheet" href={{asset('bower_components/lib_booking/lib/admin/css/jasny-bootstrap.min.css')}} />
-    <link rel="stylesheet" href={{asset('bower_components/lib_booking/lib/admin/css/selectize.default.css')}} />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/jasny-bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/selectize.default.css') }}" />
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
     <div class="main-content">
         <div class="container-fluid">
             <div class="page-header">
-                <h2 class="header-title">{{ __('messages.room_type_add') }}</h2>
+                <h2 class="header-title">{{ __('messages.room_type_edit') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
                         <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
@@ -61,7 +61,7 @@
                                     <span class="fileinput-filename"></span>
                                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
                                     @foreach ($room_type->images as $image)
-                                    <img src="{{ asset('/public/images/post/'.$image->filename) }}" width="100">
+                                    <img src="{{ asset('/images/rooms/'.$image->filename) }}" width="100">
                                     @endforeach
                                 </div>
                             </div>
@@ -103,6 +103,6 @@
 @endsection
 
 @section('script')
-    <script src={{asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js')}}></script>
-    <script src={{asset('bower_components/lib_booking/lib/admin/js/selectize.min.js')}}></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/js/selectize.min.js') }}"></script>
 @endsection

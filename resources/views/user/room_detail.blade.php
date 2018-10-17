@@ -48,15 +48,19 @@
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner">
 
-                                        @if (!empty($room_type->images))
-                                            @foreach ($room_type->images as $image)
+                                        {{-- @if (!empty($room_type->images)) --}}
+                                            {{-- @foreach ($room_type->images as $image) --}}
 
-                                                <div class="item">
+                                                {{-- <div class="item">
                                                     <img src="{{ url('/images/rooms/' . $image->filename) }}" class="thumb-preview" alt="Chevrolet Impala">
+                                                </div> --}}
+
+                                                <div class="item active">
+                                                    <img src="{{ url('/images/rooms/' . $room_type->images->first->filename['filename']) }}" class="thumb-preview" alt="Chevrolet Impala">
                                                 </div>
 
-                                            @endforeach
-                                        @endif
+                                            {{-- @endforeach --}}
+                                        {{-- @endif --}}
 
                                     </div>
                                     <!-- Controls -->
