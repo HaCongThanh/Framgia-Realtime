@@ -27,8 +27,8 @@
 
     <style type="text/css">
         .side-nav-folded .header .header-container .nav-logo > a .logo-dark{
-            background-image: url(../img/icon.png) !important;
-            background-size:100% 100%;
+            background-image: url({{ asset('/img/icon.png') }}) !important;
+            background-size: 100% 100%;
         }
     </style>
 </head>
@@ -41,8 +41,8 @@
             <div class="header-container">
                 <div class="nav-logo">
                     <a href="">
-                        <div class="logo logo-dark" style="background-image: url('../img/logo.png')"></div>
-                        <div class="logo logo-white" style="background-image: url('../img/framgia3.png')"></div>
+                        <div class="logo logo-dark" style="background-image: url({{ asset('/img/logo.png') }});"></div>
+                        <div class="logo logo-white" style="background-image: url({{ asset('/img/framgia3.png') }});"></div>
                     </a>
                 </div>
                 <ul class="nav-left">
