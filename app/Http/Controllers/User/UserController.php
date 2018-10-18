@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Validator;
@@ -26,6 +27,8 @@ class UserController extends Controller
      */
     public function updateInfo(Request $request)
     {
+        $user = Auth::user();
+
         $data = $request->all();
 
         DB::beginTransaction();
@@ -62,8 +65,8 @@ class UserController extends Controller
                 } else {
                     $request->gender = 0;
                 }
-                
-                DB::table('users')->where('id', $request->id)->update([
+
+                User::where('id', $user->id)->update([
                     'name'      =>  $request->name,
                     'gender'    =>  $request->gender,
                     'mobile'    =>  $request->mobile,
@@ -94,6 +97,8 @@ class UserController extends Controller
      */
     public function updatePayment(Request $request)
     {
+        $user = Auth::user();
+
         $data = $request->all();
 
         DB::beginTransaction();
@@ -116,7 +121,7 @@ class UserController extends Controller
                   'message' =>  $validator->errors()
               ]);
             } else {
-                DB::table('users')->where('id', $request->id)->update([
+                User::where('id', $user->id)->update([
                     'card_type'     =>  $request->card_type,
                     'card_number'   =>  $request->card_number,
                     'expire'        =>  $request->expire,

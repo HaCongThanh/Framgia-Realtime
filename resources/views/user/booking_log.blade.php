@@ -143,7 +143,7 @@
                                                         <span id="customer_booking_log_id"></span>
                                                         <br>
                                                         <br>
-                                                        <b>Ngày thanh toán:</b> 16/10/2018
+                                                        <span id="user_payment_date"></span>
                                                         <br>
                                                         <span id="user_card_number"></span>
                                                     </div>
@@ -239,6 +239,10 @@
             })
         })
 
+        function formatNumber(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        };
+
         function bills(customer_booking_log_id){
             $.ajaxSetup({
                 headers: {
@@ -257,11 +261,11 @@
 
                     for (var i = 0; i < res.data.length; i++) {
                         $room_type_name = res.data[i]['name'];
-                        $price = res.data[i]['price'];
+                        $price = formatNumber(res.data[i]['price']);
                         $number_room = res.data[i]['number_room'];
-                        $total_price = res.data[i]['total_price'];
+                        $total_price = formatNumber(res.data[i]['total_price']);
                         $created_at = res.data[i]['created_at'];
-                        $total_money = res.data[i]['total_money'];
+                        $total_money = formatNumber(res.data[i]['total_money']);
                         $total_number_room = res.data[i]['total_number_room'];
 
                         $("#record_details").append("<tr class='clear_tr'><td style='width: 5%; text-align: center;'>" + $count + "</td><td style='width: 25%; text-align: center;'>" + $room_type_name + "</td><td style='width: 25%; text-align: center;'>" + $price + " VNĐ</td><td style='width: 20%; text-align: center;'>" + $number_room + "</td><td style='width: 25%; text-align: center;'>" + $total_price + " VNĐ</td></tr>");
@@ -279,6 +283,7 @@
                     $user_email = res.info['email'];
                     $user_card_number = res.info['card_number'];
                     $user_card_type = res.info['card_type'];
+                    $user_payment_date = res.info['updated_at'];
                     $customer_booking_log_id = customer_booking_log_id;
 
                     $("#user_name").html($user_name);
@@ -286,6 +291,7 @@
                     $("#user_mobile").html("Điện thoại: " + $user_mobile);
                     $("#user_email").html("Email: " + $user_email);
                     $("#user_card_number").html("<b>Số thẻ:</b> " + $user_card_number);
+                    $("#user_payment_date").html("<b>Ngày thanh toán:</b> " + $user_payment_date);
                     $("#customer_booking_log_id").html("<b>Mã hóa đơn #</b>" + $customer_booking_log_id);
                     // $("#user_card_type").html($user_card_type);
                 }

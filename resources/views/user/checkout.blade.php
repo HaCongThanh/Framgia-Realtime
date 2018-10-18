@@ -204,7 +204,7 @@
                                 <div class="clearfix"></div>
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" id="btn_save" class="btn search-button btn-theme next-step" data-id="{{ $user_id }}">Lưu & Tiếp tục</button></li>
+                                    <li><button type="button" id="btn_save" class="btn search-button btn-theme next-step">Lưu & Tiếp tục</button></li>
                                 </ul>
                             </div>
 
@@ -274,7 +274,7 @@
 
                                         <ul class="list-inline pull-right">
                                             <li><button type="button" class="btn btn-grey prev-step" id="prev_step2">Quay lại</button></li>
-                                            <li><button type="button" class="btn search-button btn-theme next-step" id="next_step2" data-id="{{ $user_id }}">Chi tiết cuối cùng >></button></li>
+                                            <li><button type="button" class="btn search-button btn-theme next-step" id="next_step2">Chi tiết cuối cùng >></button></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-xs-12">
@@ -413,7 +413,7 @@
                                             <p class="hidden-lg hidden-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl, eget tempor lacus est vel</p>
                                         </div>
                                         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                                            <h4>Your Payment ID: #302112295143</h4>
+                                            <h4>Your Payment ID: #{{ $card_number }}</h4>
 
                                             <ul>
                                                 <li>
@@ -473,8 +473,6 @@
     <script>
         $('#btn_save').on('click', function(event) {
             event.preventDefault();
-
-            var user_id = $(this).data("id");
             
             $.ajaxSetup({
                 headers: {
@@ -486,7 +484,6 @@
                 type: 'POST',
                 url: "{{ route('user.users.update_info') }}",
                 data: {
-                    id          :   user_id,
                     name        :   $('#name').val(),
                     email       :   $('#email').val(),
                     gender      :   document.getElementById("gender").value,
@@ -538,8 +535,6 @@
         $('#next_step2').on('click', function(event) {
             event.preventDefault();
 
-            var user_id = $(this).data("id");
-
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -550,7 +545,6 @@
                 type: 'POST',
                 url: "{{ route('user.users.update_payment') }}",
                 data: {
-                    id          :   user_id,
                     card_type   :   document.getElementById("card_type").value,
                     card_number :   $('#card_number').val(),
                     expire      :   document.getElementById("expire").value,

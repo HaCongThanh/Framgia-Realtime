@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\RoomRentalList;
 use App\Models\User;
 use App\Models\Room;
+use App\Models\Post;
 use App\Models\RoomType;
 use App\Models\Revenue;
 use App\Models\CustomerBookingLog;
@@ -39,9 +40,12 @@ class HomeController extends Controller
         session()->put('route', 'user.home.index');
 
         $room_types = RoomType::all();
+
+        $posts = Post::orderBy('id', 'desc')->limit(3)->get();
         
         return view('user.home', [
-            'room_types'    =>  $room_types
+            'room_types'    =>  $room_types,
+            'posts'         =>  $posts
         ]);
     }
 
@@ -85,9 +89,15 @@ class HomeController extends Controller
 
             foreach ($rooms as $room) {
                 array_push($array_room_type, $room->room_type_id);
+
+                array_push($array_room, $room->id);
             }
 
             $array_count_room_type = array_count_values($array_room_type);
+
+            /*Đẩy mảng ID phòng còn trống vào Session*/
+            session()->forget('array_room');
+            session()->put('array_room', $array_room);
         } else {
             foreach ($room_rental_lists as $room_rental_list) {
                 /*Đẩy thông tin từng phòng vào mảng*/
@@ -134,6 +144,8 @@ class HomeController extends Controller
 
             /*Lấy những phòng còn trống trong bảng rooms với status = 0*/
             $rooms = Room::where('status', 0)->get();
+
+            dd($rooms);
 
             foreach ($rooms as $room) {
                 array_push($array_room_type, $room->room_type_id);
@@ -228,6 +240,36 @@ class HomeController extends Controller
         session()->forget('rt10');
         session()->put('rt10', $request->rt10);
 
+        session()->forget('rt11');
+        session()->put('rt11', $request->rt11);
+
+        session()->forget('rt12');
+        session()->put('rt12', $request->rt12);
+
+        session()->forget('rt13');
+        session()->put('rt13', $request->rt13);
+
+        session()->forget('rt14');
+        session()->put('rt14', $request->rt14);
+
+        session()->forget('rt15');
+        session()->put('rt15', $request->rt15);
+
+        session()->forget('rt16');
+        session()->put('rt16', $request->rt16);
+
+        session()->forget('rt17');
+        session()->put('rt17', $request->rt17);
+
+        session()->forget('rt18');
+        session()->put('rt18', $request->rt18);
+
+        session()->forget('rt19');
+        session()->put('rt19', $request->rt19);
+
+        session()->forget('rt20');
+        session()->put('rt20', $request->rt20);
+
         return response()->json([
             'error'     =>  false,
             'message'   =>  'Thêm session thành công!'
@@ -274,7 +316,7 @@ class HomeController extends Controller
         /*Thêm bản ghi vào bảng room_rental_lists*/
         $array_room = session()->get('array_room');
 
-        for ($i=1; $i <= 10; $i++) { 
+        for ($i=1; $i <= 20; $i++) { 
             if (session()->get('rt' . $i) > 0) {
                 $room_type_id = $i;
 
