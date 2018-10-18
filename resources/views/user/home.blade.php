@@ -196,7 +196,14 @@
                                                 <i class="fa fa-map-marker"></i>Framgia Hotel,
                                             </a>
                                         </h5>
-                                        {!! $room_type->description !!}
+
+                                        @php
+                                            if (strlen($room_type->description) > 436) {
+                                                echo trim(substr($room_type->description, 0, 430)) . ' . . .';
+                                            } else {
+                                                echo $room_type->description;
+                                            }
+                                        @endphp
                                     </div>
                                 </div>
                             </div>
@@ -636,98 +643,67 @@
     <!-- Testimonial-2 end -->
 
     <!-- Blog section start -->
-    {{-- <div class="blog-section content-area">
+    <div class="blog-section content-area">
         <div class="container">
             <div class="main-title">
-                <h1>Our Blog</h1>
-                <p>Check out some recent news posts.</p>
+                <h1>Blog của chúng tôi</h1>
+                <p>Một số bài đăng gần đây nhất.</p>
             </div>
 
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog-1">
-                        <div class="blog-photo">
-                            <img src="{{ url('/img/img-2.jpg') }}" alt="img-2" class="img-responsive">
-                            <div class="profile-user">
-                                <img src="{{ url('/img/avatar-1.jpg') }}" alt="user">
+
+                @if (!empty($posts))
+                    @foreach ($posts as $post)
+                        
+                        <div class="col-lg-4 col-md-4 col-sm-6">
+                            <div class="blog-1">
+                                <div class="blog-photo">
+                                    <img src="{{ url('/images/posts/' . $post->image) }}" style="width: 360px; height: 240px;" alt="img-2" class="img-responsive">
+                                    <div class="profile-user">
+                                        <img src="{{ url('/img/avatar-5.png/') }}" alt="user">
+                                    </div>
+                                </div>
+                                <div class="detail">
+                                    <div class="post-meta clearfix">
+                                        <ul>
+                                            <li>
+                                                <strong><a>{{ $post->users->name }}</a></strong>
+                                            </li>
+                                            <li class="mr-0"><span>{{ date(' d/m/Y', strtotime($post->created_at)) }}</span></li>
+                                            {{-- <li class="fr mr-0"><a href="#"><i class="fa fa-commenting-o"></i></a>15</li>
+                                            <li class="fr"><a href="#"><i class="fa fa-calendar"></i></a>5k</li> --}}
+                                        </ul>
+                                    </div>
+                                    <h3>
+                                        <a href="{{ route('user.posts.show', $post->id) }}">
+                                            @php
+                                                if (strlen($post->title) > 70) {
+                                                    echo trim(substr($post->title, 0, 64)) . ' . . .';
+                                                } else {
+                                                    echo $post->title;
+                                                }
+                                            @endphp
+                                        </a>
+                                    </h3>
+
+                                    @php
+                                        if (strlen($post->description) > 210) {
+                                            echo trim(substr($post->description, 0, 204)) . ' . . .';
+                                        } else {
+                                            echo $post->description;
+                                        }
+                                    @endphp
+                                    <a href="{{ route('user.posts.show', $post->id) }}" class="read-more-btn">Xem chi tiết</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="detail">
-                            <div class="post-meta clearfix">
-                                <ul>
-                                    <li>
-                                        <strong><a href="#">Antony</a></strong>
-                                    </li>
-                                    <li class="mr-0"><span>Feb 31, 2018</span></li>
-                                    <li class="fr mr-0"><a href="#"><i class="fa fa-commenting-o"></i></a>15</li>
-                                    <li class="fr"><a href="#"><i class="fa fa-calendar"></i></a>5k</li>
-                                </ul>
-                            </div>
-                            <h3>
-                                <a href="#">Standard Post Format Title</a>
-                            </h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                            <a href="#" class="read-more-btn">Read more...</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6 hidden-sm">
-                    <div class="blog-1">
-                        <div class="blog-photo">
-                            <img src="{{ url('/img/img-6.jpg') }}" alt="img-6" class="img-responsive">
-                            <div class="profile-user">
-                                <img src="{{ url('/img/avatar-2.jpg') }}" alt="user">
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div class="post-meta clearfix">
-                                <ul>
-                                    <li>
-                                        <strong><a href="#">Teseira</a></strong>
-                                    </li>
-                                    <li class="mr-0"><span>Feb 31, 2018</span></li>
-                                    <li class="fr mr-0"><a href="#"><i class="fa fa-commenting-o"></i></a>15</li>
-                                    <li class="fr"><a href="#"><i class="fa fa-calendar"></i></a>5k</li>
-                                </ul>
-                            </div>
-                            <h3>
-                                <a href="#">Alpha Hotel pars studiorum</a>
-                            </h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                            <a href="#" class="read-more-btn">Read more...</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-6">
-                    <div class="blog-1">
-                        <div class="blog-photo">
-                            <img src="{{ url('/img/img-3.jpg') }}" alt="img-3" class="img-responsive">
-                            <div class="profile-user">
-                                <img src="{{ url('/img/avatar-3.jpg') }}" alt="user">
-                            </div>
-                        </div>
-                        <div class="detail">
-                            <div class="post-meta clearfix">
-                                <ul>
-                                    <li>
-                                        <strong><a href="#">John Doe</a></strong>
-                                    </li>
-                                    <li class="mr-0"><span>Feb 31, 2018</span></li>
-                                    <li class="fr mr-0"><a href="#"><i class="fa fa-commenting-o"></i></a>15</li>
-                                    <li class="fr"><a href="#"><i class="fa fa-calendar"></i></a>5k</li>
-                                </ul>
-                            </div>
-                            <h3>
-                                <a href="#">Best night photo at Alpha hotel in</a>
-                            </h3>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard</p>
-                            <a href="#" class="read-more-btn">Read more...</a>
-                        </div>
-                    </div>
-                </div>
+
+                    @endforeach
+                @endif
+
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- Blog section end -->
 
     <!-- Intro section start -->

@@ -116,7 +116,7 @@
                     <input type="hidden" name="adults-hidden" id="adults-hidden" class="btn btn-success" value="{{ $adults }}" disabled>
                     <input type="hidden" name="children-hidden" id="children-hidden" class="btn btn-success" value="{{ $children }}" disabled>
                     @php
-                        for ($i=1; $i <= 10; $i++) {
+                        for ($i=1; $i <= 20; $i++) {
                     @endphp
                         <input type="hidden" name="rt@php echo $i; @endphp" id="rt@php echo $i; @endphp" class="btn btn-success" value="" disabled>
                     @php
@@ -216,10 +216,19 @@
                         rt7                 :   $('#rt7').val(),
                         rt8                 :   $('#rt8').val(),
                         rt9                 :   $('#rt9').val(),
-                        rt10                :   $('#rt10').val()
+                        rt10                :   $('#rt10').val(),
+                        rt11                :   $('#rt11').val(),
+                        rt12                :   $('#rt12').val(),
+                        rt13                :   $('#rt13').val(),
+                        rt14                :   $('#rt14').val(),
+                        rt15                :   $('#rt15').val(),
+                        rt16                :   $('#rt16').val(),
+                        rt17                :   $('#rt17').val(),
+                        rt18                :   $('#rt18').val(),
+                        rt19                :   $('#rt19').val(),
+                        rt20                :   $('#rt20').val()
                     },
                     success:function(res){
-                        // console.log(res);
                         window.location.href = "{{ route('user.home.check_out') }}";
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
