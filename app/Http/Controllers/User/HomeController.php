@@ -267,7 +267,7 @@ class HomeController extends Controller
      * [bookings description]
      * @return [type] [description]
      */
-    public function bookings($type)
+    public function bookings()
     {
         $user = Auth::user();
 
