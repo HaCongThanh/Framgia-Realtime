@@ -54,282 +54,282 @@
                             <i class="mdi mdi-menu"></i>
                         </a>
                     </li>
-                    {{--<li class="search-box">--}}
-                        {{--<a class="search-toggle" href="javascript:void(0);">--}}
-                            {{--<i class="search-icon mdi mdi-magnify"></i>--}}
-                            {{--<i class="search-icon-close mdi mdi-close-circle-outline"></i>--}}
-                        {{--</a>--}}
-                    {{--</li>--}}
-                    {{--<li class="search-input">--}}
-                        {{--<input class="form-control" type="text" placeholder="Type to search...">--}}
-                        {{--<div class="search-predict">--}}
-                            {{--<div class="search-wrapper scrollable">--}}
-                                {{--<div class="p-v-10">--}}
-                                        {{--<span class="display-block m-v-5 p-h-20 text-gray">--}}
-                                            {{--<i class="ti-file p-r-5"></i>--}}
-                                            {{--<span>Files</span>--}}
-                                        {{--</span>--}}
-                                    {{--<ul class="list-media">--}}
-                                        {{--<li class="list-item">--}}
-                                            {{--<a href="javascript:void(0);" class="media-hover p-h-20">--}}
-                                                {{--<div class="media-img">--}}
-                                                    {{--<div class="icon-avatar bg-success">--}}
-                                                        {{--<i class="mdi mdi-file-outline"></i>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="info">--}}
-                                                    {{--<span class="title p-t-10">Document.xls</span>--}}
-                                                {{--</div>--}}
-                                            {{--</a>--}}
-                                        {{--</li>--}}
-                                        {{--<li class="list-item">--}}
-                                            {{--<a href="javascript:void(0);" class="media-hover p-h-20">--}}
-                                                {{--<div class="media-img">--}}
-                                                    {{--<div class="icon-avatar bg-info">--}}
-                                                        {{--<i class="mdi mdi-file-outline"></i>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="info">--}}
-                                                    {{--<span class="title p-t-10">Mockup.doc</span>--}}
-                                                {{--</div>--}}
-                                            {{--</a>--}}
-                                        {{--</li>--}}
-                                        {{--<li class="list-item">--}}
-                                            {{--<a href="javascript:void(0);" class="media-hover p-h-20">--}}
-                                                {{--<div class="media-img">--}}
-                                                    {{--<div class="icon-avatar bg-danger">--}}
-                                                        {{--<i class="mdi mdi-file-outline"></i>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="info">--}}
-                                                    {{--<span class="title p-t-10">Document.pdf</span>--}}
-                                                {{--</div>--}}
-                                            {{--</a>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</div>--}}
-                                {{--<div class="m-h-20 border top"></div>--}}
-                                {{--<div class="p-v-10">--}}
-                                        {{--<span class="display-block m-v-5 p-h-20 text-gray">--}}
-                                            {{--<i class="ti-user p-r-5"></i>--}}
-                                            {{--<span>Members</span>--}}
-                                        {{--</span>--}}
-                                    {{--<ul class="list-media">--}}
-                                        {{--<li class="list-item">--}}
-                                            {{--<a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">--}}
-                                                {{--<div class="media-img">--}}
-                                                    {{--<img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">--}}
-                                                {{--</div>--}}
-                                                {{--<div class="info">--}}
-                                                    {{--<span class="title p-t-10">Debra Stewart</span>--}}
-                                                {{--</div>--}}
-                                            {{--</a>--}}
-                                        {{--</li>--}}
-                                        {{--<li class="list-item">--}}
-                                            {{--<a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">--}}
-                                                {{--<div class="media-img">--}}
-                                                    {{--<img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">--}}
-                                                {{--</div>--}}
-                                                {{--<div class="info">--}}
-                                                    {{--<span class="title p-t-10">Jane Hunt</span>--}}
-                                                {{--</div>--}}
-                                            {{--</a>--}}
-                                        {{--</li>--}}
-                                    {{--</ul>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<div class="search-footer">--}}
-                                {{--<span>You are Searching for '<b class="text-dark"><span class="serach-text-bind"></span></b>'</span>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</li>--}}
+                    {{--<li class="search-box">
+                        <a class="search-toggle" href="javascript:void(0);">
+                            <i class="search-icon mdi mdi-magnify"></i>
+                            <i class="search-icon-close mdi mdi-close-circle-outline"></i>
+                        </a>
+                    </li>
+                    <li class="search-input">
+                        <input class="form-control" type="text" placeholder="Type to search...">
+                        <div class="search-predict">
+                            <div class="search-wrapper scrollable">
+                                <div class="p-v-10">
+                                        <span class="display-block m-v-5 p-h-20 text-gray">
+                                            <i class="ti-file p-r-5"></i>
+                                            <span>Files</span>
+                                        </span>
+                                    <ul class="list-media">
+                                        <li class="list-item">
+                                            <a href="javascript:void(0);" class="media-hover p-h-20">
+                                                <div class="media-img">
+                                                    <div class="icon-avatar bg-success">
+                                                        <i class="mdi mdi-file-outline"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="info">
+                                                    <span class="title p-t-10">Document.xls</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="list-item">
+                                            <a href="javascript:void(0);" class="media-hover p-h-20">
+                                                <div class="media-img">
+                                                    <div class="icon-avatar bg-info">
+                                                        <i class="mdi mdi-file-outline"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="info">
+                                                    <span class="title p-t-10">Mockup.doc</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="list-item">
+                                            <a href="javascript:void(0);" class="media-hover p-h-20">
+                                                <div class="media-img">
+                                                    <div class="icon-avatar bg-danger">
+                                                        <i class="mdi mdi-file-outline"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="info">
+                                                    <span class="title p-t-10">Document.pdf</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="m-h-20 border top"></div>
+                                <div class="p-v-10">
+                                        <span class="display-block m-v-5 p-h-20 text-gray">
+                                            <i class="ti-user p-r-5"></i>
+                                            <span>Members</span>
+                                        </span>
+                                    <ul class="list-media">
+                                        <li class="list-item">
+                                            <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
+                                                <div class="media-img">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
+                                                </div>
+                                                <div class="info">
+                                                    <span class="title p-t-10">Debra Stewart</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="list-item">
+                                            <a href="javascript:void(0);" class="conversation-toggler media-hover p-h-20">
+                                                <div class="media-img">
+                                                    <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
+                                                </div>
+                                                <div class="info">
+                                                    <span class="title p-t-10">Jane Hunt</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="search-footer">
+                                <span>You are Searching for '<b class="text-dark"><span class="serach-text-bind"></span></b>'</span>
+                            </div>
+                        </div>
+                    </li>--}}
                 </ul>
                 <ul class="nav-right">
-                    {{--<li class="dropdown dropdown-animated scale-left">--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                            {{--<i class="mdi mdi-apps"></i>--}}
-                        {{--</a>--}}
-                        {{--<ul class="dropdown-menu dropdown-grid col-3 dropdown-lg">--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<div class="text-center">--}}
-                                        {{--<i class="mdi mdi-email-outline font-size-30 icon-gradient-success"></i>--}}
-                                        {{--<p class="m-b-0">Email</p>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<div class="text-center">--}}
-                                        {{--<i class="mdi mdi-folder-outline font-size-30 icon-gradient-success"></i>--}}
-                                        {{--<p class="m-b-0">Files</p>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<div class="text-center">--}}
-                                        {{--<i class="mdi mdi mdi-gauge font-size-30 icon-gradient-success"></i>--}}
-                                        {{--<p class="m-b-0">Dashboard</p>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<div class="text-center">--}}
-                                        {{--<i class="mdi mdi-play-circle-outline font-size-30 icon-gradient-success"></i>--}}
-                                        {{--<p class="m-b-0">Video</p>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<div class="text-center">--}}
-                                        {{--<i class="mdi mdi-image-filter font-size-30 icon-gradient-success"></i>--}}
-                                        {{--<p class="m-b-0">Images</p>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<div class="text-center">--}}
-                                        {{--<i class="mdi mdi-image-filter-drama font-size-30 icon-gradient-success"></i>--}}
-                                        {{--<p class="m-b-0">Cloud</p>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                    {{--<li class="notifications dropdown dropdown-animated scale-left">--}}
-                        {{--<span class="counter">2</span>--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                            {{--<i class="mdi mdi-bell-ring-outline"></i>--}}
-                        {{--</a>--}}
-                        {{--<ul class="dropdown-menu dropdown-lg p-v-0">--}}
-                            {{--<li class="p-v-15 p-h-20 border bottom text-dark">--}}
-                                {{--<h5 class="m-b-0">--}}
-                                    {{--<i class="mdi mdi-bell-ring-outline p-r-10"></i>--}}
-                                    {{--<span>Notifications</span>--}}
-                                {{--</h5>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<ul class="list-media overflow-y-auto relative scrollable" style="max-height: 300px">--}}
-                                    {{--<li class="list-item border bottom">--}}
-                                        {{--<a href="javascript:void(0);" class="media-hover p-15">--}}
-                                            {{--<div class="media-img">--}}
-                                                {{--<div class="icon-avatar bg-primary">--}}
-                                                    {{--<i class="ti-settings"></i>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="info">--}}
-                                                    {{--<span class="title">--}}
-                                                        {{--System shutdown--}}
-                                                    {{--</span>--}}
-                                                {{--<span class="sub-title">8 min ago</span>--}}
-                                            {{--</div>--}}
-                                        {{--</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="list-item border bottom">--}}
-                                        {{--<a href="javascript:void(0);" class="media-hover p-15">--}}
-                                            {{--<div class="media-img">--}}
-                                                {{--<div class="icon-avatar bg-success">--}}
-                                                    {{--<i class="ti-user"></i>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="info">--}}
-                                                    {{--<span class="title">--}}
-                                                        {{--New User Registered--}}
-                                                    {{--</span>--}}
-                                                {{--<span class="sub-title">12 min ago</span>--}}
-                                            {{--</div>--}}
-                                        {{--</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="list-item border bottom">--}}
-                                        {{--<a href="javascript:void(0);" class="media-hover p-15">--}}
-                                            {{--<div class="media-img">--}}
-                                                {{--<div class="icon-avatar bg-warning">--}}
-                                                    {{--<i class="ti-file"></i>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="info">--}}
-                                                    {{--<span class="title">--}}
-                                                        {{--New Attacthemnet--}}
-                                                    {{--</span>--}}
-                                                {{--<span class="sub-title">12 min ago</span>--}}
-                                            {{--</div>--}}
-                                        {{--</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="list-item border bottom">--}}
-                                        {{--<a href="javascript:void(0);" class="media-hover p-15">--}}
-                                            {{--<div class="media-img">--}}
-                                                {{--<div class="icon-avatar bg-info">--}}
-                                                    {{--<i class="ti-shopping-cart"></i>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="info">--}}
-                                                    {{--<span class="title">--}}
-                                                        {{--New Order Received--}}
-                                                    {{--</span>--}}
-                                                {{--<span class="sub-title">12 min ago</span>--}}
-                                            {{--</div>--}}
-                                        {{--</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            {{--<li class="p-v-15 p-h-20 text-center">--}}
-                                    {{--<span>--}}
-                                        {{--<a href="#" class="text-gray">Check all notifications <i class="ei-right-chevron p-l-5 font-size-10"></i></a>--}}
-                                    {{--</span>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                    {{--<li class="user-profile dropdown dropdown-animated scale-left">--}}
-                        {{--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--}}
-                            {{--<img class="profile-img img-fluid" src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">--}}
-                        {{--</a>--}}
-                        {{--<ul class="dropdown-menu dropdown-md p-v-0">--}}
-                            {{--<li>--}}
-                                {{--<ul class="list-media">--}}
-                                    {{--<li class="list-item p-15">--}}
-                                        {{--<div class="media-img">--}}
-                                            {{--<img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">--}}
-                                        {{--</div>--}}
-                                        {{--<div class="info">--}}
-                                            {{--<span class="title text-semibold">Marshall Nichols</span>--}}
-                                            {{--<span class="sub-title">UI/UX Desinger</span>--}}
-                                        {{--</div>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                            {{--<li role="separator" class="divider"></li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<i class="ti-settings p-r-10"></i>--}}
-                                    {{--<span>Setting</span>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<i class="ti-user p-r-10"></i>--}}
-                                    {{--<span>Profile</span>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<i class="ti-email p-r-10"></i>--}}
-                                    {{--<span>Inbox</span>--}}
-                                    {{--<span class="badge badge-pill badge-success pull-right">2</span>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                            {{--<li>--}}
-                                {{--<a href="#">--}}
-                                    {{--<i class="ti-power-off p-r-10"></i>--}}
-                                    {{--<span>Logout</span>--}}
-                                {{--</a>--}}
-                            {{--</li>--}}
-                        {{--</ul>--}}
-                    {{--</li>--}}
-                    <li class="dropdown">
+                    {{--<li class="dropdown dropdown-animated scale-left">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="mdi mdi-apps"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-grid col-3 dropdown-lg">
+                            <li>
+                                <a href="#">
+                                    <div class="text-center">
+                                        <i class="mdi mdi-email-outline font-size-30 icon-gradient-success"></i>
+                                        <p class="m-b-0">Email</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="text-center">
+                                        <i class="mdi mdi-folder-outline font-size-30 icon-gradient-success"></i>
+                                        <p class="m-b-0">Files</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="text-center">
+                                        <i class="mdi mdi mdi-gauge font-size-30 icon-gradient-success"></i>
+                                        <p class="m-b-0">Dashboard</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="text-center">
+                                        <i class="mdi mdi-play-circle-outline font-size-30 icon-gradient-success"></i>
+                                        <p class="m-b-0">Video</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="text-center">
+                                        <i class="mdi mdi-image-filter font-size-30 icon-gradient-success"></i>
+                                        <p class="m-b-0">Images</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <div class="text-center">
+                                        <i class="mdi mdi-image-filter-drama font-size-30 icon-gradient-success"></i>
+                                        <p class="m-b-0">Cloud</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="notifications dropdown dropdown-animated scale-left">
+                        <span class="counter">2</span>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="mdi mdi-bell-ring-outline"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-lg p-v-0">
+                            <li class="p-v-15 p-h-20 border bottom text-dark">
+                                <h5 class="m-b-0">
+                                    <i class="mdi mdi-bell-ring-outline p-r-10"></i>
+                                    <span>Notifications</span>
+                                </h5>
+                            </li>
+                            <li>
+                                <ul class="list-media overflow-y-auto relative scrollable" style="max-height: 300px">
+                                    <li class="list-item border bottom">
+                                        <a href="javascript:void(0);" class="media-hover p-15">
+                                            <div class="media-img">
+                                                <div class="icon-avatar bg-primary">
+                                                    <i class="ti-settings"></i>
+                                                </div>
+                                            </div>
+                                            <div class="info">
+                                                    <span class="title">
+                                                        System shutdown
+                                                    </span>
+                                                <span class="sub-title">8 min ago</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="list-item border bottom">
+                                        <a href="javascript:void(0);" class="media-hover p-15">
+                                            <div class="media-img">
+                                                <div class="icon-avatar bg-success">
+                                                    <i class="ti-user"></i>
+                                                </div>
+                                            </div>
+                                            <div class="info">
+                                                    <span class="title">
+                                                        New User Registered
+                                                    </span>
+                                                <span class="sub-title">12 min ago</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="list-item border bottom">
+                                        <a href="javascript:void(0);" class="media-hover p-15">
+                                            <div class="media-img">
+                                                <div class="icon-avatar bg-warning">
+                                                    <i class="ti-file"></i>
+                                                </div>
+                                            </div>
+                                            <div class="info">
+                                                    <span class="title">
+                                                        New Attacthemnet
+                                                    </span>
+                                                <span class="sub-title">12 min ago</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="list-item border bottom">
+                                        <a href="javascript:void(0);" class="media-hover p-15">
+                                            <div class="media-img">
+                                                <div class="icon-avatar bg-info">
+                                                    <i class="ti-shopping-cart"></i>
+                                                </div>
+                                            </div>
+                                            <div class="info">
+                                                    <span class="title">
+                                                        New Order Received
+                                                    </span>
+                                                <span class="sub-title">12 min ago</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="p-v-15 p-h-20 text-center">
+                                    <span>
+                                        <a href="#" class="text-gray">Check all notifications <i class="ei-right-chevron p-l-5 font-size-10"></i></a>
+                                    </span>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="user-profile dropdown dropdown-animated scale-left">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img class="profile-img img-fluid" src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
+                        </a>
+                        <ul class="dropdown-menu dropdown-md p-v-0">
+                            <li>
+                                <ul class="list-media">
+                                    <li class="list-item p-15">
+                                        <div class="media-img">
+                                            <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
+                                        </div>
+                                        <div class="info">
+                                            <span class="title text-semibold">Marshall Nichols</span>
+                                            <span class="sub-title">UI/UX Desinger</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-settings p-r-10"></i>
+                                    <span>Setting</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-user p-r-10"></i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-email p-r-10"></i>
+                                    <span>Inbox</span>
+                                    <span class="badge badge-pill badge-success pull-right">2</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="ti-power-off p-r-10"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown dropdown-animated scale-left">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ __('messages.language') }}
                         </button>
@@ -337,6 +337,16 @@
                             <a class="dropdown-item" href="{!! route('locale', ['en']) !!}">{{ __('messages.english') }}</a>
                             <a class="dropdown-item" href="{!! route('locale', ['vi']) !!}">{{ __('messages.vietnamese') }}</a>
                         </div>
+                    </li>--}}
+                    <li>
+                        <a class="dropdown-item" href="{!! route('locale', ['vi']) !!}" title="{{ __('messages.vietnamese') }}">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/2000px-Flag_of_Vietnam.svg.png" width="25" height="15">
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{!! route('locale', ['en']) !!}" title="{{ __('messages.english') }}">
+                            <img src="http://themes.webspixel.com/tenis/img/2.png">
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -371,16 +381,16 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ route('room_type') }}">{{ __('messages.room_types_list') }}</a>
+                                <a href="{{ route('room_type.index') }}">{{ __('messages.room_types_list') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('facility') }}">{{ __('messages.facility') }}</a>
+                                <a href="{{ route('facility.index') }}">{{ __('messages.facility') }}</a>
                             </li>
                         </ul>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="{{ route('room') }}">
+                        <a class="dropdown-toggle" href="{{ route('room.index') }}">
                             <span class="icon-holder">
                                 <i class="fa fa-hotel"></i>
                             </span>
@@ -389,7 +399,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="{{ route('rooms') }}">
+                        <a class="dropdown-toggle" href="{{ route('booking.index') }}">
                             <span class="icon-holder">
                                 <i class="fa fa-list-alt"></i>
                             </span>
@@ -409,10 +419,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ route('category') }}">{{ __('messages.category') }}</a>
+                                <a href="{{ route('category.index') }}">{{ __('messages.category') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('post') }}">{{ __('messages.posts') }}</a>
+                                <a href="{{ route('post.index') }}">{{ __('messages.posts') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -429,10 +439,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="">{{ __('messages.users') }}</a>
+                                <a href="{{ route('user') }}">{{ __('messages.users') }}</a>
                             </li>
                             <li>
-                                <a href="">{{ __('messages.customer') }}</a>
+                                <a href="{{ route('customer') }}">{{ __('messages.customer') }}</a>
                             </li>
                         </ul>
                     </li>

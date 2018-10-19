@@ -8,19 +8,20 @@
                 <h2 class="header-title">{{ __('messages.rooms') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.list') }}</span>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header border bottom">
-                    <a href="{{ route('room_create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
+                    <a href="{{ route('room.create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-hover">
                         <thead class="thead-light">
                         <tr>
+                            <th scope="col">{{ __('messages.id') }}</th>
                             <th scope="col">{{ __('messages.rooms_stt') }}</th>
                             <th scope="col">{{ __('messages.room_type') }}</th>
                             <th scope="col">{{ __('messages.floor') }}</th>
@@ -30,19 +31,19 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($rooms as $room)
+                        @foreach ($rooms as $key => $room)
                             <tr>
+                                <td>{{ $key + $rooms->firstItem() }}</td>
                                 <td>{{ $room->id }}</td>
                                 <td>{{ $room->room_types->name }}</td>
                                 <td>{{ $room->floor }}</td>
                                 <td>{{ $room->room_types->max_people }}</td>
-                                <td>{{ $room->room_types->price }}</td>
+                                <td>{{ number_format($room->room_types->price) }}</td>
                                 <td class="text-center font-size-18">
-                                    {{--<a href="" data-toggle="modal" data-target="#modal-lg" class="text-gray m-r-15" title="{{ __('messages.view') }}"><i class="ti-eye"></i></a>--}}
-                                    {!! Form::open(['route'=>['room_edit', $room->id], 'method'=>'GET']) !!}
+                                    {!! Form::open(['route'=>['room.edit', $room->id], 'method'=>'GET']) !!}
                                         {!! Form::button('<i class="ti-pencil"></i>', ['class' => 'text-gray', 'title' => __('messages.edit'), 'type' => 'submit']) !!}
                                     {!! Form::close() !!}
-                                    {!! Form::open(['route'=>['room_delete',$room->id], 'method'=>'POST']) !!}
+                                    {!! Form::open(['route'=>['room.destroy',$room->id], 'method'=>'DELETE']) !!}
                                         {!! Form::button('<i class="ti-trash"></i>', ['class' => 'text-gray', 'title' => __('messages.delete'), 'type' => 'submit']) !!}
                                     {!! Form::close() !!}
                                 </td>
@@ -50,34 +51,9 @@
                         @endforeach
                         </tbody>
                     </table>
-                    <!-- Modal START-->
-                    {{--<div class="modal fade" id="modal-lg">--}}
-                        {{--<div class="modal-dialog modal-lg" role="document">--}}
-                            {{--<div class="modal-content">--}}
-                                {{--<div class="modal-header">--}}
-                                    {{--<h4>{{ __('messages.information') }}</h4>--}}
-                                {{--</div>--}}
-                                {{--<div class="modal-body">--}}
-                                    {{--<div class="p-15 m-v-40">--}}
-                                        {{--<div class="row ">--}}
-                                            {{--<div class="col-md-6">--}}
-
-                                            {{--</div>--}}
-                                            {{--<div class="col-md-6">--}}
-
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<div class="modal-footer no-border">--}}
-                                    {{--<div class="text-right">--}}
-                                        {{--<button class="btn btn-success" data-dismiss="modal">OK</button>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    <!-- Modal END-->
+                    <div class="">
+                        {{ $rooms->links() }}
+                    </div>
                 </div>
             </div>
         </div>

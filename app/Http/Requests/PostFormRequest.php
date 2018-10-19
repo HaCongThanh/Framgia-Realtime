@@ -28,7 +28,7 @@ class PostFormRequest extends FormRequest
             'category' => 'required',
             'content' => 'required',
             'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,jpg,png,gif|max:2048',
+//            'image' => 'required|image|mimes:jpeg,jpg,png,gif|max:2048',
         ];
     }
 }

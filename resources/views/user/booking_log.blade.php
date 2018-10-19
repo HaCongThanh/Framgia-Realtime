@@ -12,10 +12,10 @@
     <div class="sub-banner overview-bgi">
         <div class="container">
             <div class="breadcrumb-area">
-                <h1>Nhật ký đặt phòng</h1>
+                <h1>{{ __('messages.diary') }}</h1>
                 <ul class="breadcrumbs">
-                    <li><a href="{{ route('user.home.index') }}">Trang chủ</a></li>
-                    <li class="active">Nhật ký</li>
+                    <li><a href="{{ route('user.home.index') }}">{{ __('messages.home') }}</a></li>
+                    <li class="active">{{ __('messages.history') }}</li>
                 </ul>
             </div>
         </div>
@@ -32,12 +32,12 @@
                         <table id="dt-opt" class="table table-hover table-xl">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;">Tên người đặt</th>
-                                    <th style="text-align: center;">Ngày nhận phòng</th>
-                                    <th style="text-align: center;">Ngày trả phòng</th>
-                                    <th style="text-align: center;">Tổng số người</th>
-                                    <th style="text-align: center;">Tổng số phòng</th>
-                                    <th style="text-align: center;">Tổng tiền</th>
+                                    <th style="text-align: center;">{{ __('messages.name') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.date_start') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.date_finish') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.total_people') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.total_room') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.total_price') }}</th>
                                     <th style="text-align: center;">#</th>
                                 </tr>
                             </thead>
@@ -63,7 +63,7 @@
                                                 {{-- <a data-toggle="modal" data-target="#details" class="text-gray m-r-15">
                                                     <i class="fa fa-twitter"></i>
                                                 </a> --}}
-                                                <a data-toggle="modal" data-target="#bills" class="text-gray clear-bills" onclick="bills({{ $customer_booking_log->id }});" title="Xem chi tiết">
+                                                <a data-toggle="modal" data-target="#bills" class="text-gray clear-bills" onclick="bills({{ $customer_booking_log->id }});" title="{{ __('messages.view') }}">
                                                     <i class="fa fa-credit-card"></i>
                                                 </a>
                                             </td>
@@ -82,7 +82,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4>Details</h4>
+                            <h4>{{ __('messages.detail') }}</h4>
                         </div>
                         <div class="modal-body">
                             <p>Epic cheeseburgers come in all kinds of manifestations, but we want them in and around our mouth no matter what. Slide those smashed patties with the gently caramelized meat fat between a toasted brioche bun and pass it over. You fall in love with the cheeseburger itself but the journey ain’t half bad either.</p>
@@ -90,7 +90,7 @@
                         </div>
                         <div class="modal-footer no-border">
                             <div class="text-right">
-                                <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button class="btn btn-default" data-dismiss="modal">{{ __('messages.cancel') }}</button>
                                 <button class="btn btn-success" data-dismiss="modal">OK</button>
                             </div>
                         </div>
@@ -111,14 +111,14 @@
                                                 <div class="row">
                                                     <div class="col-xs-12 invoice-header">
                                                         <h1>
-                                                            <i class="fa fa-globe"></i> Hóa đơn.
-                                                            <small class="pull-right" id="created_at">Ngày lập: 16/08/2016</small>
+                                                            <i class="fa fa-globe"></i> {{ __('messages.bill') }}
+                                                            <small class="pull-right" id="created_at">{{ __('messages.date_found') }}: 16/08/2016</small>
                                                         </h1>
                                                     </div>
                                                 </div>
 
                                                 <div class="row invoice-info">
-                                                    <div class="col-sm-4 invoice-col">Từ
+                                                    <div class="col-sm-4 invoice-col">{{ __('messages.to') }}
                                                         <address>
                                                             <strong id="user_name"></strong>
                                                             <br>
@@ -130,7 +130,7 @@
                                                         </address>
                                                     </div>
 
-                                                    <div class="col-sm-4 invoice-col">Đến
+                                                    <div class="col-sm-4 invoice-col">{{ __('messages.from') }}
                                                         <address>
                                                             <strong>Framgia Hotel</strong>
                                                             <br>Hà Nội
@@ -155,10 +155,10 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th style="width: 5%; text-align: center;">#</th>
-                                                                    <th style="width: 25%; text-align: center;">Loại phòng</th>
-                                                                    <th style="width: 25%; text-align: center;">Giá phòng / 1 đêm</th>
-                                                                    <th style="width: 20%; text-align: center;">Số phòng</th>
-                                                                    <th style="width: 25%; text-align: center;">Thành tiền</th>
+                                                                    <th style="width: 25%; text-align: center;">{{ __('messages.room_type') }}</th>
+                                                                    <th style="width: 25%; text-align: center;">{{ __('messages.night') }}</th>
+                                                                    <th style="width: 20%; text-align: center;">{{ __('messages.room_stt') }}</th>
+                                                                    <th style="width: 25%; text-align: center;">{{ __('messages.total_price') }}</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody id="record_details">
@@ -169,7 +169,7 @@
 
                                                 <div class="row">
                                                     <div class="col-xs-6">
-                                                        <p class="lead">Phương thức thanh toán:</p>
+                                                        <p class="lead">{{ __('messages.method') }}:</p>
                                                         <img src="{{ url('/img/visa.png') }}" alt="Visa">
                                                         <img src="{{ url('/img/mastercard.png') }}" alt="Mastercard">
                                                         <img src="{{ url('/img/american-express.png') }}" alt="American Express">
@@ -180,7 +180,7 @@
                                                     </div>
 
                                                     <div class="col-xs-6">
-                                                        <p class="lead">Tổng thanh toán</p>
+                                                        <p class="lead">{{ __('messages.total_account') }}</p>
                                                         <div class="table-responsive">
                                                             <table class="table">
                                                                 <tbody>
@@ -193,11 +193,11 @@
                                                                         <td>$10.34</td>
                                                                     </tr> --}}
                                                                     <tr>
-                                                                        <th>Tổng số phòng:</th>
+                                                                        <th>{{ __('messages.total_room') }}:</th>
                                                                         <td id="total_number_room"></td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <th>Tổng tiền:</th>
+                                                                        <th>{{ __('messages.total_price') }}:</th>
                                                                         <td id="total_money"></td>
                                                                     </tr>
                                                                 </tbody>
@@ -208,9 +208,9 @@
 
                                                 <div class="row no-print">
                                                     <div class="col-xs-12">
-                                                        <button class="btn btn-default" onclick="btnPrintBill();"><i class="fa fa-print"></i> In hóa đơn</button>
+                                                        <button class="btn btn-default" onclick="btnPrintBill();"><i class="fa fa-print"></i> {{ __('messages.bill_text') }}</button>
                                                         <button class="btn btn-success pull-right" data-dismiss="modal">OK</button>
-                                                        <button class="btn btn-primary pull-right" data-dismiss="modal" style="margin-right: 5px;">Cancel</button>
+                                                        <button class="btn btn-primary pull-right" data-dismiss="modal" style="margin-right: 5px;">{{ __('messages.cancel') }}</button>
                                                     </div>
                                                 </div>
                                             </section>

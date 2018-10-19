@@ -17,10 +17,10 @@
     <div class="sub-banner overview-bgi">
         <div class="container">
             <div class="breadcrumb-area">
-                <h1>Booking System</h1>
+                <h1>{{ __('messages.system') }}</h1>
                 <ul class="breadcrumbs">
-                    <li><a href="{{ route('user.home.index') }}">Home</a></li>
-                    <li class="active">Booking System</li>
+                    <li><a href="{{ route('user.home.index') }}">{{ __('messages.home') }}</a></li>
+                    <li class="active">{{ __('messages.system') }}</li>
                 </ul>
             </div>
         </div>
@@ -35,27 +35,27 @@
                     <div class="row search-your-details">
                         <div class="col-lg-3 col-md-3">
                             <div class="search-your-rooms mt-20">
-                                <h2 class="hidden-xs hidden-sm">Tìm <span>Phòng </span></h2>
-                                <h2 class="hidden-xs hidden-sm">Của Bạn</h2>
-                                <h2 class="hidden-lg hidden-md">Tìm <span>Phòng </span>Của Bạn</h2>
+                                <h2 class="hidden-xs hidden-sm">{{ __('messages.search') }} <span>{{ __('messages.class') }} </span></h2>
+                                <h2 class="hidden-xs hidden-sm">{{ __('messages.you') }}</h2>
+                                <h2 class="hidden-lg hidden-md">{{ __('messages.search') }} <span>{{ __('messages.class') }} </span>{{ __('messages.you') }}</h2>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9" style="margin-top: 3%;">
                             <div class="row">
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="start_date" class="btn-default datepicker" placeholder="Ngày nhận phòng" value="{{ $start_date }}">
+                                        <input type="text" name="start_date" class="btn-default datepicker" placeholder="{{ __('messages.date_start') }}" value="{{ $start_date }}">
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="end_date" class="btn-default datepicker" placeholder="Ngày trả phòng" value="{{ $end_date }}">
+                                        <input type="text" name="end_date" class="btn-default datepicker" placeholder="{{ __('messages.date_finish') }}" value="{{ $end_date }}">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="adults">
-                                            <option>Người lớn</option>
+                                            <option>{{ __('messages.old') }}</option>
                                             @php
                                                 for ($i=1; $i <= 10 ; $i++) {
                                             @endphp
@@ -71,7 +71,7 @@
                                 <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="children">
-                                            <option>Trẻ em</option>
+                                            <option>{{ __('messages.young') }}</option>
                                             <option>0</option>
                                             <option>1</option>
                                             <option>2</option>
@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
-                                        <button type="submit" name="submit" class="search-button btn-theme">Tìm</button>
+                                        <button type="submit" name="submit" class="search-button btn-theme">{{ __('messages.search') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -101,14 +101,14 @@
 
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-success" id="btn-booking" style="float: right;"><i class="fa fa-plus"></i> Đặt phòng</button>
+                    <button type="button" class="btn btn-success" id="btn-booking" style="float: right;"><i class="fa fa-plus"></i> {{ __('messages.book_room') }}</button>
 
                     @php
                         session()->forget('route');
                         session()->put('route', 'user.home.check_out');
                     @endphp
 
-                    <label class="btn btn-success" style="float: right;"><span id="number-room">Tổng giá: Chưa chọn phòng nào</span> <b id="price-total"></b></label>
+                    <label class="btn btn-success" style="float: right;"><span id="number-room">{{ __('messages.price_sum') }}: {{ __('messages.no_room') }}</span> <b id="price-total"></b></label>
                     <input type="hidden" name="number-room-hidden" id="number-room-hidden" class="btn btn-success" value="" disabled>
                     <input type="hidden" name="total-money-hidden" id="total-money-hidden" class="btn btn-success" value="" disabled>
                     <input type="hidden" name="start-date-hidden" id="start-date-hidden" class="btn btn-success" value="{{ $start_date }}" disabled>
@@ -128,10 +128,10 @@
                         <table id="dt-opt" class="table table-hover table-xl">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;">Loại phòng</th>
-                                    <th style="text-align: center;">Phù hợp cho</th>
-                                    <th style="text-align: center;">Giá 1 đêm</th>
-                                    <th style="text-align: center;">Chọn phòng</th>
+                                    <th style="text-align: center;">{{ __('messages.room_type') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.fit') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.night') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.select_room') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -144,7 +144,7 @@
                                                 </div>
                                             </td>
                                             <td style="text-align: center;">
-                                                <span class="badge badge-pill badge-gradient-success">{{ $data_room_type->max_people }} người</span>
+                                                <span class="badge badge-pill badge-gradient-success">{{ $data_room_type->max_people }} {{ __('messages.me') }}</span>
                                             </td>
                                             <td style="text-align: center;">{{ number_format($data_room_type->price) }} VNĐ</td>
                                             <td style="text-align: center;">

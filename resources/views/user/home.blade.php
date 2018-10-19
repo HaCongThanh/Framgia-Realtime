@@ -87,27 +87,27 @@
                     <div class="row search-your-details">
                         <div class="col-lg-3 col-md-3">
                             <div class="search-your-rooms mt-20">
-                                <h2 class="hidden-xs hidden-sm">Tìm <span>Phòng </span></h2>
-                                <h2 class="hidden-xs hidden-sm">Của Bạn</h2>
-                                <h2 class="hidden-lg hidden-md">Tìm <span>Phòng </span>Của Bạn</h2>
+                                <h2 class="hidden-xs hidden-sm">{{ __('messages.search') }} <span>{{ __('messages.class') }} </span></h2>
+                                <h2 class="hidden-xs hidden-sm">{{ __('messages.you') }}</h2>
+                                <h2 class="hidden-lg hidden-md">{{ __('messages.search') }} <span>{{ __('messages.class') }} </span>{{ __('messages.you') }}</h2>
                             </div>
                         </div>
                         <div class="col-lg-9 col-md-9" style="margin-top: 3%;">
                             <div class="row">
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="start_date" class="btn-default datepicker" placeholder="Ngày nhận phòng">
+                                        <input type="text" name="start_date" class="btn-default datepicker" placeholder="{{ __('messages.date_start') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="end_date" class="btn-default datepicker" placeholder="Ngày trả phòng">
+                                        <input type="text" name="end_date" class="btn-default datepicker" placeholder="{{ __('messages.date_finish') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="adults">
-                                            <option>Người lớn</option>
+                                            <option>{{ __('messages.old') }}</option>
                                             @php
                                                 for ($i=1; $i <= 5 ; $i++) {
                                             @endphp
@@ -123,7 +123,7 @@
                                 <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
                                         <select class="selectpicker search-fields form-control-2" name="children">
-                                            <option>Trẻ em</option>
+                                            <option>{{ __('messages.young') }}</option>
                                             @php
                                                 for ($i=0; $i <= 5 ; $i++) {
                                             @endphp
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-6">
                                     <div class="form-group">
-                                        <button type="submit" name="submit" class="search-button btn-theme">Tìm</button>
+                                        <button type="submit" name="submit" class="search-button btn-theme">{{ __('messages.search') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -224,11 +224,11 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4">
                     <div class="service-text">
-                        <h1>Dịch vụ hoàn hảo</h1>
+                        <h1>{{ __('messages.service') }}</h1>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text everLorem</p>
                         <p>industry's standard dummy text everLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</p>
                         <br>
-                        <a href="{{ route('user.rooms.index') }}" class="btn btn-outline2 btn-md">Đặt phòng ngay</a>
+                        <a href="#jump_booking" class="btn btn-outline2 btn-md">{{ __('messages.booking') }}</a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8">
@@ -236,42 +236,42 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-school-call-phone-reception"></i>
-                                <h3>Lễ tân 24 giờ</h3>
+                                <h3>{{ __('messages.receptionist') }}</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-room-service"></i>
-                                <h3>Dịch vụ phòng</h3>
+                                <h3>{{ __('messages.room_service') }}</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-graph-line-screen"></i>
-                                <h3>Truyền hình quốc tế</h3>
+                                <h3>{{ __('messages.international') }}</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-weightlifting"></i>
-                                <h3>Gym</h3>
+                                <h3>{{ __('messages.gym') }}</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-parking"></i>
-                                <h3>Bãi đỗ xe miễn phí</h3>
+                                <h3>{{ __('messages.free') }}</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="services-box">
                                 <i class="flaticon-wifi-connection-signal-symbol"></i>
-                                <h3>Wi-Fi miễn phí</h3>
+                                <h3>{{ __('messages.wifi') }}</h3>
                                 <p>Lorem ipsum dolor sit amet, conser adipisicing elit. Numquam</p>
                             </div>
                         </div>
@@ -288,8 +288,8 @@
             <div class="container">
                 <!-- Main title -->
                 <div class="main-title">
-                    <h1>Nhân viên của chúng tôi</h1>
-                    <p>Nhóm người nhỏ tạo ra sản phẩm.</p>
+                    <h1>{{ __('messages.customers') }}</h1>
+                    <p>{{ __('messages.author') }}</p>
                 </div>
                 <div class="row">
                     <div class="carousel our-partners slide" id="ourPartners3">

@@ -9,7 +9,7 @@
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
                         <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
-                        <a class="breadcrumb-item" href="{{ route('room') }}">{{ __('messages.list') }}</a>
+                        <a class="breadcrumb-item" href="{{ route('room.index') }}">{{ __('messages.list') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.rooms_add') }}</span>
                     </nav>
                 </div>
@@ -21,7 +21,7 @@
                 @endforeach
 
                 <div class="card-body">
-                    {!! Form::open(['route' => 'room_create', 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => 'room.store', 'method' => 'POST']) !!}
                     <div class="row">
                         <div class="col-md-6 room">
                             <div class="form-group">
@@ -34,21 +34,6 @@
                                 {!! Form::label('room_type', __('messages.room_type'), ['class'=>'control-label']) !!}
                                 {!! Form::select('room_type', $room_types, '', ['class' => 'form-control', 'id' => 'type', 'data-depenment' => 'state']) !!}
                             </div>
-                            {{--<div class="form-group">--}}
-                                {{--{!! Form::label('max_people', __('messages.people'), ['class' => 'control-label']) !!}--}}
-                                {{--{!! Form::text('max_people', '', ['class' => 'form-control form-control-sm', 'id' => 'people', 'data-depenment' => 'state']) !!}--}}
-{{----}}
-                                {{--{!! Form::select('max_people', ['L' => 'Large', 'S' => 'Small'], '',['class' => 'form-control', 'id' => 'people', 'data-depenment' => 'state']) !!}--}}
-{{----}}
-                            {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                                {{--{!! Form::label('price', __('messages.price'), ['class'=>'control-label']) !!}--}}
-                                {{--{!! Form::text('price', '', ['class' => 'form-control form-control-sm', 'id' => 'price', 'data-depenment' => 'state']) !!}--}}
-
-                                {{----}}
-                                                                {{--{!! Form::select('price', ['L' => 'Large', 'S' => 'Small'], '',['class'=>'form-control', 'id' => 'price', 'data-depenment' => 'state']) !!}--}}
-                                {{----}}
-                            {{--</div>--}}
                         </div>
                         <div class="col-md-12">
                             {!! Form::submit(__('messages.add'), ['class'=>'btn btn-info btn-float btn-outline']) !!}
@@ -60,34 +45,4 @@
         </div>
     </div>
     <!-- Content Wrapper END -->
-@endsection
-
-@section('script')
-{{--    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.select').change(function () {
-                if ($(this).val() != '') {
-                    var select = $(this).attr("id");
-                    var value = $(this).val();
-                    var depenment = $(this).data('depenment');
-                    var _token = $('input[name = "_token"]').val();
-                    $.ajax({
-                        url: "{{ route('room_create') }}",
-                        method: "GET",
-                        data: {select: select, value: value, _token: _token, depenment: depenment},
-                        success:function (result) {
-                            $('#'+depenment).html(result);
-                        }
-                    })
-                }
-            });
-            $('#type').change(function(){
-                $('#people').val('');
-            });
-
-            $('#type').change(function(){
-                $('#price').val('');
-            });
-        });
-    </script>--}}
 @endsection

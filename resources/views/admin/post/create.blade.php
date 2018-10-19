@@ -14,7 +14,7 @@
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
                         <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
-                        <a class="breadcrumb-item" href="{{ route('post') }}">{{ __('messages.posts') }}</a>
+                        <a class="breadcrumb-item" href="{{ route('post.index') }}">{{ __('messages.posts') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.add') }}</span>
                     </nav>
                 </div>
@@ -26,7 +26,7 @@
                 @endforeach
 
                 <div class="card-body">
-                    {!! Form::open(['route' => 'post_create', 'method' => 'POST', 'files' => true]) !!}
+                    {!! Form::open(['route' => 'post.store', 'method' => 'POST', 'files' => true]) !!}
                         <div class="form-group">
                             {!! Form::label('title', __('messages.posts_name'), ['class' => 'control-label']) !!}
                             {!! Form::text('title', "", ['class' =>' form-control form-control-sm', 'id' => 'title', 'onkeyup' => 'ChangeToSlug()']) !!}
@@ -53,11 +53,12 @@
                                     <span class="btn btn-default btn-file">
                                         <span class="fileinput-new">{{ __('messages.file') }}</span>
                                         <span class="fileinput-exists">{{ __('messages.change') }}</span>
-                                        {!! Form::file('image') !!}
+                                        {!! Form::file('image', ['id' => 'fileUpload']) !!}
                                     </span>
                                 <span class="fileinput-filename"></span>
                                 <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
                             </div>
+                            <div id="image-holder"></div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('status', __('messages.status'), ['class'=>'control-label']) !!}
@@ -119,5 +120,28 @@
             //In slug ra textbox có id “slug”
             document.getElementById('slug').value = slug;
         }
+        /* image preview */
+        $("#fileUpload").on('change', function () {
+
+            if (typeof (FileReader) != "undefined") {
+
+                var image_holder = $("#image-holder");
+                image_holder.empty();
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("<img />", {
+                        "src": e.target.result,
+                        "class": "thumb-image",
+                        "width": 200
+                    }).appendTo(image_holder);
+
+                }
+                image_holder.show();
+                reader.readAsDataURL($(this)[0].files[0]);
+            } else {
+                alert("Select image, please.");
+            }
+        });
     </script>
 @endsection

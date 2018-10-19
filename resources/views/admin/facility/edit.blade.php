@@ -9,7 +9,7 @@
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
                         <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
-                        <a class="breadcrumb-item" href="{{ route('facility') }}">{{ __('messages.facilities') }}</a>
+                        <a class="breadcrumb-item" href="{{ route('facility.index') }}">{{ __('messages.facilities') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.edit') }}</span>
                     </nav>
                 </div>
@@ -21,7 +21,7 @@
                         <p class="alert alert-danger">{{ $error }}</p>
                     @endforeach
 
-                    {!! Form::open(['method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['facility.update', $facility->id], 'method' => 'PUT']) !!}
                     <div class="form-group">
                         {!! Form::label('name', __('messages.facility'), ['class' => 'control-label']) !!}
                         {!! Form::text('name', $facility->name, ['class' => 'form-control form-control-sm']) !!}

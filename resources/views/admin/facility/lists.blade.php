@@ -9,13 +9,13 @@
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
                         <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
-                        <a class="breadcrumb-item" href="">{{ __('messages.facilities') }}</a>
+                        <span class="breadcrumb-item active">{{ __('messages.facilities') }}</span>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header border bottom">
-                    <a href="{{ route('facility_create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
+                    <a href="{{ route('facility.create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-hover">
@@ -27,16 +27,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @php ($stt=1)
-                        @foreach($facilities as $facility)
+                        @foreach($facilities as $key => $facility)
                             <tr>
-                                <td scope="row">{!! $stt++ !!}</td>
+                                <td scope="row">{!! $key + $facilities->firstItem() !!}</td>
                                 <td>{!! $facility -> name !!}</td>
                                 <td class="text-center font-size-18">
-                                    {!! Form::open(['route' => ['facility_edit', $facility->id], 'method' => 'GET']) !!}
+                                    {!! Form::open(['route' => ['facility.edit', $facility->id], 'method' => 'GET']) !!}
                                         {!! Form::button('<i class="ti-pencil"></i>', ['class' => 'text-gray', 'type' => 'submit', 'title' => __('messages.edit')]) !!}
                                     {!! Form::close() !!}
-                                    {!! Form::open(['route' => ['facility_delete', $facility->id], 'method' => 'POST']) !!}
+                                    {!! Form::open(['route' => ['facility.destroy', $facility->id], 'method' => 'DELETE']) !!}
                                         {!! Form::button('<i class="ti-trash"></i>', ['class' => 'text-gray', 'type' => 'submit', 'title' => __('messages.delete')]) !!}
                                     {!! Form::close() !!}
                                 </td>
@@ -44,6 +43,9 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="">
+                        {{ $facilities->links() }}
+                    </div>
                 </div>
             </div>
         </div>

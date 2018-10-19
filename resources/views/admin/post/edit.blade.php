@@ -25,7 +25,7 @@
                 @endforeach
 
                 <div class="card-body">
-                    {!! Form::open([ 'method'=>'POST', 'files' => true ]) !!}
+                    {!! Form::open(['route' => ['post.update', $post->id], 'method'=>'PUT', 'files' => true ]) !!}
                     <div class="form-group">
                         {!! Form::label('name', __('messages.posts_name'), ['class'=>'control-label']) !!}
                         {!! Form::text('title', $post->title, ['class' => 'form-control form-control-sm', 'id' => 'title', 'onkeyup' => 'ChangeToSlug()']) !!}

@@ -1,5 +1,8 @@
 <?php
 return [
+    /*
+     * Admin
+     */
     'dashboard' => 'Trang quản trị',
     'language' => 'Ngôn ngữ',
     'english' => 'Tiếng Anh',
@@ -58,6 +61,64 @@ return [
     'address' => 'Địa chỉ',
     'role' => 'Quyền',
 
+    /*
+     * Cilent
+     */
+    'support' => 'Bạn cần hỗ trợ?',
+    'home' => 'Trang chủ',
+    'diary' => 'Nhật ký đặt phòng',
+    'write' => 'Bài viết',
+    'logout' => 'Đăng xuất',
+    'login' => 'Đăng nhập / Đăng ký',
+    'register' => 'Đăng ký',
+    'contact' => 'Liên hệ',
+    'gallery' => 'Một số ảnh',
+    'incentives' => 'Ưu đãi mới',
+    'email_text' => 'Nhập mail của bạn',
+    'sub' => 'Đăng ký để nhận những ưu đãi mới của khách sạn chúng tôi.',
+    'search' => 'Tìm',
+    'class' => 'Phòng',
+    'you' => 'Của Bạn',
+    'old' => 'Người lớn',
+    'young' => 'Trẻ em',
+    'service' => 'Dịch vụ hoàn hảo',
+    'booking' => 'Đặt phòng ngay',
+    'receptionist' => 'Lễ tân 24 giờ',
+    'room_service' => 'Dịch vụ phòng',
+    'international' => 'Truyền hình quốc tế',
+    'gym' => 'Gym',
+    'free' => 'Bãi đỗ xe miễn phí',
+    'wifi' => 'Wi-Fi miễn phí',
+    'customers' => 'Nhân viên của chúng tôi',
+    'author' => 'Nhóm người nhỏ tạo ra sản phẩm.',
+    'system' => 'Hệ thống đặt phòng',
+    'book_room' => 'Đặt phòng',
+    'price_sum' => 'Tổng giá',
+    'no_room' => 'Chưa chọn phòng nào',
+    'fit' => 'Phù hợp cho',
+    'night' => 'Giá 1 đêm',
+    'select_room' => 'Chọn phòng',
+    'me' => 'người',
+    'history' => 'Nhật ký',
+    'name' => 'Tên người đặt',
+    'detail' => 'Chi tiết',
+    'bill' => 'Hóa đơn',
+    'date_found' => 'Ngày thành lập',
+    'to' => 'Từ',
+    'from' => 'Đến',
+    'date_account' => 'Ngày thanh toán',
+    'method' => 'Phương thức thanh toán',
+    'total_account' => 'Tổng thanh toán',
+    'bill_text' => 'In hóa đơn',
+    'checkout' => 'Kiểm tra',
+    'info' => 'Thông tin cá nhân',
+    'info_account' => 'Thông tin thanh toán',
+    'confirm' => 'Xác nhận',
+    'full_name' => 'Họ và tên',
+    'sex' => 'Danh xưng',
+    'mr' => 'Anh',
+    'miss' => 'Chị',
+    'info_room' => 'Thông tin đặt phòng',
 
     /*
      * buttons
@@ -77,6 +138,7 @@ return [
     'uncheck' => 'Không hiển thị',
     'list' => 'Danh sách',
     'price' => 'Giá phòng',
+    'cancel' => 'Hủy',
 
     /*
      * table

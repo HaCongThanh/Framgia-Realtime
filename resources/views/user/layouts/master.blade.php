@@ -67,7 +67,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
                 <div class="list-inline">
-                    <a href="tel:0997654398"><i class="fa fa-phone"></i>Bạn cần hỗ trợ? 0997654398</a>
+                    <a href="tel:0997654398"><i class="fa fa-phone"></i>{{ __('messages.support') }} 0997654398</a>
                     <a href="mailto:hacongthanh.it.hubt@gmail.com"><i class="fa fa-envelope"></i>hacongthanh.it.hubt@gmail.com</a>
                 </div>
             </div>
@@ -104,7 +104,7 @@
                             <a class="sign-in" href="{{ route('user.logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();"><i class="fa fa-user"></i>
-                                {{ __('Đăng xuất') }}
+                                {{ __('messages.logout') }}
                             </a>
 
                             <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
@@ -114,10 +114,19 @@
                     @else
                         <li>
                             <a href="{{ route('user.login_form') }}" class="sign-in"><i class="fa fa-user"></i>
-                                {{ __('Đăng nhập / Đăng ký') }}
+                                {{ __('messages.login') }}
                             </a>
                         </li>
                     @endif
+
+                    <li>
+                        <a class="dropdown-item" href="{!! route('locale', ['vi']) !!}" title="{{ __('messages.vietnamese') }}">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/2000px-Flag_of_Vietnam.svg.png" width="25" height="15">
+                        </a>
+                        <a class="dropdown-item" href="{!! route('locale', ['en']) !!}" title="{{ __('messages.english') }}">
+                            <img src="http://themes.webspixel.com/tenis/img/2.png">
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -144,16 +153,16 @@
             <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
                 <ul class="nav navbar-nav">
                     <li class="dropdown active">
-                        <a href="{{ route('user.home.index') }}">Trang chủ</a>
+                        <a href="{{ route('user.home.index') }}">{{ __('messages.home') }}</a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{ route('user.rooms.index') }}">Danh sách phòng</a>
+                        <a href="{{ route('user.rooms.index') }}">{{ __('messages.rooms') }}</a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{ route('user.bookings.bill') }}">Nhật ký đặt phòng</a>
+                        <a href="{{ route('user.bookings.bill') }}">{{ __('messages.diary') }}</a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{ route('user.posts.index') }}">Bài viết</a>
+                        <a href="{{ route('user.posts.index') }}">{{ __('messages.write') }}</a>
                     </li>
                     {{-- <li class="dropdown">
                         <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
@@ -215,7 +224,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-item">
                         <div class="footer-logo">
-                            <a href="index.html">
+                            <a href="">
                                 <img src="{{ url('/img/framgia3.png') }}" alt="white-logo">
                             </a>
                         </div>
@@ -226,7 +235,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-item">
                         <div class="main-title-2">
-                            <h1>Liên hệ</h1>
+                            <h1>{{ __('messages.contact') }}</h1>
                         </div>
                         <ul class="personal-info">
                             <li>
@@ -260,7 +269,7 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-item gallery">
                         <div class="main-title-2">
-                            <h1>Một số ảnh</h1>
+                            <h1>{{ __('messages.gallery') }}</h1>
                         </div>
                         <ul>
                             <li>
@@ -301,14 +310,14 @@
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <div class="footer-item newsletter">
                         <div class="main-title-2">
-                            <h1>Ưu đãi mới</h1>
+                            <h1>{{ __('messages.incentives') }}</h1>
                         </div>
                         <div class="newsletter-inner">
-                            <p>Đăng ký để nhận những ưu đãi mới của khách sạn chúng tôi.</p>
+                            <p>{{ __('messages.sub') }}</p>
                             <form action="#" method="GET">
-                                <p><input type="text" class="form-contact" name="email" placeholder="Nhập Email của bạn"></p>
+                                <p><input type="text" class="form-contact" name="email" placeholder="{{ __('messages.email_text') }}"></p>
                                 <p><button type="submit" name="submitNewsletter" class="btn btn-small">
-                                    Đăng ký
+                                        {{ __('messages.register') }}
                                 </button></p>
                             </form>
                         </div>

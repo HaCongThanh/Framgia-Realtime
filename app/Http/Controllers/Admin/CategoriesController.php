@@ -16,7 +16,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::Paginate(5);
         return view('admin.category.lists', compact('categories'));
     }
 
@@ -42,7 +42,7 @@ class CategoriesController extends Controller
             'name' => $request -> get('name'),
         ));
         $category -> save();
-        return redirect() -> route('category');
+        return redirect() -> route('category.index');
     }
 
     /**
@@ -81,7 +81,7 @@ class CategoriesController extends Controller
         $category -> name = $request->get('name');
 
         $category -> save();
-        return redirect() -> route('category',$category -> id);
+        return redirect() -> route('category.index');
     }
 
     /**
@@ -94,6 +94,6 @@ class CategoriesController extends Controller
     {
         $category = Category::whereid($id) -> firstOrFail();
         $category -> delete();
-        return redirect() -> route('category');
+        return redirect() -> route('category.index');
     }
 }
