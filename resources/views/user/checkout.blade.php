@@ -10,10 +10,10 @@
     <div class="sub-banner overview-bgi">
         <div class="container">
             <div class="breadcrumb-area">
-                <h1>Hệ thống đặt phòng</h1>
+                <h1>{{ __('messages.system') }}</h1>
                 <ul class="breadcrumbs">
-                    <li><a href="{{ route('user.home.index') }}">Trang chủ</a></li>
-                    <li class="active">Checkout</li>
+                    <li><a href="{{ route('user.home.index') }}">{{ __('messages.home') }}</a></li>
+                    <li class="active">{{ __('messages.checkout') }}</li>
                 </ul>
             </div>
         </div>
@@ -34,7 +34,7 @@
                                         <i class="fa fa-user"></i>
                                     </span>
                                 </a>
-                                <h3 class="booking-heading">Thông tin cá nhân</h3>
+                                <h3 class="booking-heading">{{ __('messages.info') }}</h3>
                             </li>
                             <li role="presentation" id="menu_step2">
                                 <a href="#step2" data-toggle="" aria-controls="step2" role="tab" title="" data-original-title="Step 2">
@@ -42,7 +42,7 @@
                                         <i class="fa fa-cc"></i>
                                     </span>
                                 </a>
-                                <h3 class="booking-heading">Thông tin thanh toán</h3>
+                                <h3 class="booking-heading">{{ __('messages.info_account') }}</h3>
                             </li>
                             <li role="presentation" id="menu_complete">
                                 <a href="#complete" data-toggle="" aria-controls="complete" role="tab" title="" data-original-title="Complete">
@@ -50,7 +50,7 @@
                                         <i class="glyphicon glyphicon-ok"></i>
                                     </span>
                                 </a>
-                                <h3 class="booking-heading">Xác nhận</h3>
+                                <h3 class="booking-heading">{{ __('messages.confirm') }}</h3>
                             </li>
                         </ul>
                     </div>
@@ -61,7 +61,7 @@
                                 <div class="row">
                                     <div class="col-lg-8 col-md-8 col-xs-12 col-md-push-4">
                                         <div class="contact-form sidebar-widget">
-                                            <h3 class="booking-heading-2 black-color">Thông tin cá nhân</h3>
+                                            <h3 class="booking-heading-2 black-color">{{ __('messages.info') }}</h3>
                                             <div class="row mb-30">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group firstname">
@@ -77,22 +77,22 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group Country">
-                                                        <label>Danh xưng</label>
+                                                        <label>{{ __('messages.sex') }}</label>
                                                         <select class="selectpicker country search-fields" name="gender" id="gender">
-                                                            <option @if ($gender == 1) selected @endif>Anh</option>
-                                                            <option @if ($gender == 0) selected @endif>Chị</option>
+                                                            <option @if ($gender == 1) selected @endif>{{ __('messages.mr') }}</option>
+                                                            <option @if ($gender == 0) selected @endif>{{ __('messages.miss') }}</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group phone">
-                                                        <label>Số điện thoại</label>
+                                                        <label>{{ __('messages.phone') }}</label>
                                                         <input type="text" name="mobile" id="mobile" class="input-text" value="{{ $mobile }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group address-line-2">
-                                                        <label>Địa chỉ</label>
+                                                        <label>{{ __('messages.address') }}</label>
                                                         <input type="text" name="address" id="address" class="input-text" value="{{ $address }}">
                                                     </div>
                                                 </div>
@@ -132,7 +132,7 @@
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-xs-12 col-md-pull-8">
                                         <div class="booling-details-box">
-                                            <h3 class="booking-heading-2">Thông tin đặt phòng</h3>
+                                            <h3 class="booking-heading-2">{{ __('messages.info_room') }}</h3>
 
                                             <div class="rooms-detail-slider simple-slider ">
                                                 <div id="carousel-custom" class="carousel slide" data-ride="carousel">
@@ -179,24 +179,24 @@
 
                                             <ul>
                                                 <li>
-                                                    <span>Nhận phòng:</span> {{ date('d/m/Y', strtotime($start_date)) }} từ 15:00
+                                                    <span>{{ __('messages.date_start') }}:</span> {{ date('d/m/Y', strtotime($start_date)) }} từ 15:00
                                                 </li>
                                                 <li>
-                                                    <span>Trả phòng:</span> {{ date('d/m/Y', strtotime($end_date)) }} đến 12:00
+                                                    <span>{{ __('messages.date_finish') }}:</span> {{ date('d/m/Y', strtotime($end_date)) }} đến 12:00
                                                 </li>
                                                 <li>
-                                                    <span>Số lượng phòng:</span> {{ $total_number_room }}
+                                                    <span>{{ __('messages.total_room') }}:</span> {{ $total_number_room }}
                                                 </li>
                                                 <li>
-                                                    <span>Người lớn:</span> {{ $adults }}
+                                                    <span>{{ __('messages.old') }}:</span> {{ $adults }}
                                                 </li>
                                                 <li>
-                                                    <span>Trẻ em:</span> {{ $children }}
+                                                    <span>{{ __('messages.young') }}:</span> {{ $children }}
                                                 </li>
                                             </ul>
 
                                             <div class="price">
-                                                Tổng giá: {{ number_format($total_money) }} VNĐ
+                                                {{ __('messages.price_sum') }}: {{ number_format($total_money) }} VNĐ
                                             </div>
                                         </div>
                                     </div>

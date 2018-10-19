@@ -18,6 +18,7 @@
                     <table class="table table-hover">
                         <thead class="thead-light">
                         <tr>
+                            <th scope="col">{{ __('messages.id') }}</th>
                             <th scope="col">{{ __('messages.customer_name') }}</th>
                             <th scope="col">{{ __('messages.date') }}</th>
                             <th scope="col">{{ __('messages.total_people') }}</th>
@@ -28,19 +29,20 @@
                         </thead>
                         <tbody>
                         @php ($stt = 0)
-                        @foreach ($lists as $list)
+                        @foreach ($lists as $key => $list)
                         <tr>
-                            <td>{{ $list->user_id->name }}</td>
+                            <td>{{ $key + $lists->firstItem() }}</td>
+                            <td>{{ $list->users->name }}</td>
                             <td>{{ $list->start_date }} / {{ $list->end_date }}</td>
                             <td>{{ $list->total_number_people }}</td>
                             <td>{{ $list->total_number_room }}</td>
-                            <td>{{ $list->total_money }}</td>
+                            <td>{{ number_format($list->total_money) }}</td>
                             <td class="text-center font-size-18">
                                 <a href="" data-toggle="modal" data-target="#modal-lg{{ $stt+=1 }}" class="text-gray m-r-15" title="{{ __('messages.view') }}"><i class="ti-eye"></i></a>
                             </td>
                         </tr>
                         <!-- Modal START-->
-                        <div class="modal fade" id="modal-lg{{ $stt+=1 }}">
+                        <div class="modal fade" id="modal-lg{{ $stt }}">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -50,7 +52,7 @@
                                         <div class="p-15 m-v-40">
                                             <div class="row ">
                                                 <div class="col-md-6">
-                                                    <p>{{ __('messages.customer_name') }}: {{ $list->user_id->name }}</p>
+                                                    <p>{{ __('messages.customer_name') }}: {{ $list->users->name }}</p>
                                                     <p>{{ __('messages.date_start') }}: {{ $list->start_date }}</p>
                                                     <p>{{ __('messages.date_finish') }}: {{ $list->end_date }}</p>
                                                     <p>{{ __('messages.total_people') }}: {{ $list->total_number_people }}</p>
@@ -59,7 +61,7 @@
                                                     <p>{{ __('messages.rooms_stt') }}: </p>
                                                     <p>{{ __('messages.room_type') }}: </p>
                                                     <p>{{ __('messages.floor') }}: </p>
-                                                    <p>{{ __('messages.total_price') }}: {{ $list->total_money }}</p>
+                                                    <p>{{ __('messages.total_price') }}: {{ number_format($list->total_money) }}</p>
                                                 </div>
                                             </div>
                                         </div>

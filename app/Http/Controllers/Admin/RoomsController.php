@@ -17,7 +17,7 @@ class RoomsController extends Controller
      */
     public function index()
     {
-        $rooms = Room::all();
+        $rooms = Room::Paginate(10);
         return view('admin.rooms.lists', compact('rooms'));
     }
 
@@ -48,7 +48,7 @@ class RoomsController extends Controller
         //dd($room);
         $rooms->save();
 
-        return redirect()->route('room');
+        return redirect()->route('room.index');
     }
 
     /**
@@ -89,10 +89,10 @@ class RoomsController extends Controller
     public function update(Request $request, $id)
     {
         $rooms = Room::findOrFail($id);
+        $rooms->room_type_id = $request->room_type;
         $rooms->save();
-        $rooms->room_types()->associate($request->get('room_type'));
 
-        return redirect()->route('room', $rooms->id);
+        return redirect()->route('room.index');
     }
 
     /**
@@ -106,6 +106,6 @@ class RoomsController extends Controller
         $rooms = Room::findOrFail($id);
         $rooms->delete();
 
-        return redirect()->route('room');
+        return redirect()->route('room.index');
     }
 }

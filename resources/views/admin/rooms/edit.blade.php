@@ -9,14 +9,14 @@
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
                         <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
-                        <a class="breadcrumb-item" href="{{ route('room') }}">{{ __('messages.rooms') }}</a>
+                        <a class="breadcrumb-item" href="{{ route('room.index') }}">{{ __('messages.rooms') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.edit') }}</span>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    {!! Form::open(['route' => 'room_edit', 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['room.update', $rooms->id], 'method' => 'PUT']) !!}
                         <div class="form-group">
                             {!! Form::label('rooms_stt', __('messages.rooms_stt'), ['class' => 'control-label']) !!} : {{ $rooms->id }}
                         </div>

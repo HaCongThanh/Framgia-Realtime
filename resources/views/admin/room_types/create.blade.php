@@ -13,15 +13,15 @@
                 <h2 class="header-title">{{ __('messages.room_type_add') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
-                        <a class="breadcrumb-item" href="{{ route('room_type') }}">{{ __('messages.room_type') }}</a>
+                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
+                        <a class="breadcrumb-item" href="{{ route('room_type.index') }}">{{ __('messages.room_type') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.add') }}</span>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    {!! Form::open([ 'route' => 'room_type_create', 'method' => 'POST', 'files' => true ]) !!}
+                    {!! Form::open([ 'route' => 'room_type.store', 'method' => 'POST', 'files' => true ]) !!}
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">
@@ -53,11 +53,12 @@
                                     <span class="btn btn-default btn-file">
                                         <span class="fileinput-new">{{ __('messages.file') }}</span>
                                         <span class="fileinput-exists">{{ __('messages.change') }}</span>
-                                        {{Form::file('image[]', ['multiple' => true,  'id' => 'exampleInputFile'])}}
+                                        {{Form::file('image[]', ['multiple' => true,  'id' => 'fileUpload'])}}
                                     </span>
                                     <span class="fileinput-filename"></span>
                                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
                                 </div>
+                                <div id="image-holder"></div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -73,7 +74,7 @@
                                 <div class="row">
                                     @php($check = 1)
                                     @foreach($facilities as $facility)
-                                    <div class="col-md-6">
+                                    <div class="col-md-4">
                                         <div class="checkbox">
                                             {{--{!! Form::checkbox('facilities', $facility->name, '', [ 'id' => "check" ]) !!}--}}
                                             <input id="check{{ $check+=1 }}" name="facilities[]" type="checkbox" value="{{ $facility->id }}">
@@ -98,4 +99,29 @@
 @section('script')
     <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/admin/js/selectize.min.js') }}"></script>
+    <script language="javascript">
+        /* image preview */
+        $("#fileUpload").on('change', function () {
+
+            if (typeof (FileReader) != "undefined") {
+
+                var image_holder = $("#image-holder");
+                image_holder.empty();
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("<img />", {
+                        "src": e.target.result,
+                        "class": "thumb-image",
+                        "width" : 200
+                    }).appendTo(image_holder);
+
+                }
+                image_holder.show();
+                reader.readAsDataURL($(this)[0].files[0]);
+            } else {
+                alert("Select image, please.");
+            }
+        });
+    </script>
 @endsection

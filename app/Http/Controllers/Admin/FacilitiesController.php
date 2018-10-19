@@ -16,7 +16,7 @@ class FacilitiesController extends Controller
      */
     public function index()
     {
-        $facilities = Facility::all();
+        $facilities = Facility::Paginate(10);
         return view('admin.facility.lists', compact('facilities'));
     }
 
@@ -42,7 +42,7 @@ class FacilitiesController extends Controller
             'name' => $request -> get('name'),
         ));
         $facility->save();
-        return redirect()->route('facility');
+        return redirect()->route('facility.index');
     }
 
     /**
@@ -64,7 +64,7 @@ class FacilitiesController extends Controller
      */
     public function edit($id)
     {
-        $facility = Facility::whereid($id)->firstOrFail();
+        $facility = Facility::findOrFail($id);
         return view('admin.facility.edit', compact('facility'));
     }
 
@@ -77,11 +77,11 @@ class FacilitiesController extends Controller
      */
     public function update(FacilityRequest $request, $id)
     {
-        $facility = Facility::whereid($id)->firstOrFail();
+        $facility = Facility::findOrFail($id);
         $facility->name = $request->get('name');
         $facility->save();
 
-        return redirect()->route('facility', $facility->id);
+        return redirect()->route('facility.index');
     }
 
     /**
@@ -92,9 +92,9 @@ class FacilitiesController extends Controller
      */
     public function destroy($id)
     {
-        $facility = Facility::whereid($id)->firstOrFail();
+        $facility = Facility::findOrFail($id);
         $facility->delete();
 
-        return redirect()->route('facility');
+        return redirect()->route('facility.index');
     }
 }

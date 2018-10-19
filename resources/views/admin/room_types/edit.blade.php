@@ -13,15 +13,15 @@
                 <h2 class="header-title">{{ __('messages.room_type_edit') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
-                        <a class="breadcrumb-item" href="{{ route('room_type') }}">{{ __('messages.room_type') }}</a>
+                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
+                        <a class="breadcrumb-item" href="{{ route('room_type.index') }}">{{ __('messages.room_type') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.edit') }}</span>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-body">
-                    {!! Form::open(['method' => 'POST', 'files' => true ]) !!}
+                    {!! Form::open(['route' => ['room_type.update', $room_type->id], 'method' => 'PUT', 'files' => true ]) !!}
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="form-group">

@@ -57,48 +57,22 @@ Route::group(['prefix' => 'dev'], function() {
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
 
-    /* Category */
-    Route::get('/category','Admin\CategoriesController@index')->name('category');
-    Route::get('/category/create','Admin\CategoriesController@create')->name('category_create');
-    Route::post('/category/create','Admin\CategoriesController@store');
-    Route::get('/category/{id?}edit','Admin\CategoriesController@edit')->name('category_edit');
-    Route::post('/category/{id?}edit','Admin\CategoriesController@update');
-    Route::post('/category/{id?}delete','Admin\CategoriesController@destroy')->name('category_delete');
+    Route::resource('category', 'Admin\CategoriesController');
 
-    /* Posts */
-    Route::get('/post','Admin\PostsController@index')->name('post');
-    Route::get('/post/create','Admin\PostsController@create')->name('post_create');
-    Route::post('/post/create','Admin\PostsController@store');
-    Route::get('/post/{id?}edit','Admin\PostsController@edit')->name('post_edit');
-    Route::post('/post/{id?}edit','Admin\PostsController@update');
-    Route::post('/post/{id?}delete','Admin\PostsController@destroy')->name('post_delete');
+    Route::resource('post','Admin\PostsController');
 
-    /* Facilities */
-    Route::get('/facility','Admin\FacilitiesController@index')->name('facility');
-    Route::get('/facility/create','Admin\FacilitiesController@create')->name('facility_create');
-    Route::post('/facility/create','Admin\FacilitiesController@store');
-    Route::get('/facility/{id?}edit','Admin\FacilitiesController@edit')->name('facility_edit');
-    Route::post('/facility/{id?}edit','Admin\FacilitiesController@update');
-    Route::post('/facility/{id?}delete','Admin\FacilitiesController@destroy')->name('facility_delete');
+    Route::resource('facility','Admin\FacilitiesController');
 
-    /* Room Type */
-    Route::get('/room_type','Admin\RoomTypesController@index')->name('room_type');
-    Route::get('/room_type/create','Admin\RoomTypesController@create')->name('room_type_create');
-    Route::post('/room_type/create','Admin\RoomTypesController@store');
-    Route::get('/room_type/{id?}edit','Admin\RoomTypesController@edit')->name('room_type_edit');
-    Route::post('/room_type/{id?}edit','Admin\RoomTypesController@update');
-    Route::post('/room_type/{id?}delete','Admin\RoomTypesController@destroy')->name('room_type_delete');
+    Route::resource('room_type','Admin\RoomTypesController');
 
-    /* Room */
-    Route::get('/room','Admin\RoomsController@index')->name('room');
-    Route::get('/room/create','Admin\RoomsController@create')->name('room_create');
-    Route::post('/room/create','Admin\RoomsController@store');
-    Route::get('/room/{id?}edit','Admin\RoomsController@edit')->name('room_edit');
-    Route::post('/room/{id?}edit','Admin\RoomsController@update');
-    Route::post('/room/{id?}delete','Admin\RoomsController@destroy')->name('room_delete');
+    Route::resource('room','Admin\RoomsController');
 
-    /* Booking List */
-    Route::get('/booking','Admin\RoomListBookController@index')->name('rooms');
+    Route::resource('booking','Admin\RoomListBookController');
+
+    Route::get('/customer','Admin\CustomersController@index')->name('customer');
+
+    Route::get('/user','Admin\UsersController@index')->name('user');
+
 });
 /*-------------------------------------------------------*/
 

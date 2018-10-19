@@ -20,7 +20,7 @@ class RoomTypesController extends Controller
      */
     public function index()
     {
-        $room_type = RoomType::all();
+        $room_type = RoomType::Paginate(10);
         return view('admin.room_types.lists', compact('room_type'));
     }
 
@@ -79,7 +79,7 @@ class RoomTypesController extends Controller
             $room_type->facilities()->attach($facility);
         }
 
-        return redirect()->route('room_type');
+        return redirect()->route('room_type.index');
     }
 
     /**
@@ -159,7 +159,7 @@ class RoomTypesController extends Controller
         }
 
 
-        return redirect()->route('room_type', $room_type->id);
+        return redirect()->route('room_type.index');
     }
 
     /**
@@ -173,6 +173,6 @@ class RoomTypesController extends Controller
         $room_type = RoomType::findOrFail($id);
         $room_type->delete();
 
-        return redirect()->route('room_type');
+        return redirect()->route('room_type.index');
     }
 }

@@ -8,19 +8,20 @@
                 <h2 class="header-title">{{ __('messages.room_types_list') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
+                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.list') }}</span>
                     </nav>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header border bottom">
-                    <a href="{{ route('room_type_create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
+                    <a href="{{ route('room_type.create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-hover">
                         <thead class="thead-light">
                         <tr>
+                            <th scope="col">{{ __('messages.id') }}</th>
                             <th scope="col">{{ __('messages.room_type') }}</th>
                             <th scope="col">{{ __('messages.room_size') }}</th>
                             <th scope="col">{{ __('messages.bed') }}</th>
@@ -31,19 +32,20 @@
                         </thead>
                         <tbody>
                         @php($stt = 0)
-                        @foreach($room_type as $room)
+                        @foreach($room_type as $key => $room)
                         <tr>
+                            <td>{{ $key + $room_type->firstItem() }}</td>
                             <td>{{ $room->name }}</td>
                             <td>{{ $room->room_size }}</td>
                             <td>{{ $room->bed }}</td>
                             <td>{{ $room->max_people }}</td>
-                            <td>{{ $room->price }}</td>
+                            <td>{{ number_format($room->price) }}</td>
                             <td class="text-center font-size-18">
                                 <button href="" data-toggle="modal" data-target="#modal-lg{{ $stt+=1 }}" class="text-gray" title="{{ __('messages.view') }}"><i class="ti-eye"></i></button>
-                                {!! Form::open(['route'=>['room_type_edit', $room->id], 'method'=>'GET']) !!}
+                                {!! Form::open(['route'=>['room_type.edit', $room->id], 'method'=>'GET']) !!}
                                     {!! Form::button('<i class="ti-pencil"></i>', ['class'=>'text-gray', 'title'=> __('messages.edit'), 'type' => 'submit']) !!}
                                 {!! Form::close() !!}
-                                {!! Form::open(['route'=>['room_type_delete', $room->id], 'method'=>'POST']) !!}
+                                {!! Form::open(['route'=>['room_type.destroy', $room->id], 'method'=>'DELETE']) !!}
                                     {!! Form::button('<i class="ti-trash"></i>', ['class'=>'text-gray', 'title'=> __('messages.delete'), 'type' => 'submit']) !!}
                                 {!! Form::close() !!}
                             </td>
@@ -74,22 +76,13 @@
                                                                         </ol>
                                                                         <div class="carousel-inner">
                                                                             @foreach ($room->images as $image)
-                                                                            <div class="carousel-item active">
+                                                                            <div class="carousel-item
+                                                                            @if ($loop->first) active @endif">
                                                                                 <div class="bg-overlay">
                                                                                     <img class="d-block w-100" src="{{ asset('images/rooms/'.$image->filename) }}" alt="First slide">
                                                                                 </div>
                                                                             </div>
                                                                             @endforeach
-                                                                            {{--<div class="carousel-item active">--}}
-                                                                                {{--<div class="bg-overlay">--}}
-                                                                                    {{--<img class="d-block w-100" src="assets/images/others/img-18.jpg" alt="First slide">--}}
-                                                                                {{--</div>--}}
-                                                                            {{--</div>--}}
-                                                                            {{--<div class="carousel-item">--}}
-                                                                                {{--<div class="bg-overlay">--}}
-                                                                                    {{--<img class="d-block w-100" src="assets/images/others/img-18.jpg" alt="Second slide">--}}
-                                                                                {{--</div>--}}
-                                                                            {{--</div>--}}
                                                                         </div>
                                                                         <a class="carousel-control-prev" href="#carouselExampleCaption" role="button" data-slide="prev">
                                                                             <span class="mdi mdi-chevron-left font-size-35" aria-hidden="true"></span>
@@ -109,7 +102,7 @@
                                                         <p>{{ __('messages.room_size') }}: {{ $room->room_size }}</p>
                                                         <p>{{ __('messages.bed') }}: {{ $room->bed }}</p>
                                                         <p>{{ __('messages.people') }}: {{ $room->max_people }}</p>
-                                                        <p>{{ __('messages.price') }}: {{ $room->price }}</p>
+                                                        <p>{{ __('messages.price') }}: {{ number_format($room->price) }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 col-sm-12 col-xs-12">
@@ -135,6 +128,9 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <div class="">
+                        {{ $room_type->links() }}
+                    </div>
                 </div>
             </div>
         </div>

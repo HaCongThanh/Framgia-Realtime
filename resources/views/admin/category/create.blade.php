@@ -10,7 +10,7 @@
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
                         <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Dashboard</a>
-                        <a class="breadcrumb-item" href="{{ route('category') }}">{{ __('messages.categories') }}</a>
+                        <a class="breadcrumb-item" href="{{ route('category.index') }}">{{ __('messages.categories') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.add') }}</span>
                     </nav>
                 </div>
@@ -23,7 +23,7 @@
 
                 <div class="card-body">
 
-                    {!! Form::open(['route' => 'category_create', 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => 'category.store', 'method' => 'POST']) !!}
                         <div class="form-group">
                             {!! Form::label('name', __('messages.category'), ['class' => 'control-label']) !!}
                             {!! Form::text('name', null, ['class' => 'form-control form-control-sm','placeholder' => __('messages.categories')]) !!}
