@@ -410,7 +410,8 @@
                                                 </div>
                                             </div>
                                             <!-- Rooms detail slider end -->
-                                            <p class="hidden-lg hidden-md">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl, eget tempor lacus est vel</p>
+                                            <textarea class="form-control hidden-lg hidden-md" id="note1" name="note1" placeholder="Ghi chú (Nếu có)"></textarea>
+                                            <br>
                                         </div>
                                         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
                                             <h4>Your Payment ID: #{{ $card_number }}</h4>
@@ -446,7 +447,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12 hidden-sm hidden-xs">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra a. Aliquam pellentesque nibh et nibh feugiat gravida. Maecenas ultricies, diam vitae semper placerat, velit risus accumsan nisl, eget tempor lacus est vel</p>
+                                            <textarea class="form-control" id="note2" name="note2" placeholder="Ghi chú (Nếu có)"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -454,7 +455,8 @@
                                 <br/>
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-grey prev-step" id="prev_complete">Quay lại</button></li>
-                                    <li><a href="{{ route('user.bookings') }}" type="button" class="btn search-button btn-theme next-step" id="btn_complete"><i class="fa fa-lock"></i> Hoàn tất đặt phòng</a></li>
+                                    {{-- <li><a href="{{ route('user.bookings') }}" type="button" class="btn search-button btn-theme next-step" id="btn_complete"><i class="fa fa-lock"></i> Hoàn tất đặt phòng</a></li> --}}
+                                    <li><button type="button" class="btn search-button btn-theme next-step" id="btn_complete"><i class="fa fa-lock"></i> Hoàn tất đặt phòng</button></li>
                                 </ul>
                             </div>
                         </div>
@@ -585,6 +587,31 @@
             $('#complete').removeClass('active');
             $('#menu_step2').addClass('active');
             $('#menu_complete').removeClass('active');
+        });
+
+        $('#btn_complete').on('click', function(event) {
+            event.preventDefault();
+            
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('user.bookings') }}",
+                data: {
+                    note1   :   $('#note1').val(),
+                    note2   :   $('#note2').val()
+                },
+                success:function(res){
+                    window.location.href = "{{ route('user.bookings.bill') }}";
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // 
+                }
+            });
         });
     </script>
 @endsection

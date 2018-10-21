@@ -13,6 +13,7 @@ use App\Models\RoomType;
 use App\Models\Revenue;
 use App\Models\CustomerBookingLog;
 use App\Models\CustomerBookingDetail;
+use Pusher\Pusher;
 use Validator;
 use DB;
 
@@ -311,9 +312,39 @@ class HomeController extends Controller
      * [bookings description]
      * @return [type] [description]
      */
-    public function bookings()
+    public function bookings(Request $request)
     {
         $user = Auth::user();
+
+        if ($request->note1 != null || $request->note2 != null) {
+            if ($request->note1 != null) {
+                $data['note'] = $request->note1;
+            } else {
+                $data['note'] = $request->note2;
+            }
+
+            $data['name'] = $user->name;
+
+            $options = array(
+                'cluster' => 'ap1',
+
+                'encrypted' => true
+            );
+
+            $pusher = new Pusher(
+                env('PUSHER_APP_KEY'),
+
+                env('PUSHER_APP_SECRET'),
+
+                env('PUSHER_APP_ID'),
+                
+                $options
+            );
+
+            $pusher->trigger('NotifyNoteEvent', 'notification-note', $data);
+        } else {
+            $data['note'] = null;
+        }
 
         /*Thêm bản ghi vào bảng room_rental_lists*/
         $array_room = session()->get('array_room');
@@ -373,7 +404,8 @@ class HomeController extends Controller
             'end_date'              =>  date_format(date_create(session()->get('end_date')), 'Y-m-d'),
             'total_number_people'   =>  session()->get('adults') + session()->get('children'),
             'total_number_room'     =>  session()->get('total_number_room'),
-            'total_money'           =>  session()->get('total_money')
+            'total_money'           =>  session()->get('total_money'),
+            'note'                  =>  $data['note']
         ]);
         /*----------------------------------------------*/
 
@@ -400,7 +432,11 @@ class HomeController extends Controller
         }
         /*--------------------------------------------------------*/
 
-        return redirect()->route('user.bookings.bill');
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Thêm đơn đặt phòng thành công!',
+            'data'      =>  $data['note']
+        ]);
     }
 
     /**
