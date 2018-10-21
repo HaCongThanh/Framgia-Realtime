@@ -40,7 +40,7 @@
         <div class="header navbar">
             <div class="header-container">
                 <div class="nav-logo">
-                    <a href="">
+                    <a href="{{ route('dashboard') }}">
                         <div class="logo logo-dark" style="background-image: url({{ asset('/img/logo.png') }});"></div>
                         <div class="logo logo-white" style="background-image: url({{ asset('/img/framgia3.png') }});"></div>
                     </a>
@@ -439,10 +439,30 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ route('user') }}">{{ __('messages.users') }}</a>
+                                <a href="{{ route('users.index') }}">{{ __('messages.users') }}</a>
                             </li>
                             <li>
                                 <a href="{{ route('customer') }}">{{ __('messages.customer') }}</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle" href="javascript:void(0);">
+                            <span class="icon-holder">
+                                <i class="fa fa-vcard"></i>
+                            </span>
+                            <span class="title">Quản trị hệ thống</span>
+                            <span class="arrow">
+                                <i class="mdi mdi-chevron-right"></i>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ route('roles.index') }}">Vai trò</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('customer') }}">Quyền hạn</a>
                             </li>
                         </ul>
                     </li>
@@ -940,7 +960,7 @@
             <footer class="content-footer">
                 <div class="footer">
                     <div class="copyright">
-                        <span>Copyright © 2018 <b class="text-dark">Theme_Nate</b>. All rights reserved.</span>
+                        <span>Copyright © 2018 <b class="text-dark">Framgia</b>. All rights reserved.</span>
                         <span class="go-right">
                                 <a href="#" class="text-gray m-r-15">Term &amp; Conditions</a>
                                 <a href="#" class="text-gray">Privacy &amp; Policy</a>

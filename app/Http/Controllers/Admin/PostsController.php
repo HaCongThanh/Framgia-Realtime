@@ -29,7 +29,9 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::Paginate(10);
+
         $categories = Category::all();
+        
         return view('admin.post.lists', compact('posts', 'categories'));
     }
 
@@ -55,10 +57,13 @@ class PostsController extends Controller
     {
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+
             $new_name = str_random(3).'_'.$image->getClientOriginalName();
+
             while (file_exists('images/posts/'.$new_name)) {
                 $new_name = str_random(4).'_'.$new_name;
             }
+
             $image->move('images/posts/', $new_name);
         }
 
@@ -71,10 +76,11 @@ class PostsController extends Controller
             'user_id' => 7,
             'image' => $new_name
         ));
+
         $post->save();
         $post->categories()->sync($request->get('category'));
 
-        return redirect() -> route('post.index');
+        return redirect()->route('post.index');
     }
 
     /**
@@ -97,8 +103,11 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
+
         $categories = Category::all()->pluck('name', 'id');
+
         $selectedCategories = $post->categories->pluck('id');
+
         return view('admin.post.edit', compact('post', 'categories', 'selectedCategories'));
     }
 
@@ -112,18 +121,25 @@ class PostsController extends Controller
     public function update($id, PostFormRequest $request)
     {
         $post = Post::findOrFail($id);
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
+
             $new_name = str_random(3).'_'.$image->getClientOriginalName();
+
             while (file_exists('images/posts/'.$new_name)) {
                 $new_name = str_random(3).'_'.$new_name;
             }
+
             $image->move('images/posts/', $new_name);
+
             if (file_exists('images/posts/'.$post->image)) {
                 unlink('images/posts/'.$post->image);
             }
+
             $post->image = $new_name;
         }
+
         $post->title = $request->get('title');
         $post->slug = $request->get('slug');
         $post->content = $request->get('content');
@@ -145,9 +161,11 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
+
         if (file_exists('images/posts/' . $post->image)) {
             unlink('images/posts/' . $post->image);
         }
+
         $post->delete();
 
         return redirect()->route('post.index');
