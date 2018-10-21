@@ -235,7 +235,7 @@ class RoleController extends Controller
             ->addColumn('action', function ($role) {
                 $string = '';
 
-                if (Entrust::hasRole(['users'])) {
+                if (Entrust::hasRole(['super-admin'])) {
                     $string = $string .' <a href="'. route('roles.show', $role->id) .'" class="text-gray m-r-15" data-tooltip="tooltip" title="Quyền hạn"><i class="ti-shield" aria-hidden="true"></i></a>';
                 }
 
