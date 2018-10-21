@@ -1,14 +1,14 @@
 @extends('user.layouts.master')
 
 @section('style')
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/admin/css/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/sweet-alert.css') }}">
+
     <style type="text/css">
         .dropdown-toggle:after {
             display: none !important;
         }
     </style>
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/admin/css/app.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/sweet-alert.css') }}">
 @endsection
 
 @section('content')
