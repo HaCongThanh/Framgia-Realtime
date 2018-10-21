@@ -101,14 +101,14 @@
 
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-success" id="btn-booking" style="float: right;"><i class="fa fa-plus"></i> {{ __('messages.book_room') }}</button>
+                    <button type="button" class="btn btn-success" id="btn-booking" style="float: right; display: none;"><i class="fa fa-plus"></i> {{ __('messages.book_room') }}</button>
 
                     @php
                         session()->forget('route');
                         session()->put('route', 'user.home.check_out');
                     @endphp
 
-                    <label class="btn btn-success" style="float: right;"><span id="number-room">{{ __('messages.price_sum') }}: {{ __('messages.no_room') }}</span> <b id="price-total"></b></label>
+                    <label class="btn btn-success" style="float: right; display: none;" id="lbl-booking"><span id="number-room">{{ __('messages.price_sum') }}: {{ __('messages.no_room') }}</span> <b id="price-total"></b></label>
                     <input type="hidden" name="number-room-hidden" id="number-room-hidden" class="btn btn-success" value="" disabled>
                     <input type="hidden" name="total-money-hidden" id="total-money-hidden" class="btn btn-success" value="" disabled>
                     <input type="hidden" name="start-date-hidden" id="start-date-hidden" class="btn btn-success" value="{{ $start_date }}" disabled>
