@@ -26,7 +26,7 @@ class CustomerBookingLog extends Model
 	 * @var [type]
 	 */
 	protected $fillable = [
-        'user_id', 'start_date', 'end_date', 'total_number_people', 'total_number_room', 'total_money', 'created_at', 'updated_at', 'deleted_at'
+        'user_id', 'start_date', 'end_date', 'total_number_people', 'total_number_room', 'total_money', 'note', 'seen', 'created_at', 'updated_at', 'deleted_at'
     ];
 
     /**
