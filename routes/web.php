@@ -57,6 +57,20 @@ Route::group(['prefix' => 'dev'], function() {
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
 
+    Route::get('/dashboard-statistical','Admin\HomeController@dashboardStatistical')->name('admin.dashboard_statistical');
+
+    Route::get('/customer','Admin\CustomersController@index')->name('customer');
+
+    Route::get('/roles/get_list_roles','Admin\RoleController@getListRoles')->name('admin.roles.get_list_roles');
+
+    Route::post('/roles/update_permission_role','Admin\RoleController@updatePermissionRole')->name('admin.roles.update_permission_role');
+
+    Route::post('/users/update_role_user','Admin\UserController@updateRoleUser')->name('admin.users.update_role_user');
+
+    Route::get('/roles/get_list_permission_role/{role_id}','Admin\RoleController@getListPermissionRole')->name('admin.roles.get_list_permission_role');
+
+    Route::get('/users/get_list_role_user/{user_id}','Admin\UserController@getListRoleUser')->name('admin.users.get_list_role_user');
+
     Route::resource('category', 'Admin\CategoriesController');
 
     Route::resource('post','Admin\PostsController');
@@ -69,10 +83,11 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::resource('booking','Admin\RoomListBookController');
 
-    Route::get('/customer','Admin\CustomersController@index')->name('customer');
+    Route::resource('users','Admin\UserController');
 
-    Route::get('/user','Admin\UsersController@index')->name('user');
+    Route::resource('roles', 'Admin\RoleController');
 
+    Route::resource('permissions', 'Admin\PermissionController');
 });
 /*-------------------------------------------------------*/
 

@@ -40,7 +40,7 @@
         <div class="header navbar">
             <div class="header-container">
                 <div class="nav-logo">
-                    <a href="">
+                    <a href="{{ route('dashboard') }}">
                         <div class="logo logo-dark" style="background-image: url({{ asset('/img/logo.png') }});"></div>
                         <div class="logo logo-white" style="background-image: url({{ asset('/img/framgia3.png') }});"></div>
                     </a>
@@ -145,7 +145,7 @@
                     </li>--}}
                 </ul>
                 <ul class="nav-right">
-                    {{--<li class="dropdown dropdown-animated scale-left">
+                    <li class="dropdown dropdown-animated scale-left">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <i class="mdi mdi-apps"></i>
                         </a>
@@ -201,35 +201,20 @@
                         </ul>
                     </li>
                     <li class="notifications dropdown dropdown-animated scale-left">
-                        <span class="counter">2</span>
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="mdi mdi-bell-ring-outline"></i>
+                        <span class="counter notif-count">0</span>
+                        <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
+                            <i data-count="0" class="mdi mdi-bell-ring-outline"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-lg p-v-0">
                             <li class="p-v-15 p-h-20 border bottom text-dark">
                                 <h5 class="m-b-0">
                                     <i class="mdi mdi-bell-ring-outline p-r-10"></i>
-                                    <span>Notifications</span>
+                                    <span>Notifications (<span class="notif-count">0</span>)</span>
                                 </h5>
                             </li>
                             <li>
                                 <ul class="list-media overflow-y-auto relative scrollable" style="max-height: 300px">
-                                    <li class="list-item border bottom">
-                                        <a href="javascript:void(0);" class="media-hover p-15">
-                                            <div class="media-img">
-                                                <div class="icon-avatar bg-primary">
-                                                    <i class="ti-settings"></i>
-                                                </div>
-                                            </div>
-                                            <div class="info">
-                                                    <span class="title">
-                                                        System shutdown
-                                                    </span>
-                                                <span class="sub-title">8 min ago</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="list-item border bottom">
+                                    {{-- <li class="list-item border bottom">
                                         <a href="javascript:void(0);" class="media-hover p-15">
                                             <div class="media-img">
                                                 <div class="icon-avatar bg-success">
@@ -243,60 +228,30 @@
                                                 <span class="sub-title">12 min ago</span>
                                             </div>
                                         </a>
-                                    </li>
-                                    <li class="list-item border bottom">
-                                        <a href="javascript:void(0);" class="media-hover p-15">
-                                            <div class="media-img">
-                                                <div class="icon-avatar bg-warning">
-                                                    <i class="ti-file"></i>
-                                                </div>
-                                            </div>
-                                            <div class="info">
-                                                    <span class="title">
-                                                        New Attacthemnet
-                                                    </span>
-                                                <span class="sub-title">12 min ago</span>
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="list-item border bottom">
-                                        <a href="javascript:void(0);" class="media-hover p-15">
-                                            <div class="media-img">
-                                                <div class="icon-avatar bg-info">
-                                                    <i class="ti-shopping-cart"></i>
-                                                </div>
-                                            </div>
-                                            <div class="info">
-                                                    <span class="title">
-                                                        New Order Received
-                                                    </span>
-                                                <span class="sub-title">12 min ago</span>
-                                            </div>
-                                        </a>
-                                    </li>
+                                    </li> --}}
                                 </ul>
                             </li>
                             <li class="p-v-15 p-h-20 text-center">
-                                    <span>
-                                        <a href="#" class="text-gray">Check all notifications <i class="ei-right-chevron p-l-5 font-size-10"></i></a>
-                                    </span>
+                                <span>
+                                    <a href="#" class="text-gray">Check all notifications <i class="ei-right-chevron p-l-5 font-size-10"></i></a>
+                                </span>
                             </li>
                         </ul>
                     </li>
                     <li class="user-profile dropdown dropdown-animated scale-left">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img class="profile-img img-fluid" src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
+                            <img class="profile-img img-fluid" src="{{ url('img/avatar-5.png') }}" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-md p-v-0">
                             <li>
                                 <ul class="list-media">
                                     <li class="list-item p-15">
                                         <div class="media-img">
-                                            <img src="{{ url('assets/images/avatars/thumb-11.jpg') }}" alt="">
+                                            <img src="@if(empty(Auth::user()->avatar)) {{ url('img/avatar-5.png') }} @else {{ Auth::user()->avatar }} @endif" alt="">
                                         </div>
                                         <div class="info">
-                                            <span class="title text-semibold">Marshall Nichols</span>
-                                            <span class="sub-title">UI/UX Desinger</span>
+                                            <span class="title text-semibold">{{ Auth::user()->name }}</span>
+                                            <span class="sub-title">{{ Auth::user()->email }}</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -314,22 +269,27 @@
                                     <span>Profile</span>
                                 </a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="#">
                                     <i class="ti-email p-r-10"></i>
                                     <span>Inbox</span>
                                     <span class="badge badge-pill badge-success pull-right">2</span>
                                 </a>
-                            </li>
+                            </li> --}}
                             <li>
-                                <a href="#">
-                                    <i class="ti-power-off p-r-10"></i>
-                                    <span>Logout</span>
+                                <a class="sign-in" href="{{ route('user.logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();"><i class="ti-power-off p-r-10"></i>
+                                    {{ __('messages.logout') }}
                                 </a>
+
+                                <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
                     </li>
-                    <li class="dropdown dropdown-animated scale-left">
+                    {{-- <li class="dropdown dropdown-animated scale-left">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{ __('messages.language') }}
                         </button>
@@ -337,7 +297,7 @@
                             <a class="dropdown-item" href="{!! route('locale', ['en']) !!}">{{ __('messages.english') }}</a>
                             <a class="dropdown-item" href="{!! route('locale', ['vi']) !!}">{{ __('messages.vietnamese') }}</a>
                         </div>
-                    </li>--}}
+                    </li> --}}
                     <li>
                         <a class="dropdown-item" href="{!! route('locale', ['vi']) !!}" title="{{ __('messages.vietnamese') }}">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/2000px-Flag_of_Vietnam.svg.png" width="25" height="15">
@@ -439,10 +399,30 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ route('user') }}">{{ __('messages.users') }}</a>
+                                <a href="{{ route('users.index') }}">{{ __('messages.users') }}</a>
                             </li>
                             <li>
                                 <a href="{{ route('customer') }}">{{ __('messages.customer') }}</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-toggle" href="javascript:void(0);">
+                            <span class="icon-holder">
+                                <i class="fa fa-vcard"></i>
+                            </span>
+                            <span class="title">Quản trị hệ thống</span>
+                            <span class="arrow">
+                                <i class="mdi mdi-chevron-right"></i>
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ route('roles.index') }}">Vai trò</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('customer') }}">Quyền hạn</a>
                             </li>
                         </ul>
                     </li>
@@ -940,7 +920,7 @@
             <footer class="content-footer">
                 <div class="footer">
                     <div class="copyright">
-                        <span>Copyright © 2018 <b class="text-dark">Theme_Nate</b>. All rights reserved.</span>
+                        <span>Copyright © 2018 <b class="text-dark">Framgia</b>. All rights reserved.</span>
                         <span class="go-right">
                                 <a href="#" class="text-gray m-r-15">Term &amp; Conditions</a>
                                 <a href="#" class="text-gray">Privacy &amp; Policy</a>
@@ -962,11 +942,61 @@
 <script src="{{ asset('bower_components/lib_booking/lib/admin/js/Chart.min.js') }}"></script>
 <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('bower_components/lib_booking/lib/admin/js/default.js') }}"></script>
+<script src="{{ asset('bower_components/lib_booking/lib/admin/js/pusher.min.js') }}"></script>
 
 <script src="{{ asset('bower_components/lib_booking/lib/admin/ckeditor/ckeditor.js') }}"></script>
 <script> CKEDITOR.replace('editor1'); </script>
 
 @yield('script')
+
+<script type="text/javascript">
+    var notificationsWrapper   = $('.notifications');
+    var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
+    var notificationsCountElem = notificationsToggle.find('i[data-count]');
+    var notificationsCount     = parseInt(notificationsCountElem.data('count'));
+    var notifications          = notificationsWrapper.find('ul.relative');
+
+
+    // Enable pusher logging - don't include this in production
+     Pusher.logToConsole = true;
+
+    var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
+        cluster: 'ap1',
+        encrypted: true
+    });
+
+    // Subscribe to the channel we specified in our Laravel Event
+    var channel = pusher.subscribe('NotifyNoteEvent');
+
+    // Bind a function to a Event (the full Laravel class)
+    channel.bind('notification-note', function(data) {
+        var existingNotifications = notifications.html();
+        var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
+        var newNotificationHtml = `
+            <li class="list-item border bottom active">
+                <a href="javascript:void(0);" class="media-hover p-15">
+                    <div class="media-img">
+                        <div class="icon-avatar bg-success">
+                            <i class="ti-user"></i>
+                        </div>
+                    </div>
+                    <div class="info">
+                            <span class="title">
+                                `+data.name+`
+                            </span>
+                        <span class="sub-title">`+data.note+`</span>
+                    </div>
+                </a>
+            </li>
+        `;
+        notifications.html(newNotificationHtml + existingNotifications);
+
+        notificationsCount += 1;
+        notificationsCountElem.attr('data-count', notificationsCount);
+        notificationsWrapper.find('.notif-count').text(notificationsCount);
+        notificationsWrapper.show();
+    });
+</script>
 
 </body>
 </html>

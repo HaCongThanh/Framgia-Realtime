@@ -174,9 +174,7 @@
                                                         <img src="{{ url('/img/mastercard.png') }}" alt="Mastercard">
                                                         <img src="{{ url('/img/american-express.png') }}" alt="American Express">
                                                         <img src="{{ url('/img/paypal.png') }}" alt="Paypal">
-                                                        <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem plugg dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                                                        </p>
+                                                        <p class="text-muted well well-sm no-shadow" id="note" style="margin-top: 10px;"></p>
                                                     </div>
 
                                                     <div class="col-xs-6">
@@ -210,7 +208,7 @@
                                                     <div class="col-xs-12">
                                                         <button class="btn btn-default" onclick="btnPrintBill();"><i class="fa fa-print"></i> {{ __('messages.bill_text') }}</button>
                                                         <button class="btn btn-success pull-right" data-dismiss="modal">OK</button>
-                                                        <button class="btn btn-primary pull-right" data-dismiss="modal" style="margin-right: 5px;">{{ __('messages.cancel') }}</button>
+                                                        <button class="btn btn-primary pull-right" data-dismiss="modal" style="margin-right: 5px;">{{ __('Hủy đặt phòng') }}</button>
                                                     </div>
                                                 </div>
                                             </section>
@@ -267,6 +265,7 @@
                         $created_at = res.data[i]['created_at'];
                         $total_money = formatNumber(res.data[i]['total_money']);
                         $total_number_room = res.data[i]['total_number_room'];
+                        $note = res.data[i]['note'];
 
                         $("#record_details").append("<tr class='clear_tr'><td style='width: 5%; text-align: center;'>" + $count + "</td><td style='width: 25%; text-align: center;'>" + $room_type_name + "</td><td style='width: 25%; text-align: center;'>" + $price + " VNĐ</td><td style='width: 20%; text-align: center;'>" + $number_room + "</td><td style='width: 25%; text-align: center;'>" + $total_price + " VNĐ</td></tr>");
 
@@ -274,6 +273,12 @@
                         $("#total_money").html($total_money + " VNĐ");
                         $("#total_number_room").html($total_number_room + " phòng");
 
+                        if ($note == null) {
+                            $("#note").html('Không có ghi chú');
+                        } else {
+                            $("#note").html($note);
+                        }
+                        
                         $count++;
                     }
 

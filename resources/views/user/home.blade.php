@@ -96,12 +96,12 @@
                             <div class="row">
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="start_date" class="btn-default datepicker" placeholder="{{ __('messages.date_start') }}">
+                                        <input type="text" name="start_date" class="btn-default datepicker" placeholder="{{ __('messages.date_start') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
-                                        <input type="text" name="end_date" class="btn-default datepicker" placeholder="{{ __('messages.date_finish') }}">
+                                        <input type="text" name="end_date" class="btn-default datepicker" placeholder="{{ __('messages.date_finish') }}" required>
                                     </div>
                                 </div>
                                 <div class="col-md-2 col-sm-2 col-xs-6">
@@ -171,7 +171,7 @@
                     @if (!empty($room_types))
                         @foreach ($room_types as $room_type)
                             
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 filtr-item" data-category="3, 2, 4">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 filtr-item" data-category="{{ $room_type->id }}">
                                 <div class="hotel-box">
                                     <div class="header clearfix">
                                         <img src="{{ url('/images/rooms/' . $room_type->images->first->filename['filename']) }}" alt="img-1" class="img-responsive" style="width: 360px; height: 240px;">

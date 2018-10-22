@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Revenue;
+use App\Models\CustomerBookingLog;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
@@ -91,5 +94,41 @@ class HomeController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * [dashboardStatistical description]
+     * @return [type] [description]
+     */
+    public function dashboardStatistical()
+    {   
+        /*Tổng doanh thu*/
+        $revenues = Revenue::select('total_amount')->get();
+
+        $total_revenue = $revenues->sum('total_amount');
+        /*--------------*/
+
+        /*Tổng lượt đặt phòng*/
+        $count_customer_booking_logs = CustomerBookingLog::count();
+        /*-------------------*/
+
+        /*Tổng bài viết*/
+        $count_posts = Post::count();
+        /*-------------*/
+
+        /*Tổng số khách đến*/
+        $customer_booking_logs = CustomerBookingLog::select('total_number_people')->get();
+
+        $total_number_people = $customer_booking_logs->sum('total_number_people');
+        /*-----------------*/
+
+        return response()->json([
+            'error'                         =>  false,
+            'message'                       =>  'Lấy thông tin thống kê thành công!',
+            'total_revenue'                 =>  $total_revenue,
+            'count_customer_booking_logs'   =>  $count_customer_booking_logs,
+            'count_posts'                   =>  $count_posts,
+            'total_number_people'           =>  $total_number_people
+        ]);
     }
 }

@@ -39,4 +39,12 @@ function selectRooms() {
 
     document.getElementById("price-total").innerHTML = formatNumber(total_room_price) + "VNĐ";
     $('#total-money-hidden').val(total_room_price);
+
+    if (total_room_count != 0) {
+        $("#btn-booking").css('display', 'block');
+        $("#lbl-booking").css('display', 'block');
+    } else {
+        $("#btn-booking").css('display', 'none');
+        $("#lbl-booking").css('display', 'none');
+    }
 };

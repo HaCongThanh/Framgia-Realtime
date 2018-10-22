@@ -23,7 +23,8 @@ mix.copy('resources/js/user/booking.js', 'public/js/user/booking.js');
 // --------------
 
 // Admin --------
-// mix.copy('resources/js/admin/dataTables.bootstrap4.min.js', 'public/js/admin/dataTables.bootstrap4.min.js');
+mix.js('resources/js/admin/role.js', 'public/js/admin/role.js');
+mix.js('resources/js/admin/permission_role.js', 'public/js/admin/permission_role.js');
 // ---------------
 
 mix.version();
