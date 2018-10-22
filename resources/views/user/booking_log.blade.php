@@ -208,7 +208,7 @@
                                                     <div class="col-xs-12">
                                                         <button class="btn btn-default" onclick="btnPrintBill();"><i class="fa fa-print"></i> {{ __('messages.bill_text') }}</button>
                                                         <button class="btn btn-success pull-right" data-dismiss="modal">OK</button>
-                                                        <button class="btn btn-primary pull-right" data-dismiss="modal" style="margin-right: 5px;">{{ __('messages.cancel') }}</button>
+                                                        <button class="btn btn-primary pull-right" data-dismiss="modal" style="margin-right: 5px;">{{ __('Hủy đặt phòng') }}</button>
                                                     </div>
                                                 </div>
                                             </section>
