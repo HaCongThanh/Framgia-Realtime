@@ -212,13 +212,13 @@
                                 <div class="row">
                                     <div class="col-lg-8 col-md-8 col-xs-12">
                                         <div class="contact-form sidebar-widget">
-                                            <h3 class="booking-heading-2 black-color">Thông tin thanh toán</h3>
+                                            <h3 class="booking-heading-2 black-color">{{ __('messages.info_account') }}</h3>
 
-                                            <h3 class="booking-heading-2">Thông tin thẻ</h3>
+                                            <h3 class="booking-heading-2">{{ __('messages.info_c') }}</h3>
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group email">
-                                                        <label>Loại thẻ</label>
+                                                        <label>{{ __('messages.t_card') }}</label>
                                                         <select class="selectpicker country search-fields" name="card_type" id="card_type">
                                                             <option @if ($card_type == 'Master Card') selected @endif>Master Card</option>
                                                             <option @if ($card_type == 'Visa') selected @endif>Visa</option>
@@ -229,13 +229,13 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group phone">
-                                                        <label>Số thẻ</label>
+                                                        <label>ype{{ __('messages.number_card') }}</label>
                                                         <input type="text" name="card_number" id="card_number" class="input-text" value="{{ $card_number }}">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group Country">
-                                                        <label>Thời hạn</label>
+                                                        <label>{{ __('messages.time_card') }}</label>
                                                         <select class="selectpicker country search-fields" name="expire" id="expire">
                                                             <option @if ($expire == 1) selected @endif>1</option>
                                                             <option @if ($expire == 2) selected @endif>2</option>
@@ -254,7 +254,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group Country">
-                                                        <label>Năm</label>
+                                                        <label>{{ __('messages.year') }}</label>
                                                         <select class="selectpicker country search-fields" name="year" id="year">
                                                             <option @if ($year == 2018) selected @endif>2018</option>
                                                             <option @if ($year == 2017) selected @endif>2017</option>
@@ -274,12 +274,12 @@
 
                                         <ul class="list-inline pull-right">
                                             <li><button type="button" class="btn btn-grey prev-step" id="prev_step2">Quay lại</button></li>
-                                            <li><button type="button" class="btn search-button btn-theme next-step" id="next_step2">Chi tiết cuối cùng >></button></li>
+                                            <li><button type="button" class="btn search-button btn-theme next-step" id="next_step2">{{ __('messages.detail_finish') }} >></button></li>
                                         </ul>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-xs-12">
                                         <div class="booling-details-box">
-                                            <h3 class="booking-heading-2">Thông tin đặt phòng</h3>
+                                            <h3 class="booking-heading-2">{{ __('messages.info_room') }}</h3>
 
                                             <!--  Rooms detail slider start -->
                                             <div class="rooms-detail-slider simple-slider ">
@@ -328,24 +328,24 @@
 
                                             <ul>
                                                 <li>
-                                                    <span>Nhận phòng:</span> {{ date('d/m/Y', strtotime($start_date)) }} từ 15:00
+                                                    <span>{{ __('messages.date_start') }}:</span> {{ date('d/m/Y', strtotime($start_date)) }} {{ __('messages.t') }} 15:00
                                                 </li>
                                                 <li>
-                                                    <span>Trả phòng:</span> {{ date('d/m/Y', strtotime($end_date)) }} đến 12:00
+                                                    <span>{{ __('messages.date_finish') }}:</span> {{ date('d/m/Y', strtotime($end_date)) }} o{{ __('messages.from') }} 12:00
                                                 </li>
                                                 <li>
-                                                    <span>Số lượng phòng:</span> {{ $total_number_room }}
+                                                    <span>{{ __('messages.total_room') }}:</span> {{ $total_number_room }}
                                                 </li>
                                                 <li>
-                                                    <span>Người lớn:</span> {{ $adults }}
+                                                    <span>{{ __('messages.old') }}:</span> {{ $adults }}
                                                 </li>
                                                 <li>
-                                                    <span>Trẻ em:</span> {{ $children }}
+                                                    <span>{{ __('messages.young') }}:</span> {{ $children }}
                                                 </li>
                                             </ul>
 
                                             <div class="your-address">
-                                                <strong>Địa chỉ:</strong>
+                                                <strong>{{ __('messages.address') }}:</strong>
                                                 <address>
                                                     <strong id="name_step2"></strong>
                                                     <br><br>
@@ -354,7 +354,7 @@
                                             </div>
 
                                             <div class="price">
-                                                Tổng giá: {{ number_format($total_money) }} VNĐ
+                                                {{ __('messages.price_sum') }}: {{ number_format($total_money) }} VNĐ
                                             </div>
                                         </div>
                                     </div>
@@ -362,7 +362,7 @@
                             </div>
                             <div class="tab-pane" role="tabpanel" id="complete">
                                 <div class="booling-details-box booling-details-box-2 mrg-btm-30">
-                                    <h3 class="booking-heading-2">Thông tin đặt phòng</h3>
+                                    <h3 class="booking-heading-2">{{ __('messages.info_room') }}</h3>
                                     <div class="row mrg-btm-30">
                                         <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                                             <!--  Rooms detail slider start -->
@@ -417,21 +417,21 @@
 
                                             <ul>
                                                 <li>
-                                                    <span>Nhận phòng:</span> {{ date('d/m/Y', strtotime($start_date)) }} từ 15:00
+                                                    <span>{{ __('messages.date_start') }}:</span> {{ date('d/m/Y', strtotime($start_date)) }} {{ __('messages.to') }} 15:00
                                                 </li>
                                                 <li>
-                                                    <span>Trả phòng:</span> {{ date('d/m/Y', strtotime($end_date)) }} đến 12:00
+                                                    <span>{{ __('messages.date_finish') }}:</span> {{ date('d/m/Y', strtotime($end_date)) }} {{ __('messages.from') }} 12:00
                                                 </li>
                                                 <li>
-                                                    <span>Người lớn:</span> {{ $adults }}
+                                                    <span>{{ __('messages.old') }}:</span> {{ $adults }}
                                                 </li>
                                                 <li>
-                                                    <span>Trẻ em:</span> {{ $children }}
+                                                    <span>{{ __('messages.young') }}:</span> {{ $children }}
                                                 </li>
                                             </ul>
 
                                             <div class="your-address">
-                                                <strong>Địa chỉ của bạn:</strong>
+                                                <strong>{{ __('messages.address') }}:</strong>
                                                 <address>
                                                     <strong id="name_complete"></strong>
                                                     <br><br>
@@ -440,7 +440,7 @@
                                             </div>
 
                                             <div class="price">
-                                                Tổng giá: {{ number_format($total_money) }} VNĐ
+                                                {{ __('messages.price_sum') }}: {{ number_format($total_money) }} VNĐ
                                             </div>
                                         </div>
                                     </div>
@@ -453,8 +453,8 @@
                                 <br/>
                                 <br/>
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-grey prev-step" id="prev_complete">Quay lại</button></li>
-                                    <li><a href="{{ route('user.bookings') }}" type="button" class="btn search-button btn-theme next-step" id="btn_complete"><i class="fa fa-lock"></i> Hoàn tất đặt phòng</a></li>
+                                    <li><button type="button" class="btn btn-grey prev-step" id="prev_complete">{{ __('messages.return') }}</button></li>
+                                    <li><a href="{{ route('user.bookings') }}" type="button" class="btn search-button btn-theme next-step" id="btn_complete"><i class="fa fa-lock"></i> {{ __('messages.finish_book_room') }}</a></li>
                                 </ul>
                             </div>
                         </div>

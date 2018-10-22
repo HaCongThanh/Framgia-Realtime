@@ -89,6 +89,10 @@
                     </div>
                     {!! Form::submit(__('messages.add'), ['class'=>'btn btn-info btn-float btn-outline', 'id' => 'submit']) !!}
                     {!! Form::close() !!}
+
+                    {{--@if (Session::has('status'))
+                        {{ Session::get('status') }}
+                    @endif--}}
                 </div>
             </div>
         </div>

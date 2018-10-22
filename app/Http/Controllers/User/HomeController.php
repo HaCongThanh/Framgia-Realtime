@@ -145,8 +145,6 @@ class HomeController extends Controller
             /*Lấy những phòng còn trống trong bảng rooms với status = 0*/
             $rooms = Room::where('status', 0)->get();
 
-            dd($rooms);
-
             foreach ($rooms as $room) {
                 array_push($array_room_type, $room->room_type_id);
 
