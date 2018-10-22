@@ -53,6 +53,7 @@ class LoginController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
+
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $email = $request->input('email');
@@ -60,9 +61,11 @@ class LoginController extends Controller
             $password = $request->input('password');
 
             if(Auth::attempt(['email' => $email, 'password' => $password], $request->has('remember'))) {
+                
                 return redirect()->route('dashboard');
             } else {
                 $errors = new MessageBag(['password' => 'Email hoặc mật khẩu không đúng']);
+
                 return redirect()->back()->withInput()->withErrors($errors);
             }
         }
