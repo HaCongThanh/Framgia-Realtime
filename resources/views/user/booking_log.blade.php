@@ -60,12 +60,16 @@
                                             <td style="text-align: center;">{{ $customer_booking_log->total_number_room }}</td>
                                             <td style="text-align: center;">{{ number_format($customer_booking_log->total_money) }} VNĐ</td>
                                             <td class="text-center font-size-18" style="text-align: center;">
-                                                {{-- <a data-toggle="modal" data-target="#details" class="text-gray m-r-15">
-                                                    <i class="fa fa-twitter"></i>
-                                                </a> --}}
                                                 <a data-toggle="modal" data-target="#bills" class="text-gray clear-bills" onclick="bills({{ $customer_booking_log->id }});" title="{{ __('messages.view') }}">
                                                     <i class="fa fa-credit-card"></i>
                                                 </a>
+
+                                                @if (strtotime('+1 day', time()) < strtotime($customer_booking_log->start_date))
+                                                    &nbsp;
+                                                    <a class="text-gray clear-bills" onclick="cancelReservation({{ $customer_booking_log->id }});" title="{{ __('Hủy đặt phòng') }}">
+                                                        <i class="fa fa-times-circle"></i>
+                                                    </a>
+                                                @endif
                                             </td>
                                         </tr>
 
@@ -208,7 +212,7 @@
                                                     <div class="col-xs-12">
                                                         <button class="btn btn-default" onclick="btnPrintBill();"><i class="fa fa-print"></i> {{ __('messages.bill_text') }}</button>
                                                         <button class="btn btn-success pull-right" data-dismiss="modal">OK</button>
-                                                        <button class="btn btn-primary pull-right" data-dismiss="modal" style="margin-right: 5px;">{{ __('Hủy đặt phòng') }}</button>
+                                                        {{-- <button type="button" class="btn btn-primary pull-right" id="cancel_reservation" style="margin-right: 5px;">{{ __('messages.cancel') }}</button> --}}
                                                     </div>
                                                 </div>
                                             </section>
@@ -228,6 +232,7 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('bower_components/lib_booking/lib/user/js/sweet-alert.min.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/jQuery.print.js') }}"></script>
 
     <script>
@@ -298,13 +303,44 @@
                     $("#user_card_number").html("<b>Số thẻ:</b> " + $user_card_number);
                     $("#user_payment_date").html("<b>Ngày thanh toán:</b> " + $user_payment_date);
                     $("#customer_booking_log_id").html("<b>Mã hóa đơn #</b>" + $customer_booking_log_id);
-                    // $("#user_card_type").html($user_card_type);
                 }
             });
         }
 
         function btnPrintBill(){
             jQuery('#print_bill').print();
+        }
+
+        function cancelReservation(customer_booking_log_id){
+            swal({
+                title: "Bạn có chắc muốn hủy đặt phòng?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            },
+            function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('user.bookings.cancel_reservation') }}',
+                    data: {
+                        customer_booking_log_id :   customer_booking_log_id
+                    },
+                    success:function(res){
+                        window.location.href = "{{ route('user.bookings.bill') }}";
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        // 
+                    }
+                });
+            });
         }
     </script>
 @endsection

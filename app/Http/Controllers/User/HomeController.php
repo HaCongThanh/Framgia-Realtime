@@ -346,41 +346,6 @@ class HomeController extends Controller
             $data['note'] = null;
         }
 
-        /*Thêm bản ghi vào bảng room_rental_lists*/
-        $array_room = session()->get('array_room');
-
-        for ($i=1; $i <= 20; $i++) { 
-            if (session()->get('rt' . $i) > 0) {
-                $room_type_id = $i;
-
-                $count_room = session()->get('rt' . $i);    //  Số lượng phòng cần đặt của LOẠI PHÒNG đó
-
-                $count = 0;
-
-                $rooms = Room::where('room_type_id', $room_type_id)->select('id')->get();
-
-                for ($j=0; $j < count($array_room); $j++) { 
-                    foreach ($rooms as $room) {
-                        if ($room->id == $array_room[$j]) {     // Nếu phòng lấy ra trong bảng rooms có trong mảng chứa phòng còn trống
-                            if ($count < $count_room) {         // Kiểm tra số lượng phòng cần đặt của loại phòng đó đã đủ chưa
-                                RoomRentalList::create([
-                                    'user_id'       =>  $user->id,
-                                    'room_id'       =>  $room->id,
-                                    'start_date'    =>  date_format(date_create(session()->get('start_date')), 'Y-m-d'),
-                                    'end_date'      =>  date_format(date_create(session()->get('end_date')), 'Y-m-d')
-                                ]);
-
-                                $count++;                       // Mỗi lần insert thì tăng biến đếm bản ghi lên 1
-
-                                Room::where('id', $room->id)->update(['status' => 1]);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        /*-------------------------------------------*/
-
         /*Thêm doanh thu*/
         $revenue = Revenue::where('created_at', date('Y-m-d', time()))->first();
 
@@ -431,6 +396,42 @@ class HomeController extends Controller
             }
         }
         /*--------------------------------------------------------*/
+
+        /*Thêm bản ghi vào bảng room_rental_lists*/
+        $array_room = session()->get('array_room');
+
+        for ($i=1; $i <= 20; $i++) { 
+            if (session()->get('rt' . $i) > 0) {
+                $room_type_id = $i;
+
+                $count_room = session()->get('rt' . $i);    //  Số lượng phòng cần đặt của LOẠI PHÒNG đó
+
+                $count = 0;
+
+                $rooms = Room::where('room_type_id', $room_type_id)->select('id')->get();
+
+                for ($j=0; $j < count($array_room); $j++) { 
+                    foreach ($rooms as $room) {
+                        if ($room->id == $array_room[$j]) {     // Nếu phòng lấy ra trong bảng rooms có trong mảng chứa phòng còn trống
+                            if ($count < $count_room) {         // Kiểm tra số lượng phòng cần đặt của loại phòng đó đã đủ chưa
+                                RoomRentalList::create([
+                                    'user_id'                   =>  $user->id,
+                                    'room_id'                   =>  $room->id,
+                                    'start_date'                =>  date_format(date_create(session()->get('start_date')), 'Y-m-d'),
+                                    'end_date'                  =>  date_format(date_create(session()->get('end_date')), 'Y-m-d'),
+                                    'customer_booking_log_id'   =>  $customer_booking_log->id
+                                ]);
+
+                                $count++;                       // Mỗi lần insert thì tăng biến đếm bản ghi lên 1
+
+                                Room::where('id', $room->id)->update(['status' => 1]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        /*-------------------------------------------*/
 
         return response()->json([
             'error'     =>  false,
@@ -490,6 +491,38 @@ class HomeController extends Controller
             'message'   =>  'Lấy thông tin thành công!',
             'data'      =>  $customer_booking_details,
             'info'      =>  $user
+        ]);
+    }
+
+    /**
+     * [cancelReservation description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function cancelReservation(Request $request)
+    {
+        /*Xóa trong bảng room_rental_lists*/
+        DB::table('room_rental_lists')->where('customer_booking_log_id', $request->customer_booking_log_id)->delete();
+        /*--------------------------------*/
+
+        $customer_booking_log = CustomerBookingLog::find($request->customer_booking_log_id);
+
+        /*Trừ doanh thu trong bảng revenues*/
+        $revenue = Revenue::where('created_at', date('Y-m-d', strtotime($customer_booking_log->created_at)))->first();
+
+        Revenue::where('id', $revenue->id)->update([
+            'total_amount'  =>  $revenue->total_amount - $customer_booking_log->total_money,
+            'updated_at'    =>  date('Y-m-d', time())
+        ]);
+        /*---------------------------------*/
+
+        /*Xóa trong bảng customer_booking_logs*/
+        DB::table('customer_booking_logs')->where('id', $request->customer_booking_log_id)->delete();
+        /*------------------------------------*/
+
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Hủy đặt phòng thành công!'
         ]);
     }
 
