@@ -14,7 +14,7 @@
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
                         <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Home</a>
-                        <a class="breadcrumb-item" href="{{ route('post') }}">{{ __('messages.posts') }}</a>
+                        <a class="breadcrumb-item" href="{{ route('post.index') }}">{{ __('messages.posts') }}</a>
                         <span class="breadcrumb-item active">{{ __('messages.edit') }}</span>
                     </nav>
                 </div>
