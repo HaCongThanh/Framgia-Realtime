@@ -480,7 +480,8 @@ class HomeController extends Controller
                 'customer_booking_details.total_price',
                 'customer_booking_logs.created_at',
                 'customer_booking_logs.total_money',
-                'customer_booking_logs.total_number_room'
+                'customer_booking_logs.total_number_room',
+                'customer_booking_logs.note'
                     ])
             ->get();
 
