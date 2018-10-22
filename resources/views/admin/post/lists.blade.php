@@ -16,7 +16,7 @@
 
             <div class="card">
                 <div class="card-header border bottom">
-                    <a href="{{ route('post_create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
+                    <a href="{{ route('post.create') }}" class="btn btn-success"><i class="fa fa-plus"></i> {{ __('messages.add') }}</a>
                 </div>
                 <div class="card-body">
                     <table class="table table-hover">

@@ -68,6 +68,7 @@ class RoomTypesController extends Controller
 
         if($request->hasFile('image')) {
             $images = $request->file('image');
+            //$count = count($images);
             foreach($images as $image) {
                 $filenameWithExt = $image->getClientOriginalName();
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -83,6 +84,9 @@ class RoomTypesController extends Controller
 
                 $image->save();
             }
+        }
+        else {
+            return back()->with('status', 'Please choose any image file');
         }
 
         foreach ($request->facilities as $facility) {

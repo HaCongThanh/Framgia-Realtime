@@ -119,6 +119,12 @@ return [
     'mr' => 'Anh',
     'miss' => 'Chị',
     'info_room' => 'Thông tin đặt phòng',
+    'info_card' => 'Thông tin thẻ',
+    'type_card' => 'Loại thẻ',
+    'number_card' => 'Số thẻ',
+    'time_card' => 'Thời hạn',
+    'year' => 'Năm',
+    'finish_book_room' => 'Hoàn tất đăt phòng',
 
     /*
      * buttons
@@ -139,6 +145,8 @@ return [
     'list' => 'Danh sách',
     'price' => 'Giá phòng',
     'cancel' => 'Hủy',
+    'return' => 'Quay lại',
+    'detail_finish' => 'Chi tiết cuối cùng',
 
     /*
      * table

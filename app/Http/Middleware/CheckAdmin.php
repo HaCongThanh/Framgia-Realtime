@@ -19,11 +19,7 @@ class CheckAdmin
         if (Auth::user()->type == 1) {
             return $next($request);
         } else {
-            session()->forget('route');
-
-            session()->put('route', 'dashboard');
-
-            return redirect()->route('user.login_form');
+            return redirect()->route('user.home.index');
         }
     }
 }
