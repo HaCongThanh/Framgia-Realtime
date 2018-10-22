@@ -44,6 +44,8 @@ Route::group(['prefix' => 'dev'], function() {
 
     Route::post('/bookings/bill-detail', 'User\HomeController@billDetail')->name('user.bookings.bill_detail');
 
+    Route::post('/bookings/cancel-reservation', 'User\HomeController@cancelReservation')->name('user.bookings.cancel_reservation');
+
     Route::get('/rooms', 'User\RoomController@index')->name('user.rooms.index');
 
     Route::get('/posts', 'User\PostController@index')->name('user.posts.index');
