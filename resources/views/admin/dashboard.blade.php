@@ -1,5 +1,9 @@
 @extends('admin.layouts.master')
 
+@section('style')
+
+@endsection
+
 @section('content')
     <!-- Content Wrapper START -->
     <div class="main-content">
@@ -91,12 +95,12 @@
                         <div class="card-body">
                             <div class="media justify-content-between">
                                 <div>
-                                    <p class="">Total Revenue</p>
-                                    <h2 class="font-size-28 font-weight-light">$23,495</h2>
+                                    <p class="">Tổng doanh thu</p>
+                                    <h2 class="font-size-28 font-weight-light" id="total_revenue"></h2>
                                     <span class="text-semibold text-success font-size-15">
-                                                    <i class="ti-arrow-up font-size-11"></i>
-                                                    <span>12%</span>
-                                                </span>
+                                        {{-- <i class="ti-arrow-up font-size-11"></i> --}}
+                                        <span>VNĐ</span>
+                                    </span>
                                 </div>
                                 <div class="align-self-end">
                                     <i class="ti-credit-card font-size-70 text-success opacity-01"></i>
@@ -110,12 +114,12 @@
                         <div class="card-body">
                             <div class="media justify-content-between">
                                 <div>
-                                    <p class="">Daily Product</p>
-                                    <h2 class="font-size-28 font-weight-light">3,758</h2>
+                                    <p class="">Tổng đơn đặt phòng</p>
+                                    <h2 class="font-size-28 font-weight-light" id="count_customer_booking_logs"></h2>
                                     <span class="text-semibold text-danger font-size-15">
-                                                    <i class="ti-arrow-down font-size-11"></i>
-                                                    <span>7%</span>
-                                                </span>
+                                        {{-- <i class="ti-arrow-down font-size-11"></i> --}}
+                                        <span>đơn</span>
+                                    </span>
                                 </div>
                                 <div class="align-self-end">
                                     <i class="ti-pie-chart font-size-70 text-info opacity-01"></i>
@@ -129,14 +133,12 @@
                         <div class="card-body">
                             <div class="media justify-content-between">
                                 <div>
-                                    <p class="">Growth Rate</p>
-                                    <h2 class="font-size-28 font-weight-light">28%</h2>
-                                    <span class=" font-size-13 opacity-04">
-                                                    from last month
-                                                </span>
+                                    <p class="">Tổng bài viết</p>
+                                    <h2 class="font-size-28 font-weight-light" id="count_posts"></h2>
+                                    <span class="font-size-13 opacity-04">bài viết</span>
                                 </div>
                                 <div class="align-self-end">
-                                    <i class="ti-bar-chart font-size-70 text-danger opacity-01"></i>
+                                    <i class="ti-book font-size-70 text-danger opacity-01"></i>
                                 </div>
                             </div>
                         </div>
@@ -147,12 +149,12 @@
                         <div class="card-body">
                             <div class="media justify-content-between">
                                 <div>
-                                    <p class="">New Customers</p>
-                                    <h2 class="font-size-28 font-weight-light">178</h2>
+                                    <p class="">Tổng số khách đến</p>
+                                    <h2 class="font-size-28 font-weight-light" id="total_number_people"></h2>
                                     <span class="text-semibold text-success font-size-15">
-                                                    <i class="ti-arrow-up font-size-11"></i>
-                                                    <span>18%</span>
-                                                </span>
+                                        {{-- <i class="ti-arrow-up font-size-11"></i> --}}
+                                        <span>lượt khách</span>
+                                    </span>
                                 </div>
                                 <div class="align-self-end">
                                     <i class="ti-user font-size-70 text-primary opacity-01"></i>
@@ -322,4 +324,29 @@
         </div>
     </div>
     <!-- Content Wrapper END -->
+@endsection
+
+@section('script')
+    <script>
+        $(function(){
+            function formatNumber(num) {
+                return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+            };
+
+            setTimeout(function(){
+                $.ajax({
+                    url: '{{ route('admin.dashboard_statistical') }}',
+                    success:function(res){
+                        $("#total_revenue").html(formatNumber(res.total_revenue));
+                        $("#count_customer_booking_logs").html(formatNumber(res.count_customer_booking_logs));
+                        $("#count_posts").html(formatNumber(res.count_posts));
+                        $("#total_number_people").html(formatNumber(res.total_number_people));
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        // toastr.error(thrownError);
+                    }
+                });
+            }, 500);
+        });
+    </script>
 @endsection

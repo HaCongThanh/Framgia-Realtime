@@ -171,7 +171,7 @@
                     @if (!empty($room_types))
                         @foreach ($room_types as $room_type)
                             
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 filtr-item" data-category="3, 2, 4">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 filtr-item" data-category="{{ $room_type->id }}">
                                 <div class="hotel-box">
                                     <div class="header clearfix">
                                         <img src="{{ url('/images/rooms/' . $room_type->images->first->filename['filename']) }}" alt="img-1" class="img-responsive" style="width: 360px; height: 240px;">
