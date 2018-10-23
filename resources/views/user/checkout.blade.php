@@ -79,8 +79,8 @@
                                                     <div class="form-group Country">
                                                         <label>{{ __('messages.sex') }}</label>
                                                         <select class="selectpicker country search-fields" name="gender" id="gender">
-                                                            <option @if ($gender == 1) selected @endif>{{ __('messages.mr') }}</option>
-                                                            <option @if ($gender == 0) selected @endif>{{ __('messages.miss') }}</option>
+                                                            <option @if ($gender == 1) selected @endif value="1">{{ __('messages.mr') }}</option>
+                                                            <option @if ($gender == 0) selected @endif value="0">{{ __('messages.miss') }}</option>
                                                         </select>
                                                     </div>
                                                 </div>

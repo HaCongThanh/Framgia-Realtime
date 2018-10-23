@@ -82,26 +82,6 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="details" style="margin-top: 200px;">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4>{{ __('messages.detail') }}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p>Epic cheeseburgers come in all kinds of manifestations, but we want them in and around our mouth no matter what. Slide those smashed patties with the gently caramelized meat fat between a toasted brioche bun and pass it over. You fall in love with the cheeseburger itself but the journey ain’t half bad either.</p>
-                            <p>They’re the childhood friend that knows your highest highs and lowest lows. They’ve been with you through thick and thin and they’re the best at keeping secrets. Whether it’s dressed up or informal, cheeseburgers have your back.</p>
-                        </div>
-                        <div class="modal-footer no-border">
-                            <div class="text-right">
-                                <button class="btn btn-default" data-dismiss="modal">{{ __('messages.cancel') }}</button>
-                                <button class="btn btn-success" data-dismiss="modal">OK</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <div class="modal fade" id="bills" style="z-index: 99999999;">
                 <div class="modal-dialog" role="document" style="width: 70%; color: #73879C;">
                     <div class="modal-content">
