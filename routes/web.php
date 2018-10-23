@@ -46,6 +46,8 @@ Route::group(['prefix' => 'dev'], function() {
 
     Route::post('/bookings/cancel-reservation', 'User\HomeController@cancelReservation')->name('user.bookings.cancel_reservation');
 
+    Route::get('/profiles/get-profile', 'User\ProfileController@getProfile')->name('user.profiles.get_profile');
+
     Route::get('/rooms', 'User\RoomController@index')->name('user.rooms.index');
 
     Route::get('/posts', 'User\PostController@index')->name('user.posts.index');
@@ -56,6 +58,8 @@ Route::group(['prefix' => 'dev'], function() {
     Route::get('/rooms/{id}', 'User\RoomController@show')->name('user.rooms.show');
 
     Route::get('/posts/{id}', 'User\PostController@show')->name('user.posts.show');
+
+    Route::resource('profiles', 'User\ProfileController');
 });
 
 /*---------------------- Admin Route --------------------*/

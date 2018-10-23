@@ -187,9 +187,11 @@
                     </li> --}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
-                    <li>
-                        <a class="btn-navbar btn btn-sm btn-theme-sm-outline btn-round" href="{{ route('user.bookings.bill') }}">Thông tin tài khoản</a>
-                    </li>
+                    @if (Auth::check())
+                        <li>
+                            <a class="btn-navbar btn btn-sm btn-theme-sm-outline btn-round" href="{{ route('profiles.show', Auth::user()->id) }}">Thông tin tài khoản</a>
+                        </li>
+                    @endif
                     {{-- <li>
                         <a id="header-search-btn" class="btn-navbar search-icon"><i class="fa fa-search"></i></a>
                     </li> --}}
