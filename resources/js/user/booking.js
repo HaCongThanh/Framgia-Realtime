@@ -9,6 +9,7 @@ function getSum(room_count_1, room_count_2) {
 function selectRooms() {
     var room_count_array = [];
     var room_price_array = [];
+    var night_count = $('#night-count-hidden').val();
 
     for (var i = 1; i <= 20; i++) {
         if ($('#select-room-' + i).length) {
@@ -22,7 +23,7 @@ function selectRooms() {
         $('#rt' + i).val(room_count);
 
         if (room_count != 0) {
-            var room_price = Number($("#select-room-" + i).data("price")) * room_count;
+            var room_price = Number($("#select-room-" + i).data("price")) * room_count * night_count;
         } else {
             var room_price = 0;
         }

@@ -2,11 +2,11 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/bootstrap.css') }}" />
-    <link href="{{ asset('bower_components/lib_booking/lib/admin/css/materialdesignicons.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/admin/css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/admin/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/toastr.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/sweet-alert.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ mix('css/user/custom.css') }}">
 
     <style type="text/css">
         .navbar {
@@ -16,6 +16,10 @@
 
         .navbar-nav {
             flex-direction: unset;
+        }
+
+        table>tbody>tr>td {
+            text-align: center;
         }
     </style>
 @endsection
@@ -83,7 +87,7 @@
 
                                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                                    <input type="text" class="form-control" id="profile_email" name="email" placeholder="Email">
+                                                    <input type="text" class="form-control" id="profile_email" name="email" placeholder="Email" readonly>
                                                 </div>
                                             </div>
                                             
@@ -139,55 +143,19 @@
                                             <th style="text-align: center;">{{ __('#') }}</th>
                                             <th style="text-align: center;">{{ __('messages.date_start') }}</th>
                                             <th style="text-align: center;">{{ __('messages.date_finish') }}</th>
-                                            <th style="text-align: center;">{{ __('messages.total_people') }}</th>
+                                            <th style="text-align: center;">{{ __('Tổng số người') }}</th>
                                             <th style="text-align: center;">{{ __('messages.total_room') }}</th>
                                             <th style="text-align: center;">{{ __('messages.total_price') }}</th>
                                             <th style="text-align: center;">#</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-
-                                        @if (!empty($customer_booking_logs))
-                                            @foreach ($customer_booking_logs as $customer_booking_log)
-
-                                                <tr>
-                                                    <td style="text-align: center;">
-                                                        <div class="list-media">
-                                                            <span class="title">{{ $user_name }}</span>
-                                                        </div>
-                                                    </td>
-                                                    <td style="text-align: center;">
-                                                        <span>{{ date('d-m-Y', strtotime($customer_booking_log->start_date)) }}</span>
-                                                    </td>
-                                                    <td style="text-align: center;">{{ date('d-m-Y', strtotime($customer_booking_log->end_date)) }}</td>
-                                                    <td style="text-align: center;">{{ $customer_booking_log->total_number_people }}</td>
-                                                    <td style="text-align: center;">{{ $customer_booking_log->total_number_room }}</td>
-                                                    <td style="text-align: center;">{{ number_format($customer_booking_log->total_money) }} VNĐ</td>
-                                                    <td class="text-center font-size-18" style="text-align: center;">
-                                                        <a data-toggle="modal" data-target="#bills" class="text-gray clear-bills" onclick="bills({{ $customer_booking_log->id }});" title="{{ __('messages.view') }}">
-                                                            <i class="fa fa-credit-card"></i>
-                                                        </a>
-
-                                                        @if (strtotime('+1 day', time()) < strtotime($customer_booking_log->start_date))
-                                                            &nbsp;
-                                                            <a class="text-gray clear-bills" onclick="cancelReservation({{ $customer_booking_log->id }});" title="{{ __('Hủy đặt phòng') }}">
-                                                                <i class="fa fa-times-circle"></i>
-                                                            </a>
-                                                        @endif
-                                                    </td>
-                                                </tr>
-
-                                            @endforeach
-                                        @endif
-                                        
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
 
                     <div class="modal fade" id="bills" style="z-index: 99999999;">
-                        <div class="modal-dialog" role="document" style="width: 70%; color: #73879C;">
+                        <div class="modal-dialog" role="document" style="width: 70%; color: #73879C; max-width: none;">
                             <div class="modal-content">
                                 <div class="modal-body">
 
@@ -200,7 +168,7 @@
                                                             <div class="col-xs-12 invoice-header">
                                                                 <h1>
                                                                     <i class="fa fa-globe"></i> {{ __('messages.bill') }}
-                                                                    <small class="pull-right" id="created_at">{{ __('messages.date_found') }}: 16/08/2016</small>
+                                                                    <small class="pull-right" id="created_at"></small>
                                                                 </h1>
                                                             </div>
                                                         </div>
@@ -245,7 +213,7 @@
                                                                             <th style="width: 5%; text-align: center;">#</th>
                                                                             <th style="width: 25%; text-align: center;">{{ __('messages.room_type') }}</th>
                                                                             <th style="width: 25%; text-align: center;">{{ __('messages.night') }}</th>
-                                                                            <th style="width: 20%; text-align: center;">{{ __('messages.room_stt') }}</th>
+                                                                            <th style="width: 20%; text-align: center;">{{ __('Số lượng phòng') }}</th>
                                                                             <th style="width: 25%; text-align: center;">{{ __('messages.total_price') }}</th>
                                                                         </tr>
                                                                     </thead>
@@ -273,6 +241,10 @@
                                                                             <tr>
                                                                                 <th>{{ __('messages.total_room') }}:</th>
                                                                                 <td id="total_number_room"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <th>{{ __('Tổng số đêm') }}:</th>
+                                                                                <td id="night_count"></td>
                                                                             </tr>
                                                                             <tr>
                                                                                 <th>{{ __('messages.total_price') }}:</th>
@@ -314,9 +286,32 @@
     <script src="{{ asset('bower_components/lib_booking/lib/admin/js/data-table.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/toastr.min.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/sweet-alert.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/user/js/jQuery.print.js') }}"></script>
+
     @routes
 
     <script>
+        /*DataTable*/
+        $('#customer_booking_logs').DataTable({
+            processing: true,
+            language: {
+                processing: "<div id='loader'>Đang tìm! Chờ chút. Hmm...!</div>"
+            },
+            ordering:   false,
+            // serverSide: true,
+            ajax: '{{ route('user.profiles.get_customer_booking_log') }}',
+            columns: [
+                {data: 'DT_Row_Index', name: 'id'},
+                {data: 'start_date', name: 'start_date'},
+                {data: 'end_date', name: 'end_date'},
+                {data: 'total_number_people', name: 'total_number_people'},
+                {data: 'total_number_room', name: 'total_number_room'},
+                {data: 'total_money', name: 'total_money'},
+                {data: 'action', name: 'action'}
+            ]
+        });
+        /*---------*/
+
         /*Tự động gọi hàm thông tin người dùng*/
         setTimeout(function(){
             getProfile();
@@ -346,9 +341,11 @@
                     }
 
                     if (res.profile.avatar == null) {
-                        $('#get_profile_avatar').append('<img class="img-fluid rounded-circle d-block mx-auto m-b-30" src="/img/avatar-2.jpg" style="width: 200px; height: 200px;" alt="">');
+                        $('#img_profile_avatar').remove();
+                        $('#get_profile_avatar').append('<img class="img-fluid rounded-circle d-block mx-auto m-b-30" src="/img/avatar-2.jpg" style="width: 200px; height: 200px;" alt="" id="img_profile_avatar">');
                     } else {
-                        $('#get_profile_avatar').append('<img class="img-fluid rounded-circle d-block mx-auto m-b-30" src="/images/avatar/'+ res.profile.avatar +'" style="width: 200px; height: 200px;" alt="">');
+                        $('#img_profile_avatar').remove();
+                        $('#get_profile_avatar').append('<img class="img-fluid rounded-circle d-block mx-auto m-b-30" src="/images/avatar/'+ res.profile.avatar +'" style="width: 200px; height: 200px;" alt="" id="img_profile_avatar">');
                     }
                     
                 }
@@ -429,23 +426,22 @@
                 url: '/dev/profiles/' + user_id,
                 data: formData,
                 success:function(res){
-                    console.log(res);
-                    // if (res.error == 'valid') {
-                    //     var arr = res.message;
-                    //     var key = Object.keys(arr);
+                    if (res.error == 'valid') {
+                        var arr = res.message;
+                        var key = Object.keys(arr);
 
-                    //     for (var i = 0; i < key.length; i++) {
-                    //         toastr.error(arr[key[i]]);
-                    //     }
-                    // } else if (res.error == false){
-                    //     toastr.success("Cập nhật vai trò thành công!");
+                        for (var i = 0; i < key.length; i++) {
+                            toastr.error(arr[key[i]]);
+                        }
+                    } else if (res.error == false){
+                        toastr.success("Cập nhật thông tin cá nhân thành công!");
 
-                    //     $('#edit_role_modal').modal('hide');
+                        $('#edit_profile_modal').modal('hide');
 
-                    //     table.ajax.reload();
-                    // } else {
-                    //     //
-                    // }
+                        getProfile();
+                    } else {
+                        //
+                    }
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     // 
@@ -453,5 +449,118 @@
             });
         });
         /*------------------------*/
+
+        /*Format giá tiền*/
+        function formatNumber(num) {
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")
+        };
+        /*---------------*/
+
+        /*Lấy thông tin ra hóa đơn*/
+        function bills(customer_booking_log_id){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('user.profiles.get_customer_booking_detail') }}',
+                data: {
+                    customer_booking_log_id :   customer_booking_log_id
+                },
+                success: function(res){
+                    $count = 1;
+
+                    $('.clear_tr').remove();
+
+                    for (var i = 0; i < res.data.length; i++) {
+                        $room_type_name = res.data[i]['name'];
+                        $price = formatNumber(res.data[i]['price']);
+                        $number_room = res.data[i]['number_room'];
+                        $total_price = formatNumber(res.data[i]['total_price']);
+                        $created_at = res.data[i]['created_at'];
+                        $total_money = formatNumber(res.data[i]['total_money']);
+                        $total_number_room = res.data[i]['total_number_room'];
+                        $note = res.data[i]['note'];
+
+                        $('#record_details').append("<tr class='clear_tr'><td style='width: 5%; text-align: center;'>" + $count + "</td><td style='width: 25%; text-align: center;'>" + $room_type_name + "</td><td style='width: 25%; text-align: center;'>" + $price + " VNĐ</td><td style='width: 20%; text-align: center;'>" + $number_room + "</td><td style='width: 25%; text-align: center;'>" + $total_price + " VNĐ</td></tr>");
+
+                        $('#created_at').html("Ngày lập: " + $created_at);
+                        $('#total_money').html($total_money + " VNĐ");
+                        $('#total_number_room').html($total_number_room + " phòng");
+
+                        if ($note == null) {
+                            $('#note').html('Không có ghi chú');
+                        } else {
+                            $('#note').html($note);
+                        }
+                        
+                        $count++;
+                    }
+
+                    $user_name = res.info['name'];
+                    $user_address = res.info['address'];
+                    $user_mobile = res.info['mobile'];
+                    $user_email = res.info['email'];
+                    $user_card_number = res.info['card_number'];
+                    $user_card_type = res.info['card_type'];
+                    $user_payment_date = res.info['updated_at'];
+                    $customer_booking_log_id = customer_booking_log_id;
+                    $night_count = res.night_count;
+
+                    $('#user_name').html($user_name);
+                    $('#user_address').html($user_address);
+                    $('#user_mobile').html("Điện thoại: " + $user_mobile);
+                    $('#user_email').html("Email: " + $user_email);
+                    $('#user_card_number').html("<b>Số thẻ:</b> " + $user_card_number);
+                    $('#user_payment_date').html("<b>Ngày thanh toán:</b> " + $user_payment_date);
+                    $('#customer_booking_log_id').html("<b>Mã hóa đơn #</b>" + $customer_booking_log_id);
+                    $('#night_count').html($night_count + " đêm");
+                }
+            });
+        }
+        /*------------------------*/
+
+        /*Ấn nút In hóa đơn*/
+        function btnPrintBill(){
+            jQuery('#print_bill').print();
+        }
+        /*-----------------*/
+
+        /*Hủy đặt phòng*/
+        function cancelReservation(customer_booking_log_id){
+            swal({
+                title: "Bạn có chắc muốn hủy đặt phòng?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            },
+            function(){
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('user.profiles.cancel_reservation') }}',
+                    data: {
+                        customer_booking_log_id :   customer_booking_log_id
+                    },
+                    success:function(res){
+                        $("#customer_booking_logs").DataTable().ajax.reload();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        // 
+                    }
+                });
+            });
+        }
+        /*-------------*/
     </script>
 @endsection

@@ -60,12 +60,6 @@ class UserController extends Controller
                   'message' =>  $validator->errors()
               ]);
             } else {
-                if ($request->gender == "Anh") {
-                    $request->gender = 1;
-                } else {
-                    $request->gender = 0;
-                }
-
                 User::where('id', $user->id)->update([
                     'name'      =>  $request->name,
                     'gender'    =>  $request->gender,
