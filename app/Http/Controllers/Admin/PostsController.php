@@ -149,7 +149,7 @@ class PostsController extends Controller
         $post->save();
         $post->categories()->sync($request->get('category'));
 
-        return redirect()->route('post.update');
+        return redirect()->route('post.index');
     }
 
     /**
