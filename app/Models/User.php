@@ -77,4 +77,12 @@ class User extends Authenticatable
     public function posts() {
         return $this->hasMany('App\Models\Post', 'user_id');
     }
+
+    /**
+     * Get Comments: One to many
+     * @return [type] [description]
+     */
+    public function comments() {
+        return $this->hasMany('App\Models\Comment', 'user_id');
+    }
 }

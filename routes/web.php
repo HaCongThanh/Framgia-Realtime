@@ -48,8 +48,11 @@ Route::group(['prefix' => 'dev'], function() {
 
     Route::get('/posts', 'User\PostController@index')->name('user.posts.index');
 
+    Route::post('/comments', 'CommentController@postComment')->name('user.post.comment');
+    Route::post('/commentsDelete/{id}', 'CommentController@deleteComment')->name('user.post.delete');
+
     Route::get('/rooms/{id}', 'User\RoomController@show')->name('user.rooms.show');
-    
+
     Route::get('/posts/{id}', 'User\PostController@show')->name('user.posts.show');
 });
 

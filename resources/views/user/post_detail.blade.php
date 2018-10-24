@@ -1,7 +1,19 @@
 @extends('user.layouts.master')
 
 @section('style')
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/sweet-alert.css') }}">
+    <style type="text/css">
+        .comment-meta-d {
+            color: #fff;
+            float: right;
+            font-size: 12px;
+            font-weight: 600;
+            margin: 0 15px 0 0;
+        }
+        .comment-meta-d a{
+            color: #0C7FCC;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -101,208 +113,75 @@
                     </div>
 
                     <!-- Comments section start -->
-                    {{-- <div class="comments-section">
+                     <div class="comments-section">
                         <div class="main-title-2">
-                            <h1><span>Comments </span> Section</h1>
+                            <h1>Bình luận</h1>
                         </div>
 
-                        <ul class="comments">
-                            <li>
-                                <div class="comment">
-                                    <div class="comment-author">
-                                        <a href="#">
-                                            <img src="img/avatar/avatar-5.png" alt="avatar-5">
-                                        </a>
-                                    </div>
-                                    <div class="comment-content">
-                                        <div class="comment-meta">
-                                            <div class="comment-meta-author">
-                                                Jane Doe
-                                            </div>
-                                            <div class="comment-meta-reply">
-                                                <a href="#">Reply</a>
-                                            </div>
-                                            <div class="comment-meta-date">
-                                                <span class="hidden-xs">8:42 PM 3/3/2017</span>
-                                            </div>
+                        <ul class="comments" id="load_comment">
+                            @foreach ($post->comments as $comment)
+                                <li id="comment-{{ $comment->id }}">
+                                    <div class="comment">
+                                        <div class="comment-author">
+                                            <a>
+                                                <img src="{{ url('img/avatar/avatar-5.png') }}" alt="{{ $comment->users->name }}">
+                                            </a>
                                         </div>
-                                        <div class="clearfix"></div>
-                                        <div class="comment-body">
-                                            <div class="comment-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
+                                        <div class="comment-content">
+                                            <div class="comment-meta">
+                                                <div class="comment-meta-author">
+                                                    {{ $comment->users->name }}
+                                                </div>
+                                                <div class="comment-meta-date">
+                                                    <span class="hidden-xs">{{ $comment->created_at }}</span>
+                                                </div>
+                                                @if (Auth::user()->id == $comment->user_id)
+                                                    <div class="comment-meta-d">
+                                                        <a type="submit" class="text-gray btnDelete" data-id="{{ $comment->id }}"><i class="fa fa-times-circle"></i></a>
+                                                    </div>
+                                                @endif
                                             </div>
-                                            <p>Lorem ipsum dolor sit amet, conser adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel, dapibus tempus nulla. Donec vel nulla dui. Pellentesque sed ante sed ligula hendrerit condimentum. Suspendisse rhoncus fringilla ipsum quis porta.</p>
+                                            <div class="clearfix"></div>
+                                            <div class="comment-body">
+                                                {{ $comment->comment }}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <div class="comment">
-                                            <div class="comment-author">
-                                                <a href="#">
-                                                    <img src="img/avatar/avatar-5.png" alt="avatar-5">
-                                                </a>
-                                            </div>
-
-                                            <div class="comment-content">
-                                                <div class="comment-meta">
-                                                    <div class="comment-meta-author">
-                                                        Jane Doe
-                                                    </div>
-
-                                                    <div class="comment-meta-reply">
-                                                        <a href="#">Reply</a>
-                                                    </div>
-
-                                                    <div class="comment-meta-date">
-                                                        <span class="hidden-xs">8:42 PM 3/3/2017</span>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                                <div class="comment-body">
-                                                    <div class="comment-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet, conser adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel, dapibus tempus nulla. Donec vel nulla dui.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <div class="comment">
-                                    <div class="comment-author">
-                                        <a href="#">
-                                            <img src="img/avatar/avatar-5.png" alt="avatar-5">
-                                        </a>
-                                    </div>
-                                    <div class="comment-content">
-                                        <div class="comment-meta">
-                                            <div class="comment-meta-author">
-                                                Jane Doe
-                                            </div>
-                                            <div class="comment-meta-reply">
-                                                <a href="#">Reply</a>
-                                            </div>
-                                            <div class="comment-meta-date">
-                                                <span class="hidden-xs">8:42 PM 3/3/2017</span>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="comment-body">
-                                            <div class="comment-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </div>
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul>
-                                    <li>
-                                        <div class="comment comment-mrg-bdr-nane">
-                                            <div class="comment-author">
-                                                <a href="#">
-                                                    <img src="img/avatar/avatar-5.png" alt="avatar-5">
-                                                </a>
-                                            </div>
-
-                                            <div class="comment-content">
-                                                <div class="comment-meta">
-                                                    <div class="comment-meta-author">
-                                                        Jane Doe
-                                                    </div>
-
-                                                    <div class="comment-meta-reply">
-                                                        <a href="#">Reply</a>
-                                                    </div>
-
-                                                    <div class="comment-meta-date">
-                                                        <span class="hidden-xs">8:42 PM 3/3/2017</span>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                                <div class="comment-body">
-                                                    <div class="comment-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <p>Lorem ipsum dolor sit amet, conser adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros. Maecenas eros enim, tincidunt vel turpis vel, dapibus tempus nulla. Donec vel nulla dui.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
+                                </li>
+                            @endforeach
                         </ul>
-                    </div> --}}
-                    <!-- Comments section end -->
+                     </div>
+                     <!-- Comments section end -->
 
-                    <!-- Contact 1 start -->
-                    {{-- <div class="contact-1">
-                        <div class="main-title-2">
-                            <h1> <span>Leave</span> a Comment</h1>
-                        </div>
-
+                     <!-- Contact 1 start -->
+                     <div class="contact-1">
                         <div class="row">
                             <div class="col-lg-12">
 
                                 <div class="contact-form">
-                                    <form id="contact_form" action="https://storage.googleapis.com/themevessel-items/hotel-alpha/index.html" method="GET" enctype="multipart/form-data">
+                                    @if (Auth::check())
+                                    {{ Form::open(['method' => 'POST', 'id' => 'comment_form']) }}
                                         <div class="row">
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="form-group fullname">
-                                                    <input type="text" name="full-name" class="input-text" placeholder="Full Name">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="form-group enter-email">
-                                                    <input type="email" name="email" class="input-text" placeholder="Enter email">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="form-group subject">
-                                                    <input type="text" name="subject" class="input-text" placeholder="Subject">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                                <div class="form-group number">
-                                                    <input type="text" name="phone" class="input-text" placeholder="Phone Number">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
+                                                <div class="form-group message">
+                                                    {!! Form::textarea('comment', null, ['class' => 'input-text', 'placeholder' => "Viết bình luận", 'rows' => "2", 'id' => 'comment']) !!}
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix">
-                                                <div class="form-group message">
-                                                    <textarea class="input-text" name="message" placeholder="Write message"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12">
                                                 <div class="send-btn form-group">
-                                                    <button type="submit" class="btn-md btn-theme">Send Message</button>
+                                                    {!! Form::hidden('post_id', $post->id, ['id' => 'post_id']) !!}
+                                                    {!! Form::hidden('user_id', Auth::user()->id, ['id' => 'user_id']) !!}
+                                                    {!! Form::button('Send Message', ['name' => 'submit_comment', 'class' => 'btn-md btn-theme', 'type' => 'submit', 'id' => 'submit_comment']) !!}
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
+                                    {{ Form::close() }}
+                                    @endif
                                 </div>
 
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <!-- Contact-1 end -->
                 </div>
 
@@ -466,5 +345,87 @@
 @endsection
 
 @section('script')
+    <script src="{{ asset('bower_components/lib_booking/lib/user/js/sweet-alert.min.js') }}"></script>
+    <script>
+        $('#submit_comment').click(function (e) {
+            e.preventDefault();
 
+            var form = $('#comment_form');
+            var formdata = form.serialize();
+
+            $.ajaxSetup({
+                headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+            });
+
+            $.ajax({
+                type: "POST",
+                url: '{{ route('user.post.comment') }}',
+                data: formdata,
+                success: function (res) {
+                    if (res.info.avatar == null) {
+                        $avatar = '/img/avatar-5.png';
+                    } else {
+                        $avatar = res.info.avatar;
+                    }
+
+                    $('#load_comment').append('<li id="comment-'+ res.comment_id +'">\n' +
+            '                                    <div class="comment">\n' +
+            '                                        <div class="comment-author">\n' +
+            '                                            <a>\n' +
+            '                                                <img src="'+ $avatar +'" alt="'+ res.info.name +'">\n' +
+            '                                            </a>\n' +
+            '                                        </div>\n' +
+            '                                        <div class="comment-content">\n' +
+            '                                            <div class="comment-meta">\n' +
+            '                                                <div class="comment-meta-author">'+ res.info.name +'</div>\n' +
+            '                                                <div class="comment-meta-date">\n' +
+            '                                                    <span class="hidden-xs">'+ res.created_at +'</span>\n' +
+            '                                                </div>\n' +
+            '                                                    <div class="comment-meta-d">\n' +
+            '                                                        <a type="submit" class="text-gray btnDelete" data-id="'+ res.comment_id +'"><i class="fa fa-times-circle"></i></a>\n' +
+            '                                                    </div>\n' +
+            '                                            </div>\n' +
+            '                                            <div class="clearfix"></div>\n' +
+            '                                            <div class="comment-body">'+ res.data.comment +'</div>\n' +
+            '                                        </div>\n' +
+            '                                    </div>\n' +
+            '                                </li>');
+
+                    $('#comment').val('');
+                }
+            });
+        });
+
+        $('.btnDelete').click(function () {
+            var comment_id = $(this).data('id');
+            // var id = $(this).closest(".row").attr('id');
+
+            swal({
+                    title: "Bạn có chắc muốn xoá comment này?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    cancelButtonText: "Không",
+                    confirmButtonText: "Có",
+                },
+                function(){
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        method: 'POST',
+                        url: '/dev/commentsDelete/' + comment_id,
+                        success:function(res){
+                            $('#comment-' + comment_id).remove();
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            //
+                        }
+                    });
+                });
+        })
+    </script>
 @endsection

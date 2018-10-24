@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model
+class Comment extends Model
 {
     use SoftDeletes;
 
@@ -13,7 +13,7 @@ class Post extends Model
      * [$table description]
      * @var string
      */
-    protected $table="posts";
+    protected $table = "comments";
 
     /**
      * [$dates description]
@@ -26,15 +26,15 @@ class Post extends Model
      * @var [type]
      */
     protected $fillable = [
-        'title', 'slug', 'description', 'content', 'image', 'user_id', 'status', 'created_at', 'updated_at', 'deleted_at'
+        'post_id', 'user_id', 'comment', 'name', 'parent_id', 'updated_at', 'deleted_at', 'created_at'
     ];
 
     /**
-     * Get categories: Many to many
+     * Get posts: One to many
      * @return [type] [description]
      */
-    public function categories() {
-        return $this->belongsToMany('App\Models\Category', 'category_post', 'post_id', 'category_id');
+    public function posts() {
+        return $this->belongsTo('App\Models\Post', 'post_id');
     }
 
     /**
@@ -43,13 +43,5 @@ class Post extends Model
      */
     public function users() {
         return $this->belongsTo('App\Models\User', 'user_id');
-    }
-
-    /**
-     * Get comments: One to many
-     * @return [type] [description]
-     */
-    public function comments() {
-        return $this->hasMany('App\Models\Comment', 'post_id');
     }
 }
