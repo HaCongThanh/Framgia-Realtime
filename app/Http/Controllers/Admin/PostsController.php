@@ -150,8 +150,6 @@ class PostsController extends Controller
         $post->categories()->sync($request->get('category'));
 
         return redirect()->route('post.index');
-
-//        test
     }
 
     /**
