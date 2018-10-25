@@ -2,6 +2,7 @@
 
 @section('style')
     <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/sweet-alert.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/toastr.min.css') }}">
 @endsection
 
@@ -79,8 +80,8 @@
                                             </td>
                                             <td class="text-center font-size-18" style="text-align: center;">
                                                 <a href="{{ route('users.show', $user->id) }}" class="text-gray" data-tooltip="tooltip" title="{{ __('Vai trò') }}"><i class="ti-lock"></i></a>
-                                                <a href="#" class="text-gray" data-tooltip="tooltip" title="{{ __('messages.edit') }}"><i class="ti-pencil"></i></a>
-                                                <a href="#" class="text-gray" data-tooltip="tooltip" title="{{ __('messages.delete') }}"><i class="ti-trash"></i></a>
+                                                <a id="call_edit_user" data-id="{{ $user->id }}" class="text-gray" data-tooltip="tooltip" title="{{ __('messages.edit') }}"><i class="ti-pencil"></i></a>
+                                                <a id="delete_user" data-id="{{ $user->id }}" class="text-gray" data-tooltip="tooltip" title="{{ __('messages.delete') }}"><i class="ti-trash"></i></a>
                                             </td>
                                         </tr>
 
@@ -100,30 +101,97 @@
                             <h4>Thêm mới nhân viên</h4>
                         </div>
                         <div class="modal-body">
-
-                            <form id="add_user_form" name="add_user_form" action="" method="POST">
-                                {{ csrf_field() }}
-
+                            {{ Form::open(['route' => 'users.store', 'method' => 'POST', 'id' => 'add_user_form', 'name' => 'add_user_form']) }}
                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                    <input type="text" class="form-control" id="display_name" name="display_name" placeholder="Tên hiển thị">
+                                    {{ Form::text('name', '', ['class' => 'form-control', 'id' => 'name', 'placeholder' => "Nhập tên"]) }}
                                 </div>
 
                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Vai trò">
+                                    {{ Form::text('email', '', ['class' => 'form-control', 'id' => 'email', 'placeholder' => "Nhập Email"]) }}
                                 </div>
 
                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                    <textarea class="form-control" id="description" name="description" placeholder="Miêu tả"></textarea>
+                                    {{ Form::text('address', '', ['class' => 'form-control', 'id' => 'address', 'placeholder' => "Địa chỉ"]) }}
                                 </div>
-                                
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
+                                            {{ Form::text('mobile', '', ['class' => 'form-control', 'id' => 'mobile', 'placeholder' => "Số điện thoại"]) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
+                                            {{ Form::select('gender', ['0' => 'Nữ', '1' => 'Nam'], '', ['class' => 'form-control', 'id' => 'gender', 'placeholder' => "Giới tính"]) }}
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <div class="modal-footer no-border">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                                    <button type="submit" id="add_user" class="btn btn-success">Tạo</button>
+                                    {{ Form::button("Hủy", ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) }}
+                                    {{ Form::submit("Tạo", ['class' => 'btn btn-success', 'id' => 'add_user']) }}
                                 </div>
-                            </form>
-
+                            {{ Form::close() }}
                         </div>
                         
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="edit_user_modal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4>Sửa nhân viên</h4>
+                        </div>
+                        <div class="modal-body">
+                            {{ Form::open(['method' => 'POST', 'id' => 'edit_user_form', 'name' => 'edit_user_form']) }}
+
+                            {{ Form::hidden('user_id', '', ['class' => 'form-control', 'id' => 'user_id']) }}
+
+                            <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
+                                {{ Form::text('name', '', ['class' => 'form-control', 'id' => 'edit_name']) }}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
+                                        {{ Form::text('email', '', ['class' => 'form-control', 'id' => 'edit_email', 'readonly']) }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
+                                        {{ Form::select('type', ['0' => 'Deactivate', '1' => 'Activate'], '', ['class' => 'form-control', 'id' => 'edit_type']) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
+                                {{ Form::text('address', '', ['class' => 'form-control', 'id' => 'edit_address']) }}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
+                                        {{ Form::text('mobile', '', ['class' => 'form-control', 'id' => 'edit_mobile']) }}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
+                                        {{ Form::select('gender', ['0' => 'Nữ', '1' => 'Nam'], '', ['class' => 'form-control', 'id' => 'edit_gender']) }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer no-border">
+                                {{ Form::button("Hủy", ['class' => 'btn btn-default', 'data-dismiss' => 'modal']) }}
+                                {{ Form::submit("Sửa", ['class' => 'btn btn-success', 'id' => 'edit_user']) }}
+                            </div>
+                            {{ Form::close() }}
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -137,6 +205,7 @@
     <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/admin/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/admin/js/data-table.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/user/js/sweet-alert.min.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/toastr.min.js') }}"></script>
 
     <script>
@@ -144,9 +213,171 @@
         $(document).on('click', '#call_add_user', function() {
             $('#add_user_modal').modal('show');
             $('#name').val('');
-            $('#display_name').val('');
-            $('#description').val('');
+            $('#email').val('');
+            $('#password').val('');
+            $('#mobile').val('');
+            $('#address').val('');
+            $('#gender').val('');
         });
         /*--------------------------*/
+
+        //add user
+        $('#add_user').on('click', function (event) {
+            event.preventDefault();
+
+            var form = $('#add_user_form');
+            var formData = form.serialize();
+
+            $.ajaxSetup({
+                header: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('users.store') }}',
+                data: formData,
+
+                success: function (res) {
+                    //console.log(res);
+                    if (res.error == 'valid') {
+                        var arr = res.message;
+                        var key = Object.keys(arr);
+
+                        for (var i = 0; i < key.length; i++) {
+                            toastr.error(arr[key[i]]);
+                        }
+                    } else  if (res.error == false) {
+                        toastr.success("Thành công");
+
+                        $('#add_user_modal').modal('hide');
+
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        //
+                    }
+                },
+
+                error: function (res) {
+                    //
+                }
+            });
+        });
+
+        /*Gọi Modal Cập nhật user*/
+        $(document).on('click', '#call_edit_user', function() {
+            $('#edit_user_modal').modal('show');
+
+            var user_id =  $(this).data('id');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: '/admin/users/' + user_id + '/edit',
+                success: function(res)
+                {
+                    $('#edit_name').val(res.user['name']);
+                    $('#edit_email').val(res.user['email']);
+                    $('#edit_address').val(res.user['address']);
+                    $('#edit_mobile').val(res.user['mobile']);
+                    $('#edit_gender').val(res.user['gender']);
+                    $('#edit_type').val(res.user['type']);
+                    $('#user_id').val(res.user['id']);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    toastr.error(thrownError);
+                }
+            });
+        });
+        /*--------------------------*/
+
+        /*Ấn nút Cập nhật vai trò*/
+        $('#edit_user').on('click', function(event) {
+            event.preventDefault();
+
+            var user_id = $('#user_id').val();
+            var form = $('#edit_user_form');
+            var formData= form.serialize();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'PUT',
+                url: '/admin/users/' + user_id,
+                data: formData,
+                success:function(res){
+                    if (res.error == 'valid') {
+                        var arr = res.message;
+                        var key = Object.keys(arr);
+
+                        for (var i = 0; i < key.length; i++) {
+                            toastr.error(arr[key[i]]);
+                        }
+                    } else if (res.error == false){
+                        toastr.success("Cập nhật người dùng thành công!");
+
+                        $('#edit_user_modal').modal('hide');
+
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    } else {
+                        //
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //
+                }
+            });
+        });
+        /*------------------------*/
+
+        /*Xóa vai trò*/
+        $(document).on('click', '#delete_user', function (event) {
+            event.preventDefault();
+            var user_id = $(this).data('id');
+
+            swal({
+                title: "Bạn có chắc muốn xóa?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có"
+            }, function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/admin/users/' + user_id,
+                    success: function success(res) {
+                        toastr.success('Xóa người dùng thành công !');
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    },
+                    error: function error(xhr, ajaxOptions, thrownError) {
+                        toastr.error(thrownError);
+                    }
+                });
+            });
+        });
+        /*------------*/
     </script>
 @endsection

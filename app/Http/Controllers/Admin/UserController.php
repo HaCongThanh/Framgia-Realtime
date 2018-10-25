@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Role;
 use DB;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -28,7 +30,6 @@ class UserController extends Controller
     public function index()
     {
         $users = User::where('type', 1)->orderBy('id', 'desc')->get();
-
         return view('admin.users.index', [
             'users' =>  $users
         ]);
@@ -52,7 +53,61 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+            $rules = [
+                'name'         => 'required|string',
+                'email'         => 'required|unique:users',
+                'mobile'         => 'required|max:11',
+                'address'         => 'required',
+                'gender'         => 'required',
+            ];
+
+            $messages = [
+                'name.required'         =>  'Tên nhân viên không được bỏ trống',
+                'name.string'           =>  'Tên nhân viên không được có ký tự đặc biệt',
+                'email.required' =>  'Email không được bỏ trống',
+                'email.unique' =>  'Email đã tồn tại',
+                'mobile.required'   =>  'Số điện thoại không được bỏ trống',
+                'mobile.max'   =>  'Số điện thoại phải không quá 11 số',
+                'address.required'   =>  'Địa chỉ không được bỏ trống',
+                'gender.required'   =>  'Giới tính không được bỏ trống',
+            ];
+
+            $validator = Validator::make($data, $rules, $messages);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'error'   =>  'valid',
+                    'message' =>  $validator->errors()
+                ]);
+            } else {
+                User::create([
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'mobile' => $request->mobile,
+                    'password' => Hash::make(123456),
+                    'address' => $request->address,
+                    'gender' => $request->gender,
+                    'type' => 1
+                ]);
+
+                DB::commit();
+
+                return response()->json([
+                    'error'     =>  false,
+                    'message'   =>  'Thêm nhân viên thành công !'
+                ]);
+            }
+        } catch (Exception $e){
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
     }
 
     /**
@@ -97,7 +152,12 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return response()->json([
+            'error' =>  false,
+            'user'  =>  $user
+        ]);
     }
 
     /**
@@ -109,7 +169,58 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+            $rules = [
+                'name'         => 'required|string',
+                'email'         => 'required',
+                'mobile'         => 'required|max:11',
+                'address'         => 'required',
+                'gender'         => 'required',
+            ];
+
+            $messages = [
+                'name.required'         =>  'Tên nhân viên không được bỏ trống',
+                'name.string'           =>  'Tên nhân viên không được có ký tự đặc biệt',
+                'email.required' =>  'Email không được bỏ trống',
+                'mobile.required'   =>  'Số điện thoại không được bỏ trống',
+                'mobile.max'   =>  'Số điện thoại phải không quá 11 số',
+                'address.required'   =>  'Địa chỉ không được bỏ trống',
+                'gender.required'   =>  'Giới tính không được bỏ trống',
+            ];
+
+            $validator = Validator::make($data, $rules, $messages);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'error'   =>  'valid',
+                    'message' =>  $validator->errors()
+                ]);
+            } else {
+                User::where('id', $id)->update([
+                    'name' => $request->name,
+                    'mobile' => $request->mobile,
+                    'address' => $request->address,
+                    'gender' => $request->gender,
+                    'type' => $request->type
+                ]);
+
+                DB::commit();
+
+                return response()->json([
+                    'error'     =>  false,
+                    'message'   =>  'Sửa nhân viên thành công !'
+                ]);
+            }
+        } catch (Exception $e){
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
     }
 
     /**
@@ -120,7 +231,25 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            USer::where('id', $id)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'error'     =>  false,
+                'message'   =>  'Xóa nhân viên thành công !'
+            ]);
+        } catch(Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
     }
 
     /**
