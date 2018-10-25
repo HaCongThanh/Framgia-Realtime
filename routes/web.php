@@ -69,6 +69,8 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::get('/dashboard-statistical','Admin\HomeController@dashboardStatistical')->name('admin.dashboard_statistical');
 
+    Route::get('/dashboard-notification','Admin\HomeController@dashboardNotification')->name('admin.dashboard_notification');
+
     Route::get('/customer','Admin\CustomersController@index')->name('customer');
 
     Route::get('/roles/get_list_roles','Admin\RoleController@getListRoles')->name('admin.roles.get_list_roles');

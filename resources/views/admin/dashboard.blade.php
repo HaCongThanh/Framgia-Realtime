@@ -133,12 +133,15 @@
                         <div class="card-body">
                             <div class="media justify-content-between">
                                 <div>
-                                    <p class="">Tổng bài viết</p>
-                                    <h2 class="font-size-28 font-weight-light" id="count_posts"></h2>
-                                    <span class="font-size-13 opacity-04">bài viết</span>
+                                    <p class="">Tổng số khách đến</p>
+                                    <h2 class="font-size-28 font-weight-light" id="total_number_people"></h2>
+                                    <span class="text-semibold text-success font-size-15">
+                                        {{-- <i class="ti-arrow-up font-size-11"></i> --}}
+                                        <span>lượt khách</span>
+                                    </span>
                                 </div>
                                 <div class="align-self-end">
-                                    <i class="ti-book font-size-70 text-danger opacity-01"></i>
+                                    <i class="ti-user font-size-70 text-primary opacity-01"></i>
                                 </div>
                             </div>
                         </div>
@@ -149,15 +152,12 @@
                         <div class="card-body">
                             <div class="media justify-content-between">
                                 <div>
-                                    <p class="">Tổng số khách đến</p>
-                                    <h2 class="font-size-28 font-weight-light" id="total_number_people"></h2>
-                                    <span class="text-semibold text-success font-size-15">
-                                        {{-- <i class="ti-arrow-up font-size-11"></i> --}}
-                                        <span>lượt khách</span>
-                                    </span>
+                                    <p class="">Tổng bài viết</p>
+                                    <h2 class="font-size-28 font-weight-light" id="count_posts"></h2>
+                                    <span class="font-size-13 opacity-04">bài viết</span>
                                 </div>
                                 <div class="align-self-end">
-                                    <i class="ti-user font-size-70 text-primary opacity-01"></i>
+                                    <i class="ti-book font-size-70 text-danger opacity-01"></i>
                                 </div>
                             </div>
                         </div>
