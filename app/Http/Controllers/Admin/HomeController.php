@@ -152,8 +152,8 @@ class HomeController extends Controller
         }
 
         return response()->json([
-            'error'                         =>  false,
-            'message'                       =>  'Lấy thông tin thống kê thành công!',
+            'error'     =>  false,
+            'message'   =>  'Lấy thông tin thống kê thành công!',
             'data'      =>  $array_note
         ]);
     }
