@@ -64,6 +64,8 @@ class HomeController extends Controller
             $adults     = $request->input('adults');
             $children   = $request->input('children');
 
+            $night_count = abs((strtotime($start_date) - strtotime($end_date)) / 86400);
+
             if ($adults == 'Người lớn') {
                 $adults = 1;
             }
@@ -183,7 +185,8 @@ class HomeController extends Controller
                 'start_date'                =>  $_GET['start_date'],
                 'end_date'                  =>  $_GET['end_date'],
                 'adults'                    =>  $adults,
-                'children'                  =>  $children
+                'children'                  =>  $children,
+                'night_count'               =>  $night_count
             ]);
         }
     }
@@ -309,7 +312,7 @@ class HomeController extends Controller
     }
 
     /**
-     * [bookings description]
+     * [bookings : Thực hiện lưu bản ghi khi hoàn tất đặt phòng]
      * @return [type] [description]
      */
     public function bookings(Request $request)
@@ -436,94 +439,8 @@ class HomeController extends Controller
         return response()->json([
             'error'     =>  false,
             'message'   =>  'Thêm đơn đặt phòng thành công!',
-            'data'      =>  $data['note']
+            'data'      =>  $data['note'],
+            'user_id'   =>  $user->id
         ]);
     }
-
-    /**
-     * [bill description]
-     * @return [type] [description]
-     */
-    public function bill()
-    {
-        $user = Auth::user();
-
-        $customer_booking_logs = CustomerBookingLog::where('user_id', $user->id)->orderBy('id', 'desc')->get();
-
-        return view('user.booking_log', [
-            'customer_booking_logs'     =>  $customer_booking_logs,
-            'user_name'                 =>  $user->name
-        ]);
-    }
-
-    /**
-     * [bookingBills description]
-     * @param  Request $request [description]
-     * @return [type]           [description]
-     */
-
-    public function billDetail(Request $request)
-    {
-        $user = Auth::user();
-
-        $customer_booking_log_id = $request->customer_booking_log_id;
-
-        // $customer_booking_details = CustomerBookingDetail::where('customer_booking_log_id', $customer_booking_log_id)->get();
-
-        $customer_booking_details = DB::table('customer_booking_details')
-            ->join('customer_booking_logs', 'customer_booking_details.customer_booking_log_id', '=', 'customer_booking_logs.id')
-            ->join('room_types', 'customer_booking_details.room_type_id', '=', 'room_types.id')
-            ->where('customer_booking_details.customer_booking_log_id', $customer_booking_log_id)
-            ->select([
-                'room_types.name',
-                'room_types.price',
-                'customer_booking_details.number_room',
-                'customer_booking_details.total_price',
-                'customer_booking_logs.created_at',
-                'customer_booking_logs.total_money',
-                'customer_booking_logs.total_number_room',
-                'customer_booking_logs.note'
-                    ])
-            ->get();
-
-        return response()->json([
-            'error'     =>  false,
-            'message'   =>  'Lấy thông tin thành công!',
-            'data'      =>  $customer_booking_details,
-            'info'      =>  $user
-        ]);
-    }
-
-    /**
-     * [cancelReservation description]
-     * @param  Request $request [description]
-     * @return [type]           [description]
-     */
-    public function cancelReservation(Request $request)
-    {
-        /*Xóa trong bảng room_rental_lists*/
-        DB::table('room_rental_lists')->where('customer_booking_log_id', $request->customer_booking_log_id)->delete();
-        /*--------------------------------*/
-
-        $customer_booking_log = CustomerBookingLog::find($request->customer_booking_log_id);
-
-        /*Trừ doanh thu trong bảng revenues*/
-        $revenue = Revenue::where('created_at', date('Y-m-d', strtotime($customer_booking_log->created_at)))->first();
-
-        Revenue::where('id', $revenue->id)->update([
-            'total_amount'  =>  $revenue->total_amount - $customer_booking_log->total_money,
-            'updated_at'    =>  date('Y-m-d', time())
-        ]);
-        /*---------------------------------*/
-
-        /*Xóa trong bảng customer_booking_logs*/
-        DB::table('customer_booking_logs')->where('id', $request->customer_booking_log_id)->delete();
-        /*------------------------------------*/
-
-        return response()->json([
-            'error'     =>  false,
-            'message'   =>  'Hủy đặt phòng thành công!'
-        ]);
-    }
-
 }

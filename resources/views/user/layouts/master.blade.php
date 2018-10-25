@@ -159,9 +159,6 @@
                         <a href="{{ route('user.rooms.index') }}">{{ __('messages.rooms') }}</a>
                     </li>
                     <li class="dropdown">
-                        <a href="{{ route('user.bookings.bill') }}">{{ __('messages.diary') }}</a>
-                    </li>
-                    <li class="dropdown">
                         <a href="{{ route('user.posts.index') }}">{{ __('messages.write') }}</a>
                     </li>
                     {{-- <li class="dropdown">

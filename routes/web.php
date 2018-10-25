@@ -40,13 +40,13 @@ Route::group(['prefix' => 'dev'], function() {
 
     Route::get('/bookings', 'User\HomeController@bookings')->name('user.bookings');
 
-    Route::get('/bookings/bill', 'User\HomeController@bill')->name('user.bookings.bill');
-
-    Route::post('/bookings/bill-detail', 'User\HomeController@billDetail')->name('user.bookings.bill_detail');
-
-    Route::post('/bookings/cancel-reservation', 'User\HomeController@cancelReservation')->name('user.bookings.cancel_reservation');
-
     Route::get('/profiles/get-profile', 'User\ProfileController@getProfile')->name('user.profiles.get_profile');
+
+    Route::get('/profiles/get-customer-booking-log', 'User\ProfileController@getCustomerBookingLog')->name('user.profiles.get_customer_booking_log');
+
+    Route::post('/profiles/get-customer-booking-detail', 'User\ProfileController@getCustomerBookingDetail')->name('user.profiles.get_customer_booking_detail');
+
+    Route::post('/profiles/cancel-reservation', 'User\ProfileController@cancelReservation')->name('user.profiles.cancel_reservation');
 
     Route::get('/rooms', 'User\RoomController@index')->name('user.rooms.index');
 
@@ -68,6 +68,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/', 'Admin\HomeController@index')->name('dashboard');
 
     Route::get('/dashboard-statistical','Admin\HomeController@dashboardStatistical')->name('admin.dashboard_statistical');
+
+    Route::get('/dashboard-notification','Admin\HomeController@dashboardNotification')->name('admin.dashboard_notification');
 
     Route::get('/customer','Admin\CustomersController@index')->name('customer');
 

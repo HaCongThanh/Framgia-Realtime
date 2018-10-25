@@ -956,9 +956,8 @@
     var notificationsCount     = parseInt(notificationsCountElem.data('count'));
     var notifications          = notificationsWrapper.find('ul.relative');
 
-
     // Enable pusher logging - don't include this in production
-     Pusher.logToConsole = true;
+    Pusher.logToConsole = true;
 
     var pusher = new Pusher('{{env('PUSHER_APP_KEY')}}', {
         cluster: 'ap1',
@@ -995,6 +994,26 @@
         notificationsCountElem.attr('data-count', notificationsCount);
         notificationsWrapper.find('.notif-count').text(notificationsCount);
         notificationsWrapper.show();
+    });
+</script>
+
+<script>
+    $(function(){
+        setTimeout(function(){
+            $.ajax({
+                url: '{{ route('admin.dashboard_notification') }}',
+                success:function(res){
+                    console.log(res);
+                    // $("#total_revenue").html(formatNumber(res.total_revenue));
+                    // $("#count_customer_booking_logs").html(formatNumber(res.count_customer_booking_logs));
+                    // $("#count_posts").html(formatNumber(res.count_posts));
+                    // $("#total_number_people").html(formatNumber(res.total_number_people));
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // toastr.error(thrownError);
+                }
+            });
+        }, 500);
     });
 </script>
 

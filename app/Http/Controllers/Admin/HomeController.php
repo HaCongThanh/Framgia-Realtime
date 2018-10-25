@@ -101,7 +101,7 @@ class HomeController extends Controller
      * @return [type] [description]
      */
     public function dashboardStatistical()
-    {   
+    {
         /*Tổng doanh thu*/
         $revenues = Revenue::select('total_amount')->get();
 
@@ -129,6 +129,32 @@ class HomeController extends Controller
             'count_customer_booking_logs'   =>  $count_customer_booking_logs,
             'count_posts'                   =>  $count_posts,
             'total_number_people'           =>  $total_number_people
+        ]);
+    }
+
+    /**
+     * [dashboardNotification description]
+     * @return [type] [description]
+     */
+    public function dashboardNotification()
+    {
+        $array_note = array();
+
+        $customer_booking_logs = CustomerBookingLog::where('note', '!=', null)->get();
+
+        foreach ($customer_booking_logs as $customer_booking_log) {
+            array_push($array_note, [
+                'note'                      =>  $customer_booking_log->note,
+                'name'                      =>  $customer_booking_log->users->name,
+                'customer_booking_log_id'   =>  $customer_booking_log->id,
+                'avatar'                    =>  $customer_booking_log->users->avatar
+            ]);
+        }
+
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Lấy thông tin thống kê thành công!',
+            'data'      =>  $array_note
         ]);
     }
 }

@@ -113,6 +113,7 @@
                     <input type="hidden" name="total-money-hidden" id="total-money-hidden" class="btn btn-success" value="" disabled>
                     <input type="hidden" name="start-date-hidden" id="start-date-hidden" class="btn btn-success" value="{{ $start_date }}" disabled>
                     <input type="hidden" name="end-date-hidden" id="end-date-hidden" class="btn btn-success" value="{{ $end_date }}" disabled>
+                    <input type="hidden" name="night-count-hidden" id="night-count-hidden" class="btn btn-success" value="{{ $night_count }}" disabled>
                     <input type="hidden" name="adults-hidden" id="adults-hidden" class="btn btn-success" value="{{ $adults }}" disabled>
                     <input type="hidden" name="children-hidden" id="children-hidden" class="btn btn-success" value="{{ $children }}" disabled>
                     @php
@@ -130,7 +131,7 @@
                                 <tr>
                                     <th style="text-align: center;">{{ __('messages.room_type') }}</th>
                                     <th style="text-align: center;">{{ __('messages.fit') }}</th>
-                                    <th style="text-align: center;">{{ __('messages.night') }}</th>
+                                    <th style="text-align: center;">{{ __('Giá 1 phòng / 1 đêm') }}</th>
                                     <th style="text-align: center;">{{ __('messages.select_room') }}</th>
                                 </tr>
                             </thead>

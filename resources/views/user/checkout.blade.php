@@ -218,7 +218,7 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group email">
-                                                        <label>{{ __('messages.t_card') }}</label>
+                                                        <label>{{ __('messages.type_card') }}</label>
                                                         <select class="selectpicker country search-fields" name="card_type" id="card_type">
                                                             <option @if ($card_type == 'Master Card') selected @endif>Master Card</option>
                                                             <option @if ($card_type == 'Visa') selected @endif>Visa</option>
@@ -229,7 +229,7 @@
                                                 </div>
                                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                                     <div class="form-group phone">
-                                                        <label>ype{{ __('messages.number_card') }}</label>
+                                                        <label>{{ __('messages.number_card') }}</label>
                                                         <input type="text" name="card_number" id="card_number" class="input-text" value="{{ $card_number }}">
                                                     </div>
                                                 </div>
@@ -606,7 +606,7 @@
                     note2   :   $('#note2').val()
                 },
                 success:function(res){
-                    window.location.href = "{{ route('user.bookings.bill') }}";
+                    window.location.href = "{{ route('profiles.show', Auth::user()->id) }}";
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     // 
