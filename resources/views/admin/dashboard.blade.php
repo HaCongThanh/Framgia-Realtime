@@ -114,7 +114,7 @@
                         <div class="card-body">
                             <div class="media justify-content-between">
                                 <div>
-                                    <p class="">Tổng đơn đặt phòng</p>
+                                    <p class="">Đang chờ xác nhận</p>
                                     <h2 class="font-size-28 font-weight-light" id="count_customer_booking_logs"></h2>
                                     <span class="text-semibold text-danger font-size-15">
                                         {{-- <i class="ti-arrow-down font-size-11"></i> --}}

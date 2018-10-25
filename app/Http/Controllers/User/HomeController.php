@@ -56,7 +56,8 @@ class HomeController extends Controller
      * @return [type]           [description]
      */
     public function findRooms(Request $request){
-        if ($request->input('start_date') == null || $request->input('end_date') == null) {
+        if ($request->input('start_date') == null || $request->input('end_date') == null || strtotime($request->input('start_date')) > strtotime($request->input('end_date')) || strtotime($request->input('start_date')) < time()) {
+            
             return redirect()->route('user.home.index');
         } else {
             $start_date = date_format(date_create($request->input('start_date')), 'Y-m-d'); // Ngày nhận phòng của khách
@@ -178,6 +179,7 @@ class HomeController extends Controller
                     }
                 }
             }
+            // dd($array_room_type_data);
 
             return view('user.booking', [
                 'array_room_type_data'      =>  $array_room_type_data,

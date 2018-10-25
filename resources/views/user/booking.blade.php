@@ -136,8 +136,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (isset($array_room_type_data))
+
+                                @if (!empty($array_room_type_data))
                                     @foreach ($array_room_type_data as $data_room_type)
+                                        @if (!empty($data_room_type))
+                                        
                                         <tr>
                                             <td style="text-align: center;">
                                                 <div class="list-media">
@@ -163,8 +166,11 @@
                                                 </select>
                                             </td>
                                         </tr>
+
+                                        @endif
                                     @endforeach
                                 @endif
+                                
                             </tbody>
                         </table>
                     </div>

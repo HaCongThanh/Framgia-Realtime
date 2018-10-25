@@ -310,8 +310,6 @@ class RoleController extends Controller
      */
     public function updatePermissionRole(Request $request)
     {
-        $role = Role::findOrFail($request->role_id);
-
         if ($request->checked == 1) {
             DB::table('permission_role')
                 ->where('role_id', $request->role_id)
