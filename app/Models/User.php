@@ -85,4 +85,12 @@ class User extends Authenticatable
     public function comments() {
         return $this->hasMany('App\Models\Comment', 'user_id');
     }
+
+    /**
+     * Get customer_cares: one to many
+     * @return [type] [description]
+     */
+    public function customer_cares() {
+        return $this->hasMany('App\Models\CustomerCare', 'user_id');
+    }
 }

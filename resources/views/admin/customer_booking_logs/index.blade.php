@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="bills" style="z-index: 99999999;">
+            <div class="modal fade" id="bills">
                 <div class="modal-dialog" role="document" style="width: 70%; color: #73879C; max-width: none;">
                     <div class="modal-content">
                         <div class="modal-body">
@@ -162,6 +162,178 @@
                             </div>
 
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="customerCare">
+                <div class="modal-dialog" role="document" style="width: 70%; color: #73879C; max-width: none;">
+                    <div class="modal-content">
+                        <div class="modal-header" align="center" style="border-bottom: 1px solid #04a1f4 !important;">
+                            <h4 class="modal-title uppercase" style="font-weight: bold !important; color: #04a1f4;">Chăm sóc khách hàng</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row info col-md-12" style="text-align: center;">
+                                <div class="col-md-6">
+                                    <h4 style="font-weight: 300;">Họ và tên : <span class="customer_name" style="font-weight: bold;"></span></h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 style="font-weight: 300;">Địa chỉ : <span class="customer_address" style="font-weight: bold;"></span></h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 style="font-weight: 300;">Số điện thoại : <span class="customer_mobile" style="font-weight: bold;"></span></h4>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 style="font-weight: 300;">Email : <span class="customer_email" style="font-weight: bold;"></span></h4>
+                                </div>
+
+                                <input type="hidden" name="_method" id="customer_id" value="">
+                                <input type="hidden" name="_method" id="customer_booking_log_id" value="">
+                                <input type="hidden" name="_method" id="classRoomId" value="">
+                                <input type="hidden" name="_method" id="stdClassRoomId" value="">
+                            </div>
+
+                            <br>
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#call" class="active show"><i class="fa fa-phone-square" aria-hidden="true"></i> Gọi điện</a></li>
+
+                                <li><a data-toggle="tab" href="#sms"><i class="fa fa-comments-o" aria-hidden="true"></i> Gửi tin nhắn</a></li>
+
+                                <li><a data-toggle="tab" href="#email"><i class="fa fa-envelope-o" aria-hidden="true"></i> Gửi email</a></li>
+
+                                <li><a data-toggle="tab" href="#history" class="history"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Lịch sử chăm sóc</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <br>
+                                <div id="call" class="row tab-pane fade in active show">
+                                    <div class="row statusCall container-fluid">
+                                        <div class="col-md-3">
+                                            <h5 class="bold" style="text-align: center;">Trạng thái cuộc gọi</h5>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <select name="" id="statusCall" class="form-control" required="required">
+                                                <option value="1">Đã nghe máy</option>
+                                                <option value="2">Không nghe máy</option>
+                                                <option value="3">Thuê bao không liên lạc được</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <div class="row email container-fluid">
+                                        <div class="col-md-3">
+                                            <h5 class="bold" style="text-align: center;">Nội dung cuộc gọi </h5>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <textarea name="content" id="contentCall" class="form-control" rows="3" required="required" style="height: 200px;" placeholder="Nội dung cuộc gọi . . ."></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row statusCall container-fluid">
+                                        <div class="col-md-12">
+                                            <br>
+                                            <center>
+                                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Hủy bỏ</button>
+                                                <button type="button" class="btn btn-sm btn-info" id="btnCall">Lưu</button>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="sms" class="tab-pane fade in">
+                                    <div class="row email container-fluid">
+                                        <div class="col-md-3">
+                                            <h5 class="bold" style="text-align: center;">Nội dung tin nhắn</h5>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <textarea name="" id="contentMessage" class="form-control" rows="3" required="required" style="height: 200px" placeholder="Nội dung tin nhắn . . ."></textarea>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <br>
+                                            <center>
+                                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Hủy bỏ</button>
+                                                <button type="button" class="btn btn-sm btn-info" id="btnSMS">Gửi</button>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="email" class="tab-pane fade in">
+                                    <div class="row email container-fluid">
+                                        <div class="col-md-3"></div>
+                                        <div class="col-md-9">
+                                            <div class="dropdown">
+                                                <a class="dropdown-toggle" data-toggle="dropdown" id="btnEmailSelect" style="color: #04a1f4; cursor: pointer;">Chọn mẫu Email
+                                                </a><span class="caret"></span>
+
+                                                <a style="margin-left: 50px" data-toggle="modal" href="javascript:;" onclick="showEmailTemplate()" id="btnEmailTem"><i class="fa fa-plus-square" aria-hidden="true"></i> Quản lý mẫu email</a>
+
+                                                <ul class="dropdown-menu">
+                                                    @if (!empty($email_template))
+                                                        @foreach ($email_template as $email)
+                                                            <li><a class="emailTemplate" id="{{$email->id}}">{{$email->name}}</a></li>
+                                                        @endforeach
+                                                    @endif
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <br>
+                                    <div class="row email container-fluid">
+                                        <div class="col-md-3">
+                                            <h5 class="bold" style="text-align: center;">Tiêu đề email</h5>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input type="text" name="titleEmail" id="titleEmail" class="form-control" value="" placeholder="Tiêu đề email">
+                                        </div>
+                                    </div>
+
+                                    <br>
+                                    <div class="row email container-fluid">
+                                        <div class="col-md-3">
+                                            <h5 class="bold" style="text-align: center;">Nội dung email </h5>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div id="summernote2"><p></p></div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <br>
+                                            <center>
+                                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Hủy bỏ</button>
+                                                <button type="button" class="btn btn-sm btn-info" id="btnEmail">Gửi</button>
+                                                <button type="button" class="btn btn-sm btn-success" value="Reset" id="btnReset">Reset</button>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="history" class="tab-pane fade">
+                                    <br>
+                                    <div class="table-overflow">
+                                        <table class="table table-hover table-bordered table-striped" id="customer_care_history" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center;">#</th>
+                                                    <th style="text-align: center;">Tiêu đề</th>
+                                                    <th style="text-align: center;">Nội dung</th>
+                                                    <th style="text-align: center;">Hình thức</th>
+                                                    <th style="text-align: center;">Trạng thái</th>
+                                                    <th style="text-align: center;">Thời gian</th>
+                                                    <th style="text-align: center;">Mã hóa đơn</th>
+                                                    <th style="text-align: center;">Người thực hiện</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -355,6 +527,133 @@
             });
         }
         /*-------------*/
+
+        /*Gọi Modal chăm sóc khách hàng*/
+        function customerCare(customer_booking_log_id){
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.customer_booking_logs.get_info_customer_care') }}',
+                data: {
+                    customer_booking_log_id : customer_booking_log_id
+                },
+                success: function(res){
+
+                    $('.customer_name').text(res.customer.name);
+                    $('.customer_address').text(res.customer.address);
+                    $('.customer_mobile').text(res.customer.mobile);
+                    $('.customer_email').text(res.customer.email);
+                    $('#customer_id').val(res.customer.id);
+                    $('#customer_booking_log_id').val(res.customer_booking_log_id);
+                    
+                    // $('#courseId').val(res[0]['course_id']);
+                    // $('#classRoomId').val(res[0]['class_room_id']);
+                    // $('#stdClassRoomId').val(res[0]['id']);
+
+                    customerCareHistory();
+                }, 
+                error: function (xhr, ajaxOptions, thrownError) {
+                    toastr.error(thrownError);
+                }
+                
+            }); 
+            
+        }
+        /*-----------------------------*/
+
+        /*DataTable lịch sử chăm sóc khách hàng*/
+        function customerCareHistory(){
+            var table = $('#customer_care_history').DataTable();
+
+            table.destroy();
+
+            $('#customer_care_history').DataTable({
+                processing: false,
+                // serverSide: true,
+                ordering: false,
+                ajax: {
+                    type: 'POST',
+                    url: '{{ route('admin.customer_booking_logs.customer_care_history') }}',
+                    data: {
+                        user_id: $('#customer_id').val(),
+                        customer_booking_log_id: $('#customer_booking_log_id').val()
+                    }
+                },
+                columns: [
+                    {data: 'DT_Row_Index', name: 'id'},
+                    {data: 'title', name: 'title'},
+                    {data: 'content', name: 'content'},
+                    {data: 'type', name: 'type'},
+                    {data: 'status', name: 'status'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'customer_booking_log_id', name: 'customer_booking_log_id'},
+                    {data: 'carer_id', name: 'carer_id'}
+                ] 
+            }); 
+        }
+        /*-------------------------------------*/
+
+        /*Lưu cuộc gọi*/
+        $('#btnCall').on('click', function(event) {
+            event.preventDefault();
+
+            swal({
+                title: "Lưu cuộc gọi?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            },
+            function() {
+                if ($('#contentCall').val() == '') {
+                    toastr['error']('Nội dung cuộc gọi không được trống!');
+                } else {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('admin.customer_booking_logs.save_customer_call') }}',
+                        data: {
+                            user_id: $('#customer_id').val(),
+                            customer_booking_log_id: $('#customer_booking_log_id').val(),
+                            content: $('#contentCall').val(),
+                            status: $('#statusCall option:selected').val()
+                        },
+                        success: function (res) {
+                            if (res.error == 'valid') {
+                                var arr = res.message;
+                                var key = Object.keys(arr);
+
+                                for (var i = 0; i < key.length; i++) {
+                                    toastr.error(arr[key[i]]);
+                                }
+                            } else if (res.error == false) {
+                                toastr['success']('Thêm cuộc gọi thành công');
+
+                                $('#contentCall').val('');
+
+                                customerCareHistory();
+                            } else {
+                                // 
+                            }
+                        },error: function (xhr, ajaxOptions, thrownError) {
+                            toastr["error"](thrownError); 
+                        }
+                    });
+                }
+            });
+        });
+        /*------------*/
     </script>
 
 @endsection

@@ -79,6 +79,12 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::post('/customer-booking-logs/update-status', 'Admin\CustomerBookingLogController@updateStatus')->name('admin.customer_booking_logs.updateStatus');
 
+    Route::post('/customer-booking-logs/get-info-customer-care', 'Admin\CustomerBookingLogController@getInfoCustomerCare')->name('admin.customer_booking_logs.get_info_customer_care');
+
+    Route::post('/customer-booking-logs/customer-care-history', 'Admin\CustomerBookingLogController@customerCareHistory')->name('admin.customer_booking_logs.customer_care_history');
+
+    Route::post('/customer-booking-logs/save-customer-call', 'Admin\CustomerBookingLogController@saveCustomerCall')->name('admin.customer_booking_logs.save_customer_call');
+
     Route::get('/roles/get_list_roles','Admin\RoleController@getListRoles')->name('admin.roles.get_list_roles');
 
     Route::post('/roles/update_permission_role','Admin\RoleController@updatePermissionRole')->name('admin.roles.update_permission_role');

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
 use App\Models\CustomerBookingLog;
 use App\Models\User;
+use App\Models\CustomerCare;
 use Validator;
 use Entrust;
 use DB;
@@ -137,11 +139,11 @@ class CustomerBookingLogController extends Controller
                 if ($customer_booking_log->status == 1) {
                     $string = '<input type="hidden" id="checked-'. $customer_booking_log->id .'" value="1">';
 
-                    $string = $string . '<i id="action-'. $customer_booking_log->id .'" class="fa fa-check-circle" data-tooltip="tooltip"  title="Đã xác nhận" onclick="updateStatus('. $customer_booking_log->id .')" aria-hidden="true" style="cursor: pointer; color: #3598dc; font-size: 20px;"></i>';
+                    $string = $string . '<i id="action-'. $customer_booking_log->id .'" class="fa fa-check-circle" data-tooltip="tooltip"  title="Đã xác nhận" onclick="updateStatus('. $customer_booking_log->id .')" aria-hidden="true" style="cursor: pointer; color: #28a745; font-size: 20px;"></i>';
                 } else {
                     $string = '<input type="hidden" id="checked-'. $customer_booking_log->id .'" value="0">';
 
-                    $string = $string . '<i id="action-'. $customer_booking_log->id .'" class="fa fa-circle-o" data-tooltip="tooltip" title="Chưa xác nhận" onclick="updateStatus('. $customer_booking_log->id .')" aria-hidden="true" style="cursor: pointer; color: #3598dc; font-size: 20px;"></i>';
+                    $string = $string . '<i id="action-'. $customer_booking_log->id .'" class="fa fa-circle-o" data-tooltip="tooltip" title="Chưa xác nhận" onclick="updateStatus('. $customer_booking_log->id .')" aria-hidden="true" style="cursor: pointer; color: #28a745; font-size: 20px;"></i>';
                 }
 
                 return $string;
@@ -151,12 +153,16 @@ class CustomerBookingLogController extends Controller
                 $string = '';
 
                 // if (Entrust::hasRole(['super-admin'])) {
-                    $string = $string . '<a data-toggle="modal" data-target="#bills" class="text-gray clear-bills" onclick="bills('. $customer_booking_log->id .');" title="'. __('messages.view') .'"><i class="fa fa-credit-card" style="font-size: 18px; cursor: pointer;"></i></a>';
+                    $string = $string . '<a data-toggle="modal" data-target="#bills" class="text-gray clear-bills" onclick="bills('. $customer_booking_log->id .');" title="'. __('messages.view') .'"><i class="fa fa-credit-card" style="font-size: 18px; cursor: pointer; color: #3598dc;"></i></a>';
+                // }
+                
+                // if (Entrust::hasRole(['super-admin'])) {
+                    $string = $string . '&nbsp;&nbsp;&nbsp;&nbsp;' . '<a data-toggle="modal" data-target="#customerCare" data-tooltip="tooltip" class="text-gray" onclick="customerCare('. $customer_booking_log->id .');" title="Chăm sóc khách hàng"><i class="ti-heart" style="font-size: 17px; cursor: pointer; color: red;"></i></a>';
                 // }
 
                 // if (Entrust::can(['edit-posts'])) {
                     // if (strtotime('+1 day', time()) < strtotime($customer_booking_log->start_date)) {
-                        $string = $string . '&nbsp;&nbsp;&nbsp;&nbsp;' . '<a class="text-gray clear-bills" onclick="cancelReservation('. $customer_booking_log->id .');" title="'. __('Hủy hóa đơn') .' "><i class="fa fa-times-circle" style="font-size: 18px; cursor: pointer;"></i></a>';
+                        $string = $string . '&nbsp;&nbsp;&nbsp;&nbsp;' . '<a class="text-gray clear-bills" onclick="cancelReservation('. $customer_booking_log->id .');" title="'. __('Hủy hóa đơn') .' "><i class="fa fa-times-circle" style="font-size: 18px; cursor: pointer; color: #e83e8c;"></i></a>';
                     // }
                 // }
 
@@ -237,6 +243,154 @@ class CustomerBookingLogController extends Controller
             'data'          =>  $customer_booking_details,
             'info'          =>  $user,
             'night_count'   =>  $night_count
+        ]);
+    }
+
+    /**
+     * [getInfoCustomerCare : Lấy thông tin của khách hàng và hóa đơn đó]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function getInfoCustomerCare(Request $request)
+    {
+        $customer_booking_log = CustomerBookingLog::find($request->customer_booking_log_id);
+
+        $customer = User::find($customer_booking_log->user_id);
+
+        return response()->json([
+            'error'                     =>  false,
+            'message'                   =>  'Lấy thông tin thành công!',
+            'customer'                  =>  $customer,
+            'customer_booking_log_id'   =>  $customer_booking_log->id
+        ]);
+    }
+
+    /**
+     * [customerCareHistory : Lấy lịch sử chăm sóc khách hàng]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function customerCareHistory(Request $request) {
+        $customer_cares = CustomerCare::where('user_id', $request->user_id)
+                                    ->where('customer_booking_log_id', $request->customer_booking_log_id)
+                                    ->orderBy('id', 'desc')
+                                    ->get();
+
+        return Datatables::of($customer_cares)
+            ->addIndexColumn()
+
+            ->editColumn('content', function($customer_care) {
+                if (strlen($customer_care->content) > 300) {
+                    return substr($customer_care->content, 0, 294)." . . .";
+                } else {
+                    return $customer_care->content;
+                }
+            })
+
+            ->editColumn('type', function($customer_care) {
+                if ($customer_care->type == 1) {
+                    $customer_care->type = 'Gọi điện thoại';
+                } elseif ($customer_care->type == 2){
+                    $customer_care->type = 'Gửi tin nhắn';
+                } elseif ($customer_care->type == 3){
+                    $customer_care->type = 'Gửi Email';
+                }
+
+                return $customer_care->type;
+            })
+
+            ->editColumn('status', function($customer_care) {
+                switch ($customer_care->status) {
+                    case 1:
+                    $customer_care->status = 'Đã nghe máy';
+                    break;
+                    case 2:
+                    $customer_care->status = 'Không nghe máy';
+                    break;
+                    case 3:
+                    $customer_care->status = 'Thuê bao không liên lạc được';
+                    break;
+                    case 4:
+                    $customer_care->status = 'Đã gửi tin nhắn';
+                    break;
+                    case 5:
+                    $customer_care->status = 'Đã gửi Email';
+                    break;
+                }
+
+                return $customer_care->status;
+            })
+
+            ->editColumn('created_at', function($customer_care) {
+                return $customer_care->created_at->format('H:m | d-m-Y');
+            })
+
+            ->editColumn('carer_id', function($customer_care) {
+                $user = User::find($customer_care->carer_id);
+
+                return $customer_care->carer_id = $user->name;
+            })
+
+        ->make(true);
+    }
+
+    /**
+     * [saveCustomerCall : Lưu cuộc gọi chăm sóc khách hàng]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function saveCustomerCall(Request $request)
+    {
+        $carer = Auth::user();
+
+        $data = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+            $rules = [
+                'content'   =>  'required',
+            ];
+
+            $messages = [
+                'content.required'  =>  'Nội dung cuộc gọi không được bỏ trống!',
+            ];
+
+            $validator = Validator::make($data, $rules, $messages);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'error'   =>  'valid',
+                    'message' =>  $validator->errors()
+                ]);
+            } else {
+                CustomerCare::create([
+                    'user_id'                   =>  $request->user_id,
+                    'carer_id'                  =>  $carer->id,
+                    'customer_booking_log_id'   =>  $request->customer_booking_log_id,
+                    'title'                     =>  'Gọi điện',
+                    'content'                   =>  $request->content,
+                    'type'                      =>  1,  // Gọi điện thoại
+                    'status'                    =>  $request->status
+                ]);
+
+                DB::commit();
+
+                return response()->json([
+                    'error'     =>  false,
+                    'message'   =>  'Thêm mới cuộc gọi chăm sóc khách hàng thành công!'
+                ]);
+            }
+        } catch(Exception $e) {
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
+        
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Thêm mới cuộc gọi chăm sóc khách hàng thành công!'
         ]);
     }
 }
