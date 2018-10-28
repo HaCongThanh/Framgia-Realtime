@@ -629,7 +629,7 @@
                             content: $('#contentCall').val(),
                             status: $('#statusCall option:selected').val()
                         },
-                        success: function (res) {
+                        success: function(res) {
                             if (res.error == 'valid') {
                                 var arr = res.message;
                                 var key = Object.keys(arr);
@@ -646,7 +646,63 @@
                             } else {
                                 // 
                             }
-                        },error: function (xhr, ajaxOptions, thrownError) {
+                        },error: function(xhr, ajaxOptions, thrownError) {
+                            toastr["error"](thrownError); 
+                        }
+                    });
+                }
+            });
+        });
+        /*------------*/
+
+        /*Lưu tin nhắn*/
+        $('#btnSMS').on('click', function(event) {
+            event.preventDefault();
+
+            swal({
+                title: "Lưu tin nhắn?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            },
+            function() {
+                if ($('#contentMessage').val() == '') {
+                    toastr['error']("Nội dung tin nhắn không được trống!");
+                } else {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('admin.customer_booking_logs.save_customer_messages') }}',
+                        data:   {
+                            user_id: $('#customer_id').val(),
+                            customer_booking_log_id : $('#customer_booking_log_id').val(),
+                            content: $('#contentMessage').val(),
+                        },
+                        success: function(res) {
+                            if (res.error == 'valid') {
+                                var arr = res.message;
+                                var key = Object.keys(arr);
+
+                                for (var i = 0; i < key.length; i++) {
+                                    toastr.error(arr[key[i]]);
+                                }
+                            } else if (res.error == false) {
+                                toastr['success']('Lưu tin nhắn thành công');
+
+                                content: $('#contentMessage').val('');
+
+                                customerCareHistory();
+                            } else {
+                                // 
+                            }
+                        },error: function(xhr, ajaxOptions, thrownError) {
                             toastr["error"](thrownError); 
                         }
                     });

@@ -85,6 +85,8 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::post('/customer-booking-logs/save-customer-call', 'Admin\CustomerBookingLogController@saveCustomerCall')->name('admin.customer_booking_logs.save_customer_call');
 
+    Route::post('/customer-booking-logs/save-customer-messages', 'Admin\CustomerBookingLogController@saveCustomerMessages')->name('admin.customer_booking_logs.save_customer_messages');
+
     Route::get('/roles/get_list_roles','Admin\RoleController@getListRoles')->name('admin.roles.get_list_roles');
 
     Route::post('/roles/update_permission_role','Admin\RoleController@updatePermissionRole')->name('admin.roles.update_permission_role');

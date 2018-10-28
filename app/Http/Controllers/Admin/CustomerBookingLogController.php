@@ -393,4 +393,64 @@ class CustomerBookingLogController extends Controller
             'message'   =>  'Thêm mới cuộc gọi chăm sóc khách hàng thành công!'
         ]);
     }
+
+    /**
+     * [saveCustomerMessages : Lưu tin nhắn chăm sóc khách hàng]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function saveCustomerMessages(Request $request)
+    {
+        $carer = Auth::user();
+
+        $data = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+            $rules = [
+                'content'   =>  'required',
+            ];
+
+            $messages = [
+                'content.required'  =>  'Nội dung tin nhắn không được bỏ trống!',
+            ];
+
+            $validator = Validator::make($data, $rules, $messages);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'error'   =>  'valid',
+                    'message' =>  $validator->errors()
+                ]);
+            } else {
+                CustomerCare::create([
+                    'user_id'                   =>  $request->user_id,
+                    'carer_id'                  =>  $carer->id,
+                    'customer_booking_log_id'   =>  $request->customer_booking_log_id,
+                    'title'                     =>  'Gửi tin nhắn',
+                    'content'                   =>  $request->content,
+                    'type'                      =>  2,  // Gửi tin nhắn
+                    'status'                    =>  4   // Đã gửi tin nhắn
+                ]);
+
+                DB::commit();
+
+                return response()->json([
+                    'error'     =>  false,
+                    'message'   =>  'Thêm mới tin nhắn chăm sóc khách hàng thành công!'
+                ]);
+            }
+        } catch(Exception $e) {
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
+        
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Thêm mới tin nhắn chăm sóc khách hàng thành công!'
+        ]);
+    }
 }
