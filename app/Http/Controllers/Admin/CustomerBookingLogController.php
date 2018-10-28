@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\CustomerBookingLog;
 use App\Models\User;
 use App\Models\CustomerCare;
+use App\Models\EmailTemplate;
 use Validator;
 use Entrust;
 use DB;
@@ -33,7 +34,17 @@ class CustomerBookingLogController extends Controller
      */
     public function index()
     {
-        return view('admin.customer_booking_logs.index');
+        $email_templates = EmailTemplate::orderBy('id','desc')->get();
+
+        $customer_field = CustomerCare::getCustomerField();
+
+        $customer_booking_log_field = CustomerCare::getCustomerBookingLogField();
+
+        return view('admin.customer_booking_logs.index', [
+            'customer_field'                =>  $customer_field,
+            'email_templates'               =>  $email_templates,
+            'customer_booking_log_field'    =>  $customer_booking_log_field
+        ]);
     }
 
     /**
@@ -113,27 +124,27 @@ class CustomerBookingLogController extends Controller
         return Datatables::of($customer_booking_logs)
             ->addIndexColumn()
 
-            ->editColumn('name', function($customer_booking_log){
+            ->editColumn('name', function($customer_booking_log) {
 
                 return $customer_booking_log->users->name;
             })
 
-            ->editColumn('start_date', function($customer_booking_log){
+            ->editColumn('start_date', function($customer_booking_log) {
 
                 return date('d-m-Y', strtotime($customer_booking_log->start_date));
             })
 
-            ->editColumn('end_date', function($customer_booking_log){
+            ->editColumn('end_date', function($customer_booking_log) {
                 
                 return date('d-m-Y', strtotime($customer_booking_log->end_date));
             })
 
-            ->editColumn('total_money', function($customer_booking_log){
+            ->editColumn('total_money', function($customer_booking_log) {
                 
                 return number_format($customer_booking_log->total_money) . ' VNĐ';
             })
 
-            ->editColumn('action2', function ($customer_booking_log){
+            ->editColumn('action2', function($customer_booking_log) {
                 $string = '';
 
                 if ($customer_booking_log->status == 1) {
@@ -149,7 +160,7 @@ class CustomerBookingLogController extends Controller
                 return $string;
             })
 
-            ->addColumn('action', function ($customer_booking_log) {
+            ->addColumn('action', function($customer_booking_log) {
                 $string = '';
 
                 // if (Entrust::hasRole(['super-admin'])) {
@@ -451,6 +462,176 @@ class CustomerBookingLogController extends Controller
         return response()->json([
             'error'     =>  false,
             'message'   =>  'Thêm mới tin nhắn chăm sóc khách hàng thành công!'
+        ]);
+    }
+
+    /**
+     * [customerCareEmailTemplate : Lấy ra các mẫu Email chăm sóc khách hàng]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function customerCareEmailTemplate(Request $request){
+        $email_templates = EmailTemplate::orderBy('id', 'desc')->get();
+
+        return Datatables::of($email_templates)
+            ->addIndexColumn()
+
+            ->addColumn('action', function($email_template) {
+                $txt = '<a class="btn btn-xs blue view_template" data-tooltip="tooltip" title="Xem chi tiết" data-toggle="modal" data-target="#viewTemplate" onclick="funcViewTemp('. $email_template->id .')"><i class="fa fa-eye" aria-hidden="true" style="font-size: 18px; cursor: pointer; color: #20c997;"></i></a>
+
+                <a class="btn btn-xs yellow edit_template" data-tooltip="tooltip" title="Chỉnh sửa" data-toggle="modal" data-target="#addTemplate" onclick="editEmailTemplate(' . $email_template->id . ')"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 18px; cursor: pointer; color: #ffc107;"></i></a>
+
+                <a class="btn btn-xs" data-tooltip="tooltip" title="Xóa" onclick="deleteEmailTemplate('. $email_template->id .')"><i class="fa fa-trash" aria-hidden="true" style="font-size: 18px; cursor: pointer; color: #fd3259;"></i></a>';
+
+                return $txt;
+            })
+
+        ->make(true);
+    }
+
+    /**
+     * [createEmailTemplate : Lưu mẫu Email mới]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function createEmailTemplate(Request $request)
+    {
+        $data = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+            $rules = [
+                'name'   =>  'unique:email_templates',
+            ];
+
+            $messages = [
+                'name.unique'  =>  'Tên mẫu Email này đã tồn tại!',
+            ];
+
+            $validator = Validator::make($data, $rules, $messages);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'error'   =>  'valid',
+                    'message' =>  $validator->errors()
+                ]);
+            } else {
+                EmailTemplate::create([
+                    'name'      =>  $request->name,
+                    'title'     =>  $request->title,
+                    'content'   =>  $request->content
+                ]);
+
+                DB::commit();
+
+                return response()->json([
+                    'error'     =>  false,
+                    'message'   =>  'Thêm mới mẫu Email thành công!'
+                ]);
+            }
+        } catch(Exception $e) {
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
+        
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Thêm mới mẫu Email thành công!'
+        ]);
+    }
+
+    /**
+     * [editEmailTemplate description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function editEmailTemplate(Request $request)
+    {
+        $email_templates = EmailTemplate::where('id', $request->id)->get();
+
+        return $email_templates;
+    }
+
+    public function updateEmailTemplate(Request $request)
+    {
+        $data = $request->all();
+
+        DB::beginTransaction();
+
+        try {
+            $rules = [
+                'name'   =>  'unique:email_templates',
+            ];
+
+            $messages = [
+                'name.unique'  =>  'Tên mẫu Email này đã tồn tại!',
+            ];
+
+            $validator = Validator::make($data, $rules, $messages);
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'error'   =>  'valid',
+                    'message' =>  $validator->errors()
+                ]);
+            } else {
+                EmailTemplate::where('id', $request->id)->update([
+                    'name'      =>  $request->name,
+                    'title'     =>  $request->title,
+                    'content'   =>  $request->content
+                ]);
+
+                DB::commit();
+
+                return response()->json([
+                    'error'     =>  false,
+                    'message'   =>  'Cập nhật mẫu Email thành công!'
+                ]);
+            }
+        } catch(Exception $e) {
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
+        
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Cập nhật mẫu Email thành công!'
+        ]);
+    }
+
+    /**
+     * [deleteEmailTemplate description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function deleteEmailTemplate(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            EmailTemplate::where('id', $request->id)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'error'     =>  false,
+                'message'   =>  'Xóa mẫu Email thành công!'
+            ]);
+        } catch(Exception $e) {
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
+        
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Xóa mẫu Email thành công!'
         ]);
     }
 }

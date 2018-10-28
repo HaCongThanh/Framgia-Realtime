@@ -87,6 +87,16 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::post('/customer-booking-logs/save-customer-messages', 'Admin\CustomerBookingLogController@saveCustomerMessages')->name('admin.customer_booking_logs.save_customer_messages');
 
+    Route::post('/customer-booking-logs/customer-care-email-template', 'Admin\CustomerBookingLogController@customerCareEmailTemplate')->name('admin.customer_booking_logs.customer_care_email_template');
+
+    Route::post('/customer-booking-logs/create-email-template', 'Admin\CustomerBookingLogController@createEmailTemplate')->name('admin.customer_booking_logs.create_email_template');
+
+    Route::post('/customer-booking-logs/edit-email-template', 'Admin\CustomerBookingLogController@editEmailTemplate')->name('admin.customer_booking_logs.edit_email_template');
+
+    Route::post('/customer-booking-logs/update-email-template', 'Admin\CustomerBookingLogController@updateEmailTemplate')->name('admin.customer_booking_logs.update_email_template');
+
+    Route::post('/customer-booking-logs/delete-email-template', 'Admin\CustomerBookingLogController@deleteEmailTemplate')->name('admin.customer_booking_logs.delete_email_template');
+
     Route::get('/roles/get_list_roles','Admin\RoleController@getListRoles')->name('admin.roles.get_list_roles');
 
     Route::post('/roles/update_permission_role','Admin\RoleController@updatePermissionRole')->name('admin.roles.update_permission_role');

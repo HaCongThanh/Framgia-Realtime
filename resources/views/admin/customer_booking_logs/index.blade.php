@@ -4,6 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/admin/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/toastr.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/sweet-alert.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/admin/summernote/summernote.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ mix('css/user/custom.css') }}">
 
     <style type="text/css">
@@ -272,9 +273,9 @@
                                                 <a style="margin-left: 50px" data-toggle="modal" href="javascript:;" onclick="showEmailTemplate()" id="btnEmailTem"><i class="fa fa-plus-square" aria-hidden="true"></i> Quản lý mẫu email</a>
 
                                                 <ul class="dropdown-menu">
-                                                    @if (!empty($email_template))
-                                                        @foreach ($email_template as $email)
-                                                            <li><a class="emailTemplate" id="{{$email->id}}">{{$email->name}}</a></li>
+                                                    @if (!empty($email_templates))
+                                                        @foreach ($email_templates as $email_template)
+                                                            <li><a class="emailTemplate" id="{{$email_template->id}}">{{$email_template->name}}</a></li>
                                                         @endforeach
                                                     @endif
                                                 </ul>
@@ -338,6 +339,107 @@
                 </div>
             </div>
 
+            <div id="emailTemplate" class="modal fade" role="dialog">
+                <div class="modal-dialog" style="width: 60%; color: #73879C; max-width: none;">
+                    <div class="modal-content">
+                        <div class="modal-header" align="center">
+                            <h4 class="modal-title uppercase">Danh sách mẫu email</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <button type="button" class="btn btn-xs btn-primary add-template" style="margin-bottom: 20px" data-toggle="modal" data-target="#addTemplate"><i class="fa fa-plus" aria-hidden="true"></i> Thêm mới</button>
+                            
+                            <div class="table-overflow">
+                                <table class="table table-hover" id="tableEmailTemplate">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: center;">#</th>
+                                            <th style="text-align: center;">Tên mẫu Email</th>
+                                            <th style="text-align: center;">Tiêu đề</th>
+                                            <th style="text-align: center;">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+
+                            <hr>
+
+                            <center>
+                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="cancelViewTmp">Hủy bỏ</button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="addTemplate" class="modal fade" role="dialog">
+                <div class="modal-dialog" style="width: 60%; color: #73879C; max-width: none;">
+                    <div class="modal-content">
+                        <div class="modal-header" align="center">
+                            <h4 class="modal-title uppercase" id="add_modal_title">Tạo mẫu email</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <form action="" method="POST" role="form">
+                                <div class="form-group">
+                                    <label for="">Tên mẫu Email</label>
+                                    <input type="text" class="form-control" id="nameEmailTmp" name="name" placeholder="Tên mẫu Email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Tiêu đề Email</label>
+                                    <input type="text" class="form-control" id="titleEmailTmp" placeholder="Tiêu đề mẫu Email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Nội dung</label>
+                                    <textarea class="form-control" name="contentAddEmail" id="contentAddEmail" cols="3" rows="3" placeholder="Content"></textarea> 
+                                </div>
+
+                                <div class="form-group">
+                                    <span style="font-weight: bold;">Chèn thêm: </span>
+
+                                    <div class="dropup" style="display: inline; margin-left: 20px; cursor: pointer;">
+                                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i> Khách hàng
+                                            <span class="caret"></span>
+                                        </a>
+
+                                        <ul class="dropdown-menu dropmenu">
+                                            @if (!empty($customer_field))
+                                                @foreach ($customer_field as $key => $value)
+                                                    <li><a class="fieldTemplate" id="{{ $key }}">{{ $value }}</a></li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </div>
+
+                                    <div class="dropup" style="display: inline; margin-left: 20px; cursor: pointer;">
+                                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book" aria-hidden="true"></i> Hóa đơn
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu dropmenu">
+                                            @if (!empty($customer_booking_log_field))
+                                                @foreach ($customer_booking_log_field as $key => $value)
+                                                    <li><a class="fieldTemplate" id="{{ $key }}">{{ $value }}</a></li>
+                                                @endforeach
+                                            @endif
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <center>
+                                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Hủy bỏ</button>
+                                    <button type="button" class="btn btn-sm btn-primary" id="btnNewEmailTmp">Lưu</button>
+                                    <button type="button" class="btn btn-sm btn-success" id="btnEditTmp" style="display: none">Chỉnh sửa</button>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -350,10 +452,78 @@
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/toastr.min.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/sweet-alert.min.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/jQuery.print.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/tinymce/tinymce.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/admin/summernote/summernote.js') }}"></script>
 
     @routes
 
     <script>
+        /*Summernote*/
+        $(document).ready(function() {
+            $('#summernote2').summernote(
+                {height:200}
+            );
+        });
+        /*----------*/
+
+        /*TinyMCE Content Email*/
+        tinymce.init({
+            selector: '#contentAddEmail',
+            height: 200,
+            theme: 'modern',
+            menubar: false,
+            autosave_ask_before_unload: false,
+            plugins: [
+                "advlist autolink link image lists charmap print preview hr anchor pagebreak",
+                "searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking",
+                "table contextmenu directionality emoticons template textcolor paste textcolor colorpicker textpattern codesample"
+            ],
+            toolbar1: "newdocument | forecolor backcolor cut copy paste bullist numlist bold italic underline strikethrough| alignleft aligncenter alignright alignjustify | styleselect formatselect fontselect fontsizeselect | outdent indent | undo redo | link unlink anchor image media code | codesample",
+            image_advtab: true,
+            content_css: [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css'
+            ],
+            setup: function (ed) {
+                ed.on('init', function (e) {
+                    ed.execCommand("fontName", false, "Tahoma");
+                });
+            },
+            relative_urls: false,
+            remove_script_host : false,
+            file_browser_callback : function(field_name, url, type, win) {
+                var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+                var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
+
+                var cmsURL = route_prefix + '?field_name=' + field_name;
+                if (type == 'image') {
+                    cmsURL = cmsURL + "&type=Images";
+                } else {
+                    cmsURL = cmsURL + "&type=Files";
+                }
+
+                tinyMCE.activeEditor.windowManager.open({
+                    file : cmsURL,
+                    title : 'Image manager',
+                    width : x * 0.9,
+                    height : y * 0.9,
+                    resizable : "yes",
+                    close_previous : "no"
+                });
+            }
+        });
+        /*---------------------*/
+
+        /*Đưa value đã chọn lên contentAddEmail*/
+        $('.fieldTemplate').click(function(event) {
+            var value = $(this).text();
+
+            var id = $(this).attr('id');
+
+            tinymce.get('contentAddEmail').execCommand('mceInsertContent', false, '<span style="font-family: Tahoma; background-color: #ff6600; color: #ffffff;" id="'+ id +'" class="spanField">&nbsp;'+ value +'&nbsp;</span>&nbsp;');
+        });
+        /*-------------------------------------*/
+
         /*DataTable*/
         $('#customer_booking_logs').DataTable({
             processing: true,
@@ -680,7 +850,7 @@
                     $.ajax({
                         type: 'POST',
                         url: '{{ route('admin.customer_booking_logs.save_customer_messages') }}',
-                        data:   {
+                        data: {
                             user_id: $('#customer_id').val(),
                             customer_booking_log_id : $('#customer_booking_log_id').val(),
                             content: $('#contentMessage').val(),
@@ -710,6 +880,228 @@
             });
         });
         /*------------*/
+
+        /*Gọi Modal các mẫu Email*/
+        function showEmailTemplate(){
+            $('#emailTemplate').modal('show');
+
+            $('#tableEmailTemplate').DataTable().destroy();
+
+            $('#tableEmailTemplate').DataTable({
+                processing: false,
+                // serverSide: true,
+                ordering: false,
+                ajax: {
+                    type: 'POST',
+                    url: '{{ route('admin.customer_booking_logs.customer_care_email_template') }}',       
+                },
+                columns: [
+                    {data: 'DT_Row_Index', name: 'id'},     
+                    {data: 'name', name: 'name'},
+                    {data: 'title', name: 'title'},
+                    {data: 'action', name: 'action'}
+                ] 
+            });
+        }
+        /*-----------------------*/
+
+        /*Thêm mới mẫu Email*/
+        $('#btnNewEmailTmp').on('click', function(event) {
+            event.preventDefault();
+
+            swal({
+                title: "Tạo mẫu Email mới?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            },
+            function() {
+                var name_mail = $('#nameEmailTmp').val();
+
+                var title_mail = $('#titleEmailTmp').val();
+
+                var content = tinymce.get('contentAddEmail').getContent();
+
+                if (name_mail == '') {
+                    toastr['error']('Tên mẫu Email không được để trống!');
+                } else if (title_mail == '') {
+                    toastr['error']('Tiêu đề mẫu Email không được để trống!');
+                } else if (content == '') {
+                    toastr['error']('Nội dung không được để trống!');
+                } else {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('admin.customer_booking_logs.create_email_template') }}',
+                        data: {
+                            name: name_mail,
+                            title: title_mail,
+                            content: content
+                        },
+                        success: function (res) {
+                            if (res.error == 'valid') {
+                                var arr = res.message;
+                                var key = Object.keys(arr);
+
+                                for (var i = 0; i < key.length; i++) {
+                                    toastr.error(arr[key[i]]);
+                                }
+                            } else if (res.error == false) {
+                                toastr['success']('Thêm mới mẫu Email thành công');
+                            
+                                $('#nameEmailTmp').val('');
+                                $('#titleEmailTmp').val('');
+                                $('#email_tmp').summernote('code','<p></p>');
+
+                                $('#addTemplate').modal('hide');
+
+                                $('#tableEmailTemplate').DataTable().ajax.reload();
+                            } else {
+                                // 
+                            }
+                        },error: function(xhr, ajaxOptions, thrownError) {
+                            toastr["error"](thrownError); 
+                        }
+                    });
+                }   
+            });
+        });
+        /*------------------*/
+
+        /*Gọi Modal sửa mẫu Email*/
+        function editEmailTemplate(id) {
+            $('#btnEditTmp').val(id);
+
+            $('#addTemplate').attr('style', 'overflow:auto !important');
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.customer_booking_logs.edit_email_template') }}',
+                data: {
+                    id: id
+                },
+                success: function(res){
+                    $('#nameEmailTmp').val(res[0]['name']);
+                    $('#titleEmailTmp').val(res[0]['title']);
+                    $('#add_modal_title').text('Sửa mẫu Email');
+                    $('#btnNewEmailTmp').hide();
+                    $('#btnEditTmp').show();                
+                    tinyMCE.activeEditor.setContent('');
+                    tinymce.get('contentAddEmail').execCommand('mceInsertContent', false, res[0]['content']);
+                }
+            });
+        };
+        /*-----------------------*/
+
+        /*Ấn nút chỉnh sửa mẫu Email*/
+        $('#btnEditTmp').on('click', function(event) {
+            swal({
+                title: "Chỉnh sửa mẫu email này?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            },
+            function() {
+                var name_mail = $('#nameEmailTmp').val();
+
+                var title_mail = $('#titleEmailTmp').val();
+
+                var content = tinymce.get('contentAddEmail').getContent();
+
+                var tmp_id = $('#btnEditTmp').val();
+
+                if (name_mail == '') {
+                    toastr['error']('Tên mẫu Email không được để trống!');
+                } else if (title_mail == '') {
+                    toastr['error']('Tiêu đề mẫu Email không được để trống!');
+                } else if (content == '') {
+                    toastr['error']('Nội dung không được để trống!');
+                } else {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('admin.customer_booking_logs.update_email_template') }}',
+                        data: {
+                            id: tmp_id,
+                            name: name_mail,
+                            title: title_mail,
+                            content: content  
+                        },
+                        success: function (res) {
+                            if (res.error == 'valid') {
+                                var arr = res.message;
+                                var key = Object.keys(arr);
+
+                                for (var i = 0; i < key.length; i++) {
+                                    toastr.error(arr[key[i]]);
+                                }
+                            } else if (res.error == false) {
+                                toastr['success']('Cập nhật mẫu email thành công');
+
+                                $('#addTemplate').modal('hide');
+
+                                $('#tableEmailTemplate').DataTable().ajax.reload();
+                            } else {
+                                // 
+                            } 
+                        },error: function (xhr, ajaxOptions, thrownError) {
+                            toastr["error"](thrownError); 
+                        }
+                    });
+                }
+            });
+        });
+        /*--------------------------*/
+
+        /*Xóa mẫu Email*/
+        function deleteEmailTemplate(id){
+            swal({
+                title: "Xóa mẫu Email này?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có",
+            },
+            function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route('admin.customer_booking_logs.delete_email_template') }}',
+                    data:   {
+                        id: id
+                    },
+                    success: function (response) {
+                        toastr['success']('Xóa mẫu email thành công');
+
+                        $('#tableEmailTemplate').DataTable().ajax.reload();
+                    },error: function (xhr, ajaxOptions, thrownError) {
+                        toastr["error"](thrownError); 
+                    }
+                });
+                
+            });
+        };
+        /*-------------*/
     </script>
 
 @endsection

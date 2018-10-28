@@ -13,7 +13,7 @@ class RoomType extends Model
      * [$table description]
      * @var string
      */
-    protected $table="room_types";
+    protected $table= 'room_types';
 
     /**
      * [$dates description]
@@ -27,7 +27,6 @@ class RoomType extends Model
      */
     protected $fillable = [
         'name', 'room_size', 'bed', 'max_people', 'price', 'description', 'facilities', 'created_at', 'updated_at', 'deleted_at'
-
     ];
 
     /**
