@@ -55,6 +55,15 @@ return [
     'email' => 'Email',
     'address' => 'Address',
     'role' => 'Roles',
+    'system_custom' => 'System Custom',
+    'roles' => 'Role',
+    'permission' => 'Permission',
+    'describe' => 'Describe',
+    'date_created' => 'date_created',
+    'name_view' => 'Display Name',
+    'role_add' => 'Role add',
+    'role_update' => 'Role update',
+    'user_write' => 'Author',
 
     /*
      * Cilent
@@ -128,7 +137,7 @@ return [
      */
     'add' => 'Add',
     'edit' => 'Edit',
-    'update' => 'Update',
+    'update' => 'Save',
     'delete' => 'Delete',
     'view' => 'View',
     'information' => 'Information',

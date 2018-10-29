@@ -7,6 +7,8 @@ use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
+use Entrust;
 
 class RoomsController extends Controller
 {
@@ -18,6 +20,9 @@ class RoomsController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'CheckAdmin']);
+        $this->middleware('permission:add-rooms')->only(['create', 'store']);
+        $this->middleware('permission:edit-rooms')->only(['edit', 'update']);
+        $this->middleware('permission:delete-rooms')->only(['destroy']);
     }
     
     /**
@@ -113,9 +118,24 @@ class RoomsController extends Controller
      */
     public function destroy($id)
     {
-        $rooms = Room::findOrFail($id);
-        $rooms->delete();
+        DB::beginTransaction();
 
-        return redirect()->route('room.index');
+        try {
+            Room::where('id', $id)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'error'     =>  false,
+                'message'   =>  'Xóa bài viết thành công !'
+            ]);
+        } catch(Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
     }
 }

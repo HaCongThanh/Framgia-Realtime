@@ -257,14 +257,14 @@
                                 </ul>
                             </li>
                             <li role="separator" class="divider"></li>
-                            <li>
+                            {{--<li>
                                 <a href="#">
                                     <i class="ti-settings p-r-10"></i>
                                     <span>Setting</span>
                                 </a>
-                            </li>
+                            </li>--}}
                             <li>
-                                <a href="#">
+                                <a href="{{ route('profiles.show', Auth::user()->id) }}">
                                     <i class="ti-user p-r-10"></i>
                                     <span>Profile</span>
                                 </a>
@@ -402,31 +402,31 @@
                                 <a href="{{ route('users.index') }}">{{ __('messages.users') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('customer') }}">{{ __('messages.customer') }}</a>
+                                <a href="{{ route('customers.index') }}">{{ __('messages.customer') }}</a>
                             </li>
                         </ul>
                     </li>
-
+                    @if (Entrust::hasRole('super-admin'))
                     <li class="nav-item dropdown">
                         <a class="dropdown-toggle" href="javascript:void(0);">
                             <span class="icon-holder">
                                 <i class="fa fa-vcard"></i>
                             </span>
-                            <span class="title">Quản trị hệ thống</span>
+                            <span class="title">{{ __('messages.system_custom') }}</span>
                             <span class="arrow">
                                 <i class="mdi mdi-chevron-right"></i>
                             </span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ route('roles.index') }}">Vai trò</a>
+                                <a href="{{ route('roles.index') }}">{{ __('messages.roles') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('customer') }}">Quyền hạn</a>
+                                <a href="{{ route('permissions.index') }}">{{ __('messages.permission') }}</a>
                             </li>
                         </ul>
                     </li>
-
+                    @endif
                 </ul>
             </div>
         </div>
@@ -921,10 +921,6 @@
                 <div class="footer">
                     <div class="copyright">
                         <span>Copyright © 2018 <b class="text-dark">Framgia</b>. All rights reserved.</span>
-                        <span class="go-right">
-                                <a href="#" class="text-gray m-r-15">Term &amp; Conditions</a>
-                                <a href="#" class="text-gray">Privacy &amp; Policy</a>
-                            </span>
                     </div>
                 </div>
             </footer>

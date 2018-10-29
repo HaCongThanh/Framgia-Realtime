@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class PostsController extends Controller
 {
@@ -160,14 +161,24 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
+        DB::beginTransaction();
 
-        if (file_exists('images/posts/' . $post->image)) {
-            unlink('images/posts/' . $post->image);
+        try {
+            Post::where('id', $id)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'error'     =>  false,
+                'message'   =>  'Xóa bài viết thành công !'
+            ]);
+        } catch(Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
         }
-
-        $post->delete();
-
-        return redirect()->route('post.index');
     }
 }

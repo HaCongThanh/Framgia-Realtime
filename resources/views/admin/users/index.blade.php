@@ -21,9 +21,11 @@
             </div>
 
             <div class="card">
+                @if (Entrust::can('add-users'))
                 <div class="card-header border bottom">
                     <button type="button" id="call_add_user" class="btn btn-success"><i class="ti-plus"></i> {{ __('messages.add') }}</button>
                 </div>
+                @endif
                 <div class="card-body">
                     <div class="table-overflow">
                         <table id="dt-opt" class="table table-hover table-xl">
@@ -35,7 +37,9 @@
                                 <th style="text-align: center;">{{ __('messages.phone') }}</th>
                                 <th style="text-align: center;">{{ __('messages.email') }}</th>
                                 <th style="text-align: center;">{{ __('Vai trò') }}</th>
+                                @if (Entrust::hasRole('super-admin'))
                                 <th style="text-align: center;">{{ __('messages.action') }}</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -78,11 +82,13 @@
                                                     @endforeach
                                                 @endif
                                             </td>
+                                            @if (Entrust::can(['select-role-users', 'edit-users', 'delete-users']))
                                             <td class="text-center font-size-18" style="text-align: center;">
                                                 <a href="{{ route('users.show', $user->id) }}" class="text-gray" data-tooltip="tooltip" title="{{ __('Vai trò') }}"><i class="ti-lock"></i></a>
                                                 <a id="call_edit_user" data-id="{{ $user->id }}" class="text-gray" data-tooltip="tooltip" title="{{ __('messages.edit') }}"><i class="ti-pencil"></i></a>
                                                 <a id="delete_user" data-id="{{ $user->id }}" class="text-gray" data-tooltip="tooltip" title="{{ __('messages.delete') }}"><i class="ti-trash"></i></a>
                                             </td>
+                                            @endif
                                         </tr>
 
                                     @endforeach
@@ -329,7 +335,6 @@
                         toastr.success("Cập nhật người dùng thành công!");
 
                         $('#edit_user_modal').modal('hide');
-
                         setTimeout(function(){
                             window.location.reload();
                         }, 1000);
@@ -366,7 +371,7 @@
                 $.ajax({
                     type: 'DELETE',
                     url: '/admin/users/' + user_id,
-                    success: function success(res) {
+                    success: function(res) {
                         toastr.success('Xóa người dùng thành công !');
                         setTimeout(function(){
                             window.location.reload();

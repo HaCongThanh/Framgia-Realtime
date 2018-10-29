@@ -47,13 +47,12 @@
                                 <div class="carousel-outer">
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner">
-
-                                        <div class="item @if ($loop->first)
-                                                active
-                                        @endif">
-                                            <img src="{{ url('/images/rooms/' . $room_type->images->first->filename['filename']) }}" class="thumb-preview" alt="Chevrolet Impala">
+                                        @foreach ($room_type->images as $image)
+                                        <div class="item
+                                        @if ($loop->first) active @endif">
+                                            <img src="{{ url('/images/rooms/' . $image->filename) }}" class="thumb-preview" alt="Chevrolet Impala">
                                         </div>
-
+                                        @endforeach
                                     </div>
                                     <!-- Controls -->
                                     <a class="left carousel-control" href="#carousel-custom" role="button" data-slide="prev">

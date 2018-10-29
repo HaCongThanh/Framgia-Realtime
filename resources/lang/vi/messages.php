@@ -60,6 +60,7 @@ return [
     'email' => 'Email',
     'address' => 'Địa chỉ',
     'role' => 'Quyền',
+    'user_write' => 'Người viết',
 
     /*
      * Cilent
@@ -125,6 +126,14 @@ return [
     'time_card' => 'Thời hạn',
     'year' => 'Năm',
     'finish_book_room' => 'Hoàn tất đăt phòng',
+    'system_custom' => 'Quản trị hệ thống',
+    'roles' => 'Vai trò',
+    'permission' => 'Quyền hạn',
+    'describe' => 'Miêu tả',
+    'date_created' => 'Ngày tạo',
+    'name_view' => 'Tên hiển thị',
+    'role_add' => 'Thêm mới vai trò',
+    'role_update' => 'Cập nhật vai trò',
 
     /*
      * buttons
