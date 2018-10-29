@@ -90,4 +90,28 @@ class CustomerCare extends Model
 
         return $customer_booking_log_field;
     }
+
+    /**
+     * [rereplace_content description]
+     * @param  [type] $content              [description]
+     * @param  [type] $user                 [description]
+     * @param  [type] $customer_booking_log [description]
+     * @return [type]                       [description]
+     */
+    public static function rereplace_content($content, $user, $customer_booking_log)
+    {
+        $model = new CustomerCare;
+
+        $user_value = $model->getCustomerField();
+
+        $customer_booking_log_value = $model->getCustomerBookingLogField();
+
+        $arr_value = array_merge($user_value, $customer_booking_log_value);
+
+        foreach ($arr_value as $key => $value) {
+            $arr[] = $key;
+        }
+        
+        return view('admin.customer_booking_logs.content_email', compact(['content', 'user', 'customer_booking_log', 'arr']));
+    }
 }

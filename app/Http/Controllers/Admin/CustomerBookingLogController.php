@@ -634,4 +634,20 @@ class CustomerBookingLogController extends Controller
             'message'   =>  'Xóa mẫu Email thành công!'
         ]);
     }
+
+    /**
+     * [convertEmailContent description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function convertEmailContent(Request $request)
+    {
+        $user = User::where('id', $request->user_id)->get();
+
+        $customer_booking_log = CustomerBookingLog::where('id', $request->customer_booking_log_id)->get();
+
+        $replace_content = CustomerCare::rereplace_content($request->content, $user, $customer_booking_log);
+
+        return $replace_content;
+    }
 }

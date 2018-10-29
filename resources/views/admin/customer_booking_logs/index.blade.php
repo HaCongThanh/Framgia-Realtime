@@ -275,7 +275,7 @@
                                                 <ul class="dropdown-menu">
                                                     @if (!empty($email_templates))
                                                         @foreach ($email_templates as $email_template)
-                                                            <li><a class="emailTemplate" id="{{$email_template->id}}">{{$email_template->name}}</a></li>
+                                                            <li><a class="emailTemplate" style="cursor: pointer;" id="{{$email_template->id}}">{{$email_template->name}}</a></li>
                                                         @endforeach
                                                     @endif
                                                 </ul>
@@ -1002,6 +1002,8 @@
 
         /*Ấn nút chỉnh sửa mẫu Email*/
         $('#btnEditTmp').on('click', function(event) {
+            event.preventDefault();
+
             swal({
                 title: "Chỉnh sửa mẫu email này?",
                 type: "warning",
@@ -1102,6 +1104,57 @@
             });
         };
         /*-------------*/
+
+        /*Chọn mẫu Email*/
+        $('.emailTemplate').on('click', function(event) {
+            event.preventDefault();
+
+            var email_id = $(this).attr('id');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ route('admin.customer_booking_logs.edit_email_template') }}',
+                data: {
+                    id: email_id
+                },
+                success: function(res){
+                    $('#titleEmail').val(res[0].title);
+                    $('#btnEmailSelect').text(res[0].name);
+                    
+                    var content = res[0].content;
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('admin.customer_booking_logs.convert_email_content') }}',
+                        data: {
+                            content: content,
+                            user_id: $('#customer_id').val(),
+                            customer_booking_log_id: $('#customer_booking_log_id').val()
+                        },
+                        success: function(res){
+                            $('#summernote2').summernote('code', res);
+                        }
+                    });
+                    
+                },error: function (xhr, ajaxOptions, thrownError) {
+                    toastr["error"](thrownError); 
+                }
+            });
+            
+        });
+        /*--------------*/
     </script>
 
 @endsection

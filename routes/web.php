@@ -97,6 +97,8 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::post('/customer-booking-logs/delete-email-template', 'Admin\CustomerBookingLogController@deleteEmailTemplate')->name('admin.customer_booking_logs.delete_email_template');
 
+    Route::post('/customer-booking-logs/convert-email-content', 'Admin\CustomerBookingLogController@convertEmailContent')->name('admin.customer_booking_logs.convert_email_content');
+
     Route::get('/roles/get_list_roles','Admin\RoleController@getListRoles')->name('admin.roles.get_list_roles');
 
     Route::post('/roles/update_permission_role','Admin\RoleController@updatePermissionRole')->name('admin.roles.update_permission_role');
