@@ -17,13 +17,12 @@
         <div class="container-fluid">
 
             <div class="page-header">
-                <h2 class="header-title">Quyền hạn</h2>
+                <h2 class="header-title">{{ __('messages.permission') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Bảng điều khiển</a>
-                        <a class="breadcrumb-item">Quản trị hệ thống</a>
-                        <a href="{{ route('roles.index') }}" class="breadcrumb-item">Vai trò</a>
-                        <span class="breadcrumb-item active">Quyền hạn</span>
+                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
+                        <a href="{{ route('roles.index') }}" class="breadcrumb-item">{{ __('messages.roles') }}</a>
+                        <span class="breadcrumb-item active">{{ __('messages.permission') }}</span>
                     </nav>
                 </div>
             </div>
@@ -37,10 +36,10 @@
                             <thead>
                                 <tr>
                                     <th style="text-align: center;">#</th>
-                                    <th style="text-align: center;">Quyền hạn</th>
-                                    <th style="text-align: center;">Miêu tả</th>
-                                    <th style="text-align: center;">Ngày tạo</th>
-                                    <th style="text-align: center;">Hành động</th>
+                                    <th style="text-align: center;">{{ __('messages.permission') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.describe') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.date_created') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                         </table>

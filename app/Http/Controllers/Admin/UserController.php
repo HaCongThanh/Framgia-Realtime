@@ -163,7 +163,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request  $re    quest
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -234,7 +234,7 @@ class UserController extends Controller
         DB::beginTransaction();
 
         try {
-            USer::where('id', $id)->delete();
+            User::where('id', $id)->delete();
 
             DB::commit();
 
@@ -282,6 +282,6 @@ class UserController extends Controller
                 'error' => false,
                 'message' => 'added'
             ], 200);
-        } 
+        }
     }
 }

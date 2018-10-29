@@ -97,6 +97,12 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::resource('users','Admin\UserController');
 
+    Route::resource('profiles', 'Admin\ProfileController');
+
+    Route::match(['get', 'post'], '/password', 'Admin\ProfileController@updatePassword');
+
+    Route::resource('customers','Admin\CustomerController');
+
     Route::resource('roles', 'Admin\RoleController');
 
     Route::resource('permissions', 'Admin\PermissionController');

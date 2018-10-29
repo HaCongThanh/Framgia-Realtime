@@ -1,5 +1,10 @@
 @extends('admin.layouts.master')
 
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/sweet-alert.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/toastr.min.css') }}">
+@endsection
+
 @section('content')
     <!-- Content Wrapper START -->
     <div class="main-content">
@@ -32,12 +37,12 @@
                             <td scope="row">{!! $key + $categories->firstItem() !!}</td>
                             <td>{!! $category -> name !!}</td>
                             <td class="text-center font-size-18">
-                                {!! Form::open(['route' => ['category.edit', $category->id], 'method' => 'GET']) !!}
-                                    {!! Form::button('<i class="ti-pencil"></i>', ['class' => 'text-gray', 'type' => 'submit', 'title' => __('messages.delete')]) !!}
-                                {!! Form::close() !!}
-                                {!! Form::open(['route' => ['category.destroy',$category->id], 'method' => 'DELETE']) !!}
-                                    {!! Form::button('<i class="ti-trash"></i>', ['class' => 'text-gray', 'type' => 'submit', 'title' => __('messages.delete')]) !!}
-                                {!! Form::close() !!}
+                                <a href="/admin/category/{{ $category->id }}/edit" class="text-gray">
+                                    <i class="ti-pencil"></i>
+                                </a>
+                                <a id="btn_delete" data-id="{{ $category->id }}" class="text-gray">
+                                    <i class="ti-trash"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach
@@ -51,4 +56,46 @@
         </div>
     </div>
     <!-- Content Wrapper END -->
+@endsection
+
+@section('script')
+    <script src="{{ asset('bower_components/lib_booking/lib/user/js/sweet-alert.min.js') }}"></script>
+    <script src="{{ asset('bower_components/lib_booking/lib/user/js/toastr.min.js') }}"></script>
+    <script>
+        $(document).on('click', '#btn_delete', function (event) {
+            event.preventDefault();
+
+            var id = $(this).data('id');
+
+            swal({
+                title: "Bạn có chắc muốn xóa?",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                cancelButtonText: "Không",
+                confirmButtonText: "Có"
+            }, function () {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $.ajax({
+                    type: 'DELETE',
+                    url: '/admin/category/' + id,
+                    success: function(res) {
+                        //console.log(res);
+                        toastr.success('Xóa danh mục thành công !');
+                        setTimeout(function(){
+                            window.location.reload();
+                        }, 1000);
+                    },
+                    error: function error(xhr, ajaxOptions, thrownError) {
+                        toastr.error(thrownError);
+                    }
+                });
+            });
+        })
+    </script>
 @endsection

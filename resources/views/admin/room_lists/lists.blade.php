@@ -56,6 +56,7 @@
                                                     <p>{{ __('messages.date_start') }}: {{ $list->start_date }}</p>
                                                     <p>{{ __('messages.date_finish') }}: {{ $list->end_date }}</p>
                                                     <p>{{ __('messages.total_people') }}: {{ $list->total_number_people }}</p>
+                                                    <p>Note: {{ $list->note }}</p>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <p>{{ __('messages.rooms_stt') }}: </p>

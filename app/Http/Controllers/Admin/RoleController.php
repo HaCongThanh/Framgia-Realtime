@@ -21,6 +21,11 @@ class RoleController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'CheckAdmin']);
+        $this->middleware('permission:view-roles')->only(['index']);
+        $this->middleware('permission:add-roles')->only(['create', 'store']);
+        $this->middleware('permission:select-permission')->only(['show']);
+        $this->middleware('permission:edit-roles')->only(['edit', 'update']);
+        $this->middleware('permission:delete-roles')->only(['destroy']);
     }
 
     /**
@@ -235,13 +240,13 @@ class RoleController extends Controller
             ->addColumn('action', function ($role) {
                 $string = '';
 
-                if (Entrust::hasRole(['super-admin'])) {
+//                if (Entrust::hasRole(['super-admin', 'user'])) {
                     $string = $string .' <a href="'. route('roles.show', $role->id) .'" class="text-gray m-r-15" data-tooltip="tooltip" title="Quyền hạn"><i class="ti-shield" aria-hidden="true"></i></a>';
-                }
+//                }
 
-                if (Entrust::can(['edit-posts'])) {
+//                if (Entrust::can(['edit-posts'])) {
                     $string = $string . '<a href="javascript:;" data-id="'. $role->id .'" class="text-gray m-r-15 role_edit" data-tooltip="tooltip" title="Chỉnh sửa"><i class="ti-pencil" aria-hidden="true"></i></a>';
-                }
+//                }
 
                 // if (Entrust::can(['add-posts'])) {
                     $string = $string . '<a href="javascript:;" data-id="'. $role->id .'" class="text-gray role_delete" data-tooltip="tooltip" title="Xóa"><i class="ti-trash"></i></a>';

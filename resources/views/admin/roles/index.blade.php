@@ -18,12 +18,11 @@
         <div class="container-fluid">
 
             <div class="page-header">
-                <h2 class="header-title">Vai trò</h2>
+                <h2 class="header-title">{{ __('messages.roles') }}</h2>
                 <div class="header-sub-title">
                     <nav class="breadcrumb breadcrumb-dash">
-                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>Bảng điều khiển</a>
-                        <a class="breadcrumb-item">Quản trị hệ thống</a>
-                        <span class="breadcrumb-item active">Vai trò</span>
+                        <a href="{{ route('dashboard') }}" class="breadcrumb-item"><i class="ti-home p-r-5"></i>{{ __('messages.dashboard') }}</a>
+                        <span class="breadcrumb-item active">{{ __('messages.roles') }}</span>
                     </nav>
                 </div>
             </div>
@@ -39,11 +38,11 @@
                             <thead>
                                 <tr>
                                     <th style="text-align: center;">#</th>
-                                    <th style="text-align: center;">Tên hiển thị</th>
-                                    <th style="text-align: center;">Vai trò</th>
-                                    <th style="text-align: center;">Miêu tả</th>
-                                    <th style="text-align: center;">Ngày tạo</th>
-                                    <th style="text-align: center;">Hành động</th>
+                                    <th style="text-align: center;">{{ __('messages.name_view') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.roles') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.describe') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.date_created') }}</th>
+                                    <th style="text-align: center;">{{ __('messages.action') }}</th>
                                 </tr>
                             </thead>
                         </table>
@@ -55,7 +54,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4>Thêm mới vai trò</h4>
+                            <h4>{{ __('messages.role_add') }}</h4>
                         </div>
                         <div class="modal-body">
 
@@ -63,19 +62,19 @@
                                 {{ csrf_field() }}
 
                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                    <input type="text" class="form-control" id="display_name" name="display_name" placeholder="Tên hiển thị">
+                                    <input type="text" class="form-control" id="display_name" name="display_name" placeholder="{{ __('messages.name_view') }}">
                                 </div>
 
                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                    <input type="text" class="form-control" id="name" name="name" placeholder="Vai trò">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('messages.roles') }}">
                                 </div>
 
                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                    <textarea class="form-control" id="description" name="description" placeholder="Miêu tả"></textarea>
+                                    <textarea class="form-control" id="description" name="description" placeholder="{{ __('messages.describe') }}"></textarea>
                                 </div>
                                 
                                 <div class="modal-footer no-border">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('messages.cancel') }}</button>
                                     <button type="submit" id="add_role" class="btn btn-success">Tạo</button>
                                 </div>
                             </form>
@@ -90,7 +89,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4>Cập nhật vai trò</h4>
+                            <h4>{{ __('messages.role_update') }}</h4>
                         </div>
                         <div class="modal-body">
 
@@ -100,20 +99,20 @@
                                 {{ csrf_field() }}
 
                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                    <input type="text" class="form-control" id="edit_display_name" name="display_name" placeholder="Tên hiển thị">
+                                    <input type="text" class="form-control" id="edit_display_name" name="display_name" placeholder="{{ __('messages.name_view') }}">
                                 </div>
 
                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                    <input type="text" class="form-control" id="edit_name" name="name" placeholder="Vai trò">
+                                    <input type="text" class="form-control" id="edit_name" name="name" placeholder="{{ __('messages.roles') }}">
                                 </div>
 
                                 <div id="add-group" class="form-group form-md-line-input form-md-floating-label">
-                                    <textarea class="form-control" id="edit_description" name="description" placeholder="Miêu tả"></textarea>
+                                    <textarea class="form-control" id="edit_description" name="description" placeholder="{{ __('messages.describe') }}"></textarea>
                                 </div>
                                 
                                 <div class="modal-footer no-border">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-                                    <button type="submit" id="edit_role" class="btn btn-success">Lưu</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('messages.cancel') }}</button>
+                                    <button type="submit" id="edit_role" class="btn btn-success">{{ __('messages.update') }}</button>
                                 </div>
                             </form>
 

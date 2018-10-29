@@ -6,6 +6,7 @@ use App\Http\Requests\CategoryFormRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use DB;
 
 class CategoriesController extends Controller
 {
@@ -102,8 +103,24 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::whereid($id) -> firstOrFail();
-        $category -> delete();
-        return redirect() -> route('category.index');
+        DB::beginTransaction();
+
+        try {
+            Category::where('id', $id)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'error'     =>  false,
+                'message'   =>  'Xóa danh mục thành công !'
+            ]);
+        } catch(Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
     }
 }

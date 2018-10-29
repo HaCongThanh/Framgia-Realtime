@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\FacilityRequest;
 use App\Models\Facility;
+use DB;
+use Entrust;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -17,6 +19,9 @@ class FacilitiesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'CheckAdmin']);
+        $this->middleware('permission:add-facilities')->only(['create', 'store']);
+        $this->middleware('permission:edit-facilities')->only(['edit', 'update']);
+        $this->middleware('permission:delete-facilities')->only(['destroy']);
     }
     
     /**
@@ -102,9 +107,24 @@ class FacilitiesController extends Controller
      */
     public function destroy($id)
     {
-        $facility = Facility::findOrFail($id);
-        $facility->delete();
+        DB::beginTransaction();
 
-        return redirect()->route('facility.index');
+        try {
+            Facility::where('id', $id)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'error'     =>  false,
+                'message'   =>  'Xóa tiện nghi thành công !'
+            ]);
+        } catch(Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
     }
 }

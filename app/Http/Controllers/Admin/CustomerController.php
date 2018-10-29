@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Permission;
+use App\Models\CustomerBookingLog;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DB;
 
-class PermissionController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -16,7 +18,6 @@ class PermissionController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'CheckAdmin']);
-        $this->middleware('permission:view-permission')->only(['index']);
     }
 
     /**
@@ -26,9 +27,10 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        $permissions = Permission::orderBy('id', 'desc')->Paginate(20);
+        $lists = CustomerBookingLog::Paginate(10);
+        $users = User::where('type', 0)->orderBy('id', 'desc')->get();
 
-        return view('admin.permission.lists', compact('permissions'));
+        return view('admin.customer.lists', compact('lists', 'users'));
     }
 
     /**
@@ -94,6 +96,24 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            CustomerBookingLog::where('id', $id)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'error'     =>  false,
+                'message'   =>  'Xóa khách hàng thành công !'
+            ]);
+        } catch(Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'error'         => true,
+                'message'       => 'Fail !'
+            ]);
+        }
     }
 }

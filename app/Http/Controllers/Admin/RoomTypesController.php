@@ -9,6 +9,7 @@ use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Entrust;
 use Illuminate\Support\Facades\Storage;
 
 class RoomTypesController extends Controller
@@ -21,6 +22,9 @@ class RoomTypesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'CheckAdmin']);
+        $this->middleware('permission:add-room-types')->only(['create', 'store']);
+        $this->middleware('permission:edit-room-types')->only(['edit', 'update']);
+        $this->middleware('permission:delete-room-types')->only(['destroy']);
     }
     
     /**
