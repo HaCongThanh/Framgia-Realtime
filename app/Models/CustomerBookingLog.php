@@ -45,4 +45,12 @@ class CustomerBookingLog extends Model
     public function customer_booking_details() {
         return $this->hasMany('App\Models\CustomerBookingDetail', 'customer_booking_log_id');
     }
+
+    /**
+     * Get customer_cares: one to many
+     * @return [type] [description]
+     */
+    public function customer_cares() {
+        return $this->hasMany('App\Models\CustomerCare', 'customer_booking_log_id');
+    }
 }

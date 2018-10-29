@@ -146,6 +146,7 @@
                                             <th style="text-align: center;">{{ __('Tổng số người') }}</th>
                                             <th style="text-align: center;">{{ __('messages.total_room') }}</th>
                                             <th style="text-align: center;">{{ __('messages.total_price') }}</th>
+                                            <th style="text-align: center;">{{ __('Trạng thái') }}</th>
                                             <th style="text-align: center;">#</th>
                                         </tr>
                                     </thead>
@@ -214,7 +215,7 @@
                                                                             <th style="width: 25%; text-align: center;">{{ __('messages.room_type') }}</th>
                                                                             <th style="width: 25%; text-align: center;">{{ __('messages.night') }}</th>
                                                                             <th style="width: 20%; text-align: center;">{{ __('Số lượng phòng') }}</th>
-                                                                            <th style="width: 25%; text-align: center;">{{ __('messages.total_price') }}</th>
+                                                                            <th style="width: 25%; text-align: center;">{{ __('Thành tiền') }}</th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody id="record_details">
@@ -307,6 +308,7 @@
                 {data: 'total_number_people', name: 'total_number_people'},
                 {data: 'total_number_room', name: 'total_number_room'},
                 {data: 'total_money', name: 'total_money'},
+                {data: 'status', name: 'status'},
                 {data: 'action', name: 'action'}
             ]
         });
@@ -342,7 +344,7 @@
 
                     if (res.profile.avatar == null) {
                         $('#img_profile_avatar').remove();
-                        $('#get_profile_avatar').append('<img class="img-fluid rounded-circle d-block mx-auto m-b-30" src="/img/avatar-2.jpg" style="width: 200px; height: 200px;" alt="" id="img_profile_avatar">');
+                        $('#get_profile_avatar').append('<img class="img-fluid rounded-circle d-block mx-auto m-b-30" src="/img/avatar-5.png" style="width: 200px; height: 200px;" alt="" id="img_profile_avatar">');
                     } else {
                         $('#img_profile_avatar').remove();
                         $('#get_profile_avatar').append('<img class="img-fluid rounded-circle d-block mx-auto m-b-30" src="/images/avatar/'+ res.profile.avatar +'" style="width: 200px; height: 200px;" alt="" id="img_profile_avatar">');
@@ -479,7 +481,7 @@
                         $room_type_name = res.data[i]['name'];
                         $price = formatNumber(res.data[i]['price']);
                         $number_room = res.data[i]['number_room'];
-                        $total_price = formatNumber(res.data[i]['total_price']);
+                        $total_price = formatNumber(res.data[i]['total_price'] * res.night_count);
                         $created_at = res.data[i]['created_at'];
                         $total_money = formatNumber(res.data[i]['total_money']);
                         $total_number_room = res.data[i]['total_number_room'];
@@ -553,7 +555,7 @@
                         customer_booking_log_id :   customer_booking_log_id
                     },
                     success:function(res){
-                        $("#customer_booking_logs").DataTable().ajax.reload();
+                        $('#customer_booking_logs').DataTable().ajax.reload();
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         // 

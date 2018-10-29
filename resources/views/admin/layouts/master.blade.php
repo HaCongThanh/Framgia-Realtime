@@ -203,7 +203,7 @@
                     <li class="notifications dropdown dropdown-animated scale-left">
                         <span class="counter notif-count">0</span>
                         <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-                            <i data-count="0" class="mdi mdi-bell-ring-outline"></i>
+                            <i data-count="0" class="mdi mdi-bell-ring-outline" id="count_notification"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-lg p-v-0">
                             <li class="p-v-15 p-h-20 border bottom text-dark">
@@ -213,7 +213,7 @@
                                 </h5>
                             </li>
                             <li>
-                                <ul class="list-media overflow-y-auto relative scrollable" style="max-height: 300px">
+                                <ul class="list-media overflow-y-auto relative scrollable" id="note_notification" style="max-height: 300px">
                                     {{-- <li class="list-item border bottom">
                                         <a href="javascript:void(0);" class="media-hover p-15">
                                             <div class="media-img">
@@ -240,7 +240,7 @@
                     </li>
                     <li class="user-profile dropdown dropdown-animated scale-left">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img class="profile-img img-fluid" src="{{ url('img/avatar-5.png') }}" alt="">
+                            <img class="profile-img img-fluid" src="@if(empty(Auth::user()->avatar)) {{ url('img/avatar-5.png') }} @else {{ Auth::user()->avatar }} @endif" alt="">
                         </a>
                         <ul class="dropdown-menu dropdown-md p-v-0">
                             <li>
@@ -308,6 +308,11 @@
                             <img src="http://themes.webspixel.com/tenis/img/2.png">
                         </a>
                     </li>
+                    <li class="m-r-10">
+                        <a class="quick-view-toggler" href="javascript:void(0);">
+                            <i class="mdi mdi-format-indent-decrease"></i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -325,7 +330,7 @@
                                 <span class="icon-holder">
                                     <i class="mdi mdi-gauge"></i>
                                 </span>
-                            <span class="title">Dashboard</span>
+                            <span class="title">Bảng điều khiển</span>
                         </a>
                     </li>
 
@@ -359,7 +364,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="dropdown-toggle" href="{{ route('booking.index') }}">
+                        <a class="dropdown-toggle" href="{{ route('customer-booking-logs.index') }}">
                             <span class="icon-holder">
                                 <i class="fa fa-list-alt"></i>
                             </span>
@@ -455,7 +460,7 @@
                 </ul>
                 <div class="tab-content scrollable">
                     <!-- config START -->
-                    <div id="config" role="tabpanel" class="tab-pane fade in active">
+                    <div id="config" role="tabpanel" class="tab-pane fade in active show">
                         <div class="theme-configurator p-20">
                             <div class="m-v-20 border bottom">
                                 <p class="text-dark text-semibold m-b-0">Solid Header</p>
@@ -997,13 +1002,33 @@
     $(function(){
         setTimeout(function(){
             $.ajax({
-                url: '{{ route('admin.dashboard_notification') }}',
+                url: '{{ route('admin.note_notification') }}',
                 success:function(res){
-                    console.log(res);
-                    // $("#total_revenue").html(formatNumber(res.total_revenue));
-                    // $("#count_customer_booking_logs").html(formatNumber(res.count_customer_booking_logs));
-                    // $("#count_posts").html(formatNumber(res.count_posts));
-                    // $("#total_number_people").html(formatNumber(res.total_number_people));
+                    if (res.array_note.length != 0) {
+                        for (var i = 0; i < res.array_note.length; i++) {
+
+                            $name = res.array_note[i]['name'];
+
+                            if (res.array_note[i]['note'].length >= 36) {
+                                $note = res.array_note[i]['note'].substr(0, 36) + ' . . .';
+                            } else {
+                                $note = res.array_note[i]['note'];
+                            }
+
+                            if (res.array_note[i]['avatar'] == null) {
+                                $avatar = '/img/avatar-5.png';
+                            } else {
+                                $avatar = res.array_note[i]['avatar'];
+                            }
+
+                            $('#note_notification').append("<li class='list-item border bottom active'><a href='javascript:void(0);' class='media-hover p-15'><div class='media-img'><img src='" + $avatar + "' alt=''></div><div class='info'><span class='title'>" + $name + "</span><span class='sub-title'>" + $note + "</span></div></a></li>");
+
+                        }
+                    }
+
+                    $('.notif-count').html(res.count_not_seen);
+
+                    $('#count_notification').attr('data-count', res.count_not_seen);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     // toastr.error(thrownError);

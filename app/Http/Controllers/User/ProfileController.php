@@ -214,6 +214,14 @@ class ProfileController extends Controller
                 return number_format($customer_booking_log->total_money) . ' VNĐ';
             })
 
+            ->editColumn('status', function($customer_booking_log){
+                if ($customer_booking_log->status == 0) {
+                    return 'Chưa xác nhận';
+                } else {
+                    return 'Đã xác nhận';
+                }
+            })
+
             ->addColumn('action', function ($customer_booking_log) {
                 $string = '';
 

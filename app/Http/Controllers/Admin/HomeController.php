@@ -109,7 +109,7 @@ class HomeController extends Controller
         /*--------------*/
 
         /*Tổng lượt đặt phòng*/
-        $count_customer_booking_logs = CustomerBookingLog::count();
+        $count_customer_booking_logs = CustomerBookingLog::where('status', 0)->count();
         /*-------------------*/
 
         /*Tổng bài viết*/
@@ -136,11 +136,13 @@ class HomeController extends Controller
      * [dashboardNotification description]
      * @return [type] [description]
      */
-    public function dashboardNotification()
+    public function noteNotification()
     {
         $array_note = array();
 
-        $customer_booking_logs = CustomerBookingLog::where('note', '!=', null)->get();
+        $customer_booking_logs = CustomerBookingLog::where('note', '!=', null)->orderBy('id', 'desc')->get();
+
+        $count_not_seen = CustomerBookingLog::where('seen', 0)->count();
 
         foreach ($customer_booking_logs as $customer_booking_log) {
             array_push($array_note, [
@@ -152,9 +154,10 @@ class HomeController extends Controller
         }
 
         return response()->json([
-            'error'     =>  false,
-            'message'   =>  'Lấy thông tin thống kê thành công!',
-            'data'      =>  $array_note
+            'error'             =>  false,
+            'message'           =>  'Lấy thông tin thống kê thành công!',
+            'array_note'        =>  $array_note,
+            'count_not_seen'    =>  $count_not_seen
         ]);
     }
 }
