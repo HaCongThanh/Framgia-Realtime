@@ -119,8 +119,6 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::resource('room','Admin\RoomsController');
 
-    // Route::resource('booking','Admin\RoomListBookController');
-
     Route::resource('customer-booking-logs','Admin\CustomerBookingLogController');
 
     Route::resource('users','Admin\UserController');
