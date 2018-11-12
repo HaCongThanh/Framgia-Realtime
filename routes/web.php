@@ -99,6 +99,8 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::post('/customer-booking-logs/convert-email-content', 'Admin\CustomerBookingLogController@convertEmailContent')->name('admin.customer_booking_logs.convert_email_content');
 
+    Route::post('/customer-booking-logs/send-email-customer-care', 'Admin\CustomerBookingLogController@sendEmailCustomerCare')->name('admin.customer_booking_logs.send_email_customer_care');
+
     Route::get('/roles/get_list_roles','Admin\RoleController@getListRoles')->name('admin.roles.get_list_roles');
 
     Route::post('/roles/update_permission_role','Admin\RoleController@updatePermissionRole')->name('admin.roles.update_permission_role');
