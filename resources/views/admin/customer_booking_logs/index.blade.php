@@ -191,8 +191,6 @@
 
                                 <input type="hidden" name="_method" id="customer_id" value="">
                                 <input type="hidden" name="_method" id="customer_booking_log_id" value="">
-                                <input type="hidden" name="_method" id="classRoomId" value="">
-                                <input type="hidden" name="_method" id="stdClassRoomId" value="">
                             </div>
 
                             <br>
@@ -335,6 +333,26 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            <div id="view_content" class="modal fade" role="dialog">
+                <div class="modal-dialog" style="width: 60%; color: #73879C; max-width: none;">
+                    <div class="modal-content">
+                        <div class="modal-header" align="center" style="border-bottom: 1px solid #04a1f4 !important;">
+                            <h4 class="modal-title uppercase">Nội dung chăm sóc khách hàng</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div id="content_care"></div>
+
+                            <hr>
+
+                            <center>
+                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="cancelViewTmp">Đóng</button>
+                            </center>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -720,10 +738,6 @@
                     $('.customer_email').text(res.customer.email);
                     $('#customer_id').val(res.customer.id);
                     $('#customer_booking_log_id').val(res.customer_booking_log_id);
-                    
-                    // $('#courseId').val(res[0]['course_id']);
-                    // $('#classRoomId').val(res[0]['class_room_id']);
-                    // $('#stdClassRoomId').val(res[0]['id']);
 
                     customerCareHistory();
                 }, 
@@ -757,7 +771,7 @@
                 columns: [
                     {data: 'DT_Row_Index', name: 'id'},
                     {data: 'title', name: 'title'},
-                    {data: 'content', name: 'content'},
+                    {data: 'action', name: 'content'},
                     {data: 'type', name: 'type'},
                     {data: 'status', name: 'status'},
                     {data: 'created_at', name: 'created_at'},
@@ -1148,13 +1162,99 @@
                         }
                     });
                     
-                },error: function (xhr, ajaxOptions, thrownError) {
-                    toastr["error"](thrownError); 
+                }, error: function (xhr, ajaxOptions, thrownError) {
+                    toastr['error'](thrownError); 
                 }
             });
             
         });
         /*--------------*/
+
+        /*Ấn nút gửi Email*/
+        $('#btnEmail').on('click', function (event) {
+            event.preventDefault();
+
+            swal({
+                title: 'Gửi Email cho khách hàng?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#DD6B55',
+                cancelButtonText: 'Không',
+                confirmButtonText: 'Có',
+            },
+            function() {
+                if ($('#titleEmail').val() == '') {
+                    toastr['error']('Tiêu đề Email không được để trống !');
+                } else if ($('#summernote2').summernote('code') == '<p></p>') {
+                    toastr['error']('Nội dung Email không được trống !');
+                } else {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('admin.customer_booking_logs.send_email_customer_care') }}',
+                        data: {
+                            idCustomer: $('#customer_id').val(),
+                            emailCustomer: $('.customer_email').text(),
+                            nameCustomer: $('.customer_name').text(),
+                            title: $('#titleEmail').val(),
+                            content: $('#summernote2').summernote('code'),
+                            customer_booking_log_id : $('#customer_booking_log_id').val()
+                        },
+                        success: function (res) {
+                            toastr['success']('Gửi Email thành công');
+
+                            $('#titleEmail').val('');
+
+                            var resetText = '';
+
+                            $('#summernote2').summernote('code', resetText);
+
+                            customerCareHistory();
+
+                        }, error: function (xhr, ajaxOptions, thrownError) {
+                            toastr['error'](thrownError);
+                        }
+                    });
+                }
+            });
+        });
+        /*----------------*/
+
+        /*Gọi Modal hiển thị nội dung chăm sóc khách hàng*/
+        $(document).on('click', '.view_content', function() {
+            $('#view_content').modal('show');
+
+            var customerCareId =  $(this).data('id');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('admin.customer_booking_logs.get_content_customer_care') }}',
+                data: {
+                    customerCareId: customerCareId,
+                },
+                success: function (res)
+                {
+                    $('.move_content').remove();
+                    
+                    $('#content_care').append('<div class="move_content">' + res.content + '</div>');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // 
+                }
+            });
+        });
+        /*--------------------------------------------------*/
     </script>
 
 @endsection

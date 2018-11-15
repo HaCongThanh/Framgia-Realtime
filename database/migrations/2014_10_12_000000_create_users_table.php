@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
                 $table->string('avatar')->nullable()->comment('Ảnh đại diện');
                 $table->tinyInteger('rate')->nullable()->comment('Cho điểm khách sạn');
                 $table->text('review')->nullable()->comment('Đánh giá khách sạn');
-                $table->tinyInteger('type')->default(0)->comment('0: Khách hàng, 1: Nhân viên, 2: Quản lý');
+                $table->tinyInteger('type')->default(0)->comment('0: Khách hàng, 1: Nhân viên');
 
                 $table->rememberToken();
                 $table->timestamps();

@@ -12,6 +12,7 @@ use App\Models\CustomerCare;
 use App\Models\EmailTemplate;
 use Validator;
 use Entrust;
+use Mail;
 use DB;
 
 
@@ -290,12 +291,10 @@ class CustomerBookingLogController extends Controller
         return Datatables::of($customer_cares)
             ->addIndexColumn()
 
-            ->editColumn('content', function($customer_care) {
-                if (strlen($customer_care->content) > 300) {
-                    return substr($customer_care->content, 0, 294)." . . .";
-                } else {
-                    return $customer_care->content;
-                }
+            ->editColumn('action', function($customer_care) {
+                $string = '<a class="view_content" data-tooltip="tooltip" title="Xem nội dung" data-id="' . $customer_care->id . '" style="cursor: pointer;"><i>Click để xem nội dung</i></a>';
+
+                return $string;
             })
 
             ->editColumn('type', function($customer_care) {
@@ -649,5 +648,82 @@ class CustomerBookingLogController extends Controller
         $replace_content = CustomerCare::rereplace_content($request->content, $user, $customer_booking_log);
 
         return $replace_content;
+    }
+
+    /**
+     * [sendEmailCustomerCare description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function sendEmailCustomerCare(Request $request) {
+        $carer = Auth::user();
+
+        DB::beginTransaction();
+
+        try {
+            $nameUser = 'Framgia Hotel';
+
+            $emailCustomer = $request->emailCustomer;
+
+            $title = $request->title;
+
+            $nameCustomer = $request->nameCustomer;
+
+            $content = $request->content;
+
+            Mail::send('admin.customer_booking_logs.email', [
+                'content' => $content,
+                'nameCustomer' => $nameCustomer,
+                'nameUser' => $nameUser
+            ], function ($messages) use ($title, $emailCustomer, $nameUser, $nameCustomer) {
+                $messages->to($emailCustomer, $nameCustomer)->subject($title);
+                $messages->from(env('MAIL_USERNAME'), $nameUser);
+            });
+
+            CustomerCare::create([
+                'user_id'                   =>  $request->idCustomer,
+                'carer_id'                  =>  $carer->id,
+                'customer_booking_log_id'   =>  $request->customer_booking_log_id,
+                'title'                     =>  $title,
+                'content'                   =>  $content,
+                'type'                      =>  3,  // Gửi Email
+                'status'                    =>  5,  // Đã gửi Email
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'error' => false,
+                'message' => 'Success',
+            ]);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'error' => true,
+                'message' => 'Fail',
+            ]);
+        }
+
+        return response()->json([
+            'error' => false,
+            'message' => 'Success',
+        ]);
+    }
+
+    /**
+     * [getContentCustomerCare description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function getContentCustomerCare(Request $request)
+    {
+        $customerCare = CustomerCare::find($request->customerCareId);
+
+        return response()->json([
+            'error' => false,
+            'message' => 'Lấy thông tin thành công!',
+            'content' => $customerCare->content,
+        ]);
     }
 }
