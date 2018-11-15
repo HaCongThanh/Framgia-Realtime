@@ -337,6 +337,26 @@
                 </div>
             </div>
 
+            <div id="view_content" class="modal fade" role="dialog">
+                <div class="modal-dialog" style="width: 60%; color: #73879C; max-width: none;">
+                    <div class="modal-content">
+                        <div class="modal-header" align="center" style="border-bottom: 1px solid #04a1f4 !important;">
+                            <h4 class="modal-title uppercase">Nội dung chăm sóc khách hàng</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <div id="content_care"></div>
+
+                            <hr>
+
+                            <center>
+                                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal" id="cancelViewTmp">Đóng</button>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="emailTemplate" class="modal fade" role="dialog">
                 <div class="modal-dialog" style="width: 60%; color: #73879C; max-width: none;">
                     <div class="modal-content">
@@ -751,7 +771,7 @@
                 columns: [
                     {data: 'DT_Row_Index', name: 'id'},
                     {data: 'title', name: 'title'},
-                    {data: 'content', name: 'content'},
+                    {data: 'action', name: 'content'},
                     {data: 'type', name: 'type'},
                     {data: 'status', name: 'status'},
                     {data: 'created_at', name: 'created_at'},
@@ -1204,6 +1224,37 @@
             });
         });
         /*----------------*/
+
+        /*Gọi Modal hiển thị nội dung chăm sóc khách hàng*/
+        $(document).on('click', '.view_content', function() {
+            $('#view_content').modal('show');
+
+            var customerCareId =  $(this).data('id');
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('admin.customer_booking_logs.get_content_customer_care') }}',
+                data: {
+                    customerCareId: customerCareId,
+                },
+                success: function (res)
+                {
+                    $('.move_content').remove();
+                    
+                    $('#content_care').append('<div class="move_content">' + res.content + '</div>');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // 
+                }
+            });
+        });
+        /*--------------------------------------------------*/
     </script>
 
 @endsection

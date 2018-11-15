@@ -291,12 +291,10 @@ class CustomerBookingLogController extends Controller
         return Datatables::of($customer_cares)
             ->addIndexColumn()
 
-            ->editColumn('content', function($customer_care) {
-                if (strlen($customer_care->content) > 300) {
-                    return substr($customer_care->content, 0, 294)." . . .";
-                } else {
-                    return $customer_care->content;
-                }
+            ->editColumn('action', function($customer_care) {
+                $string = '<a class="view_content" data-tooltip="tooltip" title="Xem nội dung" data-id="' . $customer_care->id . '" style="cursor: pointer;"><i>Click để xem nội dung</i></a>';
+
+                return $string;
             })
 
             ->editColumn('type', function($customer_care) {
@@ -710,6 +708,22 @@ class CustomerBookingLogController extends Controller
         return response()->json([
             'error' => false,
             'message' => 'Success',
+        ]);
+    }
+
+    /**
+     * [getContentCustomerCare description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function getContentCustomerCare(Request $request)
+    {
+        $customerCare = CustomerCare::find($request->customerCareId);
+
+        return response()->json([
+            'error' => false,
+            'message' => 'Lấy thông tin thành công!',
+            'content' => $customerCare->content,
         ]);
     }
 }
