@@ -13,6 +13,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta property="fb:app_id" content="1591199551025990" />
+    {{-- <meta property="fb:author" content="congthanh.ha.790" /> --}}
 
     <!-- External CSS libraries -->
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/bootstrap.min.css') }}">
@@ -55,6 +57,30 @@
 
 </head>
 <body>
+
+@yield('sdk-facebook')
+
+<!-- Load Facebook SDK for JavaScript -->
+<div id="fb-root"></div>
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<!-- Your customer chat code -->
+<div class="fb-customerchat"
+    attribution=setup_tool
+    page_id="264322124280445"
+    theme_color="#0084ff"
+    logged_in_greeting="Xin chào! Chúng tôi có thể giúp gì cho bạn?"
+    logged_out_greeting="Xin chào! Chúng tôi có thể giúp gì cho bạn?">
+</div>
+
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFC5925"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

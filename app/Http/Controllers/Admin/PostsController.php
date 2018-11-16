@@ -74,7 +74,7 @@ class PostsController extends Controller
             'description' => $request->get('description'),
             'content' => $request->get('content'),
             'status' => $request->get('status'),
-            'user_id' => 7,
+            'user_id' => Auth::id(),
             'image' => $new_name
         ));
 
