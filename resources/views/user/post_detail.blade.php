@@ -16,6 +16,28 @@
     </style>
 @endsection
 
+@section('sdk-facebook')
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1591199551025990',
+                xfbml      : true,
+                version    : 'v3.2'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=1591199551025990&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+@endsection
+
 @section('content')
     
     <!-- Sub banner start -->
@@ -112,13 +134,24 @@
                         </div>
                     </div>
 
+                    <div
+                        class="fb-like"
+                        data-share="true"
+                        data-width="450"
+                        data-show-faces="true">
+                    </div>
+
+                    <div class="fb-comments" data-href="{{ route('user.posts.show', $post->id) }}" data-width="750" data-numposts="5"></div>
+
                     <!-- Comments section start -->
                      <div class="comments-section">
-                        <div class="main-title-2">
+                        {{-- <div class="main-title-2">
                             <h1>Bình luận</h1>
-                        </div>
+                        </div> --}}
 
-                        <ul class="comments" id="load_comment">
+                        {{-- <div class="fb-comments" data-href="http://real.mathemes.info/dev" data-width="500" data-numposts="5"></div> --}}
+
+                        {{-- <ul class="comments" id="load_comment">
                             @foreach ($post->comments as $comment)
                                 <li id="comment-{{ $comment->id }}">
                                     <div class="comment">
@@ -149,12 +182,12 @@
                                     </div>
                                 </li>
                             @endforeach
-                        </ul>
+                        </ul> --}}
                      </div>
                      <!-- Comments section end -->
 
                      <!-- Contact 1 start -->
-                     <div class="contact-1">
+                     {{-- <div class="contact-1">
                         <div class="row">
                             <div class="col-lg-12">
 
@@ -181,7 +214,7 @@
 
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- Contact-1 end -->
                 </div>
 
@@ -347,85 +380,85 @@
 @section('script')
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/sweet-alert.min.js') }}"></script>
     <script>
-        $('#submit_comment').click(function (e) {
-            e.preventDefault();
+        // $('#submit_comment').click(function (e) {
+        //     e.preventDefault();
 
-            var form = $('#comment_form');
-            var formdata = form.serialize();
+        //     var form = $('#comment_form');
+        //     var formdata = form.serialize();
 
-            $.ajaxSetup({
-                headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
-            });
+        //     $.ajaxSetup({
+        //         headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+        //     });
 
-            $.ajax({
-                type: "POST",
-                url: '{{ route('user.post.comment') }}',
-                data: formdata,
-                success: function (res) {
-                    if (res.info.avatar == null) {
-                        $avatar = '/img/avatar-5.png';
-                    } else {
-                        $avatar = res.info.avatar;
-                    }
+        //     $.ajax({
+        //         type: "POST",
+        //         url: ' route('user.post.comment') }}',
+        //         data: formdata,
+        //         success: function (res) {
+        //             if (res.info.avatar == null) {
+        //                 $avatar = '/img/avatar-5.png';
+        //             } else {
+        //                 $avatar = res.info.avatar;
+        //             }
 
-                    $('#load_comment').append('<li id="comment-'+ res.comment_id +'">\n' +
-            '                                    <div class="comment">\n' +
-            '                                        <div class="comment-author">\n' +
-            '                                            <a>\n' +
-            '                                                <img src="'+ $avatar +'" alt="'+ res.info.name +'">\n' +
-            '                                            </a>\n' +
-            '                                        </div>\n' +
-            '                                        <div class="comment-content">\n' +
-            '                                            <div class="comment-meta">\n' +
-            '                                                <div class="comment-meta-author">'+ res.info.name +'</div>\n' +
-            '                                                <div class="comment-meta-date">\n' +
-            '                                                    <span class="hidden-xs">'+ res.created_at +'</span>\n' +
-            '                                                </div>\n' +
-            '                                                    <div class="comment-meta-d">\n' +
-            '                                                        <a type="submit" class="text-gray btnDelete" data-id="'+ res.comment_id +'"><i class="fa fa-times-circle"></i></a>\n' +
-            '                                                    </div>\n' +
-            '                                            </div>\n' +
-            '                                            <div class="clearfix"></div>\n' +
-            '                                            <div class="comment-body">'+ res.data.comment +'</div>\n' +
-            '                                        </div>\n' +
-            '                                    </div>\n' +
-            '                                </li>');
+        //             $('#load_comment').append('<li id="comment-'+ res.comment_id +'">\n' +
+        //     '                                    <div class="comment">\n' +
+        //     '                                        <div class="comment-author">\n' +
+        //     '                                            <a>\n' +
+        //     '                                                <img src="'+ $avatar +'" alt="'+ res.info.name +'">\n' +
+        //     '                                            </a>\n' +
+        //     '                                        </div>\n' +
+        //     '                                        <div class="comment-content">\n' +
+        //     '                                            <div class="comment-meta">\n' +
+        //     '                                                <div class="comment-meta-author">'+ res.info.name +'</div>\n' +
+        //     '                                                <div class="comment-meta-date">\n' +
+        //     '                                                    <span class="hidden-xs">'+ res.created_at +'</span>\n' +
+        //     '                                                </div>\n' +
+        //     '                                                    <div class="comment-meta-d">\n' +
+        //     '                                                        <a type="submit" class="text-gray btnDelete" data-id="'+ res.comment_id +'"><i class="fa fa-times-circle"></i></a>\n' +
+        //     '                                                    </div>\n' +
+        //     '                                            </div>\n' +
+        //     '                                            <div class="clearfix"></div>\n' +
+        //     '                                            <div class="comment-body">'+ res.data.comment +'</div>\n' +
+        //     '                                        </div>\n' +
+        //     '                                    </div>\n' +
+        //     '                                </li>');
 
-                    $('#comment').val('');
-                }
-            });
-        });
+        //             $('#comment').val('');
+        //         }
+        //     });
+        // });
 
-        $('.btnDelete').click(function () {
-            var comment_id = $(this).data('id');
-            // var id = $(this).closest(".row").attr('id');
+        // $('.btnDelete').click(function () {
+        //     var comment_id = $(this).data('id');
+        //     // var id = $(this).closest(".row").attr('id');
 
-            swal({
-                    title: "Bạn có chắc muốn xoá comment này?",
-                    type: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    cancelButtonText: "Không",
-                    confirmButtonText: "Có",
-                },
-                function(){
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
+        //     swal({
+        //             title: "Bạn có chắc muốn xoá comment này?",
+        //             type: "warning",
+        //             showCancelButton: true,
+        //             confirmButtonColor: "#DD6B55",
+        //             cancelButtonText: "Không",
+        //             confirmButtonText: "Có",
+        //         },
+        //         function(){
+        //             $.ajaxSetup({
+        //                 headers: {
+        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //                 }
+        //             });
 
-                    $.ajax({
-                        method: 'POST',
-                        url: '/dev/commentsDelete/' + comment_id,
-                        success:function(res){
-                            $('#comment-' + comment_id).remove();
-                        },
-                        error: function (xhr, ajaxOptions, thrownError) {
-                            //
-                        }
-                    });
-                });
-        })
+        //             $.ajax({
+        //                 method: 'POST',
+        //                 url: '/dev/commentsDelete/' + comment_id,
+        //                 success:function(res){
+        //                     $('#comment-' + comment_id).remove();
+        //                 },
+        //                 error: function (xhr, ajaxOptions, thrownError) {
+        //                     //
+        //                 }
+        //             });
+        //         });
+        // })
     </script>
 @endsection
