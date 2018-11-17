@@ -29,6 +29,7 @@ class TruncateTableSeeder extends Seeder
         DB::table('comments')->truncate();
         DB::table('category_post')->truncate();
         DB::table('posts')->truncate();
+        DB::table('customer_cares')->truncate();
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }

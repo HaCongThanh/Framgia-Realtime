@@ -39,10 +39,10 @@
                         @foreach($facilities as $key => $facility)
                             <tr>
                                 <td scope="row">{!! $key + $facilities->firstItem() !!}</td>
-                                <td>{!! $facility -> name !!}</td>
+                                <td>{!! $facility->name !!}</td>
                                 @if (Entrust::can(['edit-facilities', 'delete-facilities']))
                                 <td class="text-center font-size-18">
-                                    <a href="/admin/post/{{ $facility->id }}/edit" class="text-gray">
+                                    <a href="{{ route('facility.edit', $facility->id) }}" class="text-gray">
                                         <i class="ti-pencil"></i>
                                     </a>
                                     <a id="btn_delete" data-id="{{ $facility->id }}" class="text-gray">

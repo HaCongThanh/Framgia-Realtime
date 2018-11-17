@@ -1217,7 +1217,7 @@
                             customerCareHistory();
 
                         }, error: function (xhr, ajaxOptions, thrownError) {
-                            toastr['error'](thrownError);
+                            // toastr['error'](thrownError);
                         }
                     });
                 }

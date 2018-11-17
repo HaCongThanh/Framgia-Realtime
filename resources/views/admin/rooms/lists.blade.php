@@ -50,7 +50,7 @@
                                 <td>{{ number_format($room->room_types->price) }}</td>
                                 @if (Entrust::can(['edit-rooms', 'delete-rooms']))
                                 <td class="text-center font-size-18">
-                                    <a href="/admin/post/{{ $room->id }}/edit" class="text-gray">
+                                    <a href="{{ route('room.edit', $room->id) }}" class="text-gray">
                                         <i class="ti-pencil"></i>
                                     </a>
                                     <a id="btn_delete" data-id="{{ $room->id }}" class="text-gray">
@@ -100,13 +100,13 @@
                     url: '/admin/room/' + id,
                     success: function(res) {
                         //console.log(res);
-                        toastr.success('Xóa bài viết thành công !');
+                        toastr.success('Xóa thành công !');
                         setTimeout(function(){
                             window.location.reload();
                         }, 1000);
                     },
                     error: function error(xhr, ajaxOptions, thrownError) {
-                        toastr.error(thrownError);
+                        // toastr.error(thrownError);
                     }
                 });
             });

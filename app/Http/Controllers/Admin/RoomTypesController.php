@@ -191,6 +191,9 @@ class RoomTypesController extends Controller
         $room_type = RoomType::findOrFail($id);
         $room_type->delete();
 
-        return redirect()->route('room_type.index');
+        return response()->json([
+            'error'     =>  false,
+            'message'   =>  'Thành công !'
+        ]);
     }
 }
