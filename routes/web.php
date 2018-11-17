@@ -141,13 +141,6 @@ Route::group(['prefix' => 'admin'], function() {
 });
 /*-------------------------------------------------------*/
 
-/*---------------------- Language -----------------------*/
-Route::get('/{locale}', function($locale) {
-    Session::put('locale', $locale);
-    return redirect()->back();
-})->name('locale');
-/*-------------------------------------------------------*/
-
 Route::get('/realtime', 'SendMessageController@realTime')->name('realTime');
 
 Route::get('/send', 'SendMessageController@index')->name('send');
@@ -157,3 +150,12 @@ Route::post('/postMessage', 'SendMessageController@sendMessage')->name('postMess
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+/*---------------------- Language -----------------------*/
+Route::get('/{locale}', function($locale) {
+    Session::put('locale', $locale);
+    return redirect()->back();
+})->name('locale');
+/*-------------------------------------------------------*/
+
+

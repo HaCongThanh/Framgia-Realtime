@@ -671,14 +671,12 @@ class CustomerBookingLogController extends Controller
 
             $content = $request->content;
 
-            Mail::send('admin.customer_booking_logs.email', [
-                'content' => $content,
-                'nameCustomer' => $nameCustomer,
-                'nameUser' => $nameUser
-            ], function ($messages) use ($title, $emailCustomer, $nameUser, $nameCustomer) {
-                $messages->to($emailCustomer, $nameCustomer)->subject($title);
-                $messages->from(env('MAIL_USERNAME'), $nameUser);
-            });
+            // Mail::send('admin.customer_booking_logs.email_customer_care', [
+            //     'content' => $content,
+            // ], function ($messages) use ($title, $emailCustomer, $nameUser, $nameCustomer) {
+            //     $messages->to($emailCustomer, $nameCustomer)->subject($title);
+            //     $messages->from(env('MAIL_USERNAME'), $nameUser);
+            // });
 
             CustomerCare::create([
                 'user_id'                   =>  $request->idCustomer,
@@ -704,11 +702,6 @@ class CustomerBookingLogController extends Controller
                 'message' => 'Fail',
             ]);
         }
-
-        return response()->json([
-            'error' => false,
-            'message' => 'Success',
-        ]);
     }
 
     /**

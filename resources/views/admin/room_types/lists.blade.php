@@ -184,7 +184,7 @@
                         }, 1000);
                     },
                     error: function error(xhr, ajaxOptions, thrownError) {
-                        toastr.error(thrownError);
+                        // toastr.error(thrownError);
                     }
                 });
             });
