@@ -81,6 +81,8 @@
     logged_out_greeting="Xin chào! Chúng tôi có thể giúp gì cho bạn?">
 </div>
 
+{{-- <div class="_20l3"><svg width="60px" height="60px" viewBox="0 0 60 60"><svg x="0" y="0" width="60" height="60"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g><g><circle fill="#0084ff" cx="30" cy="30" r="30"></circle><g transform="translate(10.000000, 11.000000)" fill="#FFFFFF"><path d="M0,18.7150914 C0,8.37723141 8.956743,0 20,0 C31.043257,0 40,8.37723141 40,18.7150914 C40,29.0529515 31.043257,37.4301829 20,37.4301829 C18,37.4301829 16.0763359,37.1551856 14.2544529,36.6459314 L6.95652174,40 L6.95652174,33.0434783 C2.44929143,29.6044708 0,24.5969773 0,18.7150914 Z M16.9276495,19.6993886 L22.109375,25.0798234 L33.0434783,13.4782609 L23.0672554,18.9962636 L17.890625,13.6158288 L6.95652174,25.2173913 L16.9276495,19.6993886 Z"></path></g></g></g></g></svg></svg></div> --}}
+
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TFC5925"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -265,7 +267,7 @@
                         <ul class="personal-info">
                             <li>
                                 <i class="fa fa-map-marker"></i>
-                                44 New Design Street,
+                                13F Keangnam Landmark 72 Tower, Plot E6, Pham Hung Road, Nam Tu Liem District., Ha Noi
                             </li>
                             <li>
                                 <i class="fa fa-envelope"></i>
@@ -277,7 +279,7 @@
                             </li>
                             <li>
                                 <i class="fa fa-fax"></i>
-                                Fax: +0477 85X6 552
+                                Fax: +84-24-3795-5417
                             </li>
                         </ul>
                         <div class="clearfix"></div>

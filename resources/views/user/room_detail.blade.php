@@ -4,6 +4,28 @@
 
 @endsection
 
+@section('sdk-facebook')
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '1591199551025990',
+                xfbml      : true,
+                version    : 'v3.2'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.2&appId=1591199551025990&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+@endsection
+
 @section('content')
 
     <!-- Sub banner start -->
@@ -272,6 +294,16 @@
                             </div>
                         </div>
                     </div>
+
+                    <div
+                        class="fb-like"
+                        data-share="true"
+                        data-width="450"
+                        data-show-faces="true">
+                    </div>
+
+                    <div class="fb-comments" data-href="{{ route('user.rooms.show', $room_type->id) }}" data-width="750" data-numposts="5"></div>
+
                     <!-- sidebar end -->
 
                     <!-- Comments section start -->
@@ -584,7 +616,9 @@
                                 <div class="main-title-2">
                                     <h1>Location</h1>
                                 </div>
-                                <div id="map" class="contact-map" style="height: 662px;"></div>
+                                <div id="map" class="contact-map">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14897.610218563832!2d105.7835197!3d21.0165729!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xd2c6f1171eb5829a!2sFramgia!5e0!3m2!1svi!2s!4v1542472124517" width="320" height="433" frameborder="0" style="border:0" allowfullscreen></iframe>
+                                </div>
                             </div>
                         </div>
                         <!-- Location end -->
