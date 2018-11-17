@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Role;
 use App\Models\User;
+use Couchbase\UserSettings;
 use DB;
+use Monolog\Handler\SyslogUdp\UdpSocket;
 use Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -119,33 +121,22 @@ class ProfileController extends Controller
                     'message' =>  $validator->errors()
                 ]);
             } else {
-                if ($request->hasFile('avatar')) {
-                    $image = $request->file('avatar');
 
-                    $new_name = str_random(3).'_'.$image->getClientOriginalName();
+                $user = User::findOrFail(Auth::id());
 
-                    while (file_exists('images/avatar/'.$new_name)) {
-                        $new_name = str_random(4).'_'.$new_name;
-                    }
-
-                    $image->move('images/avatar/', $new_name);
-                }
-
-                User::where('id', $id)->update([
-                    'name'      => $request->name,
-                    'mobile'    => $request->mobile,
-                    'address'   => $request->address,
-                    'review'    => $request->review,
-                    'birthday'  => $request->birthday,
-                    'gender'    => $request->gender,
-                    'avatar'    => $new_name
-                ]);
+                $user->name     = $request->name;
+                $user->mobile   = $request->mobile;
+                $user->address   = $request->address;
+                 $user->review    = $request->review;
+                 $user->birthday  = $request->birthday;
+                $user->gender    = $request->gender;
 
                 DB::commit();
 
                 return response()->json([
                     'error'     =>  false,
-                    'message'   =>  'Sửa nhân viên thành công !'
+                    'message'   =>  'Sửa nhân viên thành công !',
+                    'data' => $user,
                 ]);
             }
         } catch (Exception $e){
@@ -173,7 +164,24 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updatePassword() {
+    public function uploadImage(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $image = $request->file('image_user');
+        $img = $this->saveImage($image);
+        $user->avatar = $img;
+        $user->save();
+        return back()->with('success', trans('message.success'));
+    }
 
+    public function saveImage($image)
+    {
+//        save in storage
+        $filenameWithExt = $image->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $image->getClientOriginalExtension();
+        $newName = $filename . '_' . time() . '.' . $extension;
+        $path = $image->move('images/avatar/', $newName);
+        return $newName;
     }
 }

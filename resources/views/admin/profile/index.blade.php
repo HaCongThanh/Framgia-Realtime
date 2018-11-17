@@ -4,6 +4,21 @@
     {{--<link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/selectize.default.css') }}" />--}}
     <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/jasny-bootstrap.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/toastr.min.css') }}">
+    <style>
+        .display_none {
+            display: none;
+        }
+    </style>
+    <script>
+        var loadFile = function (event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        };
+    </script>
 @endsection
 
 @section('content')
@@ -29,6 +44,20 @@
                             @else
                                 <img class="img-fluid rounded-circle d-block mx-auto m-b-30" src="{{ url('images/avatar/'.$users->avatar) }}" alt="" width="100%">
                             @endif
+                                <div class="text-center m-t-15">
+                                    {{ Form::open(['method' => 'POST', 'route' => ['user.upload_images', Auth::id()], 'enctype' => 'multipart/form-data']) }}
+                                    <a title="select image" onclick="document.getElementById('myFileInput').click()"><i
+                                                class="fa fa-camera"></i>
+                                    </a>
+                                    {!! Form::file('image_user', ['id' => 'myFileInput', 'class' => 'display_none', 'onchange' => 'loadFile(event)']) !!}
+
+                                    <button type="submit" title="upload"><i class="fa fa-upload"></i></button>
+                                    {{ Form::close() }}
+                                </div>
+                                <div class="m-t-10">
+                                    <img width="100%" id="imagePreview"/>
+                                    {{ Form::hidden('images', '', ['id' => 'file-image-input']) }}
+                                </div>
                         </div>
                         <div class="col-sm-4 text-center text-sm-left">
                             <h2 class="m-b-5">{{ $users->name }}</h2>
@@ -91,7 +120,7 @@
                             <div class="p-h-15">
                                 <h4>Cập nhật thông tin</h4>
                                 {{ Form::open(['method' => 'POST', 'id' => 'form-user-id', 'name' => 'form-user-id']) }}
-                                {{ Form::hidden('user_id', $users->id, ['id' => $users->id]) }}
+                                {{ Form::hidden('user_id', $users->id, ['id' => 'user']) }}
                                 <div class="row">
                                     <div class="col-md-6 form-group">
                                         {{ Form::text('name', '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Nhập tên của bạn']) }}
@@ -110,22 +139,6 @@
                                         </div>
                                         <div class="form-group">
                                             {{ Form::select('gender', ['0' => 'Nữ', '1' => 'Nam'], '', ['class' => 'form-control', 'id' => 'edit_gender']) }}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            {!! Form::label('avatar', __('messages.image'), ['class' => 'control-label']) !!}
-                                            <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <span class="btn btn-default btn-file">
-                                                    <span class="fileinput-new">{{ __('messages.file') }}</span>
-                                                    <span class="fileinput-exists">{{ __('messages.change') }}</span>
-                                                    {!! Form::file('avatar', ['id' => 'fileUpload']) !!}
-                                                </span>
-                                                <span class="fileinput-filename"></span>
-                                                <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">×</a>
-                                            </div>
-                                            <div id="image-holder"></div>
-                                            <img src="{{ asset('/images/avatar/'.$users->avatar) }}" width="100">
                                         </div>
                                     </div>
                                 </div>
@@ -185,38 +198,38 @@
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/toastr.min.js') }}"></script>
     <script>
         /* show password */
-        function myFunction() {
-            var x = document.getElementById("password1");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
-
-        /* image preview */
-        $("#fileUpload").on('change', function () {
-
-            if (typeof (FileReader) != "undefined") {
-
-                var image_holder = $("#image-holder");
-                image_holder.empty();
-
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $("<img />", {
-                        "src": e.target.result,
-                        "class": "thumb-image",
-                        "width": 200
-                    }).appendTo(image_holder);
-
-                }
-                image_holder.show();
-                reader.readAsDataURL($(this)[0].files[0]);
-            } else {
-                alert("Select image, please.");
-            }
-        });
+        // function myFunction() {
+        //     var x = document.getElementById("password1");
+        //     if (x.type === "password") {
+        //         x.type = "text";
+        //     } else {
+        //         x.type = "password";
+        //     }
+        // }
+        //
+        // /* image preview */
+        // $("#fileUpload").on('change', function () {
+        //
+        //     if (typeof (FileReader) != "undefined") {
+        //
+        //         var image_holder = $("#image-holder");
+        //         image_holder.empty();
+        //
+        //         var reader = new FileReader();
+        //         reader.onload = function (e) {
+        //             $("<img />", {
+        //                 "src": e.target.result,
+        //                 "class": "thumb-image",
+        //                 "width": 200
+        //             }).appendTo(image_holder);
+        //
+        //         }
+        //         image_holder.show();
+        //         reader.readAsDataURL($(this)[0].files[0]);
+        //     } else {
+        //         alert("Select image, please.");
+        //     }
+        // });
 
         $(document).on('click', '#call-update', function (event) {
             $('#modal-lg').modal('show');
@@ -234,7 +247,6 @@
                 type: 'GET',
                 url: '/admin/profiles/' + user_id + '/edit',
                 success: function (res) {
-                    console.log(res);
                     $('#name').val(res.user['name']);
                     $('#email').val(res.user['email']);
                     $('#mobile').val(res.user['mobile']);
@@ -242,7 +254,6 @@
                     $('#birthday').val(res.user['birthday']);
                     $('#gender').val(res.user['gender']);
                     $('#review').val(res.user['review']);
-                    $('#avatar').val(res.user['avatar']);
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     toastr.error(thrownError);
@@ -254,7 +265,7 @@
         $('#btn-update').on('click', function(event) {
             event.preventDefault();
 
-            var user_id = $('#user_id').val();
+            var user_id = $('#user').val();
             var form = $('#form-user-id');
             var formData= form.serialize();
 
@@ -269,7 +280,6 @@
                 url: '/admin/profiles/' + user_id,
                 data: formData,
                 success:function(res){
-                    //console.log(res);
                     if (res.error == 'valid') {
                         var arr = res.message;
                         var key = Object.keys(arr);
