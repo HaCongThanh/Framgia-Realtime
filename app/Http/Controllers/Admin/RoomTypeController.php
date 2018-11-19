@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoomTypesRequest;
 use App\Http\Requests\RoomTypesEditRequest;
 use App\Models\RoomType;
 use App\Models\Facility;

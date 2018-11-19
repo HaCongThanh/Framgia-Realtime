@@ -158,58 +158,17 @@
                 <h1>Những phòng tốt nhất</h1>
                 <p> </p>
             </div>
-            <ul class="list-inline-listing filters filters-listing-navigation">
+            {{-- <ul class="list-inline-listing filters filters-listing-navigation">
                 <li class="active btn filtr-button filtr" data-filter="all">All</li>
                 <li data-filter="1" class="btn btn-inline filtr-button filtr">Classic</li>
                 <li data-filter="2" class="btn btn-inline filtr-button filtr">Deluxe</li>
                 <li data-filter="3" class="btn btn-inline filtr-button filtr">Royal</li>
                 <li data-filter="4" class="btn btn-inline filtr-button filtr">Luxury</li>
-            </ul>
+            </ul> --}}
             <div class="row">
-                <div class="filtr-container">
+                <div class="filtr-container page">
 
-                    @if (!empty($room_types))
-                        @foreach ($room_types as $room_type)
-                            
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 filtr-item" data-category="{{ $room_type->id }}">
-                                <div class="hotel-box">
-                                    <div class="header clearfix">
-                                        <img src="{{ url('/images/rooms/' . $room_type->images->first->filename['filename']) }}" alt="img-1" class="img-responsive" style="width: 360px; height: 240px;">
-                                    </div>
-
-                                    <div class="detail clearfix">
-                                        <div class="pr">
-                                            VNĐ {{ number_format($room_type->price) }}<sub>/Đêm</sub>
-                                            {{-- <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-half-full"></i>
-                                            </div> --}}
-                                        </div>
-                                        <h3>
-                                            <a href="{{ route('user.rooms.show', $room_type->id) }}">{{ $room_type->name }}</a>
-                                        </h3>
-                                        <h5 class="location">
-                                            <a href="{{ route('user.rooms.show', $room_type->id) }}">
-                                                <i class="fa fa-map-marker"></i>Framgia Hotel,
-                                            </a>
-                                        </h5>
-
-                                        @php
-                                            if (strlen($room_type->description) > 436) {
-                                                echo trim(substr($room_type->description, 0, 430)) . ' . . .';
-                                            } else {
-                                                echo $room_type->description;
-                                            }
-                                        @endphp
-                                    </div>
-                                </div>
-                            </div>
-
-                        @endforeach
-                    @endif
+                    @include('user.room_types_ajax')
 
                 </div>
             </div>
@@ -731,5 +690,35 @@
 @endsection
 
 @section('script')
+    <script>
+        $(window).on('hashchange', function() {
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                } else {
+                    getProducts(page);
+                }
+            }
+        });
 
+        $(document).ready(function() {
+            $(document).on('click', '.pagination a', function (e) {
+                getProducts($(this).attr('href').split('page=')[1]);
+                e.preventDefault();
+            });
+        });
+
+        function getProducts(page) {
+            $.ajax({
+                url : '?page=' + page,
+                dataType: 'json',
+            }).done(function (data) {
+                $('.page').html(data);
+                location.hash = page;
+            }).fail(function () {
+                alert('Products could not be loaded.');
+            });
+        }
+    </script>
 @endsection

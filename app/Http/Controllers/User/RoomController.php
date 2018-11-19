@@ -25,9 +25,15 @@ class RoomController extends Controller
      * [index description]
      * @return [type] [description]
      */
-    public function index()
+    public function index(Request $request)
     {
-        $room_types = RoomType::all();
+        $room_types = RoomType::paginate(6);
+
+        if ($request->ajax()) {
+            return response()->json(view('user.room_list_ajax', [
+                'room_types' => $room_types
+            ])->render());  
+        }
 
         return view('user.room_list', [
             'room_types'    =>  $room_types
