@@ -13,11 +13,14 @@ return [
     'room_size' => 'Room size',
     'room_size_text' => 'Room size',
     'bed' => 'Number of beds',
+    'bed_count' => ' bed',
     'people' => 'Max people',
+    'people_count' => ' people',
     'facility' => 'Facility',
     'facilities' => 'Facility List',
-    'facility_add' => 'Facility Add',
+    'facility_add' => 'Facility add',
     'facility_edit' => 'Facility Edit',
+    'facility_name' => 'Facility name',
     'room' => 'Room Manager',
     'rooms' => 'Room List',
     'rooms_stt' => 'Room Number',
@@ -27,8 +30,9 @@ return [
     'post' => 'Posts Manager',
     'category' => 'Article Category',
     'categories' => 'Category',
-    'categories_edit' => 'Category Edit',
-    'categories_add' => 'Category Add',
+    'category_edit' => 'Edit category',
+    'category_add' => 'Add category',
+    'category_name' => 'Category name',
     'posts' => 'Posts List',
     'posts_name' => 'Posts Name',
     'posts_add' => 'Posts Add',
@@ -156,4 +160,12 @@ return [
      */
     'id' => 'Order Numerical',
     'action' => 'Action',
+
+    /*
+     * Other
+     */
+    'required' => ' not be empty',
+    'unique' => ' already exist',
+    'success' => 'success',
+    'fail' => 'fail',
 ];

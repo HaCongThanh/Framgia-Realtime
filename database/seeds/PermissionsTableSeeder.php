@@ -33,23 +33,28 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name'          =>  'view-room-types',
-            'display_name'          =>  'Xem loại phòng',
+            'name' => 'view-room-types',
+            'display_name' => 'Xem danh sách loại phòng',
         ]);
 
         Permission::create([
-            'name'          =>  'add-room-types',
-            'display_name'          =>  'Thêm loại phòng',
+            'name' => 'add-room-types',
+            'display_name' => 'Thêm loại phòng',
         ]);
 
         Permission::create([
-            'name'          =>  'edit-room-types',
-            'display_name'          =>  'Sửa loại phòng',
+            'name' => 'detail-room-types',
+            'display_name' => 'Xem chi tiết loại phòng',
         ]);
 
         Permission::create([
-            'name'          =>  'delete-room-types',
-            'display_name'          =>  'Xóa loại phòng',
+            'name' => 'edit-room-types',
+            'display_name' => 'Sửa loại phòng',
+        ]);
+
+        Permission::create([
+            'name' => 'delete-room-types',
+            'display_name' => 'Xóa loại phòng',
         ]);
 
         Permission::create([
@@ -68,36 +73,58 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name'          =>  'add-facilities',
-            'display_name'          =>  'Thêm tiện nghi',
+            'name' => 'view-facilities',
+            'display_name' => 'Xem danh sách tiện nghi',
         ]);
 
         Permission::create([
-            'name'          =>  'edit-facilities',
-            'display_name'          =>  'Sửa tiện nghi',
-        ]);
-        Permission::create([
-            'name'          =>  'delete-facilities',
-            'display_name'          =>  'Xóa tiện nghi',
-        ]);
-        Permission::create([
-            'name'          =>  'view-booking-list',
-            'display_name'  =>  'Xem danh sách đặt phòng',
+            'name' => 'add-facilities',
+            'display_name' => 'Thêm tiện nghi',
         ]);
 
         Permission::create([
-            'name'          =>  'add-categories',
-            'display_name'          =>  'Thêm danh mục bài biết',
+            'name' => 'detail-facilities',
+            'display_name' => 'Xem tiện nghi',
         ]);
 
         Permission::create([
-            'name'          =>  'edit-categories',
-            'display_name'          =>  'Sửa danh mục bài viết',
+            'name' => 'edit-facilities',
+            'display_name' => 'Sửa tiện nghi',
         ]);
 
         Permission::create([
-            'name'          =>  'delete-categories',
-            'display_name'          =>  'Xóa danh mục bài viết',
+            'name' => 'delete-facilities',
+            'display_name' => 'Xóa tiện nghi',
+        ]);
+
+        Permission::create([
+            'name' => 'view-booking-list',
+            'display_name' => 'Xem danh sách đặt phòng',
+        ]);
+
+        Permission::create([
+            'name' => 'view-categories',
+            'display_name' => 'Xem danh sách danh mục',
+        ]);
+
+        Permission::create([
+            'name' => 'add-categories',
+            'display_name' => 'Thêm danh mục',
+        ]);
+
+        Permission::create([
+            'name' => 'detail-categories',
+            'display_name' => 'Xem chi tiết danh mục',
+        ]);
+
+        Permission::create([
+            'name' => 'edit-categories',
+            'display_name' => 'Sửa danh mục',
+        ]);
+
+        Permission::create([
+            'name' => 'delete-categories',
+            'display_name' => 'Xóa danh mục',
         ]);
 
         Permission::create([

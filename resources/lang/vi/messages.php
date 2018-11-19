@@ -16,8 +16,11 @@ return [
     'room_size' => 'Diện tích',
     'room_size_text' => 'Nhập diện tích',
     'bed' => 'Số giường ngủ',
-    'people' => 'Số người trên phòng',
+    'bed_count' => ' giường',
+    'people' => 'Số người tối đa',
+    'people_count' => ' người',
     'facility' => 'Tiện nghi',
+    'facility_name' => 'Tên tiện nghi',
     'facilities' => 'Danh sách tiện nghi',
     'facility_add' => 'Thêm tiện nghi',
     'facility_edit' => 'Sửa tiện nghi',
@@ -30,10 +33,11 @@ return [
     'floor_stt' => 'Số tầng',
     'room_lists' => 'Danh sách đặt phòng',
     'post' => 'Quản lý bài viết',
-    'category' => 'Danh mục bài viết',
+    'category' => 'Danh mục',
     'categories' => 'Danh mục',
-    'categories_edit' => 'Sửa danh mục',
-    'categories_add' => 'Thêm danh mục',
+    'category_edit' => 'Sửa danh mục',
+    'category_add' => 'Thêm danh mục',
+    'category_name' => 'Tên danh mục',
     'posts' => 'Danh sách bài viết',
     'posts_name' => 'Tên bài viết',
     'posts_add' => 'Thêm bài viết',
@@ -162,4 +166,12 @@ return [
      */
     'id' => 'STT',
     'action' => 'Hành động',
+
+    /*
+     * Other
+     */
+    'required' => ' không được trống',
+    'unique' => ' đã tồn tại',
+    'success' => 'Thành công',
+    'fail' => 'Thất bại',
 ];

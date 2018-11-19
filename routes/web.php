@@ -71,6 +71,14 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::get('/note-notification','Admin\HomeController@noteNotification')->name('admin.note_notification');
 
+    Route::get('/facilities/get-facilities','Admin\FacilityController@getFacilities')->name('admin.facilities.get_facilities');
+
+    Route::resource('facilities','Admin\FacilityController');
+
+    Route::get('/room-types/get-room-types','Admin\RoomTypeController@getRoomTypes')->name('admin.room_types.get_room_types');
+
+    Route::resource('room-types','Admin\RoomTypeController');
+
     Route::get('/customer','Admin\CustomersController@index')->name('customer');
 
     Route::get('/customer-booking-logs/get-customer-booking-logs', 'Admin\CustomerBookingLogController@getCustomerBookingLogs')->name('admin.customer_booking_logs.get_customer_booking_logs');
@@ -103,6 +111,10 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::get('/customer-booking-logs/get-content-customer-care', 'Admin\CustomerBookingLogController@getContentCustomerCare')->name('admin.customer_booking_logs.get_content_customer_care');
 
+    Route::get('/categories/get-categories','Admin\CategoryController@getCategories')->name('admin.categories.get_categories');
+
+    Route::resource('categories', 'Admin\CategoryController');
+
     Route::get('/roles/get_list_roles','Admin\RoleController@getListRoles')->name('admin.roles.get_list_roles');
 
     Route::post('/roles/update_permission_role','Admin\RoleController@updatePermissionRole')->name('admin.roles.update_permission_role');
@@ -113,13 +125,7 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::get('/users/get_list_role_user/{user_id}','Admin\UserController@getListRoleUser')->name('admin.users.get_list_role_user');
 
-    Route::resource('category', 'Admin\CategoriesController');
-
     Route::resource('post','Admin\PostsController');
-
-    Route::resource('facility','Admin\FacilitiesController');
-
-    Route::resource('room_type','Admin\RoomTypesController');
 
     Route::resource('room','Admin\RoomsController');
 
