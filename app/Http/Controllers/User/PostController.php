@@ -26,9 +26,15 @@ class PostController extends Controller
      * [index description]
      * @return [type] [description]
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
+        $posts = Post::paginate(3);
+
+        if ($request->ajax()) {
+            return response()->json(view('user.post_list_ajax', [
+                'posts' => $posts
+            ])->render());  
+        }
 
         return view('user.post_list', [
             'posts'    =>  $posts

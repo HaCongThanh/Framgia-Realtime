@@ -34,13 +34,19 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         session()->forget('route');
         
         session()->put('route', 'user.home.index');
 
-        $room_types = RoomType::all();
+        $room_types = RoomType::paginate(6);
+
+        if ($request->ajax()) {
+            return response()->json(view('user.room_types_ajax', [
+                'room_types' => $room_types
+            ])->render());  
+        }
 
         $posts = Post::orderBy('id', 'desc')->limit(3)->get();
         
