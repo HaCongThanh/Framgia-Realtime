@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\RoomTypesRequest;
-use App\Models\Image;
-use App\Models\Facility;
-use App\Models\Room;
-use App\Models\RoomType;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RoomTypesEditRequest;
+use App\Models\RoomType;
+use App\Models\Facility;
+use App\Models\Image;
+use Validator;
 use Entrust;
-use Illuminate\Support\Facades\Storage;
+use DB;
 
-class RoomTypesController extends Controller
+class RoomTypeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -22,11 +23,13 @@ class RoomTypesController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'CheckAdmin']);
+        $this->middleware('permission:view-room-types')->only(['index', 'getRoomTypes']);
         $this->middleware('permission:add-room-types')->only(['create', 'store']);
+        $this->middleware('permission:detail-room-types')->only(['show']);
         $this->middleware('permission:edit-room-types')->only(['edit', 'update']);
         $this->middleware('permission:delete-room-types')->only(['destroy']);
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -34,8 +37,7 @@ class RoomTypesController extends Controller
      */
     public function index()
     {
-        $room_type = RoomType::Paginate(10);
-        return view('admin.room_types.lists', compact('room_type'));
+        return view('admin.room_types.index');
     }
 
     /**
@@ -69,35 +71,29 @@ class RoomTypesController extends Controller
 
         $room_type->save();
 
-        if($request->hasFile('image')) {
-            $images = $request->file('image');
+        $images = $request->file('image');
 
-            foreach($images as $image) {
-                $filenameWithExt = $image->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $image->getClientOriginalExtension();
+        foreach ($images as $image) {
+            $filenameWithExt = $image->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $image->getClientOriginalExtension();
 
-                $new_name = $fileNameToStore = $filename.'_'.time().'.'.$extension;
-                $path = $image->storeAs('images/rooms', $new_name);
+            $new_name = $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            $path = $image->storeAs('images/rooms', $new_name);
 
-                $image = new Image([
-                    'room_type_id' => $room_type->id,
-                    'filename' => $new_name,
-                ]);
+            $image = new Image([
+                'room_type_id' => $room_type->id,
+                'filename' => $new_name,
+            ]);
 
-                $image->save();
-            }
-        }
-
-        else {
-            return back()->with('status', 'Please choose any image file');
+            $image->save();
         }
 
         foreach ($request->facilities as $facility) {
             $room_type->facilities()->attach($facility);
         }
 
-        return redirect()->route('room_type.index');
+        return redirect()->route('room-types.index');
     }
 
     /**
@@ -133,7 +129,7 @@ class RoomTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RoomTypesRequest $request, $id)
+    public function update(RoomTypesEditRequest $request, $id)
     {
         $room_type = RoomType::findOrFail($id);
 
@@ -143,12 +139,12 @@ class RoomTypesController extends Controller
         $room_type->max_people = $request->max_people;
         $room_type->price = $request->price;
         $room_type->description = $request->description;
-        //dd($room_type);
-        //$image->save();
+
         $room_type->save();
 
         if ($request->hasFile('image')) {
             $images = $request->file('image');
+
             foreach ($images as $image) {
                 $filenameWithExt = $image->getClientOriginalName();
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
@@ -161,14 +157,14 @@ class RoomTypesController extends Controller
                     'room_type_id' => $room_type->id,
                     'filename' => $new_name,
                 ]);
-                //dd($image, $room_type);
+
                 $image->save();
             }
         }
 
         if ($request->has('facilities')) {
             $room_type->facilities()->detach();
-            //dd($request->facilities);
+
             foreach ($request->facilities as $facility) {
                 $room_type->facilities()->attach($facility);
             }
@@ -176,8 +172,7 @@ class RoomTypesController extends Controller
             $room_type->facilities()->detach();
         }
 
-
-        return redirect()->route('room_type.index');
+        return redirect()->route('room-types.index');
     }
 
     /**
@@ -188,12 +183,71 @@ class RoomTypesController extends Controller
      */
     public function destroy($id)
     {
-        $room_type = RoomType::findOrFail($id);
-        $room_type->delete();
+        //
+    }
 
-        return response()->json([
-            'error'     =>  false,
-            'message'   =>  'Thành công !'
-        ]);
+    /**
+     * [getRoomTypes description]
+     * @return [type] [description]
+     */
+    public function getRoomTypes()
+    {
+        $roomTypes = RoomType::orderBy('id', 'desc')->get();
+
+        return Datatables::of($roomTypes)
+            ->addIndexColumn()
+
+            ->editColumn('room_size', function($roomType){
+                $roomSize = $roomType->room_size . ' m2';
+
+                return $roomSize;
+            })
+
+            ->editColumn('bed', function($roomType){
+                $bed = $roomType->bed . __('messages.bed_count');
+
+                return $bed;
+            })
+
+            ->editColumn('max_people', function($roomType){
+                $maxPeople = $roomType->max_people . __('messages.people_count');
+
+                return $maxPeople;
+            })
+
+            ->editColumn('price', function($roomType){
+                $price = number_format($roomType->price) . ' VNĐ';
+
+                return $price;
+            })
+
+            ->addColumn('action', function ($roomType) {
+                if (Entrust::can(['detail-room-types'])) {
+                    $detailRoomTypes = 1;
+                } else {
+                    $detailRoomTypes = 0;
+                }
+
+                if (Entrust::can(['edit-room-types'])) {
+                    $editRoomTypes = 1;
+                } else {
+                    $editRoomTypes = 0;
+                }
+
+                if (Entrust::can(['delete-room-types'])) {
+                    $deleteRoomTypes = 1;
+                } else {
+                    $deleteRoomTypes = 0;
+                }
+
+                return [
+                    'detailRoomTypes' => $detailRoomTypes,
+                    'editRoomTypes' => $editRoomTypes,
+                    'deleteRoomTypes' => $deleteRoomTypes,
+                    'roomTypeId' => $roomType->id,
+                ];
+            })
+
+        ->make(true);
     }
 }

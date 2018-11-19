@@ -1,8 +1,11 @@
 {
     "/js/app.js": "/js/app.js?id=ab9001f08b82d540f73b",
     "/css/app.css": "/css/app.css?id=6a1071eabd7c5cf2b06a",
-    "/js/admin/role.js": "/js/admin/role.js?id=1295aace276e98b7d133",
-    "/js/admin/permission_role.js": "/js/admin/permission_role.js?id=0be18bc46e5a1ed79f08",
+    "/js/admin/room-type.js": "/js/admin/room-type.js?id=3e5622afac948c0cb116",
+    "/js/admin/role.js": "/js/admin/role.js?id=668198421d17e2b427eb",
+    "/js/admin/permission_role.js": "/js/admin/permission_role.js?id=6093446f94ff4ece01c7",
+    "/js/admin/facility.js": "/js/admin/facility.js?id=e2e43833b53ae4460965",
+    "/js/admin/category.js": "/js/admin/category.js?id=61f56d74177daf60dee3",
     "/css/user/style.css": "/css/user/style.css?id=3bb408cdea1d14c7e30f",
     "/css/user/custom.css": "/css/user/custom.css?id=a32d28f56eb4229f0378",
     "/js/user/app.js": "/js/user/app.js?id=0266b1b4b27adc5ca8f2",

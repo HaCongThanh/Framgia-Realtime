@@ -346,10 +346,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ route('room_type.index') }}">{{ __('messages.room_types_list') }}</a>
+                                <a href="{{ route('facilities.index') }}">{{ __('messages.facility') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('facility.index') }}">{{ __('messages.facility') }}</a>
+                                <a href="{{ route('room-types.index') }}">{{ __('messages.room_types_list') }}</a>
                             </li>
                         </ul>
                     </li>
@@ -384,7 +384,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="{{ route('category.index') }}">{{ __('messages.category') }}</a>
+                                <a href="{{ route('categories.index') }}">{{ __('messages.category') }}</a>
                             </li>
                             <li>
                                 <a href="{{ route('post.index') }}">{{ __('messages.posts') }}</a>
