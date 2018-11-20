@@ -122,21 +122,22 @@ class ProfileController extends Controller
                 ]);
             } else {
 
-                $user = User::findOrFail(Auth::id());
-
-                $user->name     = $request->name;
-                $user->mobile   = $request->mobile;
-                $user->address   = $request->address;
-                 $user->review    = $request->review;
-                 $user->birthday  = $request->birthday;
-                $user->gender    = $request->gender;
+                User::where('id', $id)->update([
+                    'name' => $request->name,
+                    'mobile' => $request->mobile,
+                    'address' => $request->address,
+                    'gender' => $request->gender,
+                    'type' => 1,
+                    'birthday'  => $request->birthday,
+                    'review' => $request->review,
+                ]);
 
                 DB::commit();
 
                 return response()->json([
                     'error'     =>  false,
                     'message'   =>  'Sửa nhân viên thành công !',
-                    'data' => $user,
+                    'data' => $request->all(),
                 ]);
             }
         } catch (Exception $e){

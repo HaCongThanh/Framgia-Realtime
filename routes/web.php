@@ -127,9 +127,9 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::resource('users','Admin\UserController');
 
-    Route::resource('profiles', 'Admin\ProfileController');
+    Route::resource('profile', 'Admin\ProfileController');
 
-    Route::post('/profiles/{id}', 'Admin\ProfileController@uploadImage')->name('user.upload_images');
+    Route::post('/profile/{id}', 'Admin\ProfileController@uploadImage')->name('user.upload_images');
 
     Route::match(['get', 'post'], '/password', 'Admin\ProfileController@updatePassword');
 
