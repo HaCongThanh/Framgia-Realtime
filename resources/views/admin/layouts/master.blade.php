@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/bootstrap.css') }}" />
     <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/pace-theme-minimal.css') }}" />
     <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/perfect-scrollbar.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/bootstrap-datepicker.min.css')}}">
 
     <!-- page css -->
     @yield('style')
@@ -247,7 +248,7 @@
                                 <ul class="list-media">
                                     <li class="list-item p-15">
                                         <div class="media-img">
-                                            <img src="@if(empty(Auth::user()->avatar)) {{ url('img/avatar-5.png') }} @else {{ Auth::user()->avatar }} @endif" alt="">
+                                            <img src="@if(empty(Auth::user()->avatar)) {{ url('img/avatar-5.png') }} @else {{ url('images/avatar/' . Auth::user()->avatar) }} @endif" alt="">
                                         </div>
                                         <div class="info">
                                             <span class="title text-semibold">{{ Auth::user()->name }}</span>
@@ -264,7 +265,7 @@
                                 </a>
                             </li>--}}
                             <li>
-                                <a href="{{ route('profiles.show', Auth::user()->id) }}">
+                                <a href="{{ route('profile.show', Auth::user()->id) }}">
                                     <i class="ti-user p-r-10"></i>
                                     <span>Profile</span>
                                 </a>
@@ -944,7 +945,7 @@
 <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jquery.sparkline.min.js') }}"></script>
 <script src="{{ asset('bower_components/lib_booking/lib/admin/js/default.js') }}"></script>
 <script src="{{ asset('bower_components/lib_booking/lib/admin/js/pusher.min.js') }}"></script>
-
+<script src="{{ asset('bower_components/lib_booking/lib/user/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('bower_components/lib_booking/lib/admin/ckeditor/ckeditor.js') }}"></script>
 <script> CKEDITOR.replace('editor1'); </script>
 

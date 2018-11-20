@@ -110,7 +110,7 @@
                 </div>
                 <div class="card-footer">
                     {{ Form::button('Cập nhật thông tin', ['id' => 'call-update', 'class' => 'btn btn-success btn-rounded btn-float', 'data-id' => $users->id]) }}
-                    {{ Form::button('Đổi mật khẩu', ['class' => 'btn btn-info btn-rounded btn-float', 'data-toggle' => 'modal', 'data-target' => '#side-modal-r-1']) }}
+                    {{--{{ Form::button('Đổi mật khẩu', ['class' => 'btn btn-info btn-rounded btn-float', 'data-toggle' => 'modal', 'data-target' => '#side-modal-r-1']) }}--}}
                 </div>
             </div>
             <div class="modal fade" id="modal-lg">
@@ -126,7 +126,7 @@
                                         {{ Form::text('name', '', ['id' => 'name', 'class' => 'form-control', 'placeholder' => 'Nhập tên của bạn']) }}
                                     </div>
                                     <div class="col-md-6 form-group">
-                                        {{ Form::text('birthday', '', ['id' => 'birthday', 'class' => 'form-control', 'placeholder' => 'Nhập ngày sinh']) }}
+                                        {{ Form::text('birthday', '', ['id' => 'birthday', 'class' => 'form-control datepicker', 'placeholder' => 'yyyy/mm/dd']) }}
                                     </div>
                                 </div>
                                 <div class="row">
@@ -167,16 +167,14 @@
                                             <p class="m-b-15 font-size-13">Please enter your password and enter your new password</p>
                                             {{ Form::open(['method' => 'POST', 'name' => 'password-update', 'id' => 'password-update']) }}
                                                 <div class="form-group">
-                                                    {{ Form::password('password', ['id' => 'password', 'class' => 'form-control', 'placeholder' => 'Enter your password']) }}
+                                                    {{ Form::text('password', null,['id' => 'password', 'class' => 'form-control', 'placeholder' => 'Enter your password']) }}
                                                 </div>
                                                 <div class="form-group">
-                                                    {{ Form::password('password1', ['id' => 'password1', 'class' => 'form-control', 'placeholder' => 'Enter your new password']) }}
+                                                    {{ Form::text('password1', null,['id' => 'password1', 'class' => 'form-control', 'placeholder' => 'Enter your new password']) }}
                                                 </div>
                                                 <div class="form-group">
-                                                    {{ Form::password('password2', ['id' => 'password2', 'class' => 'form-control', 'placeholder' => 'Enter your new password, again!']) }}
+                                                    {{ Form::text('password2', null,['id' => 'password2', 'class' => 'form-control', 'placeholder' => 'Enter your new password, again!']) }}
                                                 </div>
-                                                <input type="checkbox" onclick="myFunction()">Show Password
-                                                <br>
                                                 {{ Form::button('Update', ['id' => 'btn-update-password', 'class' => 'btn btn-success']) }}
                                             {{ Form::close() }}
                                         </div>
@@ -197,39 +195,6 @@
     <script src="{{ asset('bower_components/lib_booking/lib/admin/js/jasny-bootstrap.min.js') }}"></script>
     <script src="{{ asset('bower_components/lib_booking/lib/user/js/toastr.min.js') }}"></script>
     <script>
-        /* show password */
-        // function myFunction() {
-        //     var x = document.getElementById("password1");
-        //     if (x.type === "password") {
-        //         x.type = "text";
-        //     } else {
-        //         x.type = "password";
-        //     }
-        // }
-        //
-        // /* image preview */
-        // $("#fileUpload").on('change', function () {
-        //
-        //     if (typeof (FileReader) != "undefined") {
-        //
-        //         var image_holder = $("#image-holder");
-        //         image_holder.empty();
-        //
-        //         var reader = new FileReader();
-        //         reader.onload = function (e) {
-        //             $("<img />", {
-        //                 "src": e.target.result,
-        //                 "class": "thumb-image",
-        //                 "width": 200
-        //             }).appendTo(image_holder);
-        //
-        //         }
-        //         image_holder.show();
-        //         reader.readAsDataURL($(this)[0].files[0]);
-        //     } else {
-        //         alert("Select image, please.");
-        //     }
-        // });
 
         $(document).on('click', '#call-update', function (event) {
             $('#modal-lg').modal('show');
@@ -245,7 +210,7 @@
 
             $.ajax({
                 type: 'GET',
-                url: '/admin/profiles/' + user_id + '/edit',
+                url: '/admin/profile/' + user_id + '/edit',
                 success: function (res) {
                     $('#name').val(res.user['name']);
                     $('#email').val(res.user['email']);
@@ -277,7 +242,7 @@
 
             $.ajax({
                 type: 'PUT',
-                url: '/admin/profiles/' + user_id,
+                url: '/admin/profile/' + user_id,
                 data: formData,
                 success:function(res){
                     if (res.error == 'valid') {
