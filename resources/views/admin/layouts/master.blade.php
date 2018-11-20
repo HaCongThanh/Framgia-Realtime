@@ -13,8 +13,7 @@
     <!-- core dependcies css -->
     <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/bootstrap.css') }}" />
     <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/pace-theme-minimal.css') }}" />
-    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/perfect-scrollbar.min.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/lib_booking/lib/user/css/bootstrap-datepicker.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/admin/css/perfect-scrollbar.min.css') }}" /> 
 
     <!-- page css -->
     @yield('style')
@@ -25,6 +24,7 @@
     <link href="{{ asset('bower_components/lib_booking/lib/admin/css/materialdesignicons.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/lib_booking/lib/admin/css/animate.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/lib_booking/lib/admin/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('bower_components/lib_booking/lib/user/css/bootstrap-datepicker.min.css')}}">
 
     <style type="text/css">
         .side-nav-folded .header .header-container .nav-logo > a .logo-dark{
@@ -241,7 +241,7 @@
                     </li>
                     <li class="user-profile dropdown dropdown-animated scale-left">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img class="profile-img img-fluid" src="@if(empty(Auth::user()->avatar)) {{ url('img/avatar-5.png') }} @else {{ Auth::user()->avatar }} @endif" alt="">
+                            <img class="profile-img img-fluid" src="@if(empty(Auth::user()->avatar)) {{ url('img/avatar-5.png') }} @else {{ url('images/avatar/' . Auth::user()->avatar) }} @endif" alt="" style="width: 40px; height: 40px;">
                         </a>
                         <ul class="dropdown-menu dropdown-md p-v-0">
                             <li>
@@ -388,7 +388,7 @@
                                 <a href="{{ route('categories.index') }}">{{ __('messages.category') }}</a>
                             </li>
                             <li>
-                                <a href="{{ route('post.index') }}">{{ __('messages.posts') }}</a>
+                                <a href="{{ route('posts.index') }}">{{ __('messages.posts') }}</a>
                             </li>
                         </ul>
                     </li>

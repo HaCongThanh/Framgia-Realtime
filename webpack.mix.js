@@ -26,6 +26,7 @@ mix.copy('resources/js/user/booking.js', 'public/js/user/booking.js');
 mix.js('resources/js/admin/facility.js', 'public/js/admin/facility.js');
 mix.js('resources/js/admin/room-type.js', 'public/js/admin/room-type.js');
 mix.js('resources/js/admin/category.js', 'public/js/admin/category.js');
+mix.js('resources/js/admin/post.js', 'public/js/admin/post.js');
 mix.js('resources/js/admin/role.js', 'public/js/admin/role.js');
 mix.js('resources/js/admin/permission_role.js', 'public/js/admin/permission_role.js');
 // ---------------

@@ -184,7 +184,25 @@ class RoomTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+            RoomType::where('id', $id)->delete();
+
+            DB::commit();
+
+            return response()->json([
+                'error' => false,
+                'message' => __('messages.success'),
+            ]);
+        } catch (Exception $e) {
+            DB::rollback();
+
+            return response()->json([
+                'error' => true,
+                'message' => __('messages.fail'),
+            ]);
+        }
     }
 
     /**

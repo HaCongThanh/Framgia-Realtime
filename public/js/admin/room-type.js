@@ -84,7 +84,7 @@ $(function () {
                 $string = '';
 
                 if (data.detailRoomTypes == 1) {
-                    $string = $string + '<a href="javascript:;" data-id="' + data.roomTypeId + '"\
+                    $string = $string + '<a href="' + route('user.rooms.show', data.roomTypeId) + '" target="_blank" data-id="' + data.roomTypeId + '"\
                                             class="text-gray detail_room_type" title="Xem chi tiết">\
                                             <i class="ti-eye" style="color: #28a745; font-size: 20px;"></i></a>' + '&nbsp;&nbsp;';
                 }
@@ -106,6 +106,40 @@ $(function () {
         }]
     });
     /*----------*/
+
+    /*Xóa loại phòng*/
+    $(document).on('click', '.delete_room_type', function () {
+        var roomTypeId = $(this).data('id');
+
+        swal({
+            title: 'Có chắc chắn xóa loại phòng này?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#DD6B55',
+            cancelButtonText: 'Không',
+            confirmButtonText: 'Có'
+        }, function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $.ajax({
+                type: 'DELETE',
+                url: route('room-types.destroy', [roomTypeId]),
+                success: function success(res) {
+                    toastr.success('Xóa loại phòng thành công');
+
+                    table.ajax.reload();
+                },
+                error: function error(xhr, ajaxOptions, thrownError) {
+                    // 
+                }
+            });
+        });
+    });
+    /*------------*/
 });
 
 /***/ }),

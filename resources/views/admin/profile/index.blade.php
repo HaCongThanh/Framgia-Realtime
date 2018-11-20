@@ -46,8 +46,7 @@
                             @endif
                                 <div class="text-center m-t-15">
                                     {{ Form::open(['method' => 'POST', 'route' => ['user.upload_images', Auth::id()], 'enctype' => 'multipart/form-data']) }}
-                                    <a title="select image" onclick="document.getElementById('myFileInput').click()"><i
-                                                class="fa fa-camera"></i>
+                                    <a title="select image" onclick="document.getElementById('myFileInput').click()" style="cursor: pointer;">Chọn ảnh
                                     </a>
                                     {!! Form::file('image_user', ['id' => 'myFileInput', 'class' => 'display_none', 'onchange' => 'loadFile(event)']) !!}
 
@@ -134,19 +133,27 @@
                                         <div class="form-group">
                                             {{ Form::text('email', '', ['id' => 'email', 'class' => 'form-control', 'readonly']) }}
                                         </div>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             {{ Form::text('mobile', '', ['id' => 'mobile', 'class' => 'form-control', 'placeholder' => 'Nhập số điện thoại']) }}
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
                                         <div class="form-group">
                                             {{ Form::select('gender', ['0' => 'Nữ', '1' => 'Nam'], '', ['class' => 'form-control', 'id' => 'edit_gender']) }}
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {{ Form::text('address', '', ['id' => 'address', 'class' => 'form-control', 'placeholder' => 'Nhập địa chỉ']) }}
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    {{ Form::text('address', '', ['id' => 'address', 'class' => 'form-control', 'placeholder' => 'Nhập địa chỉ']) }}
-                                </div>
-                                <div class="form-group">
-                                    {{ Form::textarea('review', '', ['id' => 'review', 'class' => 'form-control', 'placeholder' => 'Giới thiệu đôi nét bản thân', 'rows' => '3']) }}
+                                    {{ Form::textarea('review', '', ['id' => 'review', 'class' => 'form-control', 'placeholder' => 'Giới thiệu bản thân', 'rows' => '3']) }}
                                 </div>
                                 {{ Form::button('Cập nhật', ['id' => 'btn-update', 'class' => 'btn btn-success']) }}
                                 {{ Form::close() }}

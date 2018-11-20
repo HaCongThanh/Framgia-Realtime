@@ -115,6 +115,10 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::resource('categories', 'Admin\CategoryController');
 
+    Route::get('/posts/get-posts','Admin\PostController@getPosts')->name('admin.posts.get_posts');
+
+    Route::resource('posts','Admin\PostController');
+
     Route::get('/roles/get_list_roles','Admin\RoleController@getListRoles')->name('admin.roles.get_list_roles');
 
     Route::post('/roles/update_permission_role','Admin\RoleController@updatePermissionRole')->name('admin.roles.update_permission_role');
@@ -124,8 +128,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/roles/get_list_permission_role/{role_id}','Admin\RoleController@getListPermissionRole')->name('admin.roles.get_list_permission_role');
 
     Route::get('/users/get_list_role_user/{user_id}','Admin\UserController@getListRoleUser')->name('admin.users.get_list_role_user');
-
-    Route::resource('post','Admin\PostsController');
 
     Route::resource('room','Admin\RoomsController');
 
